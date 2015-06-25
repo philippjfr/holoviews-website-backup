@@ -140,6 +140,43 @@
 <span class="n">archive</span> <span class="o">=</span> <span class="n">FileArchive</span><span class="p">()</span>
 
 
+<span class="k">def</span> <span class="nf">displayable</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Predicate that returns whether the object is displayable or not</span>
+<span class="sd">    (i.e whether the object obeys the nesting hierarchy</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">HoloMap</span><span class="p">):</span>
+        <span class="k">return</span> <span class="ow">not</span> <span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">type</span> <span class="ow">in</span> <span class="p">[</span><span class="n">Layout</span><span class="p">,</span> <span class="n">GridSpace</span><span class="p">])</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="p">(</span><span class="n">GridSpace</span><span class="p">,</span> <span class="n">Layout</span><span class="p">)):</span>
+        <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">obj</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">displayable</span><span class="p">(</span><span class="n">el</span><span class="p">):</span>
+                <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">return</span> <span class="bp">True</span>
+    <span class="k">return</span> <span class="bp">True</span>
+
+
+<span class="k">def</span> <span class="nf">undisplayable_info</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">html</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="s">&quot;Generate helpful message regarding an undisplayable object&quot;</span>
+
+    <span class="n">collate</span> <span class="o">=</span> <span class="s">&#39;&lt;tt&gt;collate&lt;/tt&gt;&#39;</span> <span class="k">if</span> <span class="n">html</span> <span class="k">else</span> <span class="s">&#39;collate&#39;</span>
+    <span class="n">info</span> <span class="o">=</span> <span class="s">&quot;For more information, please consult the Composing Data tutorial (http://git.io/vtIQh)&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">HoloMap</span><span class="p">):</span>
+        <span class="n">error</span> <span class="o">=</span> <span class="s">&quot;HoloMap of </span><span class="si">%s</span><span class="s"> objects cannot be displayed.&quot;</span> <span class="o">%</span> <span class="n">obj</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">__name__</span>
+        <span class="n">remedy</span> <span class="o">=</span> <span class="s">&quot;Please call the </span><span class="si">%s</span><span class="s"> method to generate a displayable object&quot;</span> <span class="o">%</span> <span class="n">collate</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">Layout</span><span class="p">):</span>
+        <span class="n">error</span> <span class="o">=</span> <span class="s">&quot;Layout containing HoloMaps of Layout or GridSpace objects cannot be displayed.&quot;</span>
+        <span class="n">remedy</span> <span class="o">=</span> <span class="s">&quot;Please call the </span><span class="si">%s</span><span class="s"> method on the appropriate elements.&quot;</span> <span class="o">%</span> <span class="n">collate</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">GridSpace</span><span class="p">):</span>
+        <span class="n">error</span> <span class="o">=</span> <span class="s">&quot;GridSpace containing HoloMaps of Layouts cannot be displayed.&quot;</span>
+        <span class="n">remedy</span> <span class="o">=</span> <span class="s">&quot;Please call the </span><span class="si">%s</span><span class="s"> method on the appropriate elements.&quot;</span> <span class="o">%</span> <span class="n">collate</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">html</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">error</span><span class="p">,</span> <span class="n">remedy</span><span class="p">,</span> <span class="n">info</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s">&quot;&lt;center&gt;{msg}&lt;/center&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">msg</span><span class="o">=</span><span class="p">(</span><span class="s">&#39;&lt;br&gt;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="p">[</span><span class="s">&#39;&lt;b&gt;</span><span class="si">%s</span><span class="s">&lt;/b&gt;&#39;</span> <span class="o">%</span> <span class="n">error</span><span class="p">,</span> <span class="n">remedy</span><span class="p">,</span> <span class="s">&#39;&lt;i&gt;</span><span class="si">%s</span><span class="s">&lt;/i&gt;&#39;</span> <span class="o">%</span> <span class="n">info</span><span class="p">])))</span>
+
+
 <span class="k">def</span> <span class="nf">formatter</span><span class="p">(</span><span class="n">fmt</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span> <span class="k">return</span> <span class="p">(</span><span class="n">fmt</span> <span class="o">%</span> <span class="n">x</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">inner</span>

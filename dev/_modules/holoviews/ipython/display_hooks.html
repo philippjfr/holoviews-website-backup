@@ -137,7 +137,7 @@
 
 <span class="kn">from</span> <span class="nn">..core.options</span> <span class="kn">import</span> <span class="n">Store</span><span class="p">,</span> <span class="n">StoreOptions</span>
 <span class="kn">from</span> <span class="nn">..core</span> <span class="kn">import</span> <span class="n">Element</span><span class="p">,</span> <span class="n">ViewableElement</span><span class="p">,</span> <span class="n">HoloMap</span><span class="p">,</span> <span class="n">AdjointLayout</span><span class="p">,</span> <span class="n">NdLayout</span><span class="p">,</span>\
-    <span class="n">NdOverlay</span><span class="p">,</span> <span class="n">GridSpace</span><span class="p">,</span> <span class="n">Layout</span><span class="p">,</span> <span class="n">Overlay</span>
+    <span class="n">NdOverlay</span><span class="p">,</span> <span class="n">GridSpace</span><span class="p">,</span> <span class="n">Layout</span><span class="p">,</span> <span class="n">Overlay</span><span class="p">,</span> <span class="n">displayable</span><span class="p">,</span> <span class="n">undisplayable_info</span>
 <span class="kn">from</span> <span class="nn">..core.traversal</span> <span class="kn">import</span> <span class="n">unique_dimkeys</span><span class="p">,</span> <span class="n">bijective</span>
 <span class="kn">from</span> <span class="nn">..element</span> <span class="kn">import</span> <span class="n">Raster</span>
 <span class="kn">from</span> <span class="nn">.magics</span> <span class="kn">import</span> <span class="n">OutputMagic</span><span class="p">,</span> <span class="n">OptsMagic</span>
@@ -330,6 +330,10 @@
 <span class="nd">@display_hook</span>
 <span class="k">def</span> <span class="nf">map_display</span><span class="p">(</span><span class="n">vmap</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">max_frames</span><span class="p">,</span> <span class="n">max_branches</span><span class="p">,</span> <span class="n">widget_mode</span><span class="p">):</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">vmap</span><span class="p">,</span> <span class="n">HoloMap</span><span class="p">):</span> <span class="k">return</span> <span class="bp">None</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">displayable</span><span class="p">(</span><span class="n">vmap</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">undisplayable_info</span><span class="p">(</span><span class="n">vmap</span><span class="p">,</span> <span class="n">html</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
     <span class="n">info</span> <span class="o">=</span> <span class="n">process_object</span><span class="p">(</span><span class="n">vmap</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">info</span><span class="p">:</span> <span class="k">return</span> <span class="n">info</span>
     <span class="k">if</span> <span class="n">vmap</span><span class="o">.</span><span class="n">type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">Store</span><span class="o">.</span><span class="n">registry</span><span class="p">[</span><span class="n">OutputMagic</span><span class="o">.</span><span class="n">backend</span><span class="p">()]:</span>  <span class="k">return</span> <span class="bp">None</span>
@@ -349,6 +353,10 @@
 <span class="k">def</span> <span class="nf">layout_display</span><span class="p">(</span><span class="n">layout</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">max_frames</span><span class="p">,</span> <span class="n">max_branches</span><span class="p">,</span> <span class="n">widget_mode</span><span class="p">):</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">layout</span><span class="p">,</span> <span class="n">AdjointLayout</span><span class="p">):</span> <span class="n">layout</span> <span class="o">=</span> <span class="n">Layout</span><span class="o">.</span><span class="n">from_values</span><span class="p">(</span><span class="n">layout</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">layout</span><span class="p">,</span> <span class="p">(</span><span class="n">Layout</span><span class="p">,</span> <span class="n">NdLayout</span><span class="p">)):</span> <span class="k">return</span> <span class="bp">None</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">displayable</span><span class="p">(</span><span class="n">layout</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">undisplayable_info</span><span class="p">(</span><span class="n">layout</span><span class="p">,</span> <span class="n">html</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
     <span class="n">nframes</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">unique_dimkeys</span><span class="p">(</span><span class="n">layout</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
 
     <span class="n">info</span> <span class="o">=</span> <span class="n">process_object</span><span class="p">(</span><span class="n">layout</span><span class="p">)</span>
@@ -373,6 +381,10 @@
 <span class="nd">@display_hook</span>
 <span class="k">def</span> <span class="nf">grid_display</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">max_frames</span><span class="p">,</span> <span class="n">max_branches</span><span class="p">,</span> <span class="n">widget_mode</span><span class="p">):</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">GridSpace</span><span class="p">):</span> <span class="k">return</span> <span class="bp">None</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">displayable</span><span class="p">(</span><span class="n">grid</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">undisplayable_info</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">html</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
     <span class="n">info</span> <span class="o">=</span> <span class="n">process_object</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">info</span><span class="p">:</span> <span class="k">return</span> <span class="n">info</span>
 

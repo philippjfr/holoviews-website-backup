@@ -145,6 +145,11 @@
 
 <span class="k">class</span> <span class="nc">RasterPlot</span><span class="p">(</span><span class="n">ElementPlot</span><span class="p">):</span>
 
+    <span class="n">aspect</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">Parameter</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s">&#39;equal&#39;</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">        Raster elements respect the aspect ratio of the</span>
+<span class="s">        Images by default but may be set to an explicit</span>
+<span class="s">        aspect ratio or to &#39;square&#39;.&quot;&quot;&quot;</span><span class="p">)</span>
+
     <span class="n">colorbar</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">Boolean</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
 <span class="s">        Whether to add a colorbar to the plot.&quot;&quot;&quot;</span><span class="p">)</span>
 
