@@ -133,13 +133,13 @@
 <span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">wraps</span>
 <span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span> <span class="nn">traceback</span>
 
+<span class="kn">import</span> <span class="nn">IPython</span>
 <span class="kn">import</span> <span class="nn">param</span>
 
 <span class="kn">from</span> <span class="nn">..core.options</span> <span class="kn">import</span> <span class="n">Store</span><span class="p">,</span> <span class="n">StoreOptions</span>
-<span class="kn">from</span> <span class="nn">..core</span> <span class="kn">import</span> <span class="n">Element</span><span class="p">,</span> <span class="n">ViewableElement</span><span class="p">,</span> <span class="n">HoloMap</span><span class="p">,</span> <span class="n">AdjointLayout</span><span class="p">,</span> <span class="n">NdLayout</span><span class="p">,</span>\
-    <span class="n">NdOverlay</span><span class="p">,</span> <span class="n">GridSpace</span><span class="p">,</span> <span class="n">Layout</span><span class="p">,</span> <span class="n">Overlay</span><span class="p">,</span> <span class="n">displayable</span><span class="p">,</span> <span class="n">undisplayable_info</span>
+<span class="kn">from</span> <span class="nn">..core</span> <span class="kn">import</span> <span class="n">Element</span><span class="p">,</span> <span class="n">ViewableElement</span><span class="p">,</span> <span class="n">UniformNdMapping</span><span class="p">,</span> <span class="n">HoloMap</span><span class="p">,</span> <span class="n">AdjointLayout</span><span class="p">,</span> <span class="n">NdLayout</span><span class="p">,</span>\
+    <span class="n">GridSpace</span><span class="p">,</span> <span class="n">Layout</span><span class="p">,</span> <span class="n">displayable</span><span class="p">,</span> <span class="n">undisplayable_info</span><span class="p">,</span> <span class="n">CompositeOverlay</span>
 <span class="kn">from</span> <span class="nn">..core.traversal</span> <span class="kn">import</span> <span class="n">unique_dimkeys</span><span class="p">,</span> <span class="n">bijective</span>
-<span class="kn">from</span> <span class="nn">..element</span> <span class="kn">import</span> <span class="n">Raster</span>
 <span class="kn">from</span> <span class="nn">.magics</span> <span class="kn">import</span> <span class="n">OutputMagic</span><span class="p">,</span> <span class="n">OptsMagic</span>
 
 <span class="kn">from</span> <span class="nn">.archive</span> <span class="kn">import</span> <span class="n">notebook_archive</span>
@@ -234,7 +234,7 @@
     <span class="k">return</span> <span class="n">html</span> <span class="k">if</span> <span class="p">(</span><span class="n">message</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">)</span> <span class="k">else</span> <span class="s">&#39;&lt;b&gt;</span><span class="si">%s</span><span class="s">&lt;/b&gt;&lt;/br&gt;</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">html</span><span class="p">)</span>
 
 </div>
-<div class="viewcode-block" id="display"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.ipython.html#holoviews.ipython.display_hooks.display">[docs]</a><span class="k">def</span> <span class="nf">display</span><span class="p">(</span><span class="n">plot</span><span class="p">,</span> <span class="n">widget_mode</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<div class="viewcode-block" id="render_plot"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.ipython.html#holoviews.ipython.display_hooks.render_plot">[docs]</a><span class="k">def</span> <span class="nf">render_plot</span><span class="p">(</span><span class="n">plot</span><span class="p">,</span> <span class="n">widget_mode</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Used by the display hooks to render a plot according to the</span>
 <span class="sd">    following policy:</span>
@@ -274,10 +274,6 @@
 <span class="k">def</span> <span class="nf">display_hook</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span>
     <span class="nd">@wraps</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">wrapped</span><span class="p">(</span><span class="n">element</span><span class="p">):</span>
-        <span class="c"># If pretty printing is off, return None (will fallback to repr)</span>
-        <span class="n">ip</span> <span class="o">=</span> <span class="n">get_ipython</span><span class="p">()</span>  <span class="c">#  # pyflakes:ignore (in IPython namespace)</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">ip</span><span class="o">.</span><span class="n">display_formatter</span><span class="o">.</span><span class="n">formatters</span><span class="p">[</span><span class="s">&#39;text/plain&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">pprint</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">None</span>
         <span class="n">optstate</span> <span class="o">=</span> <span class="n">StoreOptions</span><span class="o">.</span><span class="n">state</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">widget_mode</span> <span class="o">=</span> <span class="n">OutputMagic</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s">&#39;widgets&#39;</span><span class="p">]</span>
@@ -323,16 +319,24 @@
     <span class="n">element_plot</span> <span class="o">=</span> <span class="n">plot_class</span><span class="p">(</span><span class="n">element</span><span class="p">,</span>
                               <span class="o">**</span><span class="n">OutputMagic</span><span class="o">.</span><span class="n">renderer</span><span class="p">()</span><span class="o">.</span><span class="n">plot_options</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">size</span><span class="p">))</span>
 
-    <span class="k">return</span> <span class="n">display</span><span class="p">(</span><span class="n">element_plot</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">render_plot</span><span class="p">(</span><span class="n">element_plot</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
 
 
+<span class="k">class</span> <span class="nc">Warning</span><span class="p">(</span><span class="n">param</span><span class="o">.</span><span class="n">Parameterized</span><span class="p">):</span> <span class="k">pass</span>
+<span class="n">display_warning</span> <span class="o">=</span> <span class="ne">Warning</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;Warning&#39;</span><span class="p">)</span>
 
 <span class="nd">@display_hook</span>
 <span class="k">def</span> <span class="nf">map_display</span><span class="p">(</span><span class="n">vmap</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">max_frames</span><span class="p">,</span> <span class="n">max_branches</span><span class="p">,</span> <span class="n">widget_mode</span><span class="p">):</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">vmap</span><span class="p">,</span> <span class="n">HoloMap</span><span class="p">):</span> <span class="k">return</span> <span class="bp">None</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">displayable</span><span class="p">(</span><span class="n">vmap</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">undisplayable_info</span><span class="p">(</span><span class="n">vmap</span><span class="p">,</span> <span class="n">html</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="n">display_warning</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s">&quot;Nesting </span><span class="si">%s</span><span class="s">s within a HoloMap makes it difficult &quot;</span>
+                                <span class="s">&quot;to access your data or control how it appears; &quot;</span>
+                                <span class="s">&quot;we recommend calling .collate() on the HoloMap &quot;</span>
+                                <span class="s">&quot;in order to follow the recommended nesting &quot;</span>
+                                <span class="s">&quot;structure shown in the Composing Data tutorial&quot;</span>
+                                <span class="s">&quot;(http://git.io/vtIQh)&quot;</span> <span class="o">%</span> <span class="n">vmap</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">display</span><span class="p">(</span><span class="n">vmap</span><span class="o">.</span><span class="n">collate</span><span class="p">(),</span> <span class="n">raw</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
     <span class="n">info</span> <span class="o">=</span> <span class="n">process_object</span><span class="p">(</span><span class="n">vmap</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">info</span><span class="p">:</span> <span class="k">return</span> <span class="n">info</span>
@@ -346,7 +350,7 @@
         <span class="n">max_frame_warning</span><span class="p">(</span><span class="n">max_frames</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">sanitize_HTML</span><span class="p">(</span><span class="n">vmap</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">display</span><span class="p">(</span><span class="n">mapplot</span><span class="p">,</span> <span class="n">widget_mode</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">render_plot</span><span class="p">(</span><span class="n">mapplot</span><span class="p">,</span> <span class="n">widget_mode</span><span class="p">)</span>
 
 
 <span class="nd">@display_hook</span>
@@ -355,7 +359,21 @@
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">layout</span><span class="p">,</span> <span class="p">(</span><span class="n">Layout</span><span class="p">,</span> <span class="n">NdLayout</span><span class="p">)):</span> <span class="k">return</span> <span class="bp">None</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">displayable</span><span class="p">(</span><span class="n">layout</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">undisplayable_info</span><span class="p">(</span><span class="n">layout</span><span class="p">,</span> <span class="n">html</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">display_warning</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                <span class="s">&quot;Layout contains HoloMaps which are not nested in the &quot;</span>
+                <span class="s">&quot;recommended format for accessing your data; calling &quot;</span>
+                <span class="s">&quot;.collate() on these objects will resolve any violations &quot;</span>
+                <span class="s">&quot;of the recommended nesting presented in the Composing Data &quot;</span>
+                <span class="s">&quot;tutorial  (http://git.io/vtIQh)&quot;</span><span class="p">)</span>
+            <span class="n">expanded</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">layout</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">el</span><span class="p">,</span> <span class="n">HoloMap</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">displayable</span><span class="p">(</span><span class="n">el</span><span class="p">):</span>
+                    <span class="n">collated_layout</span> <span class="o">=</span> <span class="n">Layout</span><span class="o">.</span><span class="n">from_values</span><span class="p">(</span><span class="n">el</span><span class="o">.</span><span class="n">collate</span><span class="p">())</span>
+                    <span class="n">expanded</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">collated_layout</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+            <span class="n">layout</span> <span class="o">=</span> <span class="n">Layout</span><span class="p">(</span><span class="n">expanded</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">undisplayable_info</span><span class="p">(</span><span class="n">layout</span><span class="p">,</span> <span class="n">html</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
     <span class="n">nframes</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">unique_dimkeys</span><span class="p">(</span><span class="n">layout</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
 
@@ -375,7 +393,7 @@
                 <span class="n">max_frame_warning</span><span class="p">(</span><span class="n">max_frames</span><span class="p">)</span>
                 <span class="k">return</span> <span class="s">&#39;&lt;tt&gt;&#39;</span><span class="o">+</span> <span class="n">sanitize_HTML</span><span class="p">(</span><span class="n">layout</span><span class="p">)</span> <span class="o">+</span> <span class="s">&#39;&lt;/tt&gt;&#39;</span>
 
-    <span class="k">return</span> <span class="n">display</span><span class="p">(</span><span class="n">layoutplot</span><span class="p">,</span> <span class="n">widget_mode</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">render_plot</span><span class="p">(</span><span class="n">layoutplot</span><span class="p">,</span> <span class="n">widget_mode</span><span class="p">)</span>
 
 
 <span class="nd">@display_hook</span>
@@ -395,8 +413,34 @@
         <span class="n">max_frame_warning</span><span class="p">(</span><span class="n">max_frames</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">sanitize_HTML</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">display</span><span class="p">(</span><span class="n">gridplot</span><span class="p">,</span> <span class="n">widget_mode</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">render_plot</span><span class="p">(</span><span class="n">gridplot</span><span class="p">,</span> <span class="n">widget_mode</span><span class="p">)</span>
 
+
+<div class="viewcode-block" id="display"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.ipython.html#holoviews.ipython.display_hooks.display">[docs]</a><span class="k">def</span> <span class="nf">display</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">raw</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Renders any HoloViews object to HTML and displays it</span>
+<span class="sd">    using the IPython display function. If raw is enabled</span>
+<span class="sd">    the raw HTML is returned instead of displaying it directly.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">GridSpace</span><span class="p">):</span>
+        <span class="n">html</span> <span class="o">=</span> <span class="n">grid_display</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="p">(</span><span class="n">CompositeOverlay</span><span class="p">,</span> <span class="n">ViewableElement</span><span class="p">)):</span>
+        <span class="n">html</span> <span class="o">=</span> <span class="n">element_display</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="p">(</span><span class="n">Layout</span><span class="p">,</span> <span class="n">NdLayout</span><span class="p">,</span> <span class="n">AdjointLayout</span><span class="p">)):</span>
+        <span class="n">html</span> <span class="o">=</span> <span class="n">layout_display</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">HoloMap</span><span class="p">):</span>
+        <span class="n">html</span> <span class="o">=</span> <span class="n">map_display</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">repr</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span> <span class="k">if</span> <span class="n">raw</span> <span class="k">else</span> <span class="n">IPython</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">display</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">html</span> <span class="k">if</span> <span class="n">raw</span> <span class="k">else</span> <span class="n">IPython</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">display</span><span class="p">(</span><span class="n">IPython</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">HTML</span><span class="p">(</span><span class="n">html</span><span class="p">))</span>
+
+</div>
+<span class="k">def</span> <span class="nf">pprint_display</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
+    <span class="c"># If pretty printing is off, return None (will fallback to repr)</span>
+    <span class="n">ip</span> <span class="o">=</span> <span class="n">get_ipython</span><span class="p">()</span>  <span class="c">#  # pyflakes:ignore (in IPython namespace)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">ip</span><span class="o">.</span><span class="n">display_formatter</span><span class="o">.</span><span class="n">formatters</span><span class="p">[</span><span class="s">&#39;text/plain&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">pprint</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    <span class="k">return</span> <span class="n">display</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">raw</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
 
 <span class="c"># display_video output by default, but may be set to first_frame,</span>
@@ -405,14 +449,10 @@
 
 <span class="k">def</span> <span class="nf">set_display_hooks</span><span class="p">(</span><span class="n">ip</span><span class="p">):</span>
     <span class="n">html_formatter</span> <span class="o">=</span> <span class="n">ip</span><span class="o">.</span><span class="n">display_formatter</span><span class="o">.</span><span class="n">formatters</span><span class="p">[</span><span class="s">&#39;text/html&#39;</span><span class="p">]</span>
-    <span class="n">html_formatter</span><span class="o">.</span><span class="n">for_type</span><span class="p">(</span><span class="n">Layout</span><span class="p">,</span> <span class="n">layout_display</span><span class="p">)</span>
-    <span class="n">html_formatter</span><span class="o">.</span><span class="n">for_type</span><span class="p">(</span><span class="n">ViewableElement</span><span class="p">,</span> <span class="n">element_display</span><span class="p">)</span>
-    <span class="n">html_formatter</span><span class="o">.</span><span class="n">for_type</span><span class="p">(</span><span class="n">Overlay</span><span class="p">,</span> <span class="n">element_display</span><span class="p">)</span>
-    <span class="n">html_formatter</span><span class="o">.</span><span class="n">for_type</span><span class="p">(</span><span class="n">NdOverlay</span><span class="p">,</span> <span class="n">element_display</span><span class="p">)</span>
-    <span class="n">html_formatter</span><span class="o">.</span><span class="n">for_type</span><span class="p">(</span><span class="n">HoloMap</span><span class="p">,</span> <span class="n">map_display</span><span class="p">)</span>
-    <span class="n">html_formatter</span><span class="o">.</span><span class="n">for_type</span><span class="p">(</span><span class="n">AdjointLayout</span><span class="p">,</span> <span class="n">layout_display</span><span class="p">)</span>
-    <span class="n">html_formatter</span><span class="o">.</span><span class="n">for_type</span><span class="p">(</span><span class="n">NdLayout</span><span class="p">,</span> <span class="n">layout_display</span><span class="p">)</span>
-    <span class="n">html_formatter</span><span class="o">.</span><span class="n">for_type</span><span class="p">(</span><span class="n">GridSpace</span><span class="p">,</span> <span class="n">grid_display</span><span class="p">)</span>
+    <span class="n">html_formatter</span><span class="o">.</span><span class="n">for_type</span><span class="p">(</span><span class="n">ViewableElement</span><span class="p">,</span> <span class="n">pprint_display</span><span class="p">)</span>
+    <span class="n">html_formatter</span><span class="o">.</span><span class="n">for_type</span><span class="p">(</span><span class="n">UniformNdMapping</span><span class="p">,</span> <span class="n">pprint_display</span><span class="p">)</span>
+    <span class="n">html_formatter</span><span class="o">.</span><span class="n">for_type</span><span class="p">(</span><span class="n">AdjointLayout</span><span class="p">,</span> <span class="n">pprint_display</span><span class="p">)</span>
+    <span class="n">html_formatter</span><span class="o">.</span><span class="n">for_type</span><span class="p">(</span><span class="n">Layout</span><span class="p">,</span> <span class="n">pprint_display</span><span class="p">)</span>
 </pre></div>
 
           </div>
