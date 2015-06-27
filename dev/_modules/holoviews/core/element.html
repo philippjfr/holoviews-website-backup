@@ -139,7 +139,7 @@
 <span class="kn">from</span> <span class="nn">.ndmapping</span> <span class="kn">import</span> <span class="n">OrderedDict</span><span class="p">,</span> <span class="n">UniformNdMapping</span><span class="p">,</span> <span class="n">NdMapping</span><span class="p">,</span> <span class="n">item_check</span>
 <span class="kn">from</span> <span class="nn">.overlay</span> <span class="kn">import</span> <span class="n">Overlayable</span><span class="p">,</span> <span class="n">NdOverlay</span><span class="p">,</span> <span class="n">Overlay</span><span class="p">,</span> <span class="n">CompositeOverlay</span>
 <span class="kn">from</span> <span class="nn">.tree</span> <span class="kn">import</span> <span class="n">AttrTree</span>
-
+<span class="kn">from</span> <span class="nn">.util</span> <span class="kn">import</span> <span class="n">sanitize_identifier</span>
 
 <div class="viewcode-block" id="Element"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.core.html#holoviews.core.element.Element">[docs]</a><span class="k">class</span> <span class="nc">Element</span><span class="p">(</span><span class="n">ViewableElement</span><span class="p">,</span> <span class="n">Composable</span><span class="p">,</span> <span class="n">Overlayable</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -232,26 +232,41 @@
         <span class="k">return</span> <span class="n">coords</span>
 
 </div>
-<div class="viewcode-block" id="Element.sample"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.core.html#holoviews.core.element.Element.sample">[docs]</a>    <span class="k">def</span> <span class="nf">sample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">samples</span><span class="p">):</span>
+<div class="viewcode-block" id="Element.sample"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.core.html#holoviews.core.element.Element.sample">[docs]</a>    <span class="k">def</span> <span class="nf">sample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">samples</span><span class="o">=</span><span class="p">[],</span> <span class="o">**</span><span class="n">sample_values</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Base class signature to demonstrate API for sampling Views.</span>
-<span class="sd">        To sample a ViewableElement kwargs, where the keyword matches a Dimension</span>
-<span class="sd">        in the ViewableElement and the value matches a corresponding entry in the</span>
-<span class="sd">        data.</span>
+<span class="sd">        Base class signature to demonstrate API for sampling Elements.</span>
+<span class="sd">        To sample an Element supply either a list of sampels or keyword</span>
+<span class="sd">        arguments, where the key should match an existing key dimension</span>
+<span class="sd">        on the Element.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span>
 
 </div>
-<div class="viewcode-block" id="Element.reduce"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.core.html#holoviews.core.element.Element.reduce">[docs]</a>    <span class="k">def</span> <span class="nf">reduce</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">reduce_map</span><span class="p">):</span>
+<div class="viewcode-block" id="Element.reduce"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.core.html#holoviews.core.element.Element.reduce">[docs]</a>    <span class="k">def</span> <span class="nf">reduce</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dimensions</span><span class="o">=</span><span class="p">[],</span> <span class="n">function</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">reduce_map</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Base class signature to demonstrate API for reducing Elements,</span>
 <span class="sd">        using some reduce function, e.g. np.mean, which is applied</span>
 <span class="sd">        along a particular Dimension. The dimensions and reduce functions</span>
-<span class="sd">        should be passed as keyword arguments.</span>
+<span class="sd">        should be passed as keyword arguments or as a list of dimensions</span>
+<span class="sd">        and a single function.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span>
 
 </div>
+    <span class="k">def</span> <span class="nf">_reduce_map</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dimensions</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="n">reduce_map</span><span class="p">):</span>
+        <span class="n">dimensions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_valid_dimensions</span><span class="p">(</span><span class="n">dimensions</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">dimensions</span> <span class="ow">and</span> <span class="n">reduce_map</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s">&quot;Pass reduced dimensions either as an argument&quot;</span>
+                            <span class="s">&quot;or as part of the kwargs not both.&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">dimensions</span><span class="p">:</span>
+            <span class="n">reduce_map</span> <span class="o">=</span> <span class="p">{</span><span class="n">dimensions</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span> <span class="n">function</span><span class="p">}</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="n">reduce_map</span><span class="p">:</span>
+            <span class="n">reduce_map</span> <span class="o">=</span> <span class="p">{</span><span class="n">d</span><span class="p">:</span> <span class="n">function</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cached_index_names</span><span class="p">}</span>
+        <span class="n">sanitized</span> <span class="o">=</span> <span class="p">{</span><span class="n">sanitize_identifier</span><span class="p">(</span><span class="n">kd</span><span class="p">):</span> <span class="n">kd</span>
+                     <span class="k">for</span> <span class="n">kd</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cached_index_names</span><span class="p">}</span>
+        <span class="k">return</span> <span class="p">{</span><span class="n">sanitized</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span> <span class="n">fn</span> <span class="k">for</span> <span class="n">d</span><span class="p">,</span> <span class="n">fn</span> <span class="ow">in</span> <span class="n">reduce_map</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+
+
 <div class="viewcode-block" id="Element.table"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.core.html#holoviews.core.element.Element.table">[docs]</a>    <span class="k">def</span> <span class="nf">table</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This method transforms any ViewableElement type into a Table</span>
@@ -462,12 +477,8 @@
 <span class="sd">        the dimension name and reduce_fn as kwargs. Reduces</span>
 <span class="sd">        dimensionality of Table until only an ItemTable is left.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">dimensions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_valid_dimensions</span><span class="p">(</span><span class="n">dimensions</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">dimensions</span> <span class="ow">and</span> <span class="n">reduce_map</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s">&quot;Pass reduced dimensions either as an argument&quot;</span>
-                            <span class="s">&quot;or as part of the kwargs not both.&quot;</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">dimensions</span><span class="p">:</span>
-            <span class="n">reduce_map</span> <span class="o">=</span> <span class="p">{</span><span class="n">d</span><span class="p">:</span> <span class="n">function</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">dimensions</span><span class="p">}</span>
+        <span class="n">reduce_map</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reduce_map</span><span class="p">(</span><span class="n">dimensions</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="n">reduce_map</span><span class="p">)</span>
+
         <span class="n">dim_labels</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cached_index_names</span>
         <span class="n">reduced_table</span> <span class="o">=</span> <span class="bp">self</span>
         <span class="k">for</span> <span class="n">reduce_fn</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">groupby</span><span class="p">(</span><span class="n">reduce_map</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
@@ -795,6 +806,7 @@
         <span class="n">reduced_items</span> <span class="o">=</span> <span class="p">[(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="n">dimensions</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="o">**</span><span class="n">reduce_map</span><span class="p">))</span>
                          <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">clone</span><span class="p">(</span><span class="n">reduced_items</span><span class="p">)</span><span class="o">.</span><span class="n">table</span><span class="p">()</span>
+
 </div>
     <span class="k">def</span> <span class="nf">relabel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">depth</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
         <span class="c"># Identical to standard relabel method except for default depth of 1</span>

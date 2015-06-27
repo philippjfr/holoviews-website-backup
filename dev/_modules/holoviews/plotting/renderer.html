@@ -237,11 +237,11 @@
 <span class="sd">        Helper method to be used in the __call__ method to get a</span>
 <span class="sd">        suitable plot object and the appropriate format.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-
         <span class="n">fig_formats</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode_formats</span><span class="p">[</span><span class="s">&#39;fig&#39;</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">mode</span><span class="p">]</span>
         <span class="n">holomap_formats</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode_formats</span><span class="p">[</span><span class="s">&#39;holomap&#39;</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">mode</span><span class="p">]</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">Plot</span><span class="p">):</span>
+            <span class="n">obj</span> <span class="o">=</span> <span class="n">Layout</span><span class="o">.</span><span class="n">from_values</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">AdjointLayout</span><span class="p">)</span> <span class="k">else</span> <span class="n">obj</span>
             <span class="n">plot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">plotting_class</span><span class="p">(</span><span class="n">obj</span><span class="p">)(</span><span class="n">obj</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">plot_options</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">))</span>
             <span class="n">plot</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">fmt</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
@@ -309,7 +309,8 @@
 <span class="sd">        Given an object or Element class, return the suitable plotting</span>
 <span class="sd">        class needed to render it with the current renderer.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">obj</span> <span class="o">=</span> <span class="n">Layout</span><span class="o">.</span><span class="n">from_values</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">AdjointLayout</span><span class="p">)</span> <span class="k">else</span> <span class="n">obj</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">AdjointLayout</span><span class="p">)</span> <span class="ow">or</span> <span class="n">obj</span> <span class="ow">is</span> <span class="n">AdjointLayout</span><span class="p">:</span>
+            <span class="n">obj</span>  <span class="o">=</span> <span class="n">Layout</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="nb">type</span><span class="p">):</span>
             <span class="n">element_type</span> <span class="o">=</span> <span class="n">obj</span>
         <span class="k">else</span><span class="p">:</span>
@@ -318,7 +319,6 @@
             <span class="n">plotclass</span> <span class="o">=</span> <span class="n">Store</span><span class="o">.</span><span class="n">registry</span><span class="p">[</span><span class="n">cls</span><span class="o">.</span><span class="n">backend</span><span class="p">][</span><span class="n">element_type</span><span class="p">]</span>
         <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s">&quot;No corresponding plot type found for </span><span class="si">%r</span><span class="s">&quot;</span> <span class="o">%</span> <span class="nb">type</span><span class="p">(</span><span class="n">obj</span><span class="p">))</span>
-
         <span class="k">return</span> <span class="n">plotclass</span>
 
 

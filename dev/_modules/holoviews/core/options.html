@@ -1051,52 +1051,6 @@
             <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">cls</span><span class="o">.</span><span class="n">_options</span><span class="p">[</span><span class="n">backend</span><span class="p">]:</span>
                 <span class="n">cls</span><span class="o">.</span><span class="n">_options</span><span class="p">[</span><span class="n">backend</span><span class="p">][</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">opt_groups</span>
 
-</div>
-    <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="Store.register_plots"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.core.html#holoviews.core.options.Store.register_plots">[docs]</a>    <span class="k">def</span> <span class="nf">register_plots</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">style_aliases</span><span class="o">=</span><span class="p">{},</span> <span class="n">backend</span><span class="o">=</span><span class="s">&#39;matplotlib&#39;</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Given that the Store.registry dictionary has been populate</span>
-<span class="sd">        with {&lt;element&gt;:&lt;plot-class&gt;} items, build an OptionTree for the</span>
-<span class="sd">        supported plot types, registering allowed plotting and style</span>
-<span class="sd">        keywords.</span>
-
-<span class="sd">        This is designed to be backend independent but makes the</span>
-<span class="sd">        following assumptions:</span>
-
-<span class="sd">        * Plotting classes are param.Parameterized objects.</span>
-
-<span class="sd">        * Plotting classes have a style_opts list of keywords used to</span>
-<span class="sd">          control the display style of the output.</span>
-
-<span class="sd">        * Overlay plotting is a function of the overlaid elements and</span>
-<span class="sd">          only has plot options (and not style or normalization</span>
-<span class="sd">          options).</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">.overlay</span> <span class="kn">import</span> <span class="n">CompositeOverlay</span>
-        <span class="n">path_items</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="k">for</span> <span class="n">view_class</span><span class="p">,</span> <span class="n">plot</span> <span class="ow">in</span> <span class="n">cls</span><span class="o">.</span><span class="n">registry</span><span class="p">[</span><span class="n">backend</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="n">name</span> <span class="o">=</span> <span class="n">view_class</span><span class="o">.</span><span class="n">__name__</span>
-            <span class="n">plot_opts</span> <span class="o">=</span> <span class="p">[</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">plot</span><span class="o">.</span><span class="n">params</span><span class="p">()</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;name&#39;</span><span class="p">]]</span>
-            <span class="n">expanded_opts</span> <span class="o">=</span> <span class="p">[</span><span class="n">opt</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">plot</span><span class="o">.</span><span class="n">style_opts</span>
-                             <span class="k">for</span> <span class="n">opt</span> <span class="ow">in</span> <span class="n">style_aliases</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="p">[])]</span>
-            <span class="n">style_opts</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">expanded_opts</span> <span class="o">+</span> <span class="n">plot</span><span class="o">.</span><span class="n">style_opts</span><span class="p">))</span>
-            <span class="k">with</span> <span class="n">param</span><span class="o">.</span><span class="n">logging_level</span><span class="p">(</span><span class="s">&#39;CRITICAL&#39;</span><span class="p">):</span>
-                <span class="n">plot</span><span class="o">.</span><span class="n">style_opts</span> <span class="o">=</span> <span class="n">style_opts</span>
-            <span class="n">opt_groups</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;plot&#39;</span><span class="p">:</span> <span class="n">Options</span><span class="p">(</span><span class="n">allowed_keywords</span><span class="o">=</span><span class="n">plot_opts</span><span class="p">)}</span>
-
-            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">view_class</span><span class="p">,</span> <span class="n">CompositeOverlay</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">plot</span><span class="p">,</span> <span class="s">&#39;style_opts&#39;</span><span class="p">):</span>
-                <span class="n">opt_groups</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s">&#39;style&#39;</span><span class="p">:</span> <span class="n">Options</span><span class="p">(</span><span class="n">allowed_keywords</span><span class="o">=</span><span class="n">style_opts</span><span class="p">),</span>
-                                   <span class="s">&#39;norm&#39;</span><span class="p">:</span>  <span class="n">Options</span><span class="p">(</span><span class="n">framewise</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">axiswise</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
-                                                    <span class="n">allowed_keywords</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;framewise&#39;</span><span class="p">,</span>
-                                                                      <span class="s">&#39;axiswise&#39;</span><span class="p">])})</span>
-            <span class="n">path_items</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">opt_groups</span>
-
-        <span class="n">cls</span><span class="o">.</span><span class="n">_options</span><span class="p">[</span><span class="n">backend</span><span class="p">]</span> <span class="o">=</span> <span class="n">OptionTree</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">path_items</span><span class="o">.</span><span class="n">items</span><span class="p">()),</span>
-                                          <span class="n">groups</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;style&#39;</span><span class="p">,</span> <span class="s">&#39;plot&#39;</span><span class="p">,</span> <span class="s">&#39;norm&#39;</span><span class="p">])</span>
-
-        <span class="k">for</span> <span class="n">fn</span> <span class="ow">in</span> <span class="n">cls</span><span class="o">.</span><span class="n">option_setters</span><span class="p">:</span>
-            <span class="n">fn</span><span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">_options</span><span class="p">[</span><span class="n">backend</span><span class="p">])</span>
-
 
 </div></div>
 <div class="viewcode-block" id="StoreOptions"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.core.html#holoviews.core.options.StoreOptions">[docs]</a><span class="k">class</span> <span class="nc">StoreOptions</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>

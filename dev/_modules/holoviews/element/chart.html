@@ -268,7 +268,7 @@
 
 <div class="viewcode-block" id="Chart.sample"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.element.html#holoviews.element.chart.Chart.sample">[docs]</a>    <span class="k">def</span> <span class="nf">sample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">samples</span><span class="o">=</span><span class="p">[]):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Allows sampling of Element2D objects using the default</span>
+<span class="sd">        Allows sampling of Chart Elements using the default</span>
 <span class="sd">        syntax of providing a map of dimensions and sample pairs.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">sample_data</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
@@ -287,14 +287,7 @@
 <span class="sd">        Allows collapsing of Chart objects using the supplied map of</span>
 <span class="sd">        dimensions and reduce functions.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">dimensions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_valid_dimensions</span><span class="p">(</span><span class="n">dimensions</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">dimensions</span> <span class="ow">and</span> <span class="n">reduce_map</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s">&quot;Pass reduced dimensions either as an argument&quot;</span>
-                            <span class="s">&quot;or as part of the kwargs not both.&quot;</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">dimensions</span><span class="p">:</span>
-            <span class="n">reduce_map</span> <span class="o">=</span> <span class="p">{</span><span class="n">dimensions</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span> <span class="n">function</span><span class="p">}</span>
-        <span class="k">elif</span> <span class="ow">not</span> <span class="n">reduce_map</span><span class="p">:</span>
-            <span class="n">reduce_map</span> <span class="o">=</span> <span class="p">{</span><span class="n">d</span><span class="p">:</span> <span class="n">function</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cached_index_names</span><span class="p">}</span>
+        <span class="n">reduce_map</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reduce_map</span><span class="p">(</span><span class="n">dimensions</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="n">reduce_map</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">reduce_map</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;Chart Elements may only be reduced to a point.&quot;</span><span class="p">)</span>
@@ -554,7 +547,7 @@
             <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">Histogram</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">dimension_values</span><span class="p">(</span><span class="n">dim</span><span class="p">)</span>
 
 
-    <span class="k">def</span> <span class="nf">sample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">samples</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">sample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">samples</span><span class="o">=</span><span class="p">[],</span> <span class="o">**</span><span class="n">sample_values</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s">&#39;Cannot sample a Histogram.&#39;</span><span class="p">)</span>
 
 

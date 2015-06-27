@@ -171,7 +171,7 @@ appearance of my object?</strong></p>
 <tt class="docutils literal"><span class="pre">%%output</span> <span class="pre">info=True</span></tt> at the top of your code cell. This will
 present the available style and plotting options for that object.</p>
 <p>The same information is also available using
-<tt class="docutils literal"><span class="pre">holoviews.help(obj,</span> <span class="pre">visualization=True)</span></tt>. For more
+<tt class="docutils literal"><span class="pre">holoviews.help(obj)</span></tt>. For more
 information on customizing the display of an object,
 see our <a class="reference external" href="Tutorials/Options">Options Tutorial</a>.</p>
 <p><strong>Q: Why don&#8217;t you let me pass</strong> <em>matplotlib_option</em> <strong>as a style
@@ -236,26 +236,9 @@ of keys in any displayed <tt class="docutils literal"><span class="pre">HoloMap<
 formats may introduce visible artifacts.</li>
 </ul>
 <p><strong>Q: How do I create a Layout or Overlay object from an arbitrary list?</strong></p>
-<p>For lists of non-iterable elements (e.g. a collection of <tt class="docutils literal"><span class="pre">Image</span></tt>
-elements), the Numpy <tt class="docutils literal"><span class="pre">np.sum</span></tt> and <tt class="docutils literal"><span class="pre">np.prod</span></tt> functions work well.
-However, these functions don&#8217;t work for iterable elements such as
-<tt class="docutils literal"><span class="pre">Curve</span></tt>, for which the currently recommended approach is to
-import the <tt class="docutils literal"><span class="pre">Overlay</span></tt> or <tt class="docutils literal"><span class="pre">Layout</span></tt> as appropriate and use
-the <tt class="docutils literal"><span class="pre">from_values</span></tt> classmethod. In the next release, you will also
-be able to pass such a list directly to the constructor of <tt class="docutils literal"><span class="pre">Overlay</span></tt>
-or <tt class="docutils literal"><span class="pre">Layout</span></tt>.</p>
-<p><strong>Q: How do I include special characters (e.g. accents) in the title?</strong></p>
-<p>At this time, Python 2 users may need to switch the default encoding
-of string to UTF-8. This may be done in a live Python or IPython
-session as follows:</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">sys</span><span class="p">;</span> <span class="nb">reload</span><span class="p">(</span><span class="n">sys</span><span class="p">)</span>
-<span class="n">sys</span><span class="o">.</span><span class="n">setdefaultencoding</span><span class="p">(</span><span class="s">&quot;utf-8&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Alternatively you may set your
-<a class="reference external" href="https://docs.python.org/2/using/cmdline.html#envvar-PYTHONIOENCODING">PYTHONIOENCODING</a>
-environment variable. That said, we hope to support Unicode literals
-in the next release, making these changes unnecessary.</p>
+<p>You can supply the list of elements directly to the <tt class="docutils literal"><span class="pre">Layout</span></tt> and
+<tt class="docutils literal"><span class="pre">Overlay</span></tt> constructors. For instance, you can use
+<tt class="docutils literal"><span class="pre">hv.Layout(elements)</span></tt> or <tt class="docutils literal"><span class="pre">hv.Overlay(elements)</span></tt>.</p>
 </div>
 
 
