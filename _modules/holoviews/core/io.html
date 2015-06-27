@@ -199,7 +199,7 @@
 <span class="sd">    designed to be very general so here are a few examples:</span>
 
 <span class="sd">    Pickling:   Native Python, supported by HoloViews.</span>
-<span class="sd">    Rendering:  Currently using matplotlib but could use any plotting backend.</span>
+<span class="sd">    Rendering:  Any plotting backend may be used (default uses matplotlib)</span>
 <span class="sd">    Storage:    Saving to a database (e.g SQL), HDF5 etc.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -677,8 +677,8 @@
 
     <span class="k">def</span> <span class="nf">_dim_formatter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">obj</span><span class="p">:</span> <span class="k">return</span> <span class="s">&#39;&#39;</span>
-        <span class="n">key_dims</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">traverse</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">key_dimensions</span><span class="p">,</span> <span class="p">[</span><span class="n">UniformNdMapping</span><span class="p">])</span>
-        <span class="n">constant_dims</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">traverse</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">constant_dimensions</span><span class="p">)</span>
+        <span class="n">key_dims</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">traverse</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">kdims</span><span class="p">,</span> <span class="p">[</span><span class="n">UniformNdMapping</span><span class="p">])</span>
+        <span class="n">constant_dims</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">traverse</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">cdims</span><span class="p">)</span>
         <span class="n">dims</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="nb">map</span><span class="p">(</span><span class="n">dims</span><span class="o">.</span><span class="n">extend</span><span class="p">,</span> <span class="n">key_dims</span> <span class="o">+</span> <span class="n">constant_dims</span><span class="p">)</span>
         <span class="n">dims</span> <span class="o">=</span> <span class="n">unique_iterator</span><span class="p">(</span><span class="n">dims</span><span class="p">)</span>
@@ -949,7 +949,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'2014.05.14',
+            VERSION:'1.2.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

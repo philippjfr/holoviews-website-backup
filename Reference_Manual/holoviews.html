@@ -132,7 +132,7 @@
 <h2><tt class="xref py py-mod docutils literal"><span class="pre">holoviews</span></tt> Package<a class="headerlink" href="#holoviews-package" title="Permalink to this headline">¶</a></h2>
 <span class="target" id="module-holoviews.__init__"></span><dl class="function">
 <dt id="holoviews.__init__.help">
-<tt class="descclassname">holoviews.__init__.</tt><tt class="descname">help</tt><big>(</big><em>obj</em>, <em>visualization=False</em>, <em>ansi=True</em><big>)</big><a class="reference internal" href="../_modules/holoviews/__init__.html#help"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#holoviews.__init__.help" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">holoviews.__init__.</tt><tt class="descname">help</tt><big>(</big><em>obj</em>, <em>visualization=True</em>, <em>ansi=True</em>, <em>backend='matplotlib'</em><big>)</big><a class="reference internal" href="../_modules/holoviews/__init__.html#help"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#holoviews.__init__.help" title="Permalink to this definition">¶</a></dt>
 <dd><p>Extended version of the built-in help that supports parameterized
 functions and objects. If ansi is set to False, all ANSI color
 codes are stripped out.</p>
@@ -200,17 +200,29 @@ codes are stripped out.</p>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="holoviews.plotting.html">holoviews.plotting Package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="holoviews.plotting.html#plotting-package"><tt class="docutils literal"><span class="pre">plotting</span></tt> Package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="holoviews.plotting.html#annotation-module"><tt class="docutils literal"><span class="pre">annotation</span></tt> Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="holoviews.plotting.html#chart-module"><tt class="docutils literal"><span class="pre">chart</span></tt> Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="holoviews.plotting.html#chart3d-module"><tt class="docutils literal"><span class="pre">chart3d</span></tt> Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="holoviews.plotting.html#element-module"><tt class="docutils literal"><span class="pre">element</span></tt> Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="holoviews.plotting.html#hooks-module"><tt class="docutils literal"><span class="pre">hooks</span></tt> Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="holoviews.plotting.html#pandas-module"><tt class="docutils literal"><span class="pre">pandas</span></tt> Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="holoviews.plotting.html#path-module"><tt class="docutils literal"><span class="pre">path</span></tt> Module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="holoviews.plotting.html#plot-module"><tt class="docutils literal"><span class="pre">plot</span></tt> Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="holoviews.plotting.html#raster-module"><tt class="docutils literal"><span class="pre">raster</span></tt> Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="holoviews.plotting.html#seaborn-module"><tt class="docutils literal"><span class="pre">seaborn</span></tt> Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="holoviews.plotting.html#tabular-module"><tt class="docutils literal"><span class="pre">tabular</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="holoviews.plotting.html#renderer-module"><tt class="docutils literal"><span class="pre">renderer</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="holoviews.plotting.html#widgets-module"><tt class="docutils literal"><span class="pre">widgets</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="holoviews.plotting.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="holoviews.plotting.mpl.html">holoviews.mpl Package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="holoviews.plotting.mpl.html#mpl-package"><tt class="docutils literal"><span class="pre">mpl</span></tt> Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="holoviews.plotting.mpl.html#annotation-module"><tt class="docutils literal"><span class="pre">annotation</span></tt> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="holoviews.plotting.mpl.html#chart-module"><tt class="docutils literal"><span class="pre">chart</span></tt> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="holoviews.plotting.mpl.html#chart3d-module"><tt class="docutils literal"><span class="pre">chart3d</span></tt> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="holoviews.plotting.mpl.html#element-module"><tt class="docutils literal"><span class="pre">element</span></tt> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="holoviews.plotting.mpl.html#hooks-module"><tt class="docutils literal"><span class="pre">hooks</span></tt> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="holoviews.plotting.mpl.html#pandas-module"><tt class="docutils literal"><span class="pre">pandas</span></tt> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="holoviews.plotting.mpl.html#path-module"><tt class="docutils literal"><span class="pre">path</span></tt> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="holoviews.plotting.mpl.html#plot-module"><tt class="docutils literal"><span class="pre">plot</span></tt> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="holoviews.plotting.mpl.html#raster-module"><tt class="docutils literal"><span class="pre">raster</span></tt> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="holoviews.plotting.mpl.html#renderer-module"><tt class="docutils literal"><span class="pre">renderer</span></tt> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="holoviews.plotting.mpl.html#seaborn-module"><tt class="docutils literal"><span class="pre">seaborn</span></tt> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="holoviews.plotting.mpl.html#tabular-module"><tt class="docutils literal"><span class="pre">tabular</span></tt> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="holoviews.plotting.mpl.html#widgets-module"><tt class="docutils literal"><span class="pre">widgets</span></tt> Module</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -256,7 +268,7 @@ codes are stripped out.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'2014.05.14',
+            VERSION:'1.2.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

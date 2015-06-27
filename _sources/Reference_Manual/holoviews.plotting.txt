@@ -17,97 +17,6 @@ holoviews.plotting Package
 
 -------
 
-:mod:`annotation` Module
-------------------------
-
-.. inheritance-diagram:: holoviews.plotting.annotation
-
-
-.. automodule:: holoviews.plotting.annotation
-    :members:
-    :inherited-members:
-    :show-inheritance:
-
--------
-
-:mod:`chart` Module
--------------------
-
-.. inheritance-diagram:: holoviews.plotting.chart
-
-
-.. automodule:: holoviews.plotting.chart
-    :members:
-    :inherited-members:
-    :show-inheritance:
-
--------
-
-:mod:`chart3d` Module
----------------------
-
-.. inheritance-diagram:: holoviews.plotting.chart3d
-
-
-.. automodule:: holoviews.plotting.chart3d
-    :members:
-    :inherited-members:
-    :show-inheritance:
-
--------
-
-:mod:`element` Module
----------------------
-
-.. inheritance-diagram:: holoviews.plotting.element
-
-
-.. automodule:: holoviews.plotting.element
-    :members:
-    :inherited-members:
-    :show-inheritance:
-
--------
-
-:mod:`hooks` Module
--------------------
-
-.. inheritance-diagram:: holoviews.plotting.hooks
-
-
-.. automodule:: holoviews.plotting.hooks
-    :members:
-    :inherited-members:
-    :show-inheritance:
-
--------
-
-:mod:`pandas` Module
---------------------
-
-.. inheritance-diagram:: holoviews.plotting.pandas
-
-
-.. automodule:: holoviews.plotting.pandas
-    :members:
-    :inherited-members:
-    :show-inheritance:
-
--------
-
-:mod:`path` Module
-------------------
-
-.. inheritance-diagram:: holoviews.plotting.path
-
-
-.. automodule:: holoviews.plotting.path
-    :members:
-    :inherited-members:
-    :show-inheritance:
-
--------
-
 :mod:`plot` Module
 ------------------
 
@@ -121,42 +30,36 @@ holoviews.plotting Package
 
 -------
 
-:mod:`raster` Module
---------------------
+:mod:`renderer` Module
+----------------------
 
-.. inheritance-diagram:: holoviews.plotting.raster
+.. inheritance-diagram:: holoviews.plotting.renderer
 
 
-.. automodule:: holoviews.plotting.raster
+.. automodule:: holoviews.plotting.renderer
     :members:
     :inherited-members:
     :show-inheritance:
 
 -------
 
-:mod:`seaborn` Module
+:mod:`widgets` Module
 ---------------------
 
-.. inheritance-diagram:: holoviews.plotting.seaborn
+.. inheritance-diagram:: holoviews.plotting.widgets
 
 
-.. automodule:: holoviews.plotting.seaborn
+.. automodule:: holoviews.plotting.widgets
     :members:
     :inherited-members:
     :show-inheritance:
 
 -------
 
-:mod:`tabular` Module
----------------------
+Subpackages
+-----------
 
-.. inheritance-diagram:: holoviews.plotting.tabular
+.. toctree::
 
-
-.. automodule:: holoviews.plotting.tabular
-    :members:
-    :inherited-members:
-    :show-inheritance:
-
--------
+    holoviews.plotting.mpl
 

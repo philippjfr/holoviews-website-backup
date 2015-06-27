@@ -149,8 +149,8 @@
 <span class="sd">    used when multiple Annotations are displayed together.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">key_dimensions</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">List</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="p">[</span><span class="n">Dimension</span><span class="p">(</span><span class="s">&#39;x&#39;</span><span class="p">),</span> <span class="n">Dimension</span><span class="p">(</span><span class="s">&#39;y&#39;</span><span class="p">)],</span>
-                                <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+    <span class="n">kdims</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">List</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="p">[</span><span class="n">Dimension</span><span class="p">(</span><span class="s">&#39;x&#39;</span><span class="p">),</span> <span class="n">Dimension</span><span class="p">(</span><span class="s">&#39;y&#39;</span><span class="p">)],</span>
+                       <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
 
     <span class="n">group</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s">&#39;Annotation&#39;</span><span class="p">,</span> <span class="n">constant</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
@@ -208,7 +208,7 @@
 <span class="sd">    Draw a spline using the given handle coordinates and handle</span>
 <span class="sd">    codes. The constructor accepts a tuple in format (coords, codes).</span>
 
-<span class="sd">    Follows matplotlib spline definitions as used in</span>
+<span class="sd">    Follows format of matplotlib spline definitions as used in</span>
 <span class="sd">    matplotlib.path.Path with the following codes:</span>
 
 <span class="sd">    Path.STOP     : 0</span>
@@ -350,7 +350,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'2014.05.14',
+            VERSION:'1.2.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

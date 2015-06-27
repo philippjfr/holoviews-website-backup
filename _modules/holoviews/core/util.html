@@ -194,7 +194,7 @@
 <span class="s">       names.&quot;&quot;&quot;</span><span class="p">)</span>
 
     <span class="n">eliminations</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">List</span><span class="p">([</span><span class="s">&#39;extended&#39;</span><span class="p">,</span> <span class="s">&#39;accent&#39;</span><span class="p">,</span> <span class="s">&#39;small&#39;</span><span class="p">,</span> <span class="s">&#39;letter&#39;</span><span class="p">,</span> <span class="s">&#39;sign&#39;</span><span class="p">,</span> <span class="s">&#39;digit&#39;</span><span class="p">,</span>
-                               <span class="s">&#39;latin&#39;</span><span class="p">,</span> <span class="s">&#39;greek&#39;</span><span class="p">,</span> <span class="s">&#39;arabic-indic&#39;</span><span class="p">,</span> <span class="s">&#39;with&#39;</span><span class="p">],</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
+                               <span class="s">&#39;latin&#39;</span><span class="p">,</span> <span class="s">&#39;greek&#39;</span><span class="p">,</span> <span class="s">&#39;arabic-indic&#39;</span><span class="p">,</span> <span class="s">&#39;with&#39;</span><span class="p">,</span> <span class="s">&#39;dollar&#39;</span><span class="p">],</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
 <span class="s">       Lowercase strings to be eliminated from the unicode names in</span>
 <span class="s">       order to shorten the sanitized name ( lowercase). Redundant</span>
 <span class="s">       strings should be removed but too much elimination could cause</span>
@@ -229,6 +229,8 @@
 <span class="s">       with the leading prefix.&quot;&quot;&quot;</span><span class="p">)</span>
 
     <span class="n">prefix</span> <span class="o">=</span> <span class="s">&#39;A_&#39;</span>
+
+    <span class="n">_lookup_table</span> <span class="o">=</span> <span class="p">{}</span>
 
     <span class="nd">@param.parameterized.bothmethod</span>
     <span class="k">def</span> <span class="nf">allowable</span><span class="p">(</span><span class="n">self_or_cls</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">disable_leading_underscore</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
@@ -287,7 +289,10 @@
 
 </div>
     <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">escape</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="p">[</span><span class="bp">None</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">]:</span> <span class="k">return</span> <span class="n">name</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="p">[</span><span class="bp">None</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">]:</span>
+           <span class="k">return</span> <span class="n">name</span>
+        <span class="k">elif</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lookup_table</span><span class="p">:</span>
+           <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lookup_table</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
         <span class="n">name</span> <span class="o">=</span> <span class="n">safe_unicode</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
         <span class="n">version</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">version</span> <span class="k">if</span> <span class="n">version</span> <span class="ow">is</span> <span class="bp">None</span> <span class="k">else</span> <span class="n">version</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">allowable</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
@@ -299,8 +304,10 @@
             <span class="n">name</span> <span class="o">=</span> <span class="n">name</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="o">+</span><span class="n">name</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
 
         <span class="n">sanitized</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sanitize_py2</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="k">if</span> <span class="n">version</span><span class="o">==</span><span class="mi">2</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">sanitize_py3</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">prefixed</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">version</span><span class="p">):</span> <span class="k">return</span> <span class="n">sanitized</span>
-        <span class="k">else</span><span class="p">:</span>                                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">prefix</span> <span class="o">+</span> <span class="n">sanitized</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">prefixed</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">version</span><span class="p">):</span>
+           <span class="n">sanitized</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">prefix</span> <span class="o">+</span> <span class="n">sanitized</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_lookup_table</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">sanitized</span>
+        <span class="k">return</span> <span class="n">sanitized</span>
 
 
     <span class="k">def</span> <span class="nf">_process_underscores</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tokens</span><span class="p">):</span>
@@ -342,7 +349,8 @@
                                                          <span class="bp">self</span><span class="o">.</span><span class="n">substitutions</span><span class="p">,</span>
                                                          <span class="bp">self</span><span class="o">.</span><span class="n">transforms</span><span class="p">)</span>
                     <span class="n">sanitized</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">chars</span><span class="p">]</span> <span class="k">if</span> <span class="n">chars</span> <span class="k">else</span> <span class="p">[])</span>
-                    <span class="n">sanitized</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">short</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">short</span> <span class="o">!=</span> <span class="s">&#39;&#39;</span><span class="p">:</span>
+                       <span class="n">sanitized</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">short</span><span class="p">)</span>
                     <span class="n">chars</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
             <span class="k">if</span> <span class="n">chars</span><span class="p">:</span>
                 <span class="n">sanitized</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">chars</span><span class="p">])</span>
@@ -617,7 +625,7 @@
 <span class="sd">   &quot;&quot;&quot;</span>
    <span class="n">orderings</span> <span class="o">=</span> <span class="p">{}</span>
    <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">hmap</span><span class="p">:</span>
-      <span class="n">okeys</span> <span class="o">=</span> <span class="p">[(</span><span class="nb">type</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">v</span><span class="o">.</span><span class="n">group</span><span class="p">,</span> <span class="n">v</span><span class="o">.</span><span class="n">label</span><span class="p">)</span> <span class="o">+</span> <span class="n">k</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">o</span><span class="o">.</span><span class="n">key_dimensions</span><span class="p">)</span> <span class="k">else</span>
+      <span class="n">okeys</span> <span class="o">=</span> <span class="p">[(</span><span class="nb">type</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">v</span><span class="o">.</span><span class="n">group</span><span class="p">,</span> <span class="n">v</span><span class="o">.</span><span class="n">label</span><span class="p">)</span> <span class="o">+</span> <span class="n">k</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">o</span><span class="o">.</span><span class="n">kdims</span><span class="p">)</span> <span class="k">else</span>
                <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="o">.</span><span class="n">__name__</span><span class="p">,)</span> <span class="o">+</span> <span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">o</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
       <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">okeys</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">okeys</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">orderings</span><span class="p">:</span>
          <span class="n">orderings</span><span class="p">[</span><span class="n">okeys</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
@@ -711,7 +719,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'2014.05.14',
+            VERSION:'1.2.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
