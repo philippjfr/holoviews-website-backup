@@ -281,6 +281,17 @@
         <span class="nb">super</span><span class="p">(</span><span class="n">DimensionedPlot</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">params</span><span class="p">)</span>
 
 
+    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">frame</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the state of the Plot for a given frame number.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">frame</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s">&quot;Showing last frame available: </span><span class="si">%d</span><span class="s">&quot;</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">drawn</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">[</span><span class="s">&#39;fig&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">initialize_plot</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update_frame</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">[</span><span class="n">frame</span><span class="p">])</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span>
+
+
     <span class="k">def</span> <span class="nf">_get_frame</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Required on each MPLPlot type to get the data corresponding</span>
