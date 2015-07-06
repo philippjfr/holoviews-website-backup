@@ -812,7 +812,7 @@
 
 
     <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">max</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">),</span> <span class="mi">1</span><span class="p">])</span>
+        <span class="k">return</span> <span class="nb">max</span><span class="p">([</span><span class="mi">1</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">keys</span> <span class="ow">is</span> <span class="bp">None</span> <span class="k">else</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">),</span> <span class="mi">1</span><span class="p">])</span>
 
 </div>
 <div class="viewcode-block" id="LayoutPlot"><a class="viewcode-back" href="../../../../Reference_Manual/holoviews.plotting.mpl.html#holoviews.plotting.mpl.plot.LayoutPlot">[docs]</a><span class="k">class</span> <span class="nc">LayoutPlot</span><span class="p">(</span><span class="n">GenericLayoutPlot</span><span class="p">,</span> <span class="n">CompositePlot</span><span class="p">):</span>

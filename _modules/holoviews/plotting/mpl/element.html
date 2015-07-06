@@ -593,6 +593,11 @@
 
     <span class="n">_passed_handles</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;fig&#39;</span><span class="p">,</span> <span class="s">&#39;axis&#39;</span><span class="p">]</span>
 
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">overlay</span><span class="p">,</span> <span class="n">ranges</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">overlay</span><span class="o">.</span><span class="n">traverse</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="n">Element3D</span><span class="p">,)):</span>
+            <span class="n">params</span><span class="p">[</span><span class="s">&#39;projection&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;3d&#39;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">OverlayPlot</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">overlay</span><span class="p">,</span> <span class="n">ranges</span><span class="o">=</span><span class="n">ranges</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
+
     <span class="k">def</span> <span class="nf">_adjust_legend</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">axis</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Accumulate the legend handles and labels for all subplots</span>
