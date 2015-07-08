@@ -137,7 +137,7 @@
 <span class="kn">import</span> <span class="nn">param</span>
 
 <span class="kn">from</span> <span class="nn">..core</span> <span class="kn">import</span> <span class="n">ElementOperation</span><span class="p">,</span> <span class="n">NdOverlay</span><span class="p">,</span> <span class="n">Overlay</span>
-<span class="kn">from</span> <span class="nn">..core.util</span> <span class="kn">import</span> <span class="n">find_minmax</span>
+<span class="kn">from</span> <span class="nn">..core.util</span> <span class="kn">import</span> <span class="n">find_minmax</span><span class="p">,</span> <span class="n">sanitize_identifier</span>
 <span class="kn">from</span> <span class="nn">..element.chart</span> <span class="kn">import</span> <span class="n">Histogram</span><span class="p">,</span> <span class="n">Curve</span>
 <span class="kn">from</span> <span class="nn">..element.raster</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">RGB</span>
 <span class="kn">from</span> <span class="nn">..element.path</span> <span class="kn">import</span> <span class="n">Contours</span>
@@ -333,7 +333,7 @@
 
         <span class="n">strength</span> <span class="o">=</span> <span class="mi">1</span>
         <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;group&#39;</span><span class="p">,</span> <span class="s">&#39;label&#39;</span><span class="p">]:</span>
-            <span class="n">attr_value</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">el</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+            <span class="n">attr_value</span> <span class="o">=</span> <span class="n">sanitize_identifier</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">el</span><span class="p">,</span> <span class="n">key</span><span class="p">))</span>
             <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">spec_dict</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">spec_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">!=</span> <span class="n">attr_value</span><span class="p">:</span> <span class="k">return</span> <span class="bp">None</span>
                 <span class="n">strength</span> <span class="o">+=</span> <span class="mi">1</span>
