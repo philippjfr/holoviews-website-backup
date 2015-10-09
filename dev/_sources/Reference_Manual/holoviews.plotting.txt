@@ -43,13 +43,13 @@ holoviews.plotting Package
 
 -------
 
-:mod:`widgets` Module
----------------------
+:mod:`util` Module
+------------------
 
-.. inheritance-diagram:: holoviews.plotting.widgets
+.. inheritance-diagram:: holoviews.plotting.util
 
 
-.. automodule:: holoviews.plotting.widgets
+.. automodule:: holoviews.plotting.util
     :members:
     :inherited-members:
     :show-inheritance:
@@ -61,5 +61,7 @@ Subpackages
 
 .. toctree::
 
+    holoviews.plotting.bokeh
     holoviews.plotting.mpl
+    holoviews.plotting.widgets
 

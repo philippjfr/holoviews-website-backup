@@ -127,14 +127,16 @@
           <div role="main">
             
   <h1>Source code for holoviews.plotting.mpl.widgets</h1><div class="highlight"><pre>
-<span class="kn">import</span> <span class="nn">uuid</span><span class="o">,</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">uuid</span><span class="o">,</span> <span class="nn">json</span><span class="o">,</span> <span class="nn">warnings</span>
 <span class="kn">import</span> <span class="nn">param</span>
 
 <span class="kn">from</span> <span class="nn">..widgets</span> <span class="kn">import</span> <span class="n">NdWidget</span><span class="p">,</span> <span class="n">SelectionWidget</span><span class="p">,</span> <span class="n">ScrubberWidget</span>
 
 <span class="k">try</span><span class="p">:</span>
-    <span class="kn">from</span> <span class="nn">matplotlib.backends.backend_nbagg</span> <span class="kn">import</span> <span class="n">CommSocket</span>
-<span class="k">except</span><span class="p">:</span>
+    <span class="k">with</span> <span class="n">warnings</span><span class="o">.</span><span class="n">catch_warnings</span><span class="p">():</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s">&quot;ignore&quot;</span><span class="p">)</span>
+        <span class="kn">from</span> <span class="nn">matplotlib.backends.backend_nbagg</span> <span class="kn">import</span> <span class="n">CommSocket</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
     <span class="n">CommSocket</span> <span class="o">=</span> <span class="nb">object</span>
 
 <div class="viewcode-block" id="WidgetCommSocket"><a class="viewcode-back" href="../../../../Reference_Manual/holoviews.plotting.mpl.html#holoviews.plotting.mpl.widgets.WidgetCommSocket">[docs]</a><span class="k">class</span> <span class="nc">WidgetCommSocket</span><span class="p">(</span><span class="n">CommSocket</span><span class="p">):</span>
@@ -153,7 +155,13 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">html</span> <span class="o">=</span> <span class="s">&quot;&lt;div id=</span><span class="si">%r</span><span class="s">&gt;&lt;/div&gt;&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">uuid</span>
 
     <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="kn">from</span> <span class="nn">IPython.kernel.comm</span> <span class="kn">import</span> <span class="n">Comm</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c"># Jupyter/IPython 4.0</span>
+            <span class="kn">from</span> <span class="nn">ipykernel.comm</span> <span class="kn">import</span> <span class="n">Comm</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="c"># IPython &lt;=3.0</span>
+            <span class="kn">from</span> <span class="nn">IPython.kernel.comm</span> <span class="kn">import</span> <span class="n">Comm</span>
+
         <span class="k">try</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">comm</span> <span class="o">=</span> <span class="n">Comm</span><span class="p">(</span><span class="s">&#39;matplotlib&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;id&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">uuid</span><span class="p">})</span>
         <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
@@ -168,7 +176,10 @@
     <span class="n">CDN</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">Dict</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">NdWidget</span><span class="o">.</span><span class="n">CDN</span><span class="p">,</span> <span class="n">mpld3</span><span class="o">=</span><span class="s">&#39;https://mpld3.github.io/js/mpld3.v0.3git.js&#39;</span><span class="p">,</span>
                                   <span class="n">d3</span><span class="o">=</span><span class="s">&#39;https://cdnjs.cloudflare.com/ajax/libs/d3/3.4.13/d3.js&#39;</span><span class="p">))</span>
 
-    <span class="n">template</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s">&#39;widget.jinja&#39;</span><span class="p">)</span>
+    <span class="n">extensionjs</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s">&#39;mplwidgets.js&#39;</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">        Optional javascript extension file for a particular backend.&quot;&quot;&quot;</span><span class="p">)</span>
+
+    <span class="n">template</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s">&#39;mplwidgets.jinja&#39;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">plot</span><span class="p">,</span> <span class="n">renderer</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">MPLWidget</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">plot</span><span class="p">,</span> <span class="n">renderer</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
@@ -209,13 +220,9 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">manager</span><span class="o">.</span><span class="n">display_js</span><span class="p">()</span>
             <span class="n">frames</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">comm</span><span class="o">.</span><span class="n">html</span><span class="p">}</span>
         <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">embed</span><span class="p">:</span>
-            <span class="n">frames</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">frames</span>
+            <span class="n">frames</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">MPLWidget</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">get_frames</span><span class="p">()</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">frames</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_plot_figure</span><span class="p">(</span><span class="mi">0</span><span class="p">)}</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">renderer</span><span class="o">.</span><span class="n">mode</span> <span class="o">==</span> <span class="s">&#39;mpld3&#39;</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">frames</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">frames</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">frames</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">frames</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">encode_frames</span><span class="p">(</span><span class="n">frames</span><span class="p">)</span>
 
 
@@ -236,10 +243,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">comm</span> <span class="o">=</span> <span class="n">WidgetCommSocket</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">manager</span><span class="p">)</span>
 
 
-<span class="k">class</span> <span class="nc">SelectionWidget</span><span class="p">(</span><span class="n">MPLWidget</span><span class="p">,</span> <span class="n">SelectionWidget</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">MPLSelectionWidget</span><span class="p">(</span><span class="n">MPLWidget</span><span class="p">,</span> <span class="n">SelectionWidget</span><span class="p">):</span>
     <span class="k">pass</span>
 
-<span class="k">class</span> <span class="nc">ScrubberWidget</span><span class="p">(</span><span class="n">MPLWidget</span><span class="p">,</span> <span class="n">ScrubberWidget</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">MPLScrubberWidget</span><span class="p">(</span><span class="n">MPLWidget</span><span class="p">,</span> <span class="n">ScrubberWidget</span><span class="p">):</span>
     <span class="k">pass</span>
 </pre></div>
 

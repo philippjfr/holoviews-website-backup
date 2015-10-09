@@ -130,7 +130,7 @@
 <span class="kn">import</span> <span class="nn">param</span>
 
 <span class="kn">from</span> <span class="nn">..core</span> <span class="kn">import</span> <span class="n">Dimension</span><span class="p">,</span> <span class="n">Element3D</span>
-<span class="kn">from</span> <span class="nn">.chart</span> <span class="kn">import</span> <span class="n">Chart</span>
+<span class="kn">from</span> <span class="nn">.chart</span> <span class="kn">import</span> <span class="n">Chart</span><span class="p">,</span> <span class="n">Scatter</span>
 <span class="kn">from</span> <span class="nn">.raster</span> <span class="kn">import</span> <span class="n">Image</span>
 
 
@@ -173,7 +173,28 @@
 
 
 </div>
-<div class="viewcode-block" id="Scatter3D"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.element.html#holoviews.element.chart3d.Scatter3D">[docs]</a><span class="k">class</span> <span class="nc">Scatter3D</span><span class="p">(</span><span class="n">Element3D</span><span class="p">,</span> <span class="n">Chart</span><span class="p">):</span>
+<div class="viewcode-block" id="Trisurface"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.element.html#holoviews.element.chart3d.Trisurface">[docs]</a><span class="k">class</span> <span class="nc">Trisurface</span><span class="p">(</span><span class="n">Element3D</span><span class="p">,</span> <span class="n">Scatter</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Trisurface object represents a number of coordinates in 3D-space,</span>
+<span class="sd">    represented as a Surface of triangular polygons.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">kdims</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">List</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="p">[</span><span class="n">Dimension</span><span class="p">(</span><span class="s">&#39;x&#39;</span><span class="p">),</span>
+                                <span class="n">Dimension</span><span class="p">(</span><span class="s">&#39;y&#39;</span><span class="p">),</span>
+                                <span class="n">Dimension</span><span class="p">(</span><span class="s">&#39;z&#39;</span><span class="p">)])</span>
+
+    <span class="n">vdims</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">List</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="p">[],</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">        Trisurface can have optional value dimensions,</span>
+<span class="s">        which may be mapped onto color and size.&quot;&quot;&quot;</span><span class="p">)</span>
+
+    <span class="n">group</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s">&#39;Trisurface&#39;</span><span class="p">,</span> <span class="n">constant</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">slc</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Chart</span><span class="o">.</span><span class="n">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">slc</span><span class="p">)</span>
+
+
+</div>
+<div class="viewcode-block" id="Scatter3D"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.element.html#holoviews.element.chart3d.Scatter3D">[docs]</a><span class="k">class</span> <span class="nc">Scatter3D</span><span class="p">(</span><span class="n">Element3D</span><span class="p">,</span> <span class="n">Scatter</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Scatter3D object represents a number of coordinates in</span>
 <span class="sd">    3D-space. Additionally Scatter3D points may have any number</span>

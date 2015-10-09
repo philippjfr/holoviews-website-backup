@@ -42,7 +42,7 @@
               href="../about.html"/>
     <link rel="top" title="HoloViews" href="../index.html"/>
         <link rel="up" title="Reference Manual" href="index.html"/>
-        <link rel="next" title="holoviews.mpl Package" href="holoviews.plotting.mpl.html"/>
+        <link rel="next" title="holoviews.bokeh Package" href="holoviews.plotting.bokeh.html"/>
         <link rel="prev" title="holoviews.operation Package" href="holoviews.operation.html"/>
     <script type="text/javascript" src='../_static/jquery.js'></script>
     <script type="text/javascript" src='../_static/underscore.js'></script>
@@ -161,7 +161,7 @@ instantiated.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.Plot.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2ae51d402260&gt;</em><a class="headerlink" href="#holoviews.plotting.Plot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b5af6158e10&gt;</em><a class="headerlink" href="#holoviews.plotting.Plot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -175,7 +175,7 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.Plot.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2ae51d402310&gt;</em><a class="headerlink" href="#holoviews.plotting.Plot.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b5af6158ec0&gt;</em><a class="headerlink" href="#holoviews.plotting.Plot.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -186,7 +186,7 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.Plot.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2ae51d4023c0&gt;</em><a class="headerlink" href="#holoviews.plotting.Plot.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b5af6158f70&gt;</em><a class="headerlink" href="#holoviews.plotting.Plot.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -239,12 +239,12 @@ evaluated with eval. See pprint() function for more details.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.Plot.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2ae51d402100&gt;</em><a class="headerlink" href="#holoviews.plotting.Plot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b5af6158cb0&gt;</em><a class="headerlink" href="#holoviews.plotting.Plot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.Plot.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2ae51d402418&gt;</em><a class="headerlink" href="#holoviews.plotting.Plot.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b5af6158fc8&gt;</em><a class="headerlink" href="#holoviews.plotting.Plot.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -353,6 +353,12 @@ instantiated.</p>
 </dd></dl>
 
 <dl class="classmethod">
+<dt id="holoviews.plotting.Renderer.embed_assets">
+<em class="property">classmethod </em><tt class="descname">embed_assets</tt><big>(</big><big>)</big><a class="headerlink" href="#holoviews.plotting.Renderer.embed_assets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns JS and CSS and for embedding of widgets.</p>
+</dd></dl>
+
+<dl class="classmethod">
 <dt id="holoviews.plotting.Renderer.encode">
 <em class="property">classmethod </em><tt class="descname">encode</tt><big>(</big><em>entry</em><big>)</big><a class="headerlink" href="#holoviews.plotting.Renderer.encode" title="Permalink to this definition">¶</a></dt>
 <dd><p>Classmethod that applies conditional encoding based on
@@ -362,7 +368,7 @@ data in the appropriate encoding.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.Renderer.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2ae51d402470&gt;</em><a class="headerlink" href="#holoviews.plotting.Renderer.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b5af6158f70&gt;</em><a class="headerlink" href="#holoviews.plotting.Renderer.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -376,12 +382,12 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.Renderer.get_size">
-<tt class="descname">get_size</tt><em class="property"> = &lt;functools.partial object at 0x2ae51d402368&gt;</em><a class="headerlink" href="#holoviews.plotting.Renderer.get_size" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_size</tt><em class="property"> = &lt;functools.partial object at 0x2b5af6174050&gt;</em><a class="headerlink" href="#holoviews.plotting.Renderer.get_size" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.Renderer.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2ae51d4025d0&gt;</em><a class="headerlink" href="#holoviews.plotting.Renderer.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b5af6174158&gt;</em><a class="headerlink" href="#holoviews.plotting.Renderer.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -392,12 +398,12 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.Renderer.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2ae51d402520&gt;</em><a class="headerlink" href="#holoviews.plotting.Renderer.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b5af61740a8&gt;</em><a class="headerlink" href="#holoviews.plotting.Renderer.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.Renderer.instance">
-<tt class="descname">instance</tt><em class="property"> = &lt;functools.partial object at 0x2ae51d402628&gt;</em><a class="headerlink" href="#holoviews.plotting.Renderer.instance" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">instance</tt><em class="property"> = &lt;functools.partial object at 0x2b5af6174208&gt;</em><a class="headerlink" href="#holoviews.plotting.Renderer.instance" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -454,7 +460,7 @@ is replaced with X.classname.instance(Y</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.Renderer.save">
-<tt class="descname">save</tt><em class="property"> = &lt;functools.partial object at 0x2ae51d4024c8&gt;</em><a class="headerlink" href="#holoviews.plotting.Renderer.save" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">save</tt><em class="property"> = &lt;functools.partial object at 0x2b5af6174100&gt;</em><a class="headerlink" href="#holoviews.plotting.Renderer.save" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -473,12 +479,12 @@ is replaced with X.classname.instance(Y</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.Renderer.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2ae51d4026d8&gt;</em><a class="headerlink" href="#holoviews.plotting.Renderer.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b5af61742b8&gt;</em><a class="headerlink" href="#holoviews.plotting.Renderer.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.Renderer.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2ae51d4023c0&gt;</em><a class="headerlink" href="#holoviews.plotting.Renderer.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b5af61741b0&gt;</em><a class="headerlink" href="#holoviews.plotting.Renderer.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="classmethod">
@@ -560,7 +566,7 @@ instantiated.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.Cycle.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2ae51d4024c8&gt;</em><a class="headerlink" href="#holoviews.plotting.Cycle.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b5af6158c58&gt;</em><a class="headerlink" href="#holoviews.plotting.Cycle.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -574,12 +580,12 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.Cycle.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2ae51d4026d8&gt;</em><a class="headerlink" href="#holoviews.plotting.Cycle.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b5af6158c00&gt;</em><a class="headerlink" href="#holoviews.plotting.Cycle.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.Cycle.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2ae51d4023c0&gt;</em><a class="headerlink" href="#holoviews.plotting.Cycle.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b5af6158d08&gt;</em><a class="headerlink" href="#holoviews.plotting.Cycle.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -632,12 +638,12 @@ evaluated with eval. See pprint() function for more details.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.Cycle.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2ae51d4025d0&gt;</em><a class="headerlink" href="#holoviews.plotting.Cycle.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b5af6158ec0&gt;</em><a class="headerlink" href="#holoviews.plotting.Cycle.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.Cycle.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2ae51d4022b8&gt;</em><a class="headerlink" href="#holoviews.plotting.Cycle.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b5af6158f18&gt;</em><a class="headerlink" href="#holoviews.plotting.Cycle.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -711,6 +717,13 @@ dimension values.</p>
         for nested data containers.</dd>
 <dt><em>param String</em> <tt class="docutils literal"><span class="pre">title_format</span></tt> (<em>allow_None=False, basestring=&lt;type &#8216;basestring&#8217;&gt;, constant=False, default={label} {group}, instantiate=False, pickle_default_value=True, precedence=None, readonly=False</em>)</dt>
 <dd>The formatting string for the title of this plot.</dd>
+<dt><em>param Parameter</em> <tt class="docutils literal"><span class="pre">fontsize</span></tt> (<em>allow_None=True, constant=False, default=None, instantiate=False, pickle_default_value=True, precedence=None, readonly=False</em>)</dt>
+<dd>Specifies various fontsizes of the displayed text.
+
+       Finer control is available by supplying a dictionary where any
+       unmentioned keys reverts to the default sizes, e.g:
+
+          {&#8216;ticks&#8217;:20, &#8216;title&#8217;:15, &#8216;ylabel&#8217;:5, &#8216;xlabel&#8217;:5}</dd>
 <dt><em>param Boolean</em> <tt class="docutils literal"><span class="pre">show_title</span></tt> (<em>allow_None=False, bounds=(0, 1), constant=False, default=True, instantiate=False, pickle_default_value=True, precedence=None, readonly=False</em>)</dt>
 <dd>Whether to display the plot title.</dd>
 </dl>
@@ -744,7 +757,7 @@ instantiated.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.plot.DimensionedPlot.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2ae51d574940&gt;</em><a class="headerlink" href="#holoviews.plotting.plot.DimensionedPlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b5af7c8b1b0&gt;</em><a class="headerlink" href="#holoviews.plotting.plot.DimensionedPlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -758,7 +771,7 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.plot.DimensionedPlot.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2ae51d5748e8&gt;</em><a class="headerlink" href="#holoviews.plotting.plot.DimensionedPlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b5af7c8b208&gt;</em><a class="headerlink" href="#holoviews.plotting.plot.DimensionedPlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -769,7 +782,7 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.plot.DimensionedPlot.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2ae51d574998&gt;</em><a class="headerlink" href="#holoviews.plotting.plot.DimensionedPlot.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b5af7c8b260&gt;</em><a class="headerlink" href="#holoviews.plotting.plot.DimensionedPlot.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -822,12 +835,12 @@ evaluated with eval. See pprint() function for more details.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.plot.DimensionedPlot.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2ae51d574628&gt;</em><a class="headerlink" href="#holoviews.plotting.plot.DimensionedPlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b5af7c8b2b8&gt;</em><a class="headerlink" href="#holoviews.plotting.plot.DimensionedPlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.plot.DimensionedPlot.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2ae51d574aa0&gt;</em><a class="headerlink" href="#holoviews.plotting.plot.DimensionedPlot.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b5af7c8b3c0&gt;</em><a class="headerlink" href="#holoviews.plotting.plot.DimensionedPlot.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -893,6 +906,13 @@ extents and titles.</p>
 <dd>The formatting string for the title of this plot.</dd>
 <dt><em>param Boolean</em> <tt class="docutils literal"><span class="pre">apply_ranges</span></tt> (<em>allow_None=False, bounds=(0, 1), constant=False, default=True, instantiate=False, pickle_default_value=True, precedence=None, readonly=False</em>)</dt>
 <dd>Whether to compute the plot bounds from the data itself.</dd>
+<dt><em>param Parameter</em> <tt class="docutils literal"><span class="pre">fontsize</span></tt> (<em>allow_None=True, constant=False, default=None, instantiate=False, pickle_default_value=True, precedence=None, readonly=False</em>)</dt>
+<dd>Specifies various fontsizes of the displayed text.
+
+       Finer control is available by supplying a dictionary where any
+       unmentioned keys reverts to the default sizes, e.g:
+
+          {&#8216;ticks&#8217;:20, &#8216;title&#8217;:15, &#8216;ylabel&#8217;:5, &#8216;xlabel&#8217;:5}</dd>
 <dt><em>param Boolean</em> <tt class="docutils literal"><span class="pre">show_title</span></tt> (<em>allow_None=False, bounds=(0, 1), constant=False, default=True, instantiate=False, pickle_default_value=True, precedence=None, readonly=False</em>)</dt>
 <dd>Whether to display the plot title.</dd>
 </dl>
@@ -926,7 +946,7 @@ instantiated.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.plot.GenericElementPlot.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2ae51d574730&gt;</em><a class="headerlink" href="#holoviews.plotting.plot.GenericElementPlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b5af7c8b0a8&gt;</em><a class="headerlink" href="#holoviews.plotting.plot.GenericElementPlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -947,7 +967,7 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.plot.GenericElementPlot.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2ae51d574998&gt;</em><a class="headerlink" href="#holoviews.plotting.plot.GenericElementPlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b5af7c8b3c0&gt;</em><a class="headerlink" href="#holoviews.plotting.plot.GenericElementPlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -958,7 +978,7 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.plot.GenericElementPlot.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2ae51d5747e0&gt;</em><a class="headerlink" href="#holoviews.plotting.plot.GenericElementPlot.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b5af7c8b100&gt;</em><a class="headerlink" href="#holoviews.plotting.plot.GenericElementPlot.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -1011,12 +1031,12 @@ evaluated with eval. See pprint() function for more details.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.plot.GenericElementPlot.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2ae51d574680&gt;</em><a class="headerlink" href="#holoviews.plotting.plot.GenericElementPlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b5af7c8b158&gt;</em><a class="headerlink" href="#holoviews.plotting.plot.GenericElementPlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.plot.GenericElementPlot.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2ae51d574af8&gt;</em><a class="headerlink" href="#holoviews.plotting.plot.GenericElementPlot.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b5af7c8b418&gt;</em><a class="headerlink" href="#holoviews.plotting.plot.GenericElementPlot.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -1087,6 +1107,13 @@ displays the elements in a cartesian grid in scanline order.</p>
         for nested data containers.</dd>
 <dt><em>param String</em> <tt class="docutils literal"><span class="pre">title_format</span></tt> (<em>allow_None=False, basestring=&lt;type &#8216;basestring&#8217;&gt;, constant=False, default={label} {group}, instantiate=False, pickle_default_value=True, precedence=None, readonly=False</em>)</dt>
 <dd>The formatting string for the title of this plot.</dd>
+<dt><em>param Parameter</em> <tt class="docutils literal"><span class="pre">fontsize</span></tt> (<em>allow_None=True, constant=False, default=None, instantiate=False, pickle_default_value=True, precedence=None, readonly=False</em>)</dt>
+<dd>Specifies various fontsizes of the displayed text.
+
+       Finer control is available by supplying a dictionary where any
+       unmentioned keys reverts to the default sizes, e.g:
+
+          {&#8216;ticks&#8217;:20, &#8216;title&#8217;:15, &#8216;ylabel&#8217;:5, &#8216;xlabel&#8217;:5}</dd>
 <dt><em>param Boolean</em> <tt class="docutils literal"><span class="pre">show_title</span></tt> (<em>allow_None=False, bounds=(0, 1), constant=False, default=True, instantiate=False, pickle_default_value=True, precedence=None, readonly=False</em>)</dt>
 <dd>Whether to display the plot title.</dd>
 </dl>
@@ -1120,7 +1147,7 @@ instantiated.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.plot.GenericLayoutPlot.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2ae51d5748e8&gt;</em><a class="headerlink" href="#holoviews.plotting.plot.GenericLayoutPlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b5af7c8b1b0&gt;</em><a class="headerlink" href="#holoviews.plotting.plot.GenericLayoutPlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -1134,7 +1161,7 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.plot.GenericLayoutPlot.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2ae51d574940&gt;</em><a class="headerlink" href="#holoviews.plotting.plot.GenericLayoutPlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b5af7c8b418&gt;</em><a class="headerlink" href="#holoviews.plotting.plot.GenericLayoutPlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -1145,7 +1172,7 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.plot.GenericLayoutPlot.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2ae51d574628&gt;</em><a class="headerlink" href="#holoviews.plotting.plot.GenericLayoutPlot.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b5af7c8b260&gt;</em><a class="headerlink" href="#holoviews.plotting.plot.GenericLayoutPlot.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -1198,12 +1225,12 @@ evaluated with eval. See pprint() function for more details.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.plot.GenericLayoutPlot.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2ae51d5747e0&gt;</em><a class="headerlink" href="#holoviews.plotting.plot.GenericLayoutPlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b5af7c8b2b8&gt;</em><a class="headerlink" href="#holoviews.plotting.plot.GenericLayoutPlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.plot.GenericLayoutPlot.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2ae51d5749f0&gt;</em><a class="headerlink" href="#holoviews.plotting.plot.GenericLayoutPlot.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b5af7c8b310&gt;</em><a class="headerlink" href="#holoviews.plotting.plot.GenericLayoutPlot.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -1272,6 +1299,13 @@ allows collapsing of layers via the Compositor.</p>
 <dd>Whether to compute the plot bounds from the data itself.</dd>
 <dt><em>param Boolean</em> <tt class="docutils literal"><span class="pre">show_legend</span></tt> (<em>allow_None=False, bounds=(0, 1), constant=False, default=False, instantiate=False, pickle_default_value=True, precedence=None, readonly=False</em>)</dt>
 <dd>Whether to show legend for the plot.</dd>
+<dt><em>param Parameter</em> <tt class="docutils literal"><span class="pre">fontsize</span></tt> (<em>allow_None=True, constant=False, default=None, instantiate=False, pickle_default_value=True, precedence=None, readonly=False</em>)</dt>
+<dd>Specifies various fontsizes of the displayed text.
+
+       Finer control is available by supplying a dictionary where any
+       unmentioned keys reverts to the default sizes, e.g:
+
+          {&#8216;ticks&#8217;:20, &#8216;title&#8217;:15, &#8216;ylabel&#8217;:5, &#8216;xlabel&#8217;:5}</dd>
 <dt><em>param Boolean</em> <tt class="docutils literal"><span class="pre">show_title</span></tt> (<em>allow_None=False, bounds=(0, 1), constant=False, default=True, instantiate=False, pickle_default_value=True, precedence=None, readonly=False</em>)</dt>
 <dd>Whether to display the plot title.</dd>
 <dt><em>param Integer</em> <tt class="docutils literal"><span class="pre">style_grouping</span></tt> (<em>allow_None=False, bounds=None, constant=False, default=2, inclusive_bounds=(True, True), instantiate=False, pickle_default_value=True, precedence=None, readonly=False, time_dependent=False, time_fn=&lt;Time Time00001&gt;</em>)</dt>
@@ -1311,7 +1345,7 @@ instantiated.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.plot.GenericOverlayPlot.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2ae51d574788&gt;</em><a class="headerlink" href="#holoviews.plotting.plot.GenericOverlayPlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b5af7c8b260&gt;</em><a class="headerlink" href="#holoviews.plotting.plot.GenericOverlayPlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -1325,7 +1359,7 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.plot.GenericOverlayPlot.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2ae51d574730&gt;</em><a class="headerlink" href="#holoviews.plotting.plot.GenericOverlayPlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b5af7c8b1b0&gt;</em><a class="headerlink" href="#holoviews.plotting.plot.GenericOverlayPlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -1336,7 +1370,7 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.plot.GenericOverlayPlot.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2ae51d574680&gt;</em><a class="headerlink" href="#holoviews.plotting.plot.GenericOverlayPlot.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b5af7c8b2b8&gt;</em><a class="headerlink" href="#holoviews.plotting.plot.GenericOverlayPlot.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -1389,12 +1423,12 @@ evaluated with eval. See pprint() function for more details.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.plot.GenericOverlayPlot.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2ae51d574998&gt;</em><a class="headerlink" href="#holoviews.plotting.plot.GenericOverlayPlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b5af7c8b310&gt;</em><a class="headerlink" href="#holoviews.plotting.plot.GenericOverlayPlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.plot.GenericOverlayPlot.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2ae51d574a48&gt;</em><a class="headerlink" href="#holoviews.plotting.plot.GenericOverlayPlot.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b5af7c8b3c0&gt;</em><a class="headerlink" href="#holoviews.plotting.plot.GenericOverlayPlot.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -1476,7 +1510,7 @@ instantiated.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.plot.Plot.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2ae51d574890&gt;</em><a class="headerlink" href="#holoviews.plotting.plot.Plot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b5af7bd7208&gt;</em><a class="headerlink" href="#holoviews.plotting.plot.Plot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -1490,7 +1524,7 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.plot.Plot.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2ae51d5748e8&gt;</em><a class="headerlink" href="#holoviews.plotting.plot.Plot.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b5af7bd7260&gt;</em><a class="headerlink" href="#holoviews.plotting.plot.Plot.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -1501,7 +1535,7 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.plot.Plot.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2ae51d574788&gt;</em><a class="headerlink" href="#holoviews.plotting.plot.Plot.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b5af7bd72b8&gt;</em><a class="headerlink" href="#holoviews.plotting.plot.Plot.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -1554,12 +1588,12 @@ evaluated with eval. See pprint() function for more details.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.plot.Plot.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2ae51d5747e0&gt;</em><a class="headerlink" href="#holoviews.plotting.plot.Plot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b5af7bd71b0&gt;</em><a class="headerlink" href="#holoviews.plotting.plot.Plot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.plot.Plot.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2ae51d574838&gt;</em><a class="headerlink" href="#holoviews.plotting.plot.Plot.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b5af7bd73c0&gt;</em><a class="headerlink" href="#holoviews.plotting.plot.Plot.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -1617,7 +1651,7 @@ containing the arguments.</p>
 
 <dl class="class">
 <dt id="holoviews.plotting.plot.PlotSelector">
-<em class="property">class </em><tt class="descclassname">holoviews.plotting.plot.</tt><tt class="descname">PlotSelector</tt><big>(</big><em>selector</em>, <em>plot_classes</em><big>)</big><a class="reference internal" href="../_modules/holoviews/plotting/plot.html#PlotSelector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#holoviews.plotting.plot.PlotSelector" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">holoviews.plotting.plot.</tt><tt class="descname">PlotSelector</tt><big>(</big><em>selector</em>, <em>plot_classes</em>, <em>allow_mismatch=False</em><big>)</big><a class="reference internal" href="../_modules/holoviews/plotting/plot.html#PlotSelector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#holoviews.plotting.plot.PlotSelector" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></a></p>
 <p>Proxy that allows dynamic selection of a plotting class based on a
 function of the plotted object. Behaves like a Plot class and
@@ -1692,6 +1726,12 @@ instantiated.</p>
 </dd></dl>
 
 <dl class="classmethod">
+<dt id="holoviews.plotting.renderer.Renderer.embed_assets">
+<em class="property">classmethod </em><tt class="descname">embed_assets</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/holoviews/plotting/renderer.html#Renderer.embed_assets"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#holoviews.plotting.renderer.Renderer.embed_assets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns JS and CSS and for embedding of widgets.</p>
+</dd></dl>
+
+<dl class="classmethod">
 <dt id="holoviews.plotting.renderer.Renderer.encode">
 <em class="property">classmethod </em><tt class="descname">encode</tt><big>(</big><em>entry</em><big>)</big><a class="headerlink" href="#holoviews.plotting.renderer.Renderer.encode" title="Permalink to this definition">¶</a></dt>
 <dd><p>Classmethod that applies conditional encoding based on
@@ -1701,7 +1741,7 @@ data in the appropriate encoding.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.renderer.Renderer.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2ae51dd98208&gt;</em><a class="headerlink" href="#holoviews.plotting.renderer.Renderer.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b5af48b5e68&gt;</em><a class="headerlink" href="#holoviews.plotting.renderer.Renderer.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -1715,12 +1755,12 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.renderer.Renderer.get_size">
-<tt class="descname">get_size</tt><em class="property"> = &lt;functools.partial object at 0x2ae51dd981b0&gt;</em><a class="reference internal" href="../_modules/holoviews/plotting/renderer.html#Renderer.get_size"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#holoviews.plotting.renderer.Renderer.get_size" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_size</tt><em class="property"> = &lt;functools.partial object at 0x2b5af48b5f70&gt;</em><a class="reference internal" href="../_modules/holoviews/plotting/renderer.html#Renderer.get_size"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#holoviews.plotting.renderer.Renderer.get_size" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.renderer.Renderer.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2ae51dd98158&gt;</em><a class="headerlink" href="#holoviews.plotting.renderer.Renderer.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b5af48b5b50&gt;</em><a class="headerlink" href="#holoviews.plotting.renderer.Renderer.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -1731,12 +1771,12 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.renderer.Renderer.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2ae51dd982b8&gt;</em><a class="headerlink" href="#holoviews.plotting.renderer.Renderer.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b5af48b5fc8&gt;</em><a class="headerlink" href="#holoviews.plotting.renderer.Renderer.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.renderer.Renderer.instance">
-<tt class="descname">instance</tt><em class="property"> = &lt;functools.partial object at 0x2ae51dd98310&gt;</em><a class="headerlink" href="#holoviews.plotting.renderer.Renderer.instance" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">instance</tt><em class="property"> = &lt;functools.partial object at 0x2b5af48b5f18&gt;</em><a class="headerlink" href="#holoviews.plotting.renderer.Renderer.instance" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -1793,7 +1833,7 @@ is replaced with X.classname.instance(Y</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.renderer.Renderer.save">
-<tt class="descname">save</tt><em class="property"> = &lt;functools.partial object at 0x2ae51dd98100&gt;</em><a class="reference internal" href="../_modules/holoviews/plotting/renderer.html#Renderer.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#holoviews.plotting.renderer.Renderer.save" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">save</tt><em class="property"> = &lt;functools.partial object at 0x2b5af667c050&gt;</em><a class="reference internal" href="../_modules/holoviews/plotting/renderer.html#Renderer.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#holoviews.plotting.renderer.Renderer.save" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -1812,12 +1852,12 @@ is replaced with X.classname.instance(Y</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.renderer.Renderer.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2ae51dd98260&gt;</em><a class="headerlink" href="#holoviews.plotting.renderer.Renderer.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b5af667c100&gt;</em><a class="headerlink" href="#holoviews.plotting.renderer.Renderer.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.renderer.Renderer.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2ae51dd983c0&gt;</em><a class="headerlink" href="#holoviews.plotting.renderer.Renderer.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b5af667c158&gt;</em><a class="headerlink" href="#holoviews.plotting.renderer.Renderer.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="classmethod">
@@ -1867,532 +1907,23 @@ containing the arguments.</p>
 
 </div>
 <hr class="docutils" />
-<div class="section" id="widgets-module">
-<h2><tt class="xref py py-mod docutils literal"><span class="pre">widgets</span></tt> Module<a class="headerlink" href="#widgets-module" title="Permalink to this headline">¶</a></h2>
-<p class="graphviz">
-<img src="../_images/inheritance-a0cec12b46a3a44d82457785e9316d9dc1cf40f4.png" alt="Inheritance diagram of holoviews.plotting.widgets" usemap="#inheritancee1e5c697f8" class="inheritance"/>
-<map id="inheritancee1e5c697f8" name="inheritancee1e5c697f8">
-<area shape="rect" id="node1" href="#holoviews.plotting.widgets.NdWidget" title="NdWidget is an abstract base class implementing a method to find" alt="" coords="313,30,565,55"/>
-<area shape="rect" id="node3" href="#holoviews.plotting.widgets.ScrubberWidget" title="ScrubberWidget generates a basic animation widget with a slider" alt="" coords="614,5,906,30"/>
-<area shape="rect" id="node4" href="#holoviews.plotting.widgets.SelectionWidget" title="Javascript based widget to select and view ViewableElement objects" alt="" coords="613,54,907,79"/>
-<area shape="rect" id="node2" title="params(name=String)" alt="" coords="5,30,264,55"/>
-</map>
-</p>
-<span class="target" id="module-holoviews.plotting.widgets"></span><dl class="class">
-<dt id="holoviews.plotting.widgets.NdWidget">
-<em class="property">class </em><tt class="descclassname">holoviews.plotting.widgets.</tt><tt class="descname">NdWidget</tt><big>(</big><em>plot</em>, <em>renderer=None</em>, <em>**params</em><big>)</big><a class="reference internal" href="../_modules/holoviews/plotting/widgets.html#NdWidget"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#holoviews.plotting.widgets.NdWidget" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="http://ioam.github.io/param/Reference_Manual/param.html#param.parameterized.Parameterized" title="(in Param v1.3.1)"><tt class="xref py py-class docutils literal"><span class="pre">param.parameterized.Parameterized</span></tt></a></p>
-<p>NdWidget is an abstract base class implementing a method to find
-the dimensions and keys of any ViewableElement, GridSpace or
-UniformNdMapping type.  In the process it creates a mock_obj to
-hold the dimensions and keys.</p>
-<dl class="docutils">
-<dt><em>param Dict</em> <tt class="docutils literal"><span class="pre">display_options</span></tt> (<em>allow_None=False, constant=False, default={}, instantiate=True, is_instance=True, pickle_default_value=True, precedence=None, readonly=False</em>)</dt>
-<dd>The display options used to generate individual frames</dd>
-<dt><em>param Boolean</em> <tt class="docutils literal"><span class="pre">export_json</span></tt> (<em>allow_None=False, bounds=(0, 1), constant=False, default=False, instantiate=False, pickle_default_value=True, precedence=None, readonly=False</em>)</dt>
-<dd>Whether to export
-         plots as json files, which can be dynamically loaded through
-         a callback from the slider.</dd>
-</dl>
-<p><em>param Dict</em> <tt class="docutils literal"><span class="pre">CDN</span></tt> (<em>allow_None=False, constant=False, default={&#8216;jQueryUI&#8217;: &#8216;https://code.jquery.com/ui/1.10.4/jquery-ui.min.js&#8217;, &#8216;underscore&#8217;: &#8216;https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js&#8217;}, instantiate=True, is_instance=True, pickle_default_value=True, precedence=None, readonly=False</em>)</p>
-<dl class="docutils">
-<dt><em>param String</em> <tt class="docutils literal"><span class="pre">server_url</span></tt> (<em>allow_None=False, basestring=&lt;type &#8216;basestring&#8217;&gt;, constant=False, default=, instantiate=False, pickle_default_value=True, precedence=None, readonly=False</em>)</dt>
-<dd>If export_json is
-         True the slider widget will expect to be served the plot data
-         from this URL. Data should be served from:
-         server_url/fig_{id}/{frame}.</dd>
-<dt><em>param String</em> <tt class="docutils literal"><span class="pre">json_path</span></tt> (<em>allow_None=False, basestring=&lt;type &#8216;basestring&#8217;&gt;, constant=False, default=./json_figures, instantiate=False, pickle_default_value=True, precedence=None, readonly=False</em>)</dt>
-<dd>If export_json is True the json files will be written to this
-         directory.</dd>
-<dt><em>param Boolean</em> <tt class="docutils literal"><span class="pre">embed</span></tt> (<em>allow_None=False, bounds=(0, 1), constant=False, default=True, instantiate=False, pickle_default_value=True, precedence=None, readonly=False</em>)</dt>
-<dd>Whether to embed all plots in the Javascript, generating
-        a static widget not dependent on the IPython server.</dd>
-</dl>
-<dl class="method">
-<dt id="holoviews.plotting.widgets.NdWidget.debug">
-<tt class="descname">debug</tt><big>(</big><em>msg</em>, <em>*args</em>, <em>**kw</em><big>)</big><a class="headerlink" href="#holoviews.plotting.widgets.NdWidget.debug" title="Permalink to this definition">¶</a></dt>
-<dd><p>Print msg merged with args as a debugging statement.</p>
-<p>See Python&#8217;s logging module for details of message formatting.</p>
+<div class="section" id="util-module">
+<h2><tt class="xref py py-mod docutils literal"><span class="pre">util</span></tt> Module<a class="headerlink" href="#util-module" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-holoviews.plotting.util"></span><dl class="function">
+<dt id="holoviews.plotting.util.compute_sizes">
+<tt class="descclassname">holoviews.plotting.util.</tt><tt class="descname">compute_sizes</tt><big>(</big><em>sizes</em>, <em>size_fn</em>, <em>scaling</em>, <em>base_size</em><big>)</big><a class="reference internal" href="../_modules/holoviews/plotting/util.html#compute_sizes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#holoviews.plotting.util.compute_sizes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Scales point sizes according to a scaling factor,
+base size and size_fn, which will be applied before
+scaling.</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="holoviews.plotting.widgets.NdWidget.defaults">
-<tt class="descname">defaults</tt><big>(</big><big>)</big><a class="headerlink" href="#holoviews.plotting.widgets.NdWidget.defaults" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return {parameter_name:parameter.default} for all non-constant
-Parameters.</p>
-<p>Note that a Parameter for which instantiate==True has its default
-instantiated.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="holoviews.plotting.widgets.NdWidget.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2ae51dc11cb0&gt;</em><a class="headerlink" href="#holoviews.plotting.widgets.NdWidget.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="holoviews.plotting.widgets.NdWidget.get_param_values">
-<tt class="descname">get_param_values</tt><big>(</big><em>onlychanged=False</em><big>)</big><a class="headerlink" href="#holoviews.plotting.widgets.NdWidget.get_param_values" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return a list of name,value pairs for all Parameters of this
-object.</p>
-<p>If onlychanged is True, will only return values that are not
-equal to the default value.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="holoviews.plotting.widgets.NdWidget.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2ae51dc11c58&gt;</em><a class="headerlink" href="#holoviews.plotting.widgets.NdWidget.get_value_generator" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="holoviews.plotting.widgets.NdWidget.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2ae51dc11d08&gt;</em><a class="headerlink" href="#holoviews.plotting.widgets.NdWidget.inspect_value" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="holoviews.plotting.widgets.NdWidget.message">
-<tt class="descname">message</tt><big>(</big><em>msg</em>, <em>*args</em>, <em>**kw</em><big>)</big><a class="headerlink" href="#holoviews.plotting.widgets.NdWidget.message" title="Permalink to this definition">¶</a></dt>
-<dd><p>Print msg merged with args as a message.</p>
-<p>See Python&#8217;s logging module for details of message formatting.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="holoviews.plotting.widgets.NdWidget.params">
-<em class="property">classmethod </em><tt class="descname">params</tt><big>(</big><em>parameter_name=None</em><big>)</big><a class="headerlink" href="#holoviews.plotting.widgets.NdWidget.params" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the Parameters of this class as the
-dictionary {name: parameter_object}</p>
-<p>Includes Parameters from this class and its
-superclasses.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="holoviews.plotting.widgets.NdWidget.pprint">
-<tt class="descname">pprint</tt><big>(</big><em>imports=None</em>, <em>prefix=' '</em>, <em>unknown_value='&lt;?&gt;'</em>, <em>qualify=False</em>, <em>separator=''</em><big>)</big><a class="headerlink" href="#holoviews.plotting.widgets.NdWidget.pprint" title="Permalink to this definition">¶</a></dt>
-<dd><p>(Experimental) Pretty printed representation that may be
-evaluated with eval. See pprint() function for more details.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="holoviews.plotting.widgets.NdWidget.print_param_defaults">
-<em class="property">classmethod </em><tt class="descname">print_param_defaults</tt><big>(</big><big>)</big><a class="headerlink" href="#holoviews.plotting.widgets.NdWidget.print_param_defaults" title="Permalink to this definition">¶</a></dt>
-<dd><p>Print the default values of all cls&#8217;s Parameters.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="holoviews.plotting.widgets.NdWidget.print_param_values">
-<tt class="descname">print_param_values</tt><big>(</big><big>)</big><a class="headerlink" href="#holoviews.plotting.widgets.NdWidget.print_param_values" title="Permalink to this definition">¶</a></dt>
-<dd><p>Print the values of all this object&#8217;s Parameters.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="holoviews.plotting.widgets.NdWidget.script_repr">
-<tt class="descname">script_repr</tt><big>(</big><em>imports=</em>, <span class="optional">[</span><span class="optional">]</span><em>prefix='    '</em><big>)</big><a class="headerlink" href="#holoviews.plotting.widgets.NdWidget.script_repr" title="Permalink to this definition">¶</a></dt>
-<dd><p>Variant of __repr__ designed for generating a runnable script.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="holoviews.plotting.widgets.NdWidget.set_default">
-<em class="property">classmethod </em><tt class="descname">set_default</tt><big>(</big><em>param_name</em>, <em>value</em><big>)</big><a class="headerlink" href="#holoviews.plotting.widgets.NdWidget.set_default" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set the default value of param_name.</p>
-<p>Equivalent to setting param_name on the class.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="holoviews.plotting.widgets.NdWidget.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2ae51dc11aa0&gt;</em><a class="headerlink" href="#holoviews.plotting.widgets.NdWidget.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="holoviews.plotting.widgets.NdWidget.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2ae51dc11e68&gt;</em><a class="headerlink" href="#holoviews.plotting.widgets.NdWidget.set_param" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="holoviews.plotting.widgets.NdWidget.state_pop">
-<tt class="descname">state_pop</tt><big>(</big><big>)</big><a class="headerlink" href="#holoviews.plotting.widgets.NdWidget.state_pop" title="Permalink to this definition">¶</a></dt>
-<dd><p>Restore the most recently saved state.</p>
-<p>See state_push() for more details.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="holoviews.plotting.widgets.NdWidget.state_push">
-<tt class="descname">state_push</tt><big>(</big><big>)</big><a class="headerlink" href="#holoviews.plotting.widgets.NdWidget.state_push" title="Permalink to this definition">¶</a></dt>
-<dd><p>Save this instance&#8217;s state.</p>
-<p>For Parameterized instances, this includes the state of
-dynamically generated values.</p>
-<p>Subclasses that maintain short-term state should additionally
-save and restore that state using state_push() and
-state_pop().</p>
-<p>Generally, this method is used by operations that need to test
-something without permanently altering the objects&#8217; state.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="holoviews.plotting.widgets.NdWidget.verbose">
-<tt class="descname">verbose</tt><big>(</big><em>msg</em>, <em>*args</em>, <em>**kw</em><big>)</big><a class="headerlink" href="#holoviews.plotting.widgets.NdWidget.verbose" title="Permalink to this definition">¶</a></dt>
-<dd><p>Print msg merged with args as a verbose message.</p>
-<p>See Python&#8217;s logging module for details of message formatting.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="holoviews.plotting.widgets.NdWidget.warning">
-<tt class="descname">warning</tt><big>(</big><em>msg</em>, <em>*args</em>, <em>**kw</em><big>)</big><a class="headerlink" href="#holoviews.plotting.widgets.NdWidget.warning" title="Permalink to this definition">¶</a></dt>
-<dd><p>Print msg merged with args as a warning, unless module variable
-warnings_as_exceptions is True, then raise an Exception
-containing the arguments.</p>
-<p>See Python&#8217;s logging module for details of message formatting.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="holoviews.plotting.widgets.ScrubberWidget">
-<em class="property">class </em><tt class="descclassname">holoviews.plotting.widgets.</tt><tt class="descname">ScrubberWidget</tt><big>(</big><em>plot</em>, <em>renderer=None</em>, <em>**params</em><big>)</big><a class="reference internal" href="../_modules/holoviews/plotting/widgets.html#ScrubberWidget"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#holoviews.plotting.widgets.ScrubberWidget" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#holoviews.plotting.widgets.NdWidget" title="holoviews.plotting.widgets.NdWidget"><tt class="xref py py-class docutils literal"><span class="pre">holoviews.plotting.widgets.NdWidget</span></tt></a></p>
-<p>ScrubberWidget generates a basic animation widget with a slider
-and various play/rewind/stepping options. It has been adapted
-from Jake Vanderplas&#8217; JSAnimation library, which was released
-under BSD license.</p>
-<p>Optionally the individual plots can be exported to json, which can
-be dynamically loaded by serving the data the data for each frame
-on a simple server.</p>
-<dl class="docutils">
-<dt><em>param Dict</em> <tt class="docutils literal"><span class="pre">display_options</span></tt> (<em>allow_None=False, constant=False, default={}, instantiate=True, is_instance=True, pickle_default_value=True, precedence=None, readonly=False</em>)</dt>
-<dd>The display options used to generate individual frames</dd>
-<dt><em>param Boolean</em> <tt class="docutils literal"><span class="pre">export_json</span></tt> (<em>allow_None=False, bounds=(0, 1), constant=False, default=False, instantiate=False, pickle_default_value=True, precedence=None, readonly=False</em>)</dt>
-<dd>Whether to export
-         plots as json files, which can be dynamically loaded through
-         a callback from the slider.</dd>
-</dl>
-<p><em>param Dict</em> <tt class="docutils literal"><span class="pre">CDN</span></tt> (<em>allow_None=False, constant=False, default={&#8216;jQueryUI&#8217;: &#8216;https://code.jquery.com/ui/1.10.4/jquery-ui.min.js&#8217;, &#8216;underscore&#8217;: &#8216;https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js&#8217;}, instantiate=True, is_instance=True, pickle_default_value=True, precedence=None, readonly=False</em>)</p>
-<dl class="docutils">
-<dt><em>param String</em> <tt class="docutils literal"><span class="pre">server_url</span></tt> (<em>allow_None=False, basestring=&lt;type &#8216;basestring&#8217;&gt;, constant=False, default=, instantiate=False, pickle_default_value=True, precedence=None, readonly=False</em>)</dt>
-<dd>If export_json is
-         True the slider widget will expect to be served the plot data
-         from this URL. Data should be served from:
-         server_url/fig_{id}/{frame}.</dd>
-<dt><em>param String</em> <tt class="docutils literal"><span class="pre">template</span></tt> (<em>allow_None=False, basestring=&lt;type &#8216;basestring&#8217;&gt;, constant=False, default=jsscrubber.jinja, instantiate=False, pickle_default_value=True, precedence=None, readonly=False</em>)</dt>
-<dd>The jinja2 template used to generate the html output.</dd>
-<dt><em>param String</em> <tt class="docutils literal"><span class="pre">json_path</span></tt> (<em>allow_None=False, basestring=&lt;type &#8216;basestring&#8217;&gt;, constant=False, default=./json_figures, instantiate=False, pickle_default_value=True, precedence=None, readonly=False</em>)</dt>
-<dd>If export_json is True the json files will be written to this
-         directory.</dd>
-<dt><em>param Boolean</em> <tt class="docutils literal"><span class="pre">embed</span></tt> (<em>allow_None=False, bounds=(0, 1), constant=False, default=True, instantiate=False, pickle_default_value=True, precedence=None, readonly=False</em>)</dt>
-<dd>Whether to embed all plots in the Javascript, generating
-        a static widget not dependent on the IPython server.</dd>
-<dt><em>param String</em> <tt class="docutils literal"><span class="pre">base_template</span></tt> (<em>allow_None=False, basestring=&lt;type &#8216;basestring&#8217;&gt;, constant=False, default=jsscrubber.jinja, instantiate=False, pickle_default_value=True, precedence=None, readonly=False</em>)</dt>
-<dd>The jinja2 template used to generate the html output.</dd>
-</dl>
-<dl class="method">
-<dt id="holoviews.plotting.widgets.ScrubberWidget.debug">
-<tt class="descname">debug</tt><big>(</big><em>msg</em>, <em>*args</em>, <em>**kw</em><big>)</big><a class="headerlink" href="#holoviews.plotting.widgets.ScrubberWidget.debug" title="Permalink to this definition">¶</a></dt>
-<dd><p>Print msg merged with args as a debugging statement.</p>
-<p>See Python&#8217;s logging module for details of message formatting.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="holoviews.plotting.widgets.ScrubberWidget.defaults">
-<tt class="descname">defaults</tt><big>(</big><big>)</big><a class="headerlink" href="#holoviews.plotting.widgets.ScrubberWidget.defaults" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return {parameter_name:parameter.default} for all non-constant
-Parameters.</p>
-<p>Note that a Parameter for which instantiate==True has its default
-instantiated.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="holoviews.plotting.widgets.ScrubberWidget.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2ae51dc11c58&gt;</em><a class="headerlink" href="#holoviews.plotting.widgets.ScrubberWidget.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="holoviews.plotting.widgets.ScrubberWidget.get_param_values">
-<tt class="descname">get_param_values</tt><big>(</big><em>onlychanged=False</em><big>)</big><a class="headerlink" href="#holoviews.plotting.widgets.ScrubberWidget.get_param_values" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return a list of name,value pairs for all Parameters of this
-object.</p>
-<p>If onlychanged is True, will only return values that are not
-equal to the default value.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="holoviews.plotting.widgets.ScrubberWidget.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2ae51dc11b50&gt;</em><a class="headerlink" href="#holoviews.plotting.widgets.ScrubberWidget.get_value_generator" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="holoviews.plotting.widgets.ScrubberWidget.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2ae51dc11c00&gt;</em><a class="headerlink" href="#holoviews.plotting.widgets.ScrubberWidget.inspect_value" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="holoviews.plotting.widgets.ScrubberWidget.message">
-<tt class="descname">message</tt><big>(</big><em>msg</em>, <em>*args</em>, <em>**kw</em><big>)</big><a class="headerlink" href="#holoviews.plotting.widgets.ScrubberWidget.message" title="Permalink to this definition">¶</a></dt>
-<dd><p>Print msg merged with args as a message.</p>
-<p>See Python&#8217;s logging module for details of message formatting.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="holoviews.plotting.widgets.ScrubberWidget.params">
-<em class="property">classmethod </em><tt class="descname">params</tt><big>(</big><em>parameter_name=None</em><big>)</big><a class="headerlink" href="#holoviews.plotting.widgets.ScrubberWidget.params" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the Parameters of this class as the
-dictionary {name: parameter_object}</p>
-<p>Includes Parameters from this class and its
-superclasses.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="holoviews.plotting.widgets.ScrubberWidget.pprint">
-<tt class="descname">pprint</tt><big>(</big><em>imports=None</em>, <em>prefix=' '</em>, <em>unknown_value='&lt;?&gt;'</em>, <em>qualify=False</em>, <em>separator=''</em><big>)</big><a class="headerlink" href="#holoviews.plotting.widgets.ScrubberWidget.pprint" title="Permalink to this definition">¶</a></dt>
-<dd><p>(Experimental) Pretty printed representation that may be
-evaluated with eval. See pprint() function for more details.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="holoviews.plotting.widgets.ScrubberWidget.print_param_defaults">
-<em class="property">classmethod </em><tt class="descname">print_param_defaults</tt><big>(</big><big>)</big><a class="headerlink" href="#holoviews.plotting.widgets.ScrubberWidget.print_param_defaults" title="Permalink to this definition">¶</a></dt>
-<dd><p>Print the default values of all cls&#8217;s Parameters.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="holoviews.plotting.widgets.ScrubberWidget.print_param_values">
-<tt class="descname">print_param_values</tt><big>(</big><big>)</big><a class="headerlink" href="#holoviews.plotting.widgets.ScrubberWidget.print_param_values" title="Permalink to this definition">¶</a></dt>
-<dd><p>Print the values of all this object&#8217;s Parameters.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="holoviews.plotting.widgets.ScrubberWidget.script_repr">
-<tt class="descname">script_repr</tt><big>(</big><em>imports=</em>, <span class="optional">[</span><span class="optional">]</span><em>prefix='    '</em><big>)</big><a class="headerlink" href="#holoviews.plotting.widgets.ScrubberWidget.script_repr" title="Permalink to this definition">¶</a></dt>
-<dd><p>Variant of __repr__ designed for generating a runnable script.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="holoviews.plotting.widgets.ScrubberWidget.set_default">
-<em class="property">classmethod </em><tt class="descname">set_default</tt><big>(</big><em>param_name</em>, <em>value</em><big>)</big><a class="headerlink" href="#holoviews.plotting.widgets.ScrubberWidget.set_default" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set the default value of param_name.</p>
-<p>Equivalent to setting param_name on the class.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="holoviews.plotting.widgets.ScrubberWidget.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2ae51dc11af8&gt;</em><a class="headerlink" href="#holoviews.plotting.widgets.ScrubberWidget.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="holoviews.plotting.widgets.ScrubberWidget.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2ae51dc11f18&gt;</em><a class="headerlink" href="#holoviews.plotting.widgets.ScrubberWidget.set_param" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="holoviews.plotting.widgets.ScrubberWidget.state_pop">
-<tt class="descname">state_pop</tt><big>(</big><big>)</big><a class="headerlink" href="#holoviews.plotting.widgets.ScrubberWidget.state_pop" title="Permalink to this definition">¶</a></dt>
-<dd><p>Restore the most recently saved state.</p>
-<p>See state_push() for more details.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="holoviews.plotting.widgets.ScrubberWidget.state_push">
-<tt class="descname">state_push</tt><big>(</big><big>)</big><a class="headerlink" href="#holoviews.plotting.widgets.ScrubberWidget.state_push" title="Permalink to this definition">¶</a></dt>
-<dd><p>Save this instance&#8217;s state.</p>
-<p>For Parameterized instances, this includes the state of
-dynamically generated values.</p>
-<p>Subclasses that maintain short-term state should additionally
-save and restore that state using state_push() and
-state_pop().</p>
-<p>Generally, this method is used by operations that need to test
-something without permanently altering the objects&#8217; state.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="holoviews.plotting.widgets.ScrubberWidget.verbose">
-<tt class="descname">verbose</tt><big>(</big><em>msg</em>, <em>*args</em>, <em>**kw</em><big>)</big><a class="headerlink" href="#holoviews.plotting.widgets.ScrubberWidget.verbose" title="Permalink to this definition">¶</a></dt>
-<dd><p>Print msg merged with args as a verbose message.</p>
-<p>See Python&#8217;s logging module for details of message formatting.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="holoviews.plotting.widgets.ScrubberWidget.warning">
-<tt class="descname">warning</tt><big>(</big><em>msg</em>, <em>*args</em>, <em>**kw</em><big>)</big><a class="headerlink" href="#holoviews.plotting.widgets.ScrubberWidget.warning" title="Permalink to this definition">¶</a></dt>
-<dd><p>Print msg merged with args as a warning, unless module variable
-warnings_as_exceptions is True, then raise an Exception
-containing the arguments.</p>
-<p>See Python&#8217;s logging module for details of message formatting.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="holoviews.plotting.widgets.SelectionWidget">
-<em class="property">class </em><tt class="descclassname">holoviews.plotting.widgets.</tt><tt class="descname">SelectionWidget</tt><big>(</big><em>plot</em>, <em>renderer=None</em>, <em>**params</em><big>)</big><a class="reference internal" href="../_modules/holoviews/plotting/widgets.html#SelectionWidget"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#holoviews.plotting.widgets.SelectionWidget" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#holoviews.plotting.widgets.NdWidget" title="holoviews.plotting.widgets.NdWidget"><tt class="xref py py-class docutils literal"><span class="pre">holoviews.plotting.widgets.NdWidget</span></tt></a></p>
-<p>Javascript based widget to select and view ViewableElement objects
-contained in an NdMapping. For each dimension in the NdMapping a
-slider or dropdown selection widget is created and can be used to
-select the html output associated with the selected
-ViewableElement type. The widget maybe set to embed all frames in
-the supplied object into the rendered html or to dynamically
-update the widget with a live IPython kernel.</p>
-<p>The widget supports all current HoloViews figure backends
-including png, svg, mpld3 and nbagg output. To select nbagg
-output, the SelectionWidget must not be set to embed.</p>
-<p>Just like the ScrubberWidget the data can be optionally saved
-to json and dynamically loaded from a server.</p>
-<dl class="docutils">
-<dt><em>param Dict</em> <tt class="docutils literal"><span class="pre">display_options</span></tt> (<em>allow_None=False, constant=False, default={}, instantiate=True, is_instance=True, pickle_default_value=True, precedence=None, readonly=False</em>)</dt>
-<dd>The display options used to generate individual frames</dd>
-<dt><em>param Boolean</em> <tt class="docutils literal"><span class="pre">export_json</span></tt> (<em>allow_None=False, bounds=(0, 1), constant=False, default=False, instantiate=False, pickle_default_value=True, precedence=None, readonly=False</em>)</dt>
-<dd>Whether to export
-         plots as json files, which can be dynamically loaded through
-         a callback from the slider.</dd>
-</dl>
-<p><em>param Dict</em> <tt class="docutils literal"><span class="pre">CDN</span></tt> (<em>allow_None=False, constant=False, default={&#8216;jQueryUI&#8217;: &#8216;https://code.jquery.com/ui/1.10.4/jquery-ui.min.js&#8217;, &#8216;underscore&#8217;: &#8216;https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js&#8217;}, instantiate=True, is_instance=True, pickle_default_value=True, precedence=None, readonly=False</em>)</p>
-<dl class="docutils">
-<dt><em>param String</em> <tt class="docutils literal"><span class="pre">server_url</span></tt> (<em>allow_None=False, basestring=&lt;type &#8216;basestring&#8217;&gt;, constant=False, default=, instantiate=False, pickle_default_value=True, precedence=None, readonly=False</em>)</dt>
-<dd>If export_json is
-         True the slider widget will expect to be served the plot data
-         from this URL. Data should be served from:
-         server_url/fig_{id}/{frame}.</dd>
-<dt><em>param String</em> <tt class="docutils literal"><span class="pre">template</span></tt> (<em>allow_None=False, basestring=&lt;type &#8216;basestring&#8217;&gt;, constant=False, default=jsslider.jinja, instantiate=False, pickle_default_value=True, precedence=None, readonly=False</em>)</dt>
-<dd>The jinja2 template used to generate the html output.</dd>
-<dt><em>param String</em> <tt class="docutils literal"><span class="pre">json_path</span></tt> (<em>allow_None=False, basestring=&lt;type &#8216;basestring&#8217;&gt;, constant=False, default=./json_figures, instantiate=False, pickle_default_value=True, precedence=None, readonly=False</em>)</dt>
-<dd>If export_json is True the json files will be written to this
-         directory.</dd>
-<dt><em>param Boolean</em> <tt class="docutils literal"><span class="pre">embed</span></tt> (<em>allow_None=False, bounds=(0, 1), constant=False, default=True, instantiate=False, pickle_default_value=True, precedence=None, readonly=False</em>)</dt>
-<dd>Whether to embed all plots in the Javascript, generating
-        a static widget not dependent on the IPython server.</dd>
-<dt><em>param String</em> <tt class="docutils literal"><span class="pre">base_template</span></tt> (<em>allow_None=False, basestring=&lt;type &#8216;basestring&#8217;&gt;, constant=False, default=jsslider.jinja, instantiate=False, pickle_default_value=True, precedence=None, readonly=False</em>)</dt>
-<dd>The jinja2 template used to generate the html output.</dd>
-</dl>
-<dl class="method">
-<dt id="holoviews.plotting.widgets.SelectionWidget.debug">
-<tt class="descname">debug</tt><big>(</big><em>msg</em>, <em>*args</em>, <em>**kw</em><big>)</big><a class="headerlink" href="#holoviews.plotting.widgets.SelectionWidget.debug" title="Permalink to this definition">¶</a></dt>
-<dd><p>Print msg merged with args as a debugging statement.</p>
-<p>See Python&#8217;s logging module for details of message formatting.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="holoviews.plotting.widgets.SelectionWidget.defaults">
-<tt class="descname">defaults</tt><big>(</big><big>)</big><a class="headerlink" href="#holoviews.plotting.widgets.SelectionWidget.defaults" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return {parameter_name:parameter.default} for all non-constant
-Parameters.</p>
-<p>Note that a Parameter for which instantiate==True has its default
-instantiated.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="holoviews.plotting.widgets.SelectionWidget.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2ae51dc11c58&gt;</em><a class="headerlink" href="#holoviews.plotting.widgets.SelectionWidget.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="holoviews.plotting.widgets.SelectionWidget.get_param_values">
-<tt class="descname">get_param_values</tt><big>(</big><em>onlychanged=False</em><big>)</big><a class="headerlink" href="#holoviews.plotting.widgets.SelectionWidget.get_param_values" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return a list of name,value pairs for all Parameters of this
-object.</p>
-<p>If onlychanged is True, will only return values that are not
-equal to the default value.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="holoviews.plotting.widgets.SelectionWidget.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2ae51dc11d08&gt;</em><a class="headerlink" href="#holoviews.plotting.widgets.SelectionWidget.get_value_generator" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="holoviews.plotting.widgets.SelectionWidget.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2ae51dc11e68&gt;</em><a class="headerlink" href="#holoviews.plotting.widgets.SelectionWidget.inspect_value" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="holoviews.plotting.widgets.SelectionWidget.message">
-<tt class="descname">message</tt><big>(</big><em>msg</em>, <em>*args</em>, <em>**kw</em><big>)</big><a class="headerlink" href="#holoviews.plotting.widgets.SelectionWidget.message" title="Permalink to this definition">¶</a></dt>
-<dd><p>Print msg merged with args as a message.</p>
-<p>See Python&#8217;s logging module for details of message formatting.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="holoviews.plotting.widgets.SelectionWidget.params">
-<em class="property">classmethod </em><tt class="descname">params</tt><big>(</big><em>parameter_name=None</em><big>)</big><a class="headerlink" href="#holoviews.plotting.widgets.SelectionWidget.params" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the Parameters of this class as the
-dictionary {name: parameter_object}</p>
-<p>Includes Parameters from this class and its
-superclasses.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="holoviews.plotting.widgets.SelectionWidget.pprint">
-<tt class="descname">pprint</tt><big>(</big><em>imports=None</em>, <em>prefix=' '</em>, <em>unknown_value='&lt;?&gt;'</em>, <em>qualify=False</em>, <em>separator=''</em><big>)</big><a class="headerlink" href="#holoviews.plotting.widgets.SelectionWidget.pprint" title="Permalink to this definition">¶</a></dt>
-<dd><p>(Experimental) Pretty printed representation that may be
-evaluated with eval. See pprint() function for more details.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="holoviews.plotting.widgets.SelectionWidget.print_param_defaults">
-<em class="property">classmethod </em><tt class="descname">print_param_defaults</tt><big>(</big><big>)</big><a class="headerlink" href="#holoviews.plotting.widgets.SelectionWidget.print_param_defaults" title="Permalink to this definition">¶</a></dt>
-<dd><p>Print the default values of all cls&#8217;s Parameters.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="holoviews.plotting.widgets.SelectionWidget.print_param_values">
-<tt class="descname">print_param_values</tt><big>(</big><big>)</big><a class="headerlink" href="#holoviews.plotting.widgets.SelectionWidget.print_param_values" title="Permalink to this definition">¶</a></dt>
-<dd><p>Print the values of all this object&#8217;s Parameters.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="holoviews.plotting.widgets.SelectionWidget.script_repr">
-<tt class="descname">script_repr</tt><big>(</big><em>imports=</em>, <span class="optional">[</span><span class="optional">]</span><em>prefix='    '</em><big>)</big><a class="headerlink" href="#holoviews.plotting.widgets.SelectionWidget.script_repr" title="Permalink to this definition">¶</a></dt>
-<dd><p>Variant of __repr__ designed for generating a runnable script.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="holoviews.plotting.widgets.SelectionWidget.set_default">
-<em class="property">classmethod </em><tt class="descname">set_default</tt><big>(</big><em>param_name</em>, <em>value</em><big>)</big><a class="headerlink" href="#holoviews.plotting.widgets.SelectionWidget.set_default" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set the default value of param_name.</p>
-<p>Equivalent to setting param_name on the class.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="holoviews.plotting.widgets.SelectionWidget.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2ae51dc11aa0&gt;</em><a class="headerlink" href="#holoviews.plotting.widgets.SelectionWidget.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="holoviews.plotting.widgets.SelectionWidget.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2ae51dc11ec0&gt;</em><a class="headerlink" href="#holoviews.plotting.widgets.SelectionWidget.set_param" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="holoviews.plotting.widgets.SelectionWidget.state_pop">
-<tt class="descname">state_pop</tt><big>(</big><big>)</big><a class="headerlink" href="#holoviews.plotting.widgets.SelectionWidget.state_pop" title="Permalink to this definition">¶</a></dt>
-<dd><p>Restore the most recently saved state.</p>
-<p>See state_push() for more details.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="holoviews.plotting.widgets.SelectionWidget.state_push">
-<tt class="descname">state_push</tt><big>(</big><big>)</big><a class="headerlink" href="#holoviews.plotting.widgets.SelectionWidget.state_push" title="Permalink to this definition">¶</a></dt>
-<dd><p>Save this instance&#8217;s state.</p>
-<p>For Parameterized instances, this includes the state of
-dynamically generated values.</p>
-<p>Subclasses that maintain short-term state should additionally
-save and restore that state using state_push() and
-state_pop().</p>
-<p>Generally, this method is used by operations that need to test
-something without permanently altering the objects&#8217; state.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="holoviews.plotting.widgets.SelectionWidget.verbose">
-<tt class="descname">verbose</tt><big>(</big><em>msg</em>, <em>*args</em>, <em>**kw</em><big>)</big><a class="headerlink" href="#holoviews.plotting.widgets.SelectionWidget.verbose" title="Permalink to this definition">¶</a></dt>
-<dd><p>Print msg merged with args as a verbose message.</p>
-<p>See Python&#8217;s logging module for details of message formatting.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="holoviews.plotting.widgets.SelectionWidget.warning">
-<tt class="descname">warning</tt><big>(</big><em>msg</em>, <em>*args</em>, <em>**kw</em><big>)</big><a class="headerlink" href="#holoviews.plotting.widgets.SelectionWidget.warning" title="Permalink to this definition">¶</a></dt>
-<dd><p>Print msg merged with args as a warning, unless module variable
-warnings_as_exceptions is True, then raise an Exception
-containing the arguments.</p>
-<p>See Python&#8217;s logging module for details of message formatting.</p>
-</dd></dl>
-
+<dl class="function">
+<dt id="holoviews.plotting.util.get_sideplot_ranges">
+<tt class="descclassname">holoviews.plotting.util.</tt><tt class="descname">get_sideplot_ranges</tt><big>(</big><em>plot</em>, <em>element</em>, <em>main</em>, <em>ranges</em><big>)</big><a class="reference internal" href="../_modules/holoviews/plotting/util.html#get_sideplot_ranges"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#holoviews.plotting.util.get_sideplot_ranges" title="Permalink to this definition">¶</a></dt>
+<dd><p>Utility to find the range for an adjoined
+plot given the plot, the element, the
+Element the plot is adjoined to and the
+dictionary of ranges.</p>
 </dd></dl>
 
 </div>
@@ -2401,6 +1932,20 @@ containing the arguments.</p>
 <h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="holoviews.plotting.bokeh.html">holoviews.bokeh Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="holoviews.plotting.bokeh.html#bokeh-package"><tt class="docutils literal"><span class="pre">bokeh</span></tt> Package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="holoviews.plotting.bokeh.html#annotation-module"><tt class="docutils literal"><span class="pre">annotation</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="holoviews.plotting.bokeh.html#chart-module"><tt class="docutils literal"><span class="pre">chart</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="holoviews.plotting.bokeh.html#element-module"><tt class="docutils literal"><span class="pre">element</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="holoviews.plotting.bokeh.html#path-module"><tt class="docutils literal"><span class="pre">path</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="holoviews.plotting.bokeh.html#plot-module"><tt class="docutils literal"><span class="pre">plot</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="holoviews.plotting.bokeh.html#raster-module"><tt class="docutils literal"><span class="pre">raster</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="holoviews.plotting.bokeh.html#renderer-module"><tt class="docutils literal"><span class="pre">renderer</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="holoviews.plotting.bokeh.html#tabular-module"><tt class="docutils literal"><span class="pre">tabular</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="holoviews.plotting.bokeh.html#util-module"><tt class="docutils literal"><span class="pre">util</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="holoviews.plotting.bokeh.html#widgets-module"><tt class="docutils literal"><span class="pre">widgets</span></tt> Module</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="holoviews.plotting.mpl.html">holoviews.mpl Package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="holoviews.plotting.mpl.html#mpl-package"><tt class="docutils literal"><span class="pre">mpl</span></tt> Package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="holoviews.plotting.mpl.html#annotation-module"><tt class="docutils literal"><span class="pre">annotation</span></tt> Module</a></li>
@@ -2415,7 +1960,12 @@ containing the arguments.</p>
 <li class="toctree-l2"><a class="reference internal" href="holoviews.plotting.mpl.html#renderer-module"><tt class="docutils literal"><span class="pre">renderer</span></tt> Module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="holoviews.plotting.mpl.html#seaborn-module"><tt class="docutils literal"><span class="pre">seaborn</span></tt> Module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="holoviews.plotting.mpl.html#tabular-module"><tt class="docutils literal"><span class="pre">tabular</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="holoviews.plotting.mpl.html#util-module"><tt class="docutils literal"><span class="pre">util</span></tt> Module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="holoviews.plotting.mpl.html#widgets-module"><tt class="docutils literal"><span class="pre">widgets</span></tt> Module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="holoviews.plotting.widgets.html">holoviews.widgets Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="holoviews.plotting.widgets.html#widgets-package"><tt class="docutils literal"><span class="pre">widgets</span></tt> Package</a></li>
 </ul>
 </li>
 </ul>
@@ -2429,7 +1979,7 @@ containing the arguments.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="holoviews.plotting.mpl.html" class="btn btn-neutral float-right" title="holoviews.mpl Package"/>Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="holoviews.plotting.bokeh.html" class="btn btn-neutral float-right" title="holoviews.bokeh Package"/>Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="holoviews.operation.html" class="btn btn-neutral" title="holoviews.operation Package"><span class="fa fa-arrow-circle-left"></span> Previous</a>

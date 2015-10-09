@@ -171,19 +171,27 @@
     <span class="n">_deep_indexable</span> <span class="o">=</span> <span class="bp">True</span>
 
 
-    <span class="k">def</span> <span class="nf">hist</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">adjoin</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">hist</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">adjoin</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">dimension</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">valid_ind</span> <span class="o">=</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
         <span class="n">valid_label</span> <span class="o">=</span> <span class="n">index</span> <span class="ow">in</span> <span class="p">[</span><span class="n">el</span><span class="o">.</span><span class="n">label</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">]</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">any</span><span class="p">([</span><span class="n">valid_ind</span><span class="p">,</span> <span class="n">valid_label</span><span class="p">]):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&quot;Please supply a suitable index or label for the histogram data&quot;</span><span class="p">)</span>
 
-        <span class="n">hist</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">index</span><span class="p">)</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">adjoin</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">hists</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">index</span><span class="p">)</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">adjoin</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">dimension</span><span class="o">=</span><span class="n">dimension</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">hists</span><span class="p">,</span> <span class="n">Layout</span><span class="p">):</span>
+            <span class="n">hists</span> <span class="o">=</span> <span class="p">[</span><span class="n">hists</span><span class="p">]</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dimension</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="n">dimension</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;Default&#39;</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">adjoin</span><span class="p">:</span>
-            <span class="n">layout</span> <span class="o">=</span> <span class="bp">self</span> <span class="o">&lt;&lt;</span> <span class="n">hist</span>
+            <span class="n">layout</span> <span class="o">=</span> <span class="bp">self</span>
+            <span class="k">for</span> <span class="n">hist</span> <span class="ow">in</span> <span class="n">hists</span><span class="p">:</span>
+                <span class="n">layout</span> <span class="o">=</span> <span class="n">layout</span> <span class="o">&lt;&lt;</span> <span class="n">hist</span>
             <span class="n">layout</span><span class="o">.</span><span class="n">main_layer</span> <span class="o">=</span> <span class="n">index</span>
-            <span class="k">return</span> <span class="n">layout</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">dimension</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">layout</span> <span class="o">=</span> <span class="n">hists</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">hist</span>
+            <span class="n">layout</span> <span class="o">=</span> <span class="n">hists</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">layout</span>
 
 
     <span class="k">def</span> <span class="nf">dimension_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dimension</span><span class="p">):</span>
@@ -352,12 +360,6 @@
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">overlays</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">NdOverlay</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">overlays</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
-
-
-    <span class="k">def</span> <span class="nf">hist</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_bins</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">bin_range</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">adjoin</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">individually</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="kn">from</span> <span class="nn">..operation</span> <span class="kn">import</span> <span class="n">histogram</span>
-        <span class="k">return</span> <span class="n">histogram</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_bins</span><span class="o">=</span><span class="n">num_bins</span><span class="p">,</span> <span class="n">bin_range</span><span class="o">=</span><span class="n">bin_range</span><span class="p">,</span> <span class="n">adjoin</span><span class="o">=</span><span class="n">adjoin</span><span class="p">,</span>
-                         <span class="n">individually</span><span class="o">=</span><span class="n">individually</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
 </div>
 <span class="n">__all__</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">([</span><span class="n">_k</span> <span class="k">for</span> <span class="n">_k</span><span class="p">,</span> <span class="n">_v</span> <span class="ow">in</span> <span class="nb">locals</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>

@@ -108,3 +108,16 @@ holoviews.element Package
 
 -------
 
+:mod:`util` Module
+------------------
+
+.. inheritance-diagram:: holoviews.element.util
+
+
+.. automodule:: holoviews.element.util
+    :members:
+    :inherited-members:
+    :show-inheritance:
+
+-------
+

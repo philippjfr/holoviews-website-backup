@@ -145,9 +145,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">[</span><span class="s">&#39;annotations&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
 
     <span class="k">def</span> <span class="nf">initialize_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ranges</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-        <span class="n">annotation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">map</span><span class="o">.</span><span class="n">last</span>
+        <span class="n">annotation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hmap</span><span class="o">.</span><span class="n">last</span>
         <span class="n">key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-        <span class="n">ranges</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_ranges</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">map</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">ranges</span><span class="p">)</span>
+        <span class="n">ranges</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_ranges</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hmap</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">ranges</span><span class="p">)</span>
         <span class="n">ranges</span> <span class="o">=</span> <span class="n">match_spec</span><span class="p">(</span><span class="n">annotation</span><span class="p">,</span> <span class="n">ranges</span><span class="p">)</span>
         <span class="n">axis</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">[</span><span class="s">&#39;axis&#39;</span><span class="p">]</span>
         <span class="n">opts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">style</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">cyclic_index</span><span class="p">]</span>
@@ -203,11 +203,11 @@
     <span class="k">def</span> <span class="nf">draw_annotation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">axis</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">opts</span><span class="p">):</span>
         <span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">fontsize</span><span class="p">,</span>
          <span class="n">horizontalalignment</span><span class="p">,</span> <span class="n">verticalalignment</span><span class="p">,</span> <span class="n">rotation</span><span class="p">)</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="n">opts</span><span class="p">[</span><span class="s">&#39;fontsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fontsize</span>
         <span class="k">return</span> <span class="p">[</span><span class="n">axis</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span>
                           <span class="n">horizontalalignment</span> <span class="o">=</span> <span class="n">horizontalalignment</span><span class="p">,</span>
                           <span class="n">verticalalignment</span> <span class="o">=</span> <span class="n">verticalalignment</span><span class="p">,</span>
-                          <span class="n">rotation</span><span class="o">=</span><span class="n">rotation</span><span class="p">,</span>
-                          <span class="n">fontsize</span><span class="o">=</span><span class="n">opts</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&#39;fontsize&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="p">),</span> <span class="o">**</span><span class="n">opts</span><span class="p">)]</span>
+                          <span class="n">rotation</span><span class="o">=</span><span class="n">rotation</span><span class="p">,</span> <span class="o">**</span><span class="n">opts</span><span class="p">)]</span>
 
 
 </div>

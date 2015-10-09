@@ -173,6 +173,19 @@ holoviews.mpl Package
 
 -------
 
+:mod:`util` Module
+------------------
+
+.. inheritance-diagram:: holoviews.plotting.mpl.util
+
+
+.. automodule:: holoviews.plotting.mpl.util
+    :members:
+    :inherited-members:
+    :show-inheritance:
+
+-------
+
 :mod:`widgets` Module
 ---------------------
 

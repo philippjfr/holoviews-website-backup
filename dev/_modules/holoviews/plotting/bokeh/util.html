@@ -1,0 +1,308 @@
+
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>holoviews.plotting.bokeh.util &mdash; HoloViews</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../../../_static/bootstrap.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../../../../_static/codehilite.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../../../../_static/custom.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../../../../_static/rtd_bootstrap.css" type="text/css" />
+  
+        <link rel="author" title="About these documents"
+              href="../../../../about.html"/>
+    <link rel="top" title="HoloViews" href="../../../../index.html"/>
+        <link rel="up" title="holoviews.plotting" href="../../plotting.html"/>
+    <script type="text/javascript" src='../../../../_static/jquery.js'></script>
+    <script type="text/javascript" src='../../../../_static/underscore.js'></script>
+    <script type="text/javascript" src='../../../../_static/doctools.js'></script>
+    <script type="text/javascript" src='../../../../_static/require.js'></script>
+    <script type="text/javascript" src='../../../../_static/bootstrap.js'></script>
+    <script type="text/javascript" src='../../../../_static/custom.js'></script>
+    <script type="text/javascript" src='../../../../_static/js/theme.js'></script>
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+
+        
+          <img src="../../../../_static/holoviews_logo.png" class="logo" />
+        
+
+        <a href="../../../../index.html" class="fa"> HoloViews</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../index.html">Home</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../features.html">Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Tutorials/index.html">Tutorials</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Examples/index.html">Examples</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Reference_Manual/index.html">Reference Manual</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Reference_Manual/holoviews.core.html">core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Reference_Manual/holoviews.element.html">element</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Reference_Manual/holoviews.interface.html">interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Reference_Manual/holoviews.ipython.html">ipython</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Reference_Manual/holoviews.operation.html">operation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Reference_Manual/holoviews.plotting.html">plotting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../FAQ.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference external" href="http://github.com/ioam/holoviews">Github source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../about.html">About</a><ul class="simple">
+</ul>
+</li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../../index.html">HoloViews</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="main">
+            
+  <h1>Source code for holoviews.plotting.bokeh.util</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">colors</span>
+    <span class="kn">import</span> <span class="nn">matplotlib.cm</span> <span class="kn">as</span> <span class="nn">cm</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="n">cm</span><span class="p">,</span> <span class="n">colors</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span>
+
+<span class="kn">from</span> <span class="nn">bokeh.enums</span> <span class="kn">import</span> <span class="n">Palette</span>
+<span class="kn">from</span> <span class="nn">bokeh.plotting</span> <span class="kn">import</span> <span class="n">figure</span><span class="p">,</span> <span class="n">Plot</span>
+
+<span class="c"># Conversion between matplotlib and bokeh markers</span>
+<span class="n">markers</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;s&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;marker&#39;</span><span class="p">:</span> <span class="s">&#39;square&#39;</span><span class="p">},</span>
+           <span class="s">&#39;d&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;marker&#39;</span><span class="p">:</span> <span class="s">&#39;diamond&#39;</span><span class="p">},</span>
+           <span class="s">&#39;^&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;marker&#39;</span><span class="p">:</span> <span class="s">&#39;triangle&#39;</span><span class="p">,</span> <span class="s">&#39;orientation&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
+           <span class="s">&#39;&gt;&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;marker&#39;</span><span class="p">:</span> <span class="s">&#39;triangle&#39;</span><span class="p">,</span> <span class="s">&#39;orientation&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">},</span>
+           <span class="s">&#39;v&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;marker&#39;</span><span class="p">:</span> <span class="s">&#39;triangle&#39;</span><span class="p">,</span> <span class="s">&#39;orientation&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">},</span>
+           <span class="s">&#39;&lt;&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;marker&#39;</span><span class="p">:</span> <span class="s">&#39;triangle&#39;</span><span class="p">,</span> <span class="s">&#39;orientation&#39;</span><span class="p">:</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">},</span>
+           <span class="s">&#39;1&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;marker&#39;</span><span class="p">:</span> <span class="s">&#39;triangle&#39;</span><span class="p">,</span> <span class="s">&#39;orientation&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
+           <span class="s">&#39;2&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;marker&#39;</span><span class="p">:</span> <span class="s">&#39;triangle&#39;</span><span class="p">,</span> <span class="s">&#39;orientation&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">},</span>
+           <span class="s">&#39;3&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;marker&#39;</span><span class="p">:</span> <span class="s">&#39;triangle&#39;</span><span class="p">,</span> <span class="s">&#39;orientation&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">},</span>
+           <span class="s">&#39;4&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;marker&#39;</span><span class="p">:</span> <span class="s">&#39;triangle&#39;</span><span class="p">,</span> <span class="s">&#39;orientation&#39;</span><span class="p">:</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">}}</span>
+
+
+<div class="viewcode-block" id="mplcmap_to_palette"><a class="viewcode-back" href="../../../../Reference_Manual/holoviews.plotting.bokeh.html#holoviews.plotting.bokeh.util.mplcmap_to_palette">[docs]</a><span class="k">def</span> <span class="nf">mplcmap_to_palette</span><span class="p">(</span><span class="n">cmap</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Converts a matplotlib colormap to palette of RGB hex strings.&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">colors</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">ValueException</span><span class="p">(</span><span class="s">&quot;Using cmaps on objects requires matplotlib.&quot;</span><span class="p">)</span>
+    <span class="n">colormap</span> <span class="o">=</span> <span class="n">cm</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="n">cmap</span><span class="p">)</span> <span class="c">#choose any matplotlib colormap here</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">colors</span><span class="o">.</span><span class="n">rgb2hex</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">colormap</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">colormap</span><span class="o">.</span><span class="n">N</span><span class="p">))]</span>
+
+</div>
+<div class="viewcode-block" id="get_cmap"><a class="viewcode-back" href="../../../../Reference_Manual/holoviews.plotting.bokeh.html#holoviews.plotting.bokeh.util.get_cmap">[docs]</a><span class="k">def</span> <span class="nf">get_cmap</span><span class="p">(</span><span class="n">cmap</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns matplotlib cmap generated from bokeh palette or</span>
+<span class="sd">    directly accessed from matplotlib.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">rgb_vals</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">Palette</span><span class="p">,</span> <span class="n">cmap</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">rgb_vals</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">colors</span><span class="o">.</span><span class="n">ListedColormap</span><span class="p">(</span><span class="n">rgb_vals</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">cmap</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">cm</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="n">cmap</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="map_colors"><a class="viewcode-back" href="../../../../Reference_Manual/holoviews.plotting.bokeh.html#holoviews.plotting.bokeh.util.map_colors">[docs]</a><span class="k">def</span> <span class="nf">map_colors</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">crange</span><span class="p">,</span> <span class="n">cmap</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Maps an array of values to RGB hex strings, given</span>
+<span class="sd">    a color range and colormap.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">crange</span><span class="p">:</span>
+        <span class="n">cmin</span><span class="p">,</span> <span class="n">cmax</span> <span class="o">=</span> <span class="n">crange</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">cmin</span><span class="p">,</span> <span class="n">cmax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmin</span><span class="p">(</span><span class="n">arr</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmax</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+    <span class="n">arr</span> <span class="o">=</span> <span class="p">(</span><span class="n">arr</span> <span class="o">-</span> <span class="n">cmin</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">cmax</span><span class="o">-</span><span class="n">cmin</span><span class="p">)</span>
+    <span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">logical_not</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">arr</span><span class="p">)))</span>
+    <span class="n">arr</span> <span class="o">=</span> <span class="n">cmap</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span><span class="o">*</span><span class="mi">255</span>
+    <span class="k">return</span> <span class="p">[</span><span class="s">&quot;#{0:02x}{1:02x}{2:02x}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">c</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+            <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">arr</span><span class="p">]</span>
+
+</div>
+<div class="viewcode-block" id="mpl_to_bokeh"><a class="viewcode-back" href="../../../../Reference_Manual/holoviews.plotting.bokeh.html#holoviews.plotting.bokeh.util.mpl_to_bokeh">[docs]</a><span class="k">def</span> <span class="nf">mpl_to_bokeh</span><span class="p">(</span><span class="n">properties</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Utility to process style properties converting any</span>
+<span class="sd">    matplotlib specific options to their nearest bokeh</span>
+<span class="sd">    equivalent.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">new_properties</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">properties</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="s">&#39;s&#39;</span><span class="p">:</span>
+            <span class="n">new_properties</span><span class="p">[</span><span class="s">&#39;size&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+        <span class="k">elif</span> <span class="n">k</span> <span class="o">==</span> <span class="s">&#39;marker&#39;</span><span class="p">:</span>
+            <span class="n">new_properties</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">markers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;marker&#39;</span><span class="p">:</span> <span class="n">v</span><span class="p">}))</span>
+        <span class="k">elif</span> <span class="n">k</span> <span class="o">==</span> <span class="s">&#39;color&#39;</span> <span class="ow">or</span> <span class="n">k</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s">&#39;_color&#39;</span><span class="p">):</span>
+            <span class="n">v</span> <span class="o">=</span> <span class="n">colors</span><span class="o">.</span><span class="n">ColorConverter</span><span class="o">.</span><span class="n">colors</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+                <span class="n">v</span> <span class="o">=</span> <span class="n">colors</span><span class="o">.</span><span class="n">rgb2hex</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+            <span class="n">new_properties</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">new_properties</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+    <span class="n">new_properties</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&#39;cmap&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">new_properties</span>
+
+</div>
+<div class="viewcode-block" id="layout_padding"><a class="viewcode-back" href="../../../../Reference_Manual/holoviews.plotting.bokeh.html#holoviews.plotting.bokeh.util.layout_padding">[docs]</a><span class="k">def</span> <span class="nf">layout_padding</span><span class="p">(</span><span class="n">plots</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Temporary workaround to allow empty plots in a</span>
+<span class="sd">    row of a bokeh GridPlot type. Should be removed</span>
+<span class="sd">    when https://github.com/bokeh/bokeh/issues/2891</span>
+<span class="sd">    is resolved.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">widths</span><span class="p">,</span> <span class="n">heights</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">),</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">r</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">plots</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">c</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">p</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">width</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">plot_width</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">Plot</span><span class="p">)</span> <span class="k">else</span> <span class="n">p</span><span class="o">.</span><span class="n">width</span>
+                <span class="n">height</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">plot_height</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">Plot</span><span class="p">)</span> <span class="k">else</span> <span class="n">p</span><span class="o">.</span><span class="n">height</span>
+                <span class="n">widths</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">widths</span><span class="p">[</span><span class="n">c</span><span class="p">],</span> <span class="n">width</span><span class="p">)</span>
+                <span class="n">heights</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">heights</span><span class="p">[</span><span class="n">r</span><span class="p">],</span> <span class="n">height</span><span class="p">)</span>
+
+    <span class="n">expanded_plots</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">r</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">plots</span><span class="p">):</span>
+        <span class="n">expanded_plots</span><span class="o">.</span><span class="n">append</span><span class="p">([])</span>
+        <span class="k">for</span> <span class="n">c</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">p</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">p</span> <span class="o">=</span> <span class="n">figure</span><span class="p">(</span><span class="n">plot_width</span><span class="o">=</span><span class="n">widths</span><span class="p">[</span><span class="n">c</span><span class="p">],</span> 
+                           <span class="n">plot_height</span><span class="o">=</span><span class="n">heights</span><span class="p">[</span><span class="n">r</span><span class="p">])</span>
+                <span class="n">p</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="p">[</span><span class="s">&#39; &#39;</span><span class="p">])</span>
+                <span class="n">p</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">visible</span> <span class="o">=</span> <span class="bp">False</span>
+                <span class="n">p</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">visible</span> <span class="o">=</span> <span class="bp">False</span>
+                <span class="n">p</span><span class="o">.</span><span class="n">outline_line_color</span> <span class="o">=</span> <span class="bp">None</span>
+                <span class="n">p</span><span class="o">.</span><span class="n">xgrid</span><span class="o">.</span><span class="n">grid_line_color</span> <span class="o">=</span> <span class="bp">None</span>
+                <span class="n">p</span><span class="o">.</span><span class="n">ygrid</span><span class="o">.</span><span class="n">grid_line_color</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="n">expanded_plots</span><span class="p">[</span><span class="n">r</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">expanded_plots</span></div>
+</pre></div>
+
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015 IOAM: Jean-Luc R. Stevens, Philipp Rudiger, and James A. Bednar.
+    </p>
+  </div>
+
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-61554933-1', 'auto');
+  ga('send', 'pageview');
+
+  </script>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../',
+            VERSION:'1.3.2',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

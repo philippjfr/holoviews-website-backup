@@ -132,6 +132,7 @@
 <span class="sd">axis or map dimension. Also supplies the Dimensioned abstract</span>
 <span class="sd">baseclass for classes that accept Dimension values.</span>
 <span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">re</span>
 <span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">itemgetter</span>
 
 <span class="k">try</span><span class="p">:</span>
@@ -141,7 +142,7 @@
 
 <span class="kn">import</span> <span class="nn">param</span>
 
-<span class="kn">from</span> <span class="nn">..core.util</span> <span class="kn">import</span> <span class="n">sanitize_identifier</span><span class="p">,</span> <span class="n">max_range</span><span class="p">,</span> <span class="n">find_range</span>
+<span class="kn">from</span> <span class="nn">..core.util</span> <span class="kn">import</span> <span class="nb">basestring</span><span class="p">,</span> <span class="n">sanitize_identifier</span><span class="p">,</span> <span class="n">max_range</span><span class="p">,</span> <span class="n">find_range</span>
 <span class="kn">from</span> <span class="nn">.options</span> <span class="kn">import</span> <span class="n">Store</span><span class="p">,</span> <span class="n">StoreOptions</span>
 <span class="kn">from</span> <span class="nn">.pprint</span> <span class="kn">import</span> <span class="n">PrettyPrinter</span>
 
@@ -205,7 +206,7 @@
 <span class="s">        may be an inbuilt constructor (such as int, str, float) or a</span>
 <span class="s">        custom class object.&quot;&quot;&quot;</span><span class="p">)</span>
 
-    <span class="n">unit</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
+    <span class="n">unit</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">allow_None</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
 <span class="s">        Optional unit string associated with the Dimension. For</span>
 <span class="s">        instance, the string &#39;m&#39; may be used represent units of meters</span>
 <span class="s">        and &#39;s&#39; to represent units of seconds.&quot;&quot;&quot;</span><span class="p">)</span>
@@ -223,6 +224,7 @@
 
     <span class="c"># Defines default formatting by type</span>
     <span class="n">type_formatters</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">unit_format</span> <span class="o">=</span> <span class="s">&#39; ({unit})&#39;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -248,7 +250,7 @@
     <span class="nd">@property</span>
 <div class="viewcode-block" id="Dimension.pprint_label"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.core.html#holoviews.core.dimension.Dimension.pprint_label">[docs]</a>    <span class="k">def</span> <span class="nf">pprint_label</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="s">&quot;The pretty-printed label string for the Dimension&quot;</span>
-        <span class="n">unit</span> <span class="o">=</span> <span class="s">&#39;&#39;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">unit</span> <span class="ow">is</span> <span class="bp">None</span> <span class="k">else</span> <span class="s">&#39; (</span><span class="si">%s</span><span class="s">)&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">unit</span>
+        <span class="n">unit</span> <span class="o">=</span> <span class="s">&#39;&#39;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">unit</span> <span class="ow">is</span> <span class="bp">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">unit_format</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">unit</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="n">unit</span>
 
 </div>
@@ -259,12 +261,15 @@
         <span class="n">own_type</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">type</span> <span class="ow">is</span> <span class="bp">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">type</span>
         <span class="n">formatter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">formatter</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">formatter</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">type_formatters</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">own_type</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">formatter</span><span class="p">:</span>
-            <span class="k">try</span><span class="p">:</span>
-                <span class="n">value</span> <span class="o">=</span> <span class="n">formatter</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-            <span class="k">except</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s">&quot;Formatting could not be applied for Dimension &quot;</span>
-                             <span class="s">&quot;</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">callable</span><span class="p">(</span><span class="n">formatter</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">formatter</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">formatter</span><span class="p">,</span> <span class="nb">basestring</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s">r&quot;\{(\w+)\}&quot;</span><span class="p">,</span> <span class="n">formatter</span><span class="p">):</span>
+                    <span class="k">return</span> <span class="n">formatter</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">formatter</span> <span class="o">%</span> <span class="n">value</span>
         <span class="k">return</span> <span class="n">value</span>
+
 </div>
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">pprint</span><span class="p">()</span>
@@ -279,6 +284,7 @@
         <span class="n">unit</span> <span class="o">=</span> <span class="s">&#39;&#39;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">unit</span> <span class="ow">is</span> <span class="bp">None</span> <span class="k">else</span> <span class="s">&#39; &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">unit</span>
         <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pprint_value</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">format_string</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">val</span><span class="o">=</span><span class="n">value</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="n">unit</span><span class="p">)</span>
+
 </div>
     <span class="k">def</span> <span class="nf">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -645,16 +651,21 @@
 
 
     <span class="k">def</span> <span class="nf">_valid_dimensions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dimensions</span><span class="p">):</span>
-        <span class="s">&quot;Validates key dimension input&quot;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">dimensions</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">dimensions</span>
+        <span class="sd">&quot;&quot;&quot;Validates key dimension input</span>
+<span class="sd">        </span>
+<span class="sd">        Returns kdims if no dimensions are specified&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">dimensions</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">dimensions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">kdims</span>
         <span class="k">elif</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dimensions</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
             <span class="n">dimensions</span> <span class="o">=</span> <span class="p">[</span><span class="n">dimensions</span><span class="p">]</span>
 
+        <span class="n">valid_dimensions</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">dim</span> <span class="ow">in</span> <span class="n">dimensions</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">Dimension</span><span class="p">):</span> <span class="n">dim</span> <span class="o">=</span> <span class="n">dim</span><span class="o">.</span><span class="n">name</span>
             <span class="k">if</span> <span class="n">dim</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cached_index_names</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s">&quot;Supplied dimensions </span><span class="si">%s</span><span class="s"> not found.&quot;</span> <span class="o">%</span> <span class="n">dim</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">dimensions</span>
+            <span class="n">valid_dimensions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dim</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">valid_dimensions</span>
 
 
     <span class="nd">@property</span>
@@ -697,7 +708,9 @@
 <div class="viewcode-block" id="Dimensioned.get_dimension"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.core.html#holoviews.core.dimension.Dimensioned.get_dimension">[docs]</a>    <span class="k">def</span> <span class="nf">get_dimension</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dimension</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="s">&quot;Access a Dimension object by name or index.&quot;</span>
         <span class="n">all_dims</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dimensions</span><span class="p">()</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dimension</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dimension</span><span class="p">,</span> <span class="n">Dimension</span><span class="p">):</span>
+            <span class="n">dimension</span> <span class="o">=</span> <span class="n">dimension</span><span class="o">.</span><span class="n">name</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dimension</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">and</span> <span class="n">dimension</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">all_dims</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">all_dims</span><span class="p">[</span><span class="n">dimension</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="p">{</span><span class="n">dim</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="n">dim</span> <span class="k">for</span> <span class="n">dim</span> <span class="ow">in</span> <span class="n">all_dims</span><span class="p">}</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">dimension</span><span class="p">,</span> <span class="n">default</span><span class="p">)</span>
@@ -707,6 +720,7 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the index of the requested dimension.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">Dimension</span><span class="p">):</span> <span class="n">dim</span> <span class="o">=</span> <span class="n">dim</span><span class="o">.</span><span class="n">name</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">dim</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dimensions</span><span class="p">()):</span>
                 <span class="k">return</span> <span class="n">dim</span>

@@ -135,46 +135,63 @@
 <span class="kn">import</span> <span class="nn">time</span><span class="o">,</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">traceback</span>
 <span class="kn">import</span> <span class="nn">io</span>
 
-<span class="kn">from</span> <span class="nn">IPython.nbformat</span> <span class="kn">import</span> <span class="n">reader</span>
+<span class="kn">from</span> <span class="nn">IPython</span> <span class="kn">import</span> <span class="n">version_info</span>
 <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Javascript</span><span class="p">,</span> <span class="n">display</span>
 
-<span class="kn">from</span> <span class="nn">IPython.nbconvert.preprocessors</span> <span class="kn">import</span> <span class="n">Preprocessor</span>
-<span class="kn">from</span> <span class="nn">IPython.nbconvert</span> <span class="kn">import</span> <span class="n">HTMLExporter</span>
+<span class="c"># Import appropriate nbconvert machinery</span>
+<span class="k">if</span> <span class="n">version_info</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">4</span><span class="p">:</span>
+    <span class="c"># Jupyter/IPython &gt;=4.0</span>
+    <span class="kn">from</span> <span class="nn">nbformat</span> <span class="kn">import</span> <span class="n">reader</span>
+    <span class="kn">from</span> <span class="nn">nbconvert.preprocessors</span> <span class="kn">import</span> <span class="n">Preprocessor</span>
+    <span class="kn">from</span> <span class="nn">nbconvert</span> <span class="kn">import</span> <span class="n">HTMLExporter</span>
+
+    <span class="kn">from</span> <span class="nn">nbconvert.preprocessors.clearoutput</span> <span class="kn">import</span> <span class="n">ClearOutputPreprocessor</span>
+    <span class="kn">from</span> <span class="nn">nbconvert</span> <span class="kn">import</span> <span class="n">NotebookExporter</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="c"># IPython &lt;= 3.0</span>
+    <span class="kn">from</span> <span class="nn">IPython.nbformat</span> <span class="kn">import</span> <span class="n">reader</span>
+    <span class="kn">from</span> <span class="nn">IPython.nbconvert.preprocessors</span> <span class="kn">import</span> <span class="n">Preprocessor</span>
+    <span class="kn">from</span> <span class="nn">IPython.nbconvert</span> <span class="kn">import</span> <span class="n">HTMLExporter</span>
+
+    <span class="k">if</span> <span class="n">version_info</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="c"># IPython 3</span>
+        <span class="kn">from</span> <span class="nn">IPython.nbconvert.preprocessors.clearoutput</span> <span class="kn">import</span> <span class="n">ClearOutputPreprocessor</span>
+        <span class="kn">from</span> <span class="nn">IPython.nbconvert</span> <span class="kn">import</span> <span class="n">NotebookExporter</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c"># IPython 2</span>
+        <span class="kn">from</span> <span class="nn">IPython.nbformat</span> <span class="kn">import</span> <span class="n">current</span>
+        <span class="n">NotebookExporter</span><span class="p">,</span> <span class="n">ClearOutputPreprocessor</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span>
+
+        <span class="k">def</span> <span class="nf">v3_strip_output</span><span class="p">(</span><span class="n">nb</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot;strip the outputs from a notebook object&quot;&quot;&quot;</span>
+            <span class="n">nb</span><span class="p">[</span><span class="s">&quot;nbformat&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span>
+            <span class="n">nb</span><span class="p">[</span><span class="s">&quot;nbformat_minor&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">nb</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&#39;signature&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">cell</span> <span class="ow">in</span> <span class="n">nb</span><span class="o">.</span><span class="n">worksheets</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">cells</span><span class="p">:</span>
+                <span class="k">if</span> <span class="s">&#39;outputs&#39;</span> <span class="ow">in</span> <span class="n">cell</span><span class="p">:</span>
+                    <span class="n">cell</span><span class="p">[</span><span class="s">&#39;outputs&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">if</span> <span class="s">&#39;prompt_number&#39;</span> <span class="ow">in</span> <span class="n">cell</span><span class="p">:</span>
+                    <span class="n">cell</span><span class="p">[</span><span class="s">&#39;prompt_number&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="k">return</span> <span class="n">nb</span>
 
 <span class="kn">import</span> <span class="nn">param</span>
 <span class="kn">from</span> <span class="nn">..core.io</span> <span class="kn">import</span> <span class="n">FileArchive</span><span class="p">,</span> <span class="n">Pickler</span>
 <span class="kn">from</span> <span class="nn">..core.options</span> <span class="kn">import</span> <span class="n">Store</span>
 <span class="kn">from</span> <span class="nn">..plotting.renderer</span> <span class="kn">import</span> <span class="n">HTML_TAGS</span>
 
-
-<span class="k">try</span><span class="p">:</span>  <span class="c"># IPython 3</span>
-    <span class="kn">from</span> <span class="nn">IPython.nbconvert.preprocessors.clearoutput</span> <span class="kn">import</span> <span class="n">ClearOutputPreprocessor</span>
-    <span class="kn">from</span> <span class="nn">IPython.nbconvert</span> <span class="kn">import</span> <span class="n">NotebookExporter</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="c"># Only matplotlib outputs to graphical file formats at this time</span>
+    <span class="n">renderers</span> <span class="o">=</span> <span class="p">[</span><span class="n">Store</span><span class="o">.</span><span class="n">renderers</span><span class="p">[</span><span class="s">&#39;matplotlib&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">instance</span><span class="p">(</span><span class="n">holomap</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">fig</span><span class="o">=</span><span class="s">&#39;svg&#39;</span><span class="p">)]</span>
 <span class="k">except</span><span class="p">:</span>
-    <span class="c"># IPython 2</span>
-    <span class="kn">from</span> <span class="nn">IPython.nbformat</span> <span class="kn">import</span> <span class="n">current</span>
-    <span class="n">NotebookExporter</span><span class="p">,</span> <span class="n">ClearOutputPreprocessor</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span>
+    <span class="n">renderers</span> <span class="o">=</span> <span class="p">[]</span>
 
-<div class="viewcode-block" id="v3_strip_output"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.ipython.html#holoviews.ipython.archive.v3_strip_output">[docs]</a>    <span class="k">def</span> <span class="nf">v3_strip_output</span><span class="p">(</span><span class="n">nb</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;strip the outputs from a notebook object&quot;&quot;&quot;</span>
-        <span class="n">nb</span><span class="p">[</span><span class="s">&quot;nbformat&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span>
-        <span class="n">nb</span><span class="p">[</span><span class="s">&quot;nbformat_minor&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="n">nb</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&#39;signature&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">cell</span> <span class="ow">in</span> <span class="n">nb</span><span class="o">.</span><span class="n">worksheets</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">cells</span><span class="p">:</span>
-            <span class="k">if</span> <span class="s">&#39;outputs&#39;</span> <span class="ow">in</span> <span class="n">cell</span><span class="p">:</span>
-                <span class="n">cell</span><span class="p">[</span><span class="s">&#39;outputs&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="k">if</span> <span class="s">&#39;prompt_number&#39;</span> <span class="ow">in</span> <span class="n">cell</span><span class="p">:</span>
-                <span class="n">cell</span><span class="p">[</span><span class="s">&#39;prompt_number&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span>
-        <span class="k">return</span> <span class="n">nb</span>
-
-</div>
 <div class="viewcode-block" id="NotebookArchive"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.ipython.html#holoviews.ipython.archive.NotebookArchive">[docs]</a><span class="k">class</span> <span class="nc">NotebookArchive</span><span class="p">(</span><span class="n">FileArchive</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    FileArchive that can automatically capture notebook data via the</span>
 <span class="sd">    display hooks and automatically adds a notebook HTML snapshot to</span>
 <span class="sd">    the archive upon export.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">exporters</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">List</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="p">[</span><span class="n">Store</span><span class="o">.</span><span class="n">renderers</span><span class="p">[</span><span class="s">&#39;matplotlib&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">instance</span><span class="p">(</span><span class="n">holomap</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">fig</span><span class="o">=</span><span class="s">&#39;svg&#39;</span><span class="p">),</span> <span class="n">Pickler</span><span class="p">])</span>
+    <span class="n">exporters</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">List</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="n">renderers</span> <span class="o">+</span> <span class="p">[</span><span class="n">Pickler</span><span class="p">])</span>
 
     <span class="n">namespace</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="s">&#39;holoviews.archive&#39;</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
 <span class="s">        The name of the current in the NotebookArchive instance in the</span>

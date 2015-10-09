@@ -1,0 +1,7 @@
+<map id="inheritanceac3c8b59ec" name="inheritanceac3c8b59ec">
+<area shape="rect" id="node1" href="#holoviews.plotting.bokeh.plot.BokehPlot" title="Plotting baseclass for the Bokeh backends, implementing the basic" alt="" coords="675,5,884,24"/>
+<area shape="rect" id="node2" href="holoviews.plotting.html#holoviews.plotting.plot.Plot" title="Base class of all Plot classes in HoloViews, designed to be" alt="" coords="239,23,384,42"/>
+<area shape="rect" id="node5" href="holoviews.plotting.html#holoviews.plotting.plot.DimensionedPlot" title="DimensionedPlot implements a number of useful methods" alt="" coords="421,42,631,62"/>
+<area shape="rect" id="node4" href="holoviews.plotting.html#holoviews.plotting.plot.GenericElementPlot" title="Plotting baseclass to render contents of an Element. Implements" alt="" coords="668,42,891,62"/>
+<area shape="rect" id="node6" title="params(name=String)" alt="" coords="4,23,201,42"/>
+</map>

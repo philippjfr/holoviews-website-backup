@@ -190,7 +190,7 @@
         <span class="k">pass</span>
 </div>
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="OptionsMagic.get_options"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.ipython.html#holoviews.ipython.magics.OptionsMagic.get_options">[docs]</a>    <span class="k">def</span> <span class="nf">get_options</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">line</span><span class="p">,</span> <span class="n">options</span><span class="p">):</span>
+<div class="viewcode-block" id="OptionsMagic.get_options"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.ipython.html#holoviews.ipython.magics.OptionsMagic.get_options">[docs]</a>    <span class="k">def</span> <span class="nf">get_options</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">line</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span> <span class="n">linemagic</span><span class="p">):</span>
         <span class="s">&quot;Given a keyword specification line, validated and compute options&quot;</span>
         <span class="n">items</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">_extract_keywords</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">OrderedDict</span><span class="p">())</span>
         <span class="k">for</span> <span class="n">keyword</span> <span class="ow">in</span> <span class="n">cls</span><span class="o">.</span><span class="n">defaults</span><span class="p">:</span>
@@ -209,8 +209,11 @@
                     <span class="n">wrong_type</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">value</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
                                   <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">allowed</span><span class="p">[</span><span class="n">k</span><span class="p">])}</span>
                     <span class="k">if</span> <span class="n">wrong_type</span><span class="p">:</span>
-                        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">((</span><span class="s">&quot;Value </span><span class="si">%r</span><span class="s"> for </span><span class="si">%r</span><span class="s"> option&#39;s </span><span class="si">%r</span><span class="s"> attribute not of type </span><span class="si">%r</span><span class="s">&quot;</span> <span class="o">%</span>
-                                          <span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">keyword</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">allowed</span><span class="p">[</span><span class="n">k</span><span class="p">])))</span>
+                        <span class="n">errors</span> <span class="o">=</span> <span class="p">[]</span>
+                        <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">wrong_type</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                            <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;Value </span><span class="si">%r</span><span class="s"> for </span><span class="si">%r</span><span class="s"> option&#39;s </span><span class="si">%r</span><span class="s"> attribute not of type </span><span class="si">%r</span><span class="s">&quot;</span> <span class="o">%</span>
+                                          <span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">keyword</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">allowed</span><span class="p">[</span><span class="n">k</span><span class="p">]))</span>
+                        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">errors</span><span class="p">))</span>
                 <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">allowed</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">and</span> <span class="n">value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">allowed</span><span class="p">:</span>
                     <span class="k">if</span> <span class="n">keyword</span> <span class="ow">in</span> <span class="n">cls</span><span class="o">.</span><span class="n">custom_exceptions</span><span class="p">:</span>
                         <span class="n">cls</span><span class="o">.</span><span class="n">custom_exceptions</span><span class="p">[</span><span class="n">keyword</span><span class="p">](</span><span class="n">value</span><span class="p">,</span> <span class="n">keyword</span><span class="p">,</span> <span class="n">allowed</span><span class="p">)</span>
@@ -222,10 +225,10 @@
                         <span class="n">info</span> <span class="o">=</span> <span class="p">(</span><span class="n">keyword</span><span class="p">,</span><span class="n">value</span><span class="p">)</span><span class="o">+</span><span class="n">allowed</span>
                         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;Value </span><span class="si">%r</span><span class="s"> for key </span><span class="si">%r</span><span class="s"> not between </span><span class="si">%s</span><span class="s"> and </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">info</span><span class="p">)</span>
                 <span class="n">options</span><span class="p">[</span><span class="n">keyword</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
-        <span class="k">return</span> <span class="n">cls</span><span class="o">.</span><span class="n">_validate</span><span class="p">(</span><span class="n">options</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">cls</span><span class="o">.</span><span class="n">_validate</span><span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="n">linemagic</span><span class="p">)</span>
 </div>
     <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">_validate</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">options</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_validate</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span> <span class="n">linemagic</span><span class="p">):</span>
         <span class="s">&quot;Allows subclasses to check options are valid.&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s">&quot;OptionsMagic is an abstract base class.&quot;</span><span class="p">)</span>
 
@@ -243,8 +246,8 @@
                 <span class="n">completion_key</span> <span class="o">=</span> <span class="n">token</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
                 <span class="k">break</span>
 
-        <span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">cls</span><span class="o">.</span><span class="n">allowed</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">completion_key</span><span class="p">,</span> <span class="p">[])</span>
-                  <span class="k">if</span> <span class="n">v</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">cls</span><span class="o">.</span><span class="n">hidden</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">completion_key</span><span class="p">,</span> <span class="p">[])]</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="n">val</span> <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">cls</span><span class="o">.</span><span class="n">allowed</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">completion_key</span><span class="p">,</span> <span class="p">[])</span>
+                  <span class="k">if</span> <span class="n">val</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">cls</span><span class="o">.</span><span class="n">hidden</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">completion_key</span><span class="p">,</span> <span class="p">[])]</span>
         <span class="n">vreprs</span> <span class="o">=</span> <span class="p">[</span><span class="nb">repr</span><span class="p">(</span><span class="n">el</span><span class="p">)</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">values</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">el</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)]</span>
         <span class="k">return</span> <span class="n">vreprs</span> <span class="o">+</span> <span class="p">[</span><span class="n">el</span><span class="o">+</span><span class="s">&#39;=&#39;</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">cls</span><span class="o">.</span><span class="n">allowed</span><span class="o">.</span><span class="n">keys</span><span class="p">()]</span>
 
@@ -380,6 +383,8 @@
     <span class="c"># Used to disable info output in testing</span>
     <span class="n">_disable_info_output</span> <span class="o">=</span> <span class="bp">False</span>
 
+    <span class="n">bokeh_loaded</span> <span class="o">=</span> <span class="bp">False</span>
+
     <span class="c">#==========================#</span>
     <span class="c"># Backend state management #</span>
     <span class="c">#==========================#</span>
@@ -408,17 +413,21 @@
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="s">&#39;fig&#39;</span><span class="p">,</span> <span class="s">&#39;holomap&#39;</span><span class="p">]):</span>
             <span class="n">value</span> <span class="o">=</span> <span class="n">options</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="k">if</span> <span class="n">unchanged</span> <span class="k">else</span> <span class="bp">None</span>
             <span class="n">allowed</span> <span class="o">=</span> <span class="p">[</span><span class="n">el</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">cls</span><span class="o">.</span><span class="n">backend_formats</span><span class="p">[</span><span class="n">backend</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="k">if</span> <span class="n">el</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">]</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">allowed</span><span class="p">):</span>
-                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s">&quot;Option </span><span class="si">%r</span><span class="s"> not in allowed list: </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="s">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">allowed</span><span class="p">)))</span>
-            <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-                <span class="n">cls</span><span class="o">.</span><span class="n">backend_settings</span><span class="p">[</span><span class="n">backend</span><span class="p">][</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
-            <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
                 <span class="n">settings</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">backend_settings</span><span class="p">[</span><span class="n">backend</span><span class="p">]</span>
                 <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">settings</span><span class="p">:</span>
                     <span class="c"># First element of the list is the default format</span>
-                    <span class="n">options</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">backend_formats</span><span class="p">[</span><span class="n">backend</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="n">value</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">backend_formats</span><span class="p">[</span><span class="n">backend</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
                 <span class="k">elif</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">settings</span><span class="p">:</span>
-                    <span class="n">options</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">settings</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+                    <span class="n">value</span> <span class="o">=</span> <span class="n">settings</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">allowed</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">backend_settings</span><span class="p">[</span><span class="n">backend</span><span class="p">][</span><span class="n">key</span><span class="p">]</span> <span class="ow">in</span> <span class="n">allowed</span><span class="p">):</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">backend_settings</span><span class="p">[</span><span class="n">backend</span><span class="p">][</span><span class="n">key</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">allowed</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s">&quot;Option </span><span class="si">%r</span><span class="s"> not in allowed list: </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="s">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">allowed</span><span class="p">)))</span>
+            <span class="n">options</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+            <span class="n">cls</span><span class="o">.</span><span class="n">backend_settings</span><span class="p">[</span><span class="n">backend</span><span class="p">][</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+
+
         <span class="k">return</span> <span class="n">options</span>
 
 
@@ -447,7 +456,10 @@
     <span class="nd">@classmethod</span>
 <div class="viewcode-block" id="OutputMagic.backend"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.ipython.html#holoviews.ipython.magics.OutputMagic.backend">[docs]</a>    <span class="k">def</span> <span class="nf">backend</span><span class="p">(</span><span class="n">cls</span><span class="p">):</span>
         <span class="s">&quot;Convenience method as the backend is accessed frequently&quot;</span>
-        <span class="k">return</span> <span class="n">cls</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s">&#39;backend&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;:&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">backend</span> <span class="o">=</span>  <span class="n">cls</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s">&#39;backend&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;:&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">backend</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">Store</span><span class="o">.</span><span class="n">registry</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s">&quot;The </span><span class="si">%r</span><span class="s"> backend isn&#39;t registered and may not be available.&quot;</span> <span class="o">%</span> <span class="n">backend</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">backend</span>
 
 </div>
     <span class="nd">@classmethod</span>
@@ -495,7 +507,7 @@
 
 
     <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">_validate</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">options</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_validate</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span> <span class="n">linemagic</span><span class="p">):</span>
         <span class="s">&quot;Validation of edge cases and incompatible options&quot;</span>
         <span class="k">if</span> <span class="n">options</span><span class="p">[</span><span class="s">&#39;backend&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;d3&#39;</span><span class="p">,</span> <span class="s">&#39;nbagg&#39;</span><span class="p">]:</span>
             <span class="n">backend</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">_backend_aliases</span><span class="p">[</span><span class="n">options</span><span class="p">[</span><span class="s">&#39;backend&#39;</span><span class="p">]]</span>
@@ -509,6 +521,20 @@
             <span class="n">outputwarning</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s">&quot;The widget mode must be set to &#39;live&#39; for matplotlib:nbagg.&quot;</span>
                                   <span class="s">&quot;</span><span class="se">\n</span><span class="s">Switching widget mode to &#39;live&#39;.&quot;</span><span class="p">)</span>
             <span class="n">options</span><span class="p">[</span><span class="s">&#39;widgets&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;live&#39;</span>
+        <span class="k">if</span> <span class="n">options</span><span class="p">[</span><span class="s">&#39;backend&#39;</span><span class="p">]</span><span class="o">==</span><span class="s">&#39;bokeh&#39;</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="kn">import</span> <span class="nn">bokeh</span>
+                <span class="kn">import</span> <span class="nn">bokeh.io</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">cls</span><span class="o">.</span><span class="n">bokeh_loaded</span><span class="p">:</span>
+                    <span class="n">outputwarning</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s">&quot;Some elements and plot options are &quot;</span>
+                                          <span class="s">&quot;not supported by Bokeh library and backend.&quot;</span><span class="p">)</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s">&quot;Could not import one of bokeh, pandas or scipy.&quot;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">cls</span><span class="o">.</span><span class="n">bokeh_loaded</span><span class="p">:</span>
+                <span class="n">bokeh</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">load_notebook</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">linemagic</span><span class="p">:</span>
+                    <span class="n">cls</span><span class="o">.</span><span class="n">bokeh_loaded</span> <span class="o">=</span> <span class="bp">True</span>
         <span class="k">return</span> <span class="n">options</span>
 
 
@@ -527,7 +553,7 @@
             <span class="k">if</span> <span class="n">OutputMagic</span><span class="o">.</span><span class="n">last_backend</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
                 <span class="n">options</span><span class="p">[</span><span class="s">&#39;fig&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span>
 
-            <span class="n">new_options</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_options</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span>
+            <span class="n">new_options</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_options</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span> <span class="n">cell</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">)</span>
             <span class="n">switched_options</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">switch_backend</span><span class="p">(</span><span class="n">new_options</span><span class="p">)</span>
             <span class="n">OutputMagic</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="n">switched_options</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
@@ -538,7 +564,8 @@
         <span class="k">if</span> <span class="n">cell</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">shell</span><span class="o">.</span><span class="n">run_cell</span><span class="p">(</span><span class="n">cell</span><span class="p">,</span> <span class="n">store_history</span><span class="o">=</span><span class="n">STORE_HISTORY</span><span class="p">)</span>
             <span class="n">OutputMagic</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="n">restore_copy</span>
-            <span class="n">Store</span><span class="o">.</span><span class="n">current_backend</span> <span class="o">=</span> <span class="n">restore_copy</span><span class="p">[</span><span class="s">&#39;backend&#39;</span><span class="p">]</span>
+            <span class="n">backend</span> <span class="o">=</span> <span class="n">restore_copy</span><span class="p">[</span><span class="s">&#39;backend&#39;</span><span class="p">]</span>
+            <span class="n">Store</span><span class="o">.</span><span class="n">current_backend</span> <span class="o">=</span> <span class="n">backend</span> <span class="k">if</span> <span class="p">(</span><span class="s">&#39;:&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">backend</span><span class="p">)</span> <span class="k">else</span> <span class="n">backend</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;:&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 
 </div>
 <span class="nd">@magics_class</span>
@@ -596,15 +623,15 @@
     <span class="nd">@classmethod</span>
 <div class="viewcode-block" id="OptsCompleter.setup_completer"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.ipython.html#holoviews.ipython.magics.OptsCompleter.setup_completer">[docs]</a>    <span class="k">def</span> <span class="nf">setup_completer</span><span class="p">(</span><span class="n">cls</span><span class="p">):</span>
         <span class="s">&quot;Get the dictionary of valid completions&quot;</span>
-        <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">Store</span><span class="o">.</span><span class="n">options</span><span class="p">()</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-            <span class="k">try</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">Store</span><span class="o">.</span><span class="n">options</span><span class="p">()</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
                 <span class="n">options</span> <span class="o">=</span> <span class="n">Store</span><span class="o">.</span><span class="n">options</span><span class="p">()[</span><span class="s">&#39;.&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">element</span><span class="p">)]</span>
                 <span class="n">plotkws</span> <span class="o">=</span> <span class="n">options</span><span class="p">[</span><span class="s">&#39;plot&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">allowed_keywords</span>
                 <span class="n">stylekws</span> <span class="o">=</span> <span class="n">options</span><span class="p">[</span><span class="s">&#39;style&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">allowed_keywords</span>
                 <span class="n">dotted</span> <span class="o">=</span> <span class="s">&#39;.&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
                 <span class="n">cls</span><span class="o">.</span><span class="n">_completions</span><span class="p">[</span><span class="n">dotted</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">plotkws</span><span class="p">,</span> <span class="n">stylekws</span> <span class="k">if</span> <span class="n">stylekws</span> <span class="k">else</span> <span class="p">[])</span>
-            <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-                <span class="k">pass</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="k">pass</span>
         <span class="k">return</span> <span class="n">cls</span><span class="o">.</span><span class="n">_completions</span>
 </div>
     <span class="nd">@classmethod</span>
@@ -798,12 +825,11 @@
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">elapsed_time</span><span class="p">():</span>
-        <span class="n">elapsed</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span>  <span class="n">TimerMagic</span><span class="o">.</span><span class="n">start_time</span>
-        <span class="n">minutes</span> <span class="o">=</span> <span class="n">elapsed</span> <span class="o">//</span> <span class="mi">60</span>
+        <span class="n">seconds</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span>  <span class="n">TimerMagic</span><span class="o">.</span><span class="n">start_time</span>
+        <span class="n">minutes</span> <span class="o">=</span> <span class="n">seconds</span> <span class="o">//</span> <span class="mi">60</span>
         <span class="n">hours</span> <span class="o">=</span> <span class="n">minutes</span> <span class="o">//</span> <span class="mi">60</span>
-        <span class="n">seconds</span> <span class="o">=</span> <span class="n">elapsed</span> <span class="o">%</span> <span class="mi">60</span>
-        <span class="k">return</span> <span class="s">&quot;Timer elapsed: </span><span class="si">%02d</span><span class="s">:</span><span class="si">%02d</span><span class="s">:</span><span class="si">%02d</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">hours</span><span class="p">,</span> <span class="n">minutes</span><span class="p">,</span> <span class="n">seconds</span><span class="p">)</span>
-
+        <span class="k">return</span> <span class="s">&quot;Timer elapsed: </span><span class="si">%02d</span><span class="s">:</span><span class="si">%02d</span><span class="s">:</span><span class="si">%02d</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">hours</span><span class="p">,</span> <span class="n">minutes</span> <span class="o">%</span> <span class="mi">60</span><span class="p">,</span> <span class="n">seconds</span> <span class="o">%</span> <span class="mi">60</span><span class="p">)</span>
+                                    
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">option_completer</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">):</span>
         <span class="k">return</span> <span class="p">[</span><span class="s">&#39;start&#39;</span><span class="p">]</span>

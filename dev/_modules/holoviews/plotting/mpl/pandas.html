@@ -192,12 +192,12 @@
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">view</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">DFrameViewPlot</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">map</span><span class="o">.</span><span class="n">last</span><span class="o">.</span><span class="n">plot_type</span> <span class="ow">and</span> <span class="s">&#39;plot_type&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">plot_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">map</span><span class="o">.</span><span class="n">last</span><span class="o">.</span><span class="n">plot_type</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hmap</span><span class="o">.</span><span class="n">last</span><span class="o">.</span><span class="n">plot_type</span> <span class="ow">and</span> <span class="s">&#39;plot_type&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">plot_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hmap</span><span class="o">.</span><span class="n">last</span><span class="o">.</span><span class="n">plot_type</span>
 
 
     <span class="k">def</span> <span class="nf">initialize_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ranges</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-        <span class="n">dfview</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">map</span><span class="o">.</span><span class="n">last</span>
+        <span class="n">dfview</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hmap</span><span class="o">.</span><span class="n">last</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_validate</span><span class="p">(</span><span class="n">dfview</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_update_plot</span><span class="p">(</span><span class="n">dfview</span><span class="p">)</span>
@@ -222,7 +222,7 @@
         <span class="k">return</span> <span class="n">style</span>
 
 
-    <span class="k">def</span> <span class="nf">_axis_labels</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">view</span><span class="p">,</span> <span class="n">subplots</span><span class="p">,</span> <span class="n">xlabel</span><span class="p">,</span> <span class="n">ylabel</span><span class="p">,</span> <span class="n">zlabel</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_axis_labels</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">view</span><span class="p">,</span> <span class="n">subplots</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">zlabel</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">view</span><span class="o">.</span><span class="n">x</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">xlabel</span><span class="p">:</span>
             <span class="n">xlabel</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">view</span><span class="o">.</span><span class="n">get_dimension</span><span class="p">(</span><span class="n">view</span><span class="o">.</span><span class="n">x</span><span class="p">))</span>
         <span class="k">if</span> <span class="n">view</span><span class="o">.</span><span class="n">x2</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">ylabel</span><span class="p">:</span>

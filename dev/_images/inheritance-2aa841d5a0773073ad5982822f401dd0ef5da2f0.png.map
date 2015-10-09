@@ -1,0 +1,10 @@
+<map id="inheritance888ece81a0" name="inheritance888ece81a0">
+<area shape="rect" id="node1" href="#holoviews.core.dimension.Dimensioned" title="Dimensioned is a base class that allows the data contents of a" alt="" coords="320,15,458,28"/>
+<area shape="rect" id="node4" href="#holoviews.core.ndmapping.MultiDimensionalMapping" title="An MultiDimensionalMapping is a Dimensioned mapping (like a" alt="" coords="482,15,663,28"/>
+<area shape="rect" id="node2" href="#holoviews.core.dimension.LabelledData" title="LabelledData is a mix&#45;in class designed to introduce the group and" alt="" coords="157,15,295,28"/>
+<area shape="rect" id="node3" title="params(name=String)" alt="" coords="3,15,133,28"/>
+<area shape="rect" id="node5" href="#holoviews.core.ndmapping.NdMapping" title="NdMapping supports the same indexing semantics as" alt="" coords="687,15,822,28"/>
+<area shape="rect" id="node6" href="#holoviews.core.ndmapping.UniformNdMapping" title="A UniformNdMapping is a map of Dimensioned objects and is itself" alt="" coords="846,15,1007,28"/>
+<area shape="rect" id="node7" href="#holoviews.core.spaces.GridSpace" title="Grids are distinct from Layouts as they ensure all contained" alt="" coords="1031,2,1149,15"/>
+<area shape="rect" id="node8" href="#holoviews.core.spaces.HoloMap" title="A HoloMap can hold any number of DataLayers indexed by a list of" alt="" coords="1034,27,1147,40"/>
+</map>

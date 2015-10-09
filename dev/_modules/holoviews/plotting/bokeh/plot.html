@@ -1,0 +1,672 @@
+
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>holoviews.plotting.bokeh.plot &mdash; HoloViews</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../../../_static/bootstrap.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../../../../_static/codehilite.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../../../../_static/custom.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../../../../_static/rtd_bootstrap.css" type="text/css" />
+  
+        <link rel="author" title="About these documents"
+              href="../../../../about.html"/>
+    <link rel="top" title="HoloViews" href="../../../../index.html"/>
+        <link rel="up" title="holoviews.plotting" href="../../plotting.html"/>
+    <script type="text/javascript" src='../../../../_static/jquery.js'></script>
+    <script type="text/javascript" src='../../../../_static/underscore.js'></script>
+    <script type="text/javascript" src='../../../../_static/doctools.js'></script>
+    <script type="text/javascript" src='../../../../_static/require.js'></script>
+    <script type="text/javascript" src='../../../../_static/bootstrap.js'></script>
+    <script type="text/javascript" src='../../../../_static/custom.js'></script>
+    <script type="text/javascript" src='../../../../_static/js/theme.js'></script>
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+
+        
+          <img src="../../../../_static/holoviews_logo.png" class="logo" />
+        
+
+        <a href="../../../../index.html" class="fa"> HoloViews</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../index.html">Home</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../features.html">Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Tutorials/index.html">Tutorials</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Examples/index.html">Examples</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Reference_Manual/index.html">Reference Manual</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Reference_Manual/holoviews.core.html">core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Reference_Manual/holoviews.element.html">element</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Reference_Manual/holoviews.interface.html">interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Reference_Manual/holoviews.ipython.html">ipython</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Reference_Manual/holoviews.operation.html">operation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Reference_Manual/holoviews.plotting.html">plotting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../FAQ.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference external" href="http://github.com/ioam/holoviews">Github source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../about.html">About</a><ul class="simple">
+</ul>
+</li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../../index.html">HoloViews</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="main">
+            
+  <h1>Source code for holoviews.plotting.bokeh.plot</h1><div class="highlight"><pre>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+<span class="kn">import</span> <span class="nn">param</span>
+
+<span class="kn">from</span> <span class="nn">bokeh.io</span> <span class="kn">import</span> <span class="n">gridplot</span><span class="p">,</span> <span class="n">vplot</span><span class="p">,</span> <span class="n">hplot</span>
+<span class="kn">from</span> <span class="nn">bokeh.models</span> <span class="kn">import</span> <span class="n">ColumnDataSource</span>
+<span class="kn">from</span> <span class="nn">bokeh.models.widgets</span> <span class="kn">import</span> <span class="n">Panel</span><span class="p">,</span> <span class="n">Tabs</span>
+
+<span class="kn">from</span> <span class="nn">...core</span> <span class="kn">import</span> <span class="n">OrderedDict</span><span class="p">,</span> <span class="n">CompositeOverlay</span><span class="p">,</span> <span class="n">Element</span>
+<span class="kn">from</span> <span class="nn">...core</span> <span class="kn">import</span> <span class="n">Store</span><span class="p">,</span> <span class="n">Layout</span><span class="p">,</span> <span class="n">AdjointLayout</span><span class="p">,</span> <span class="n">NdLayout</span><span class="p">,</span> <span class="n">Empty</span><span class="p">,</span> <span class="n">GridSpace</span><span class="p">,</span> <span class="n">HoloMap</span>
+<span class="kn">from</span> <span class="nn">...core.options</span> <span class="kn">import</span> <span class="n">Compositor</span>
+<span class="kn">from</span> <span class="nn">...core</span> <span class="kn">import</span> <span class="n">traversal</span>
+<span class="kn">from</span> <span class="nn">...core.util</span> <span class="kn">import</span> <span class="nb">basestring</span>
+<span class="kn">from</span> <span class="nn">..plot</span> <span class="kn">import</span> <span class="n">Plot</span><span class="p">,</span> <span class="n">GenericCompositePlot</span><span class="p">,</span> <span class="n">GenericLayoutPlot</span>
+<span class="kn">from</span> <span class="nn">.renderer</span> <span class="kn">import</span> <span class="n">BokehRenderer</span>
+<span class="kn">from</span> <span class="nn">.util</span> <span class="kn">import</span> <span class="n">layout_padding</span>
+
+<div class="viewcode-block" id="BokehPlot"><a class="viewcode-back" href="../../../../Reference_Manual/holoviews.plotting.bokeh.html#holoviews.plotting.bokeh.plot.BokehPlot">[docs]</a><span class="k">class</span> <span class="nc">BokehPlot</span><span class="p">(</span><span class="n">Plot</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Plotting baseclass for the Bokeh backends, implementing the basic</span>
+<span class="sd">    plotting interface for Bokeh based plots.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">width</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">Integer</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">        Width of the plot in pixels&quot;&quot;&quot;</span><span class="p">)</span>
+
+    <span class="n">height</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">Integer</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">        Height of the plot in pixels&quot;&quot;&quot;</span><span class="p">)</span>
+
+    <span class="n">renderer</span> <span class="o">=</span> <span class="n">BokehRenderer</span>
+
+<div class="viewcode-block" id="BokehPlot.get_data"><a class="viewcode-back" href="../../../../Reference_Manual/holoviews.plotting.bokeh.html#holoviews.plotting.bokeh.plot.BokehPlot.get_data">[docs]</a>    <span class="k">def</span> <span class="nf">get_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">,</span> <span class="n">ranges</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the data from an element in the appropriate format for</span>
+<span class="sd">        initializing or updating a ColumnDataSource and a dictionary</span>
+<span class="sd">        which maps the expected keywords arguments of a glyph to</span>
+<span class="sd">        the column in the datasource.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+</div>
+    <span class="k">def</span> <span class="nf">_init_datasource</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initializes a data source to be passed into the bokeh glyph.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">ColumnDataSource</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+
+
+    <span class="k">def</span> <span class="nf">_update_datasource</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Update datasource with data for a new frame.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">source</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+
+    <span class="nd">@property</span>
+<div class="viewcode-block" id="BokehPlot.state"><a class="viewcode-back" href="../../../../Reference_Manual/holoviews.plotting.bokeh.html#holoviews.plotting.bokeh.plot.BokehPlot.state">[docs]</a>    <span class="k">def</span> <span class="nf">state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The plotting state that gets updated via the update method and</span>
+<span class="sd">        used by the renderer to generate output.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">[</span><span class="s">&#39;plot&#39;</span><span class="p">]</span>
+
+</div>
+    <span class="k">def</span> <span class="nf">_fontsize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">&#39;fontsize&#39;</span><span class="p">,</span> <span class="n">common</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Converts integer fontsizes to a string specifying</span>
+<span class="sd">        fontsize in pt.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">size</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">BokehPlot</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">_fontsize</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">common</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="nb">basestring</span><span class="p">)</span> <span class="k">else</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">pt&#39;</span> <span class="o">%</span> <span class="n">v</span>
+                <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">size</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+
+
+</div>
+<div class="viewcode-block" id="GridPlot"><a class="viewcode-back" href="../../../../Reference_Manual/holoviews.plotting.bokeh.html#holoviews.plotting.bokeh.plot.GridPlot">[docs]</a><span class="k">class</span> <span class="nc">GridPlot</span><span class="p">(</span><span class="n">BokehPlot</span><span class="p">,</span> <span class="n">GenericCompositePlot</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Plot a group of elements in a grid layout based on a GridSpace element</span>
+<span class="sd">    object.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">layout</span><span class="p">,</span> <span class="n">ranges</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">keys</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">dimensions</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+                 <span class="n">layout_num</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">layout</span><span class="p">,</span> <span class="n">GridSpace</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s">&quot;GridPlot only accepts GridSpace.&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">layout</span> <span class="o">=</span> <span class="n">layout</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rows</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cols</span> <span class="o">=</span> <span class="n">layout</span><span class="o">.</span><span class="n">shape</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">layout_num</span> <span class="o">=</span> <span class="n">layout_num</span>
+        <span class="n">extra_opts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lookup_options</span><span class="p">(</span><span class="n">layout</span><span class="p">,</span> <span class="s">&#39;plot&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">options</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">keys</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">dimensions</span><span class="p">:</span>
+            <span class="n">dimensions</span><span class="p">,</span> <span class="n">keys</span> <span class="o">=</span> <span class="n">traversal</span><span class="o">.</span><span class="n">unique_dimkeys</span><span class="p">(</span><span class="n">layout</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s">&#39;uniform&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span>
+            <span class="n">params</span><span class="p">[</span><span class="s">&#39;uniform&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">traversal</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">layout</span><span class="p">)</span>
+
+        <span class="nb">super</span><span class="p">(</span><span class="n">GridPlot</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">keys</span><span class="o">=</span><span class="n">keys</span><span class="p">,</span> <span class="n">dimensions</span><span class="o">=</span><span class="n">dimensions</span><span class="p">,</span>
+                                       <span class="o">**</span><span class="nb">dict</span><span class="p">(</span><span class="n">extra_opts</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">subplots</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">layout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_subplots</span><span class="p">(</span><span class="n">layout</span><span class="p">,</span> <span class="n">ranges</span><span class="p">)</span>
+
+
+    <span class="k">def</span> <span class="nf">_create_subplots</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">layout</span><span class="p">,</span> <span class="n">ranges</span><span class="p">):</span>
+        <span class="n">layout</span> <span class="o">=</span> <span class="n">layout</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">Compositor</span><span class="o">.</span><span class="n">collapse_element</span><span class="p">,</span> <span class="p">[</span><span class="n">CompositeOverlay</span><span class="p">],</span>
+                            <span class="n">clone</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+        <span class="n">subplots</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+        <span class="n">frame_ranges</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_ranges</span><span class="p">(</span><span class="n">layout</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="n">ranges</span><span class="p">)</span>
+        <span class="n">frame_ranges</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">([(</span><span class="n">key</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_ranges</span><span class="p">(</span><span class="n">layout</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">frame_ranges</span><span class="p">))</span>
+                                    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">])</span>
+        <span class="n">collapsed_layout</span> <span class="o">=</span> <span class="n">layout</span><span class="o">.</span><span class="n">clone</span><span class="p">(</span><span class="n">shared_data</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">layout</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">coord</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">layout</span><span class="o">.</span><span class="n">keys</span><span class="p">(</span><span class="n">full_grid</span><span class="o">=</span><span class="bp">True</span><span class="p">)):</span>
+            <span class="n">r</span> <span class="o">=</span> <span class="n">i</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">cols</span>
+            <span class="n">c</span> <span class="o">=</span> <span class="n">i</span> <span class="o">//</span> <span class="bp">self</span><span class="o">.</span><span class="n">cols</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">coord</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span> <span class="n">coord</span> <span class="o">=</span> <span class="p">(</span><span class="n">coord</span><span class="p">,)</span>
+            <span class="n">view</span> <span class="o">=</span> <span class="n">layout</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">coord</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+            <span class="c"># Create subplot</span>
+            <span class="k">if</span> <span class="n">view</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">vtype</span> <span class="o">=</span> <span class="n">view</span><span class="o">.</span><span class="n">type</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">HoloMap</span><span class="p">)</span> <span class="k">else</span> <span class="n">view</span><span class="o">.</span><span class="n">__class__</span>
+                <span class="n">opts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lookup_options</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="s">&#39;plot&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">options</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">vtype</span> <span class="o">=</span> <span class="bp">None</span>
+
+            <span class="c"># Create axes</span>
+            <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">if</span> <span class="n">c</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">r</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;xaxis&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;left-bare&#39;</span>
+                <span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;width&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">175</span>
+            <span class="k">if</span> <span class="n">c</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">r</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">layout</span><span class="o">.</span><span class="n">ndims</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;yaxis&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;bottom-bare&#39;</span>
+                <span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;height&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">175</span>
+            <span class="k">if</span> <span class="n">c</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">r</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;width&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">175</span>
+                <span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;height&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">175</span>
+            <span class="k">if</span> <span class="n">r</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">c</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;xaxis&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;left-bare&#39;</span>
+                <span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;yaxis&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;bottom-bare&#39;</span>
+
+            <span class="k">if</span> <span class="s">&#39;width&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+                <span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;width&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">125</span>
+            <span class="k">if</span> <span class="s">&#39;height&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+                <span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;height&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">125</span>
+
+            <span class="c"># Create subplot</span>
+            <span class="n">plotting_class</span> <span class="o">=</span> <span class="n">Store</span><span class="o">.</span><span class="n">registry</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">renderer</span><span class="o">.</span><span class="n">backend</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">vtype</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">plotting_class</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">view</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s">&quot;Bokeh plotting class for </span><span class="si">%s</span><span class="s"> type not found, &quot;</span>
+                                 <span class="s">&quot;object will not be rendered.&quot;</span> <span class="o">%</span> <span class="n">vtype</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">subplot</span> <span class="o">=</span> <span class="n">plotting_class</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">dimensions</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dimensions</span><span class="p">,</span>
+                                         <span class="n">show_title</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">subplot</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                                         <span class="n">ranges</span><span class="o">=</span><span class="n">frame_ranges</span><span class="p">,</span> <span class="n">uniform</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">uniform</span><span class="p">,</span>
+                                         <span class="n">keys</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">,</span> <span class="o">**</span><span class="nb">dict</span><span class="p">(</span><span class="n">opts</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+                <span class="n">collapsed_layout</span><span class="p">[</span><span class="n">coord</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">subplot</span><span class="o">.</span><span class="n">layout</span>
+                                           <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">subplot</span><span class="p">,</span> <span class="n">GenericCompositePlot</span><span class="p">)</span>
+                                           <span class="k">else</span> <span class="n">subplot</span><span class="o">.</span><span class="n">hmap</span><span class="p">)</span>
+                <span class="n">subplots</span><span class="p">[</span><span class="n">coord</span><span class="p">]</span> <span class="o">=</span> <span class="n">subplot</span>
+        <span class="k">return</span> <span class="n">subplots</span><span class="p">,</span> <span class="n">collapsed_layout</span>
+
+
+    <span class="k">def</span> <span class="nf">initialize_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ranges</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">plots</span><span class="o">=</span><span class="p">[]):</span>
+        <span class="n">ranges</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_ranges</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">layout</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="n">plots</span> <span class="o">=</span> <span class="p">[[]</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cols</span><span class="p">)]</span>
+        <span class="n">passed_plots</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">plots</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">coord</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">keys</span><span class="p">(</span><span class="n">full_grid</span><span class="o">=</span><span class="bp">True</span><span class="p">)):</span>
+            <span class="n">r</span> <span class="o">=</span> <span class="n">i</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">cols</span>
+            <span class="n">subplot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">subplots</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">coord</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">subplot</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">plot</span> <span class="o">=</span> <span class="n">subplot</span><span class="o">.</span><span class="n">initialize_plot</span><span class="p">(</span><span class="n">ranges</span><span class="o">=</span><span class="n">ranges</span><span class="p">,</span> <span class="n">plots</span><span class="o">=</span><span class="n">passed_plots</span><span class="p">)</span>
+                <span class="n">plots</span><span class="p">[</span><span class="n">r</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">plot</span><span class="p">)</span>
+                <span class="n">passed_plots</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">plots</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">plots</span><span class="p">[</span><span class="n">r</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
+                <span class="n">passed_plots</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">[</span><span class="s">&#39;plot&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">gridplot</span><span class="p">(</span><span class="n">plots</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">[</span><span class="s">&#39;plots&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">plots</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">drawn</span> <span class="o">=</span> <span class="bp">True</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">[</span><span class="s">&#39;plot&#39;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="GridPlot.update_frame"><a class="viewcode-back" href="../../../../Reference_Manual/holoviews.plotting.bokeh.html#holoviews.plotting.bokeh.plot.GridPlot.update_frame">[docs]</a>    <span class="k">def</span> <span class="nf">update_frame</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">ranges</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Update the internal state of the Plot to represent the given</span>
+<span class="sd">        key tuple (where integers represent frames). Returns this</span>
+<span class="sd">        state.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ranges</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_ranges</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">layout</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">ranges</span><span class="p">)</span>
+        <span class="n">plots</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">[</span><span class="s">&#39;plots&#39;</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">coord</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">keys</span><span class="p">(</span><span class="n">full_grid</span><span class="o">=</span><span class="bp">True</span><span class="p">)):</span>
+            <span class="n">r</span> <span class="o">=</span> <span class="n">i</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">cols</span>
+            <span class="n">c</span> <span class="o">=</span> <span class="n">i</span> <span class="o">//</span> <span class="bp">self</span><span class="o">.</span><span class="n">cols</span>
+            <span class="n">subplot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">subplots</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">coord</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">subplot</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">subplot</span><span class="o">.</span><span class="n">update_frame</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">ranges</span><span class="p">)</span>
+
+
+</div></div>
+<span class="k">class</span> <span class="nc">LayoutPlot</span><span class="p">(</span><span class="n">BokehPlot</span><span class="p">,</span> <span class="n">GenericLayoutPlot</span><span class="p">):</span>
+
+    <span class="n">shared_axes</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">Boolean</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">        Whether axes should be shared across plots&quot;&quot;&quot;</span><span class="p">)</span>
+
+    <span class="n">tabs</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">Boolean</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">        Whether to display overlaid plots in separate panes&quot;&quot;&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">layout</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">LayoutPlot</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">layout</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">layout</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">subplots</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">paths</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_init_layout</span><span class="p">(</span><span class="n">layout</span><span class="p">)</span>
+
+
+    <span class="k">def</span> <span class="nf">_init_layout</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">layout</span><span class="p">):</span>
+        <span class="c"># Situate all the Layouts in the grid and compute the gridspec</span>
+        <span class="c"># indices for all the axes required by each LayoutPlot.</span>
+        <span class="n">gidx</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">layout_count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">collapsed_layout</span> <span class="o">=</span> <span class="n">layout</span><span class="o">.</span><span class="n">clone</span><span class="p">(</span><span class="n">shared_data</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">layout</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+        <span class="n">frame_ranges</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_ranges</span><span class="p">(</span><span class="n">layout</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="n">frame_ranges</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">([(</span><span class="n">key</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_ranges</span><span class="p">(</span><span class="n">layout</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">frame_ranges</span><span class="p">))</span>
+                                    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">])</span>
+        <span class="n">layout_items</span> <span class="o">=</span> <span class="n">layout</span><span class="o">.</span><span class="n">grid_items</span><span class="p">()</span>
+        <span class="n">layout_dimensions</span> <span class="o">=</span> <span class="n">layout</span><span class="o">.</span><span class="n">kdims</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">layout</span><span class="p">,</span> <span class="n">NdLayout</span><span class="p">)</span> <span class="k">else</span> <span class="bp">None</span>
+        <span class="n">layout_subplots</span><span class="p">,</span> <span class="n">layouts</span><span class="p">,</span> <span class="n">paths</span> <span class="o">=</span> <span class="p">{},</span> <span class="p">{},</span> <span class="p">{}</span>
+        <span class="n">inserts_cols</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">r</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">coords</span><span class="p">:</span>
+            <span class="c"># Get view at layout position and wrap in AdjointLayout</span>
+            <span class="n">key</span><span class="p">,</span> <span class="n">view</span> <span class="o">=</span> <span class="n">layout_items</span><span class="o">.</span><span class="n">get</span><span class="p">((</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">),</span> <span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">))</span>
+            <span class="n">view</span> <span class="o">=</span> <span class="n">view</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">AdjointLayout</span><span class="p">)</span> <span class="k">else</span> <span class="n">AdjointLayout</span><span class="p">([</span><span class="n">view</span><span class="p">])</span>
+            <span class="n">layouts</span><span class="p">[(</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">)]</span> <span class="o">=</span> <span class="n">view</span>
+            <span class="n">paths</span><span class="p">[</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">key</span>
+
+            <span class="c"># Compute the layout type from shape</span>
+            <span class="n">layout_lens</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span><span class="s">&#39;Single&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span><span class="s">&#39;Dual&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="s">&#39;Triple&#39;</span><span class="p">}</span>
+            <span class="n">layout_type</span> <span class="o">=</span> <span class="n">layout_lens</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">view</span><span class="p">),</span> <span class="s">&#39;Single&#39;</span><span class="p">)</span>
+
+            <span class="c"># Get the AdjoinLayout at the specified coordinate</span>
+            <span class="n">positions</span> <span class="o">=</span> <span class="n">AdjointLayoutPlot</span><span class="o">.</span><span class="n">layout_dict</span><span class="p">[</span><span class="n">layout_type</span><span class="p">][</span><span class="s">&#39;positions&#39;</span><span class="p">]</span>
+
+            <span class="c"># Create temporary subplots to get projections types</span>
+            <span class="c"># to create the correct subaxes for all plots in the layout</span>
+            <span class="n">layout_key</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">layout_items</span><span class="o">.</span><span class="n">get</span><span class="p">((</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">),</span> <span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">))</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">layout</span><span class="p">,</span> <span class="n">NdLayout</span><span class="p">)</span> <span class="ow">and</span> <span class="n">layout_key</span><span class="p">:</span>
+                <span class="n">layout_dimensions</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">layout_dimensions</span><span class="p">,</span> <span class="n">layout_key</span><span class="p">))</span>
+
+            <span class="c"># Generate the axes and create the subplots with the appropriate</span>
+            <span class="c"># axis objects, handling any Empty objects.</span>
+            <span class="n">obj</span> <span class="o">=</span> <span class="n">layouts</span><span class="p">[(</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">)]</span>
+            <span class="n">empty</span> <span class="o">=</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">main</span><span class="p">,</span> <span class="n">Empty</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">empty</span><span class="p">:</span>
+                <span class="n">obj</span> <span class="o">=</span> <span class="n">AdjointLayout</span><span class="p">([])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">layout_count</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">subplot_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_subplots</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">positions</span><span class="p">,</span>
+                                                 <span class="n">layout_dimensions</span><span class="p">,</span> <span class="n">frame_ranges</span><span class="p">,</span>
+                                                 <span class="n">num</span><span class="o">=</span><span class="mi">0</span> <span class="k">if</span> <span class="n">empty</span> <span class="k">else</span> <span class="n">layout_count</span><span class="p">)</span>
+            <span class="n">subplots</span><span class="p">,</span> <span class="n">adjoint_layout</span> <span class="o">=</span> <span class="n">subplot_data</span>
+
+            <span class="c"># Generate the AdjointLayoutsPlot which will coordinate</span>
+            <span class="c"># plotting of AdjointLayouts in the larger grid</span>
+            <span class="n">plotopts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lookup_options</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="s">&#39;plot&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">options</span>
+            <span class="n">layout_plot</span> <span class="o">=</span> <span class="n">AdjointLayoutPlot</span><span class="p">(</span><span class="n">adjoint_layout</span><span class="p">,</span> <span class="n">layout_type</span><span class="p">,</span> <span class="n">subplots</span><span class="p">,</span> <span class="o">**</span><span class="n">plotopts</span><span class="p">)</span>
+            <span class="n">layout_subplots</span><span class="p">[(</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">)]</span> <span class="o">=</span> <span class="n">layout_plot</span>
+            <span class="k">if</span> <span class="n">layout_key</span><span class="p">:</span>
+                <span class="n">collapsed_layout</span><span class="p">[</span><span class="n">layout_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">adjoint_layout</span>
+        <span class="k">return</span> <span class="n">collapsed_layout</span><span class="p">,</span> <span class="n">layout_subplots</span><span class="p">,</span> <span class="n">paths</span>
+
+
+    <span class="k">def</span> <span class="nf">_create_subplots</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">layout</span><span class="p">,</span> <span class="n">positions</span><span class="p">,</span> <span class="n">layout_dimensions</span><span class="p">,</span> <span class="n">ranges</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Plot all the views contained in the AdjointLayout Object using axes</span>
+<span class="sd">        appropriate to the layout configuration. All the axes are</span>
+<span class="sd">        supplied by LayoutPlot - the purpose of the call is to</span>
+<span class="sd">        invoke subplots with correct options and styles and hide any</span>
+<span class="sd">        empty axes as necessary.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">subplots</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">projections</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">adjoint_clone</span> <span class="o">=</span> <span class="n">layout</span><span class="o">.</span><span class="n">clone</span><span class="p">(</span><span class="n">shared_data</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">layout</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+        <span class="n">subplot_opts</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">adjoined</span><span class="o">=</span><span class="n">layout</span><span class="p">)</span>
+        <span class="n">main</span><span class="p">,</span> <span class="n">main_plot</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span>
+        <span class="k">for</span> <span class="n">pos</span> <span class="ow">in</span> <span class="n">positions</span><span class="p">:</span>
+            <span class="c"># Pos will be one of &#39;main&#39;, &#39;top&#39; or &#39;right&#39; or None</span>
+            <span class="n">element</span> <span class="o">=</span> <span class="n">layout</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">element</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="k">continue</span>
+
+            <span class="c"># Options common for any subplot</span>
+            <span class="n">vtype</span> <span class="o">=</span> <span class="n">element</span><span class="o">.</span><span class="n">type</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">HoloMap</span><span class="p">)</span> <span class="k">else</span> <span class="n">element</span><span class="o">.</span><span class="n">__class__</span>
+            <span class="n">plot_type</span> <span class="o">=</span> <span class="n">Store</span><span class="o">.</span><span class="n">registry</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">renderer</span><span class="o">.</span><span class="n">backend</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">vtype</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+            <span class="n">plotopts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lookup_options</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="s">&#39;plot&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">options</span>
+            <span class="n">side_opts</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">if</span> <span class="n">pos</span> <span class="o">!=</span> <span class="s">&#39;main&#39;</span><span class="p">:</span>
+                <span class="n">plot_type</span> <span class="o">=</span> <span class="n">AdjointLayoutPlot</span><span class="o">.</span><span class="n">registry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">vtype</span><span class="p">,</span> <span class="n">plot_type</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">pos</span> <span class="o">==</span> <span class="s">&#39;right&#39;</span><span class="p">:</span>
+                    <span class="n">side_opts</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">height</span><span class="o">=</span><span class="n">main_plot</span><span class="o">.</span><span class="n">height</span><span class="p">,</span> <span class="n">yaxis</span><span class="o">=</span><span class="s">&#39;right&#39;</span><span class="p">,</span>
+                                     <span class="n">invert_axes</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">120</span><span class="p">,</span> <span class="n">show_labels</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;y&#39;</span><span class="p">],</span>
+                                     <span class="n">xticks</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">show_title</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">side_opts</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="n">main_plot</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="n">xaxis</span><span class="o">=</span><span class="s">&#39;top&#39;</span><span class="p">,</span>
+                                     <span class="n">height</span><span class="o">=</span><span class="mi">120</span><span class="p">,</span> <span class="n">show_labels</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;x&#39;</span><span class="p">],</span> <span class="n">yticks</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                                     <span class="n">show_title</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+            <span class="c"># Override the plotopts as required</span>
+            <span class="c"># Customize plotopts depending on position.</span>
+            <span class="n">plotopts</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">side_opts</span><span class="p">,</span> <span class="o">**</span><span class="n">plotopts</span><span class="p">)</span>
+            <span class="n">plotopts</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">subplot_opts</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">plot_type</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s">&quot;Bokeh plotting class for </span><span class="si">%s</span><span class="s"> type not found, object will &quot;</span>
+                             <span class="s">&quot;not be rendered.&quot;</span> <span class="o">%</span> <span class="n">vtype</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
+                <span class="k">continue</span>
+            <span class="k">if</span> <span class="n">plot_type</span> <span class="ow">in</span> <span class="p">[</span><span class="n">GridPlot</span><span class="p">,</span> <span class="n">LayoutPlot</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">tabs</span> <span class="o">=</span> <span class="bp">True</span>
+            <span class="n">num</span> <span class="o">=</span> <span class="n">num</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">coords</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span>
+            <span class="n">subplot</span> <span class="o">=</span> <span class="n">plot_type</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">keys</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">,</span>
+                                <span class="n">dimensions</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dimensions</span><span class="p">,</span>
+                                <span class="n">layout_dimensions</span><span class="o">=</span><span class="n">layout_dimensions</span><span class="p">,</span>
+                                <span class="n">ranges</span><span class="o">=</span><span class="n">ranges</span><span class="p">,</span> <span class="n">subplot</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                                <span class="n">uniform</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">uniform</span><span class="p">,</span> <span class="n">layout_num</span><span class="o">=</span><span class="n">num</span><span class="p">,</span>
+                                <span class="o">**</span><span class="n">plotopts</span><span class="p">)</span>
+            <span class="n">subplots</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span> <span class="o">=</span> <span class="n">subplot</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">plot_type</span><span class="p">,</span> <span class="nb">type</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">plot_type</span><span class="p">,</span> <span class="n">GenericCompositePlot</span><span class="p">):</span>
+                <span class="n">adjoint_clone</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span> <span class="o">=</span> <span class="n">subplots</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span><span class="o">.</span><span class="n">layout</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">adjoint_clone</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span> <span class="o">=</span> <span class="n">subplots</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span><span class="o">.</span><span class="n">hmap</span>
+            <span class="k">if</span> <span class="n">pos</span> <span class="o">==</span> <span class="s">&#39;main&#39;</span><span class="p">:</span>
+                <span class="n">main</span> <span class="o">=</span> <span class="n">element</span>
+                <span class="n">main_plot</span> <span class="o">=</span> <span class="n">subplot</span>
+
+        <span class="k">return</span> <span class="n">subplots</span><span class="p">,</span> <span class="n">adjoint_clone</span>
+
+
+    <span class="k">def</span> <span class="nf">initialize_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ranges</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="n">ranges</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_ranges</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">layout</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="n">plots</span> <span class="o">=</span> <span class="p">[[]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rows</span><span class="p">)]</span>
+        <span class="n">passed_plots</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">tab_titles</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">insert_rows</span><span class="p">,</span> <span class="n">insert_cols</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+        <span class="n">adjoined</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="k">for</span> <span class="n">r</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">coords</span><span class="p">:</span>
+            <span class="n">subplot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">subplots</span><span class="o">.</span><span class="n">get</span><span class="p">((</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">),</span> <span class="bp">None</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">subplot</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">shared_plots</span> <span class="o">=</span> <span class="n">passed_plots</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">shared_axes</span> <span class="k">else</span> <span class="bp">None</span>
+                <span class="n">subplots</span> <span class="o">=</span> <span class="n">subplot</span><span class="o">.</span><span class="n">initialize_plot</span><span class="p">(</span><span class="n">ranges</span><span class="o">=</span><span class="n">ranges</span><span class="p">,</span> <span class="n">plots</span><span class="o">=</span><span class="n">shared_plots</span><span class="p">)</span>
+
+                <span class="c"># Computes plotting offsets depending on</span>
+                <span class="c"># number of adjoined plots</span>
+                <span class="n">offset</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">r</span> <span class="o">&gt;=</span> <span class="n">ir</span> <span class="k">for</span> <span class="n">ir</span> <span class="ow">in</span> <span class="n">insert_rows</span><span class="p">)</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">subplots</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+                    <span class="n">adjoined</span> <span class="o">=</span> <span class="bp">True</span>
+                    <span class="c"># Add pad column in this position</span>
+                    <span class="n">insert_cols</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">r</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">insert_rows</span><span class="p">:</span>
+                        <span class="c"># Insert and pad marginal row if none exists</span>
+                        <span class="n">plots</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">r</span><span class="o">+</span><span class="n">offset</span><span class="p">,</span> <span class="p">[</span><span class="bp">None</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">plots</span><span class="p">[</span><span class="n">r</span><span class="p">]))])</span>
+                        <span class="c"># Pad previous rows</span>
+                        <span class="k">for</span> <span class="n">ir</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
+                            <span class="n">plots</span><span class="p">[</span><span class="n">ir</span><span class="p">]</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">c</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+                        <span class="c"># Add to row offset</span>
+                        <span class="n">insert_rows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+                        <span class="n">offset</span> <span class="o">+=</span> <span class="mi">1</span>
+                    <span class="c"># Add top marginal</span>
+                    <span class="n">plots</span><span class="p">[</span><span class="n">r</span><span class="o">+</span><span class="n">offset</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="p">[</span><span class="n">subplots</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="bp">None</span><span class="p">]</span>
+                <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">subplots</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">adjoined</span> <span class="o">=</span> <span class="bp">True</span>
+                    <span class="c"># Add pad column in this position</span>
+                    <span class="n">insert_cols</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+                    <span class="c"># Pad previous rows</span>
+                    <span class="k">for</span> <span class="n">ir</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
+                        <span class="n">plots</span><span class="p">[</span><span class="n">r</span><span class="p">]</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">c</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+                    <span class="c"># Pad top marginal if one exists</span>
+                    <span class="k">if</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">insert_rows</span><span class="p">:</span>
+                        <span class="n">plots</span><span class="p">[</span><span class="n">r</span><span class="o">+</span><span class="n">offset</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">2</span><span class="o">*</span><span class="p">[</span><span class="bp">None</span><span class="p">]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="c"># Pad top marginal if one exists</span>
+                    <span class="k">if</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">insert_rows</span><span class="p">:</span>
+                        <span class="n">plots</span><span class="p">[</span><span class="n">r</span><span class="o">+</span><span class="n">offset</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="p">[</span><span class="bp">None</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="p">(</span><span class="n">c</span> <span class="ow">in</span> <span class="n">insert_cols</span><span class="p">))</span>
+                <span class="n">plots</span><span class="p">[</span><span class="n">r</span><span class="o">+</span><span class="n">offset</span><span class="p">]</span> <span class="o">+=</span> <span class="n">subplots</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">subplots</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">insert_cols</span><span class="p">:</span>
+                    <span class="n">plots</span><span class="p">[</span><span class="n">r</span><span class="o">+</span><span class="n">offset</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
+                <span class="n">passed_plots</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">subplots</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tabs</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">layout</span><span class="p">,</span> <span class="n">Layout</span><span class="p">):</span>
+                    <span class="n">tab_titles</span><span class="p">[</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">paths</span><span class="p">[</span><span class="n">r</span><span class="p">,</span><span class="n">c</span><span class="p">])</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">dim_vals</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">kdims</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">paths</span><span class="p">[</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">])</span>
+                    <span class="n">tab_titles</span><span class="p">[</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">d</span><span class="o">.</span><span class="n">pprint_value_string</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+                                                  <span class="k">for</span> <span class="n">d</span><span class="p">,</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">dim_vals</span><span class="p">])</span>
+
+        <span class="c"># Replace None types with empty plots</span>
+        <span class="c"># to avoid bokeh bug</span>
+        <span class="k">if</span> <span class="n">adjoined</span><span class="p">:</span>
+            <span class="n">plots</span> <span class="o">=</span> <span class="n">layout_padding</span><span class="p">(</span><span class="n">plots</span><span class="p">)</span>
+
+        <span class="c"># Determine the most appropriate composite plot type</span>
+        <span class="c"># If the object cannot be displayed in a single layout</span>
+        <span class="c"># it will be split into Tabs, for 1-row or 1-column</span>
+        <span class="c"># Layouts we use the vplot and hplots.</span>
+        <span class="c"># If there is a table and multiple rows and columns</span>
+        <span class="c"># everything will be forced to a vertical layout</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tabs</span><span class="p">:</span>
+            <span class="n">panels</span> <span class="o">=</span> <span class="p">[</span><span class="n">Panel</span><span class="p">(</span><span class="n">child</span><span class="o">=</span><span class="n">child</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="n">tab_titles</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">))</span>
+                      <span class="k">for</span> <span class="n">r</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">plots</span><span class="p">)</span>
+                      <span class="k">for</span> <span class="n">c</span><span class="p">,</span> <span class="n">child</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+                      <span class="k">if</span> <span class="n">child</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">]</span>
+            <span class="n">layout_plot</span> <span class="o">=</span> <span class="n">Tabs</span><span class="p">(</span><span class="n">tabs</span><span class="o">=</span><span class="n">panels</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">plots</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">adjoined</span><span class="p">:</span>
+            <span class="n">layout_plot</span> <span class="o">=</span> <span class="n">vplot</span><span class="p">(</span><span class="n">hplot</span><span class="p">(</span><span class="o">*</span><span class="n">plots</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">plots</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">layout_plot</span> <span class="o">=</span> <span class="n">vplot</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">plots</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">layout_plot</span> <span class="o">=</span> <span class="n">gridplot</span><span class="p">(</span><span class="n">plots</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">[</span><span class="s">&#39;plot&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">layout_plot</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">[</span><span class="s">&#39;plots&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">plots</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">drawn</span> <span class="o">=</span> <span class="bp">True</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">[</span><span class="s">&#39;plot&#39;</span><span class="p">]</span>
+
+
+    <span class="k">def</span> <span class="nf">update_frame</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">ranges</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Update the internal state of the Plot to represent the given</span>
+<span class="sd">        key tuple (where integers represent frames). Returns this</span>
+<span class="sd">        state.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ranges</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_ranges</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">layout</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">ranges</span><span class="p">)</span>
+        <span class="n">plots</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">[</span><span class="s">&#39;plots&#39;</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">r</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">coords</span><span class="p">:</span>
+            <span class="n">subplot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">subplots</span><span class="o">.</span><span class="n">get</span><span class="p">((</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">),</span> <span class="bp">None</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">subplot</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">subplot</span><span class="o">.</span><span class="n">update_frame</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">ranges</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">AdjointLayoutPlot</span><span class="p">(</span><span class="n">BokehPlot</span><span class="p">,</span> <span class="n">GenericCompositePlot</span><span class="p">):</span>
+
+    <span class="n">layout_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;Single&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;positions&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;main&#39;</span><span class="p">]},</span>
+                   <span class="s">&#39;Dual&#39;</span><span class="p">:</span>   <span class="p">{</span><span class="s">&#39;positions&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;main&#39;</span><span class="p">,</span> <span class="s">&#39;right&#39;</span><span class="p">]},</span>
+                   <span class="s">&#39;Triple&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;positions&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;main&#39;</span><span class="p">,</span> <span class="s">&#39;right&#39;</span><span class="p">,</span> <span class="s">&#39;top&#39;</span><span class="p">]}}</span>
+
+    <span class="n">registry</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">layout</span><span class="p">,</span> <span class="n">layout_type</span><span class="p">,</span> <span class="n">subplots</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
+        <span class="c"># The AdjointLayout ViewableElement object</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">layout</span> <span class="o">=</span> <span class="n">layout</span>
+        <span class="c"># Type may be set to &#39;Embedded Dual&#39; by a call it grid_situate</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">layout_type</span> <span class="o">=</span> <span class="n">layout_type</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">view_positions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">layout_dict</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">layout_type</span><span class="p">][</span><span class="s">&#39;positions&#39;</span><span class="p">]</span>
+
+        <span class="c"># The supplied (axes, view) objects as indexed by position</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">AdjointLayoutPlot</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">subplots</span><span class="o">=</span><span class="n">subplots</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
+
+
+    <span class="k">def</span> <span class="nf">initialize_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ranges</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">plots</span><span class="o">=</span><span class="p">[]):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Plot all the views contained in the AdjointLayout Object using axes</span>
+<span class="sd">        appropriate to the layout configuration. All the axes are</span>
+<span class="sd">        supplied by LayoutPlot - the purpose of the call is to</span>
+<span class="sd">        invoke subplots with correct options and styles and hide any</span>
+<span class="sd">        empty axes as necessary.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">adjoined_plots</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">pos</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;main&#39;</span><span class="p">,</span> <span class="s">&#39;right&#39;</span><span class="p">,</span> <span class="s">&#39;top&#39;</span><span class="p">]:</span>
+            <span class="c"># Pos will be one of &#39;main&#39;, &#39;top&#39; or &#39;right&#39; or None</span>
+            <span class="n">subplot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">subplots</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+            <span class="c"># If no view object or empty position, disable the axis</span>
+            <span class="k">if</span> <span class="n">subplot</span><span class="p">:</span>
+                <span class="n">adjoined_plots</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">subplot</span><span class="o">.</span><span class="n">initialize_plot</span><span class="p">(</span><span class="n">ranges</span><span class="o">=</span><span class="n">ranges</span><span class="p">,</span> <span class="n">plots</span><span class="o">=</span><span class="n">plots</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">drawn</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">adjoined_plots</span><span class="p">:</span> <span class="n">adjoined_plots</span> <span class="o">=</span> <span class="p">[</span><span class="bp">None</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">adjoined_plots</span>
+
+
+    <span class="k">def</span> <span class="nf">update_frame</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">ranges</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="n">plot</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="k">for</span> <span class="n">pos</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;main&#39;</span><span class="p">,</span> <span class="s">&#39;right&#39;</span><span class="p">,</span> <span class="s">&#39;top&#39;</span><span class="p">]:</span>
+            <span class="n">subplot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">subplots</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">subplot</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">plot</span> <span class="o">=</span> <span class="n">subplot</span><span class="o">.</span><span class="n">update_frame</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">ranges</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">plot</span>
+</pre></div>
+
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015 IOAM: Jean-Luc R. Stevens, Philipp Rudiger, and James A. Bednar.
+    </p>
+  </div>
+
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-61554933-1', 'auto');
+  ga('send', 'pageview');
+
+  </script>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../',
+            VERSION:'1.3.2',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

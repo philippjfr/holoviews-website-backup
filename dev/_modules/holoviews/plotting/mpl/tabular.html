@@ -189,7 +189,7 @@
 
             <span class="c"># Mapping from the cell coordinates to the dictionary key.</span>
             <span class="n">summarize</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">rows</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_rows</span>
-            <span class="n">half_rows</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_rows</span><span class="o">/</span><span class="mi">2</span>
+            <span class="n">half_rows</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_rows</span><span class="o">//</span><span class="mi">2</span>
             <span class="n">rows</span> <span class="o">=</span> <span class="nb">min</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">max_rows</span><span class="p">,</span> <span class="n">frame</span><span class="o">.</span><span class="n">rows</span><span class="p">])</span>
             <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rows</span><span class="p">):</span>
                 <span class="n">adjusted_row</span> <span class="o">=</span> <span class="n">row</span>
@@ -227,7 +227,7 @@
 
 </div>
     <span class="k">def</span> <span class="nf">initialize_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ranges</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-        <span class="n">element</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">map</span><span class="o">.</span><span class="n">last</span>
+        <span class="n">element</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hmap</span><span class="o">.</span><span class="n">last</span>
         <span class="n">axis</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">[</span><span class="s">&#39;axis&#39;</span><span class="p">]</span>
 
         <span class="n">axis</span><span class="o">.</span><span class="n">set_axis_off</span><span class="p">()</span>
@@ -256,13 +256,13 @@
         <span class="n">table</span><span class="o">.</span><span class="n">auto_set_font_size</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
         <span class="n">axis</span><span class="o">.</span><span class="n">add_table</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">[</span><span class="s">&#39;table&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">table</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">[</span><span class="s">&#39;artist&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">table</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_finalize_axis</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 
 
     <span class="k">def</span> <span class="nf">update_handles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">axis</span><span class="p">,</span> <span class="n">view</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">ranges</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-        <span class="n">table</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">[</span><span class="s">&#39;table&#39;</span><span class="p">]</span>
+        <span class="n">table</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">[</span><span class="s">&#39;artist&#39;</span><span class="p">]</span>
 
         <span class="k">for</span> <span class="n">coords</span><span class="p">,</span> <span class="n">cell</span> <span class="ow">in</span> <span class="n">table</span><span class="o">.</span><span class="n">get_celld</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cell_values</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="n">coords</span><span class="p">]</span>

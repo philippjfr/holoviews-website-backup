@@ -136,10 +136,9 @@
 
 
 <span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">ticker</span>
 <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">rc_params_from_file</span>
 
-<span class="kn">from</span> <span class="nn">...core</span> <span class="kn">import</span> <span class="n">Dimension</span><span class="p">,</span> <span class="n">Layout</span><span class="p">,</span> <span class="n">GridSpace</span><span class="p">,</span> <span class="n">AdjointLayout</span><span class="p">,</span> <span class="n">NdOverlay</span>
+<span class="kn">from</span> <span class="nn">...core</span> <span class="kn">import</span> <span class="n">Layout</span><span class="p">,</span> <span class="n">NdOverlay</span><span class="p">,</span> <span class="n">Collator</span>
 <span class="kn">from</span> <span class="nn">...core.options</span> <span class="kn">import</span> <span class="n">Cycle</span><span class="p">,</span> <span class="n">Palette</span><span class="p">,</span> <span class="n">Options</span>
 <span class="kn">from</span> <span class="nn">...element</span> <span class="kn">import</span> <span class="o">*</span> <span class="c"># pyflakes:ignore (API import)</span>
 <span class="kn">from</span> <span class="nn">..plot</span> <span class="kn">import</span> <span class="n">PlotSelector</span>
@@ -180,12 +179,6 @@
 
 <span class="n">styles</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;default&#39;</span><span class="p">:</span> <span class="s">&#39;./default.mplstyle&#39;</span><span class="p">}</span></div>
 <span class="n">set_style</span><span class="p">(</span><span class="s">&#39;default&#39;</span><span class="p">)</span>
-
-
-<span class="c"># Upgrade Dimension formatters to matplotlib</span>
-<span class="n">wrapped_formatters</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">fn</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span> <span class="n">ticker</span><span class="o">.</span><span class="n">Formatter</span><span class="p">)</span> <span class="k">else</span> <span class="n">ticker</span><span class="o">.</span><span class="n">FuncFormatter</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>
-                      <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">fn</span> <span class="ow">in</span> <span class="n">Dimension</span><span class="o">.</span><span class="n">type_formatters</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
-<span class="n">Dimension</span><span class="o">.</span><span class="n">type_formatters</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">wrapped_formatters</span><span class="p">)</span>
 
 <span class="c"># Define matplotlib based style cycles and Palettes</span>
 <span class="n">Cycle</span><span class="o">.</span><span class="n">default_cycles</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s">&#39;default_colors&#39;</span><span class="p">:</span> <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s">&#39;axes.color_cycle&#39;</span><span class="p">]})</span>
@@ -234,13 +227,16 @@
 
                 <span class="c"># Chart 3D</span>
                 <span class="n">Surface</span><span class="p">:</span> <span class="n">SurfacePlot</span><span class="p">,</span>
+                <span class="n">Trisurface</span><span class="p">:</span> <span class="n">TrisurfacePlot</span><span class="p">,</span>
                 <span class="n">Scatter3D</span><span class="p">:</span> <span class="n">Scatter3DPlot</span><span class="p">,</span>
 
                 <span class="c"># Tabular plots</span>
                 <span class="n">ItemTable</span><span class="p">:</span> <span class="n">TablePlot</span><span class="p">,</span>
                 <span class="n">Table</span><span class="p">:</span> <span class="n">TablePlot</span><span class="p">,</span>
+                <span class="n">Collator</span><span class="p">:</span> <span class="n">TablePlot</span><span class="p">,</span>
 
                 <span class="c"># Raster plots</span>
+                <span class="n">QuadMesh</span><span class="p">:</span> <span class="n">QuadMeshPlot</span><span class="p">,</span>
                 <span class="n">Raster</span><span class="p">:</span> <span class="n">RasterPlot</span><span class="p">,</span>
                 <span class="n">HeatMap</span><span class="p">:</span> <span class="n">RasterPlot</span><span class="p">,</span>
                 <span class="n">Image</span><span class="p">:</span> <span class="n">RasterPlot</span><span class="p">,</span>
@@ -279,12 +275,13 @@
 <span class="n">options</span><span class="o">.</span><span class="n">Bars</span> <span class="o">=</span> <span class="n">Options</span><span class="p">(</span><span class="s">&#39;style&#39;</span><span class="p">,</span> <span class="n">ec</span><span class="o">=</span><span class="s">&#39;k&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">Cycle</span><span class="p">())</span>
 <span class="n">options</span><span class="o">.</span><span class="n">Histogram</span> <span class="o">=</span> <span class="n">Options</span><span class="p">(</span><span class="s">&#39;style&#39;</span><span class="p">,</span> <span class="n">ec</span><span class="o">=</span><span class="s">&#39;k&#39;</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="n">Cycle</span><span class="p">())</span>
 <span class="n">options</span><span class="o">.</span><span class="n">Points</span> <span class="o">=</span> <span class="n">Options</span><span class="p">(</span><span class="s">&#39;style&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">Cycle</span><span class="p">(),</span> <span class="n">marker</span><span class="o">=</span><span class="s">&#39;o&#39;</span><span class="p">)</span>
-<span class="n">options</span><span class="o">.</span><span class="n">Scatter3D</span> <span class="o">=</span> <span class="n">Options</span><span class="p">(</span><span class="s">&#39;style&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">Cycle</span><span class="p">(),</span> <span class="n">marker</span><span class="o">=</span><span class="s">&#39;o&#39;</span><span class="p">)</span>
+<span class="n">options</span><span class="o">.</span><span class="n">Scatter3D</span> <span class="o">=</span> <span class="n">Options</span><span class="p">(</span><span class="s">&#39;style&#39;</span><span class="p">,</span> <span class="n">facecolors</span><span class="o">=</span><span class="n">Cycle</span><span class="p">(),</span> <span class="n">marker</span><span class="o">=</span><span class="s">&#39;o&#39;</span><span class="p">)</span>
 <span class="n">options</span><span class="o">.</span><span class="n">Scatter3D</span> <span class="o">=</span> <span class="n">Options</span><span class="p">(</span><span class="s">&#39;plot&#39;</span><span class="p">,</span> <span class="n">fig_size</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>
 <span class="n">options</span><span class="o">.</span><span class="n">Surface</span> <span class="o">=</span> <span class="n">Options</span><span class="p">(</span><span class="s">&#39;plot&#39;</span><span class="p">,</span> <span class="n">fig_size</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>
 <span class="c"># Rasters</span>
 <span class="n">options</span><span class="o">.</span><span class="n">Image</span> <span class="o">=</span> <span class="n">Options</span><span class="p">(</span><span class="s">&#39;style&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s">&#39;hot&#39;</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s">&#39;nearest&#39;</span><span class="p">)</span>
 <span class="n">options</span><span class="o">.</span><span class="n">Raster</span> <span class="o">=</span> <span class="n">Options</span><span class="p">(</span><span class="s">&#39;style&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s">&#39;hot&#39;</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s">&#39;nearest&#39;</span><span class="p">)</span>
+<span class="n">options</span><span class="o">.</span><span class="n">QuadMesh</span> <span class="o">=</span> <span class="n">Options</span><span class="p">(</span><span class="s">&#39;style&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s">&#39;hot&#39;</span><span class="p">)</span>
 <span class="n">options</span><span class="o">.</span><span class="n">HeatMap</span> <span class="o">=</span> <span class="n">Options</span><span class="p">(</span><span class="s">&#39;style&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s">&#39;RdYlBu_r&#39;</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s">&#39;nearest&#39;</span><span class="p">)</span>
 <span class="n">options</span><span class="o">.</span><span class="n">HeatMap</span> <span class="o">=</span> <span class="n">Options</span><span class="p">(</span><span class="s">&#39;plot&#39;</span><span class="p">,</span> <span class="n">show_values</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">xticks</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">yticks</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
 <span class="n">options</span><span class="o">.</span><span class="n">RGB</span> <span class="o">=</span> <span class="n">Options</span><span class="p">(</span><span class="s">&#39;style&#39;</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s">&#39;nearest&#39;</span><span class="p">)</span>

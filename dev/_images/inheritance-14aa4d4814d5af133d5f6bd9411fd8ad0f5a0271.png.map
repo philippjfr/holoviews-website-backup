@@ -1,0 +1,11 @@
+<map id="inheritance077379fcb8" name="inheritance077379fcb8">
+<area shape="rect" id="node1" href="holoviews.core.html#holoviews.core.io.Archive" title="An Archive is a means to collect and store a collection of" alt="" coords="210,31,316,46"/>
+<area shape="rect" id="node3" href="holoviews.core.html#holoviews.core.io.FileArchive" title="A file archive stores files on disk, either unpacked in a" alt="" coords="410,31,527,46"/>
+<area shape="rect" id="node2" title="params(name=String)" alt="" coords="3,31,154,46"/>
+<area shape="rect" id="node4" href="#holoviews.ipython.archive.NotebookArchive" title="FileArchive that can automatically capture notebook data via the" alt="" coords="593,31,767,46"/>
+<area shape="rect" id="node5" href="#holoviews.ipython.archive.Substitute" title="An nbconvert preprocessor that substitutes one set of HTML data" alt="" coords="1000,3,1149,17"/>
+<area shape="rect" id="node6" title="A configurable preprocessor" alt="" coords="795,3,972,17"/>
+<area shape="rect" id="node7" title="Global configurable class for shared config" alt="" coords="606,3,754,17"/>
+<area shape="rect" id="node8" title="A parent class for Configurables that log." alt="" coords="373,3,565,17"/>
+<area shape="rect" id="node10" title="The base class for all classes that have traitlets." alt="" coords="24,3,133,17"/>
+</map>

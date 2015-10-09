@@ -1,0 +1,8 @@
+<map id="inheritanceb797483a5f" name="inheritanceb797483a5f">
+<area shape="rect" id="node6" href="#holoviews.plotting.mpl.path.PolygonPlot" title="PolygonPlot draws the polygon paths in the supplied Polygons" alt="" coords="1005,3,1149,16"/>
+<area shape="rect" id="node3" href="holoviews.plotting.html#holoviews.plotting.plot.GenericElementPlot" title="Plotting baseclass to render contents of an Element. Implements" alt="" coords="459,3,612,16"/>
+<area shape="rect" id="node4" href="#holoviews.plotting.mpl.plot.MPLPlot" title="An MPLPlot object draws a matplotlib figure object when called or" alt="" coords="471,29,600,42"/>
+<area shape="rect" id="node7" href="holoviews.plotting.html#holoviews.plotting.plot.DimensionedPlot" title="DimensionedPlot implements a number of useful methods" alt="" coords="289,16,433,30"/>
+<area shape="rect" id="node8" href="holoviews.plotting.html#holoviews.plotting.plot.Plot" title="Base class of all Plot classes in HoloViews, designed to be" alt="" coords="164,16,264,30"/>
+<area shape="rect" id="node9" title="params(name=String)" alt="" coords="3,16,138,30"/>
+</map>

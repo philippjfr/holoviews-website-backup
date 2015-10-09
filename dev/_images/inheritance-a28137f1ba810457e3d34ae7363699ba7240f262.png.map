@@ -1,0 +1,6 @@
+<map id="inheritance3f48bebc1c" name="inheritance3f48bebc1c">
+<area shape="rect" id="node3" href="holoviews.plotting.widgets.html#holoviews.plotting.widgets.ScrubberWidget" title="ScrubberWidget generates a basic animation widget with a slider" alt="" coords="530,4,778,25"/>
+<area shape="rect" id="node5" href="holoviews.plotting.widgets.html#holoviews.plotting.widgets.SelectionWidget" title="Javascript based widget to select and view ViewableElement objects" alt="" coords="530,88,778,109"/>
+<area shape="rect" id="node6" href="holoviews.plotting.widgets.html#holoviews.plotting.widgets.NdWidget" title="NdWidget is an abstract base class implementing a method to find" alt="" coords="265,46,478,67"/>
+<area shape="rect" id="node7" title="params(name=String)" alt="" coords="5,46,224,67"/>
+</map>

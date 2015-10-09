@@ -1,0 +1,16 @@
+<map id="inheritance48e2cb70e7" name="inheritance48e2cb70e7">
+<area shape="rect" id="node1" href="holoviews.core.html#holoviews.core.dimension.Dimensioned" title="Dimensioned is a base class that allows the data contents of a" alt="" coords="239,39,341,48"/>
+<area shape="rect" id="node4" href="holoviews.core.html#holoviews.core.dimension.ViewableElement" title="A ViewableElement is a dimensioned datastructure that may be" alt="" coords="360,39,472,48"/>
+<area shape="rect" id="node2" href="holoviews.core.html#holoviews.core.dimension.LabelledData" title="LabelledData is a mix&#45;in class designed to introduce the group and" alt="" coords="117,39,220,48"/>
+<area shape="rect" id="node3" title="params(name=String)" alt="" coords="2,39,99,48"/>
+<area shape="rect" id="node5" href="holoviews.core.html#holoviews.core.element.Element" title="Element is the baseclass for all ViewableElement types, with an x&#45; and" alt="" coords="490,20,576,30"/>
+<area shape="rect" id="node6" title="Composable is a mix&#45;in class to allow Dimensioned object to be" alt="" coords="370,2,461,11"/>
+<area shape="rect" id="node7" href="holoviews.core.html#holoviews.core.overlay.Overlayable" title="Overlayable provides a mix&#45;in class to support the" alt="" coords="370,20,461,30"/>
+<area shape="rect" id="node13" href="#holoviews.element.raster.Raster" title="Raster is a basic 2D element type for presenting numpy arrays as" alt="" coords="730,20,815,30"/>
+<area shape="rect" id="node9" href="holoviews.core.html#holoviews.core.sheetcoords.SheetCoordinateSystem" title="Provides methods to allow conversion between sheet and matrix" alt="" coords="705,2,840,11"/>
+<area shape="rect" id="node14" href="#holoviews.element.raster.Image" title="Image is the atomic unit as which 2D data is stored, along with" alt="" coords="864,2,948,11"/>
+<area shape="rect" id="node10" href="#holoviews.element.raster.HSV" title="Example of a commonly used color space subclassed from RGB used" alt="" coords="1070,2,1150,11"/>
+<area shape="rect" id="node11" href="#holoviews.element.raster.RGB" title="An RGB element is a Image containing channel data for the the" alt="" coords="972,2,1052,11"/>
+<area shape="rect" id="node12" href="#holoviews.element.raster.HeatMap" title="HeatMap is an atomic Element used to visualize two dimensional" alt="" coords="860,20,952,30"/>
+<area shape="rect" id="node15" href="#holoviews.element.raster.QuadMesh" title="QuadMesh is a Raster type to hold x&#45; and y&#45; bin values" alt="" coords="858,39,954,48"/>
+</map>

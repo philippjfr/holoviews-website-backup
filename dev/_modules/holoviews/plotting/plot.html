@@ -141,10 +141,11 @@
 
 <span class="kn">from</span> <span class="nn">..core</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
 <span class="kn">from</span> <span class="nn">..core</span> <span class="kn">import</span> <span class="n">util</span><span class="p">,</span> <span class="n">traversal</span>
-<span class="kn">from</span> <span class="nn">..core.element</span> <span class="kn">import</span> <span class="n">HoloMap</span><span class="p">,</span> <span class="n">Element</span>
+<span class="kn">from</span> <span class="nn">..core.element</span> <span class="kn">import</span> <span class="n">Element</span>
 <span class="kn">from</span> <span class="nn">..core.overlay</span> <span class="kn">import</span> <span class="n">Overlay</span><span class="p">,</span> <span class="n">CompositeOverlay</span>
 <span class="kn">from</span> <span class="nn">..core.layout</span> <span class="kn">import</span> <span class="n">Empty</span><span class="p">,</span> <span class="n">NdLayout</span><span class="p">,</span> <span class="n">Layout</span>
 <span class="kn">from</span> <span class="nn">..core.options</span> <span class="kn">import</span> <span class="n">Store</span><span class="p">,</span> <span class="n">Compositor</span>
+<span class="kn">from</span> <span class="nn">..core.spaces</span> <span class="kn">import</span> <span class="n">HoloMap</span>
 <span class="kn">from</span> <span class="nn">..element</span> <span class="kn">import</span> <span class="n">Table</span><span class="p">,</span> <span class="n">Annotation</span>
 
 
@@ -199,27 +200,27 @@
 <span class="sd">    function of the plotted object. Behaves like a Plot class and</span>
 <span class="sd">    presents the same parameterized interface.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">selector</span><span class="p">,</span> <span class="n">plot_classes</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">selector</span><span class="p">,</span> <span class="n">plot_classes</span><span class="p">,</span> <span class="n">allow_mismatch</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        The selector function accepts a component instance and returns</span>
 <span class="sd">        the appropriate key to index plot_classes dictionary.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">selector</span> <span class="o">=</span> <span class="n">selector</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">plot_classes</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">(</span><span class="n">plot_classes</span><span class="p">)</span>
-        <span class="n">interface</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_define_interface</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">plot_classes</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+        <span class="n">interface</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_define_interface</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">plot_classes</span><span class="o">.</span><span class="n">values</span><span class="p">(),</span> <span class="n">allow_mismatch</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">style_opts</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">plot_options</span> <span class="o">=</span> <span class="n">interface</span>
 
 
-    <span class="k">def</span> <span class="nf">_define_interface</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">plots</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_define_interface</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">plots</span><span class="p">,</span> <span class="n">allow_mismatch</span><span class="p">):</span>
         <span class="n">parameters</span> <span class="o">=</span> <span class="p">[{</span><span class="n">k</span><span class="p">:</span><span class="n">v</span><span class="o">.</span><span class="n">precedence</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">plot</span><span class="o">.</span><span class="n">params</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
                        <span class="k">if</span> <span class="p">((</span><span class="n">v</span><span class="o">.</span><span class="n">precedence</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">precedence</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">))}</span>
                       <span class="k">for</span> <span class="n">plot</span> <span class="ow">in</span> <span class="n">plots</span><span class="p">]</span>
         <span class="n">param_sets</span> <span class="o">=</span> <span class="p">[</span><span class="nb">set</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="k">for</span> <span class="n">params</span> <span class="ow">in</span> <span class="n">parameters</span><span class="p">]</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="n">pset</span> <span class="o">==</span> <span class="n">param_sets</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">pset</span> <span class="ow">in</span> <span class="n">param_sets</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">allow_mismatch</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="n">pset</span> <span class="o">==</span> <span class="n">param_sets</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">pset</span> <span class="ow">in</span> <span class="n">param_sets</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s">&quot;All selectable plot classes must have identical plot options.&quot;</span><span class="p">)</span>
         <span class="n">styles</span><span class="o">=</span> <span class="p">[</span><span class="n">plot</span><span class="o">.</span><span class="n">style_opts</span> <span class="k">for</span> <span class="n">plot</span> <span class="ow">in</span> <span class="n">plots</span><span class="p">]</span>
 
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="n">style</span> <span class="o">==</span> <span class="n">styles</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">style</span> <span class="ow">in</span> <span class="n">styles</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">allow_mismatch</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="n">style</span> <span class="o">==</span> <span class="n">styles</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">style</span> <span class="ow">in</span> <span class="n">styles</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s">&quot;All selectable plot classes must have identical style options.&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">styles</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
@@ -251,6 +252,14 @@
 <span class="sd">    dimension values.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
+    <span class="n">fontsize</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">Parameter</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">allow_None</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>  <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">       Specifies various fontsizes of the displayed text.</span>
+
+<span class="s">       Finer control is available by supplying a dictionary where any</span>
+<span class="s">       unmentioned keys reverts to the default sizes, e.g:</span>
+
+<span class="s">          {&#39;ticks&#39;:20, &#39;title&#39;:15, &#39;ylabel&#39;:5, &#39;xlabel&#39;:5}&quot;&quot;&quot;</span><span class="p">)</span>
+
     <span class="n">show_title</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">Boolean</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
 <span class="s">        Whether to display the plot title.&quot;&quot;&quot;</span><span class="p">)</span>
 
@@ -277,6 +286,12 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">uniform</span> <span class="o">=</span> <span class="n">uniform</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">drawn</span> <span class="o">=</span> <span class="bp">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">handles</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">group</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_frame</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_key</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">params</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+                  <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">()}</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">DimensionedPlot</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">params</span><span class="p">)</span>
 
 
@@ -299,7 +314,7 @@
         <span class="k">pass</span>
 
 
-    <span class="k">def</span> <span class="nf">_frame_title</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">group_size</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_frame_title</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">group_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">separator</span><span class="o">=</span><span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the formatted dimension group strings</span>
 <span class="sd">        for a particular frame.</span>
@@ -315,7 +330,21 @@
                             <span class="nb">zip</span><span class="p">(</span><span class="n">dimensions</span><span class="p">,</span> <span class="n">key</span><span class="p">)]</span>
         <span class="n">groups</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dimension_labels</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="n">group_size</span><span class="p">:(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">group_size</span><span class="p">])</span>
                   <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dimension_labels</span><span class="p">))]</span>
-        <span class="k">return</span> <span class="n">util</span><span class="o">.</span><span class="n">safe_unicode</span><span class="p">(</span><span class="s">&#39;</span><span class="se">\n</span><span class="s"> &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">g</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">groups</span> <span class="k">if</span> <span class="n">g</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">util</span><span class="o">.</span><span class="n">safe_unicode</span><span class="p">(</span><span class="n">separator</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">g</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">groups</span> <span class="k">if</span> <span class="n">g</span><span class="p">))</span>
+
+
+    <span class="k">def</span> <span class="nf">_fontsize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">&#39;fontsize&#39;</span><span class="p">,</span> <span class="n">common</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        To be used as kwargs e.g: **self._fontsize(&#39;title&#39;)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">fontsize</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{}</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fontsize</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">fontsize</span><span class="p">:</span>
+                <span class="k">return</span> <span class="p">{}</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="p">{</span><span class="n">label</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">fontsize</span><span class="p">[</span><span class="n">key</span><span class="p">]}</span>
+        <span class="k">return</span> <span class="p">{</span><span class="n">label</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">fontsize</span><span class="p">}</span> <span class="k">if</span> <span class="n">common</span> <span class="k">else</span> <span class="p">{}</span>
 
 
 <div class="viewcode-block" id="DimensionedPlot.compute_ranges"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.plotting.html#holoviews.plotting.plot.DimensionedPlot.compute_ranges">[docs]</a>    <span class="k">def</span> <span class="nf">compute_ranges</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">ranges</span><span class="p">):</span>
@@ -462,21 +491,30 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">cyclic_index</span> <span class="o">=</span> <span class="n">cyclic_index</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">overlaid</span> <span class="o">=</span> <span class="n">overlaid</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">HoloMap</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">map</span> <span class="o">=</span> <span class="n">HoloMap</span><span class="p">(</span><span class="n">initial_items</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">element</span><span class="p">),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">hmap</span> <span class="o">=</span> <span class="n">HoloMap</span><span class="p">(</span><span class="n">initial_items</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">element</span><span class="p">),</span>
                                <span class="n">kdims</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;Frame&#39;</span><span class="p">],</span> <span class="nb">id</span><span class="o">=</span><span class="n">element</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">map</span> <span class="o">=</span> <span class="n">element</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">style</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lookup_options</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">map</span><span class="o">.</span><span class="n">last</span><span class="p">,</span> <span class="s">&#39;style&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="n">style</span> <span class="ow">is</span> <span class="bp">None</span> <span class="k">else</span> <span class="n">style</span>
-        <span class="n">dimensions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">map</span><span class="o">.</span><span class="n">kdims</span> <span class="k">if</span> <span class="n">dimensions</span> <span class="ow">is</span> <span class="bp">None</span> <span class="k">else</span> <span class="n">dimensions</span>
-        <span class="n">keys</span> <span class="o">=</span> <span class="n">keys</span> <span class="k">if</span> <span class="n">keys</span> <span class="k">else</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">map</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
-        <span class="n">plot_opts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lookup_options</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">map</span><span class="o">.</span><span class="n">last</span><span class="p">,</span> <span class="s">&#39;plot&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">options</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">GenericElementPlot</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">keys</span><span class="o">=</span><span class="n">keys</span><span class="p">,</span> <span class="n">dimensions</span><span class="o">=</span><span class="n">dimensions</span><span class="p">,</span> <span class="o">**</span><span class="nb">dict</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="o">**</span><span class="n">plot_opts</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">hmap</span> <span class="o">=</span> <span class="n">element</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">style</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lookup_options</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hmap</span><span class="o">.</span><span class="n">last</span><span class="p">,</span> <span class="s">&#39;style&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="n">style</span> <span class="ow">is</span> <span class="bp">None</span> <span class="k">else</span> <span class="n">style</span>
+        <span class="n">dimensions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hmap</span><span class="o">.</span><span class="n">kdims</span> <span class="k">if</span> <span class="n">dimensions</span> <span class="ow">is</span> <span class="bp">None</span> <span class="k">else</span> <span class="n">dimensions</span>
+        <span class="n">keys</span> <span class="o">=</span> <span class="n">keys</span> <span class="k">if</span> <span class="n">keys</span> <span class="k">else</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hmap</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="n">plot_opts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lookup_options</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hmap</span><span class="o">.</span><span class="n">last</span><span class="p">,</span> <span class="s">&#39;plot&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">options</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">GenericElementPlot</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">keys</span><span class="o">=</span><span class="n">keys</span><span class="p">,</span> <span class="n">dimensions</span><span class="o">=</span><span class="n">dimensions</span><span class="p">,</span>
+                                                 <span class="o">**</span><span class="nb">dict</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="o">**</span><span class="n">plot_opts</span><span class="p">))</span>
 
 
     <span class="k">def</span> <span class="nf">_get_frame</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="n">key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hmap</span><span class="o">.</span><span class="n">keys</span><span class="p">()[</span><span class="nb">min</span><span class="p">([</span><span class="n">key</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hmap</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">])]</span>
+
+        <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_key</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_frame</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">current_key</span> <span class="o">=</span> <span class="n">key</span>
+
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">uniform</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span> <span class="n">key</span> <span class="o">=</span> <span class="p">(</span><span class="n">key</span><span class="p">,)</span>
-            <span class="n">kdims</span> <span class="o">=</span> <span class="p">[</span><span class="n">d</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">map</span><span class="o">.</span><span class="n">kdims</span><span class="p">]</span>
+            <span class="n">kdims</span> <span class="o">=</span> <span class="p">[</span><span class="n">d</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">hmap</span><span class="o">.</span><span class="n">kdims</span><span class="p">]</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dimensions</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
                 <span class="n">dimensions</span> <span class="o">=</span> <span class="n">kdims</span>
             <span class="k">else</span><span class="p">:</span>
@@ -486,15 +524,16 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">select</span> <span class="o">=</span> <span class="p">{</span><span class="n">d</span><span class="p">:</span> <span class="n">key</span><span class="p">[</span><span class="n">dimensions</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">d</span><span class="p">)]</span>
                           <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">kdims</span><span class="p">}</span>
-        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">map</span><span class="o">.</span><span class="n">values</span><span class="p">()[</span><span class="nb">min</span><span class="p">([</span><span class="n">key</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">map</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">])]</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">select</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">map</span><span class="o">.</span><span class="n">dimensions</span><span class="p">(</span><span class="s">&#39;key&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="bp">True</span><span class="p">),</span> <span class="n">key</span><span class="p">))</span>
+            <span class="n">select</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hmap</span><span class="o">.</span><span class="n">dimensions</span><span class="p">(</span><span class="s">&#39;key&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="bp">True</span><span class="p">),</span> <span class="n">key</span><span class="p">))</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">selection</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">map</span><span class="o">.</span><span class="n">select</span><span class="p">((</span><span class="n">HoloMap</span><span class="p">,),</span> <span class="o">**</span><span class="n">select</span><span class="p">)</span>
+            <span class="n">selection</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hmap</span><span class="o">.</span><span class="n">select</span><span class="p">((</span><span class="n">HoloMap</span><span class="p">,),</span> <span class="o">**</span><span class="n">select</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
             <span class="n">selection</span> <span class="o">=</span> <span class="bp">None</span>
-        <span class="k">return</span> <span class="n">selection</span><span class="o">.</span><span class="n">last</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">selection</span><span class="p">,</span> <span class="n">HoloMap</span><span class="p">)</span> <span class="k">else</span> <span class="n">selection</span>
+        <span class="n">selection</span> <span class="o">=</span> <span class="n">selection</span><span class="o">.</span><span class="n">last</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">selection</span><span class="p">,</span> <span class="n">HoloMap</span><span class="p">)</span> <span class="k">else</span> <span class="n">selection</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_frame</span> <span class="o">=</span> <span class="n">selection</span>
+
+        <span class="k">return</span> <span class="n">selection</span>
 
 
 <div class="viewcode-block" id="GenericElementPlot.get_extents"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.plotting.html#holoviews.plotting.plot.GenericElementPlot.get_extents">[docs]</a>    <span class="k">def</span> <span class="nf">get_extents</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">view</span><span class="p">,</span> <span class="n">ranges</span><span class="p">):</span>
@@ -527,7 +566,7 @@
             <span class="k">if</span> <span class="n">norm_opts</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;framewise&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">):</span>
                 <span class="n">extents</span> <span class="o">=</span> <span class="n">view</span><span class="o">.</span><span class="n">extents</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">extent_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">map</span><span class="o">.</span><span class="n">traverse</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">extents</span><span class="p">,</span> <span class="p">[</span><span class="n">Element</span><span class="p">])</span>
+                <span class="n">extent_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hmap</span><span class="o">.</span><span class="n">traverse</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">extents</span><span class="p">,</span> <span class="p">[</span><span class="n">Element</span><span class="p">])</span>
                 <span class="n">extents</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">max_extents</span><span class="p">(</span><span class="n">extent_list</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">projection</span> <span class="o">==</span> <span class="s">&#39;3d&#39;</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">extents</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">NaN</span><span class="p">,)</span> <span class="o">*</span> <span class="n">num</span>
@@ -535,11 +574,15 @@
                      <span class="n">l2</span> <span class="k">for</span> <span class="n">l1</span><span class="p">,</span> <span class="n">l2</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">range_extents</span><span class="p">,</span> <span class="n">extents</span><span class="p">))</span>
 
 </div>
-    <span class="k">def</span> <span class="nf">_axis_labels</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">view</span><span class="p">,</span> <span class="n">subplots</span><span class="p">,</span> <span class="n">xlabel</span><span class="p">,</span> <span class="n">ylabel</span><span class="p">,</span> <span class="n">zlabel</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_axis_labels</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">view</span><span class="p">,</span> <span class="n">subplots</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">zlabel</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="c"># Axis labels</span>
-        <span class="n">dims</span> <span class="o">=</span> <span class="n">view</span><span class="o">.</span><span class="n">dimensions</span><span class="p">()</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">CompositeOverlay</span><span class="p">):</span>
-            <span class="n">dims</span> <span class="o">=</span> <span class="n">dims</span><span class="p">[</span><span class="n">view</span><span class="o">.</span><span class="n">ndims</span><span class="p">:]</span>
+            <span class="n">bottom</span> <span class="o">=</span> <span class="n">view</span><span class="o">.</span><span class="n">values</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">dims</span> <span class="o">=</span> <span class="n">bottom</span><span class="o">.</span><span class="n">dimensions</span><span class="p">()</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">bottom</span><span class="p">,</span> <span class="n">CompositeOverlay</span><span class="p">):</span>
+                <span class="n">dims</span> <span class="o">=</span> <span class="n">dims</span><span class="p">[</span><span class="n">bottom</span><span class="o">.</span><span class="n">ndims</span><span class="p">:]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">dims</span> <span class="o">=</span> <span class="n">view</span><span class="o">.</span><span class="n">dimensions</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">dims</span> <span class="ow">and</span> <span class="n">xlabel</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="n">xlabel</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">safe_unicode</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">dims</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">dims</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">ylabel</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
@@ -549,7 +592,7 @@
         <span class="k">return</span> <span class="n">xlabel</span><span class="p">,</span> <span class="n">ylabel</span><span class="p">,</span> <span class="n">zlabel</span>
 
 
-    <span class="k">def</span> <span class="nf">_format_title</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_format_title</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">separator</span><span class="o">=</span><span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">):</span>
         <span class="n">frame</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_frame</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">frame</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span> <span class="k">return</span> <span class="bp">None</span>
         <span class="n">type_name</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span><span class="o">.</span><span class="n">__name__</span>
@@ -562,13 +605,13 @@
             <span class="n">title</span> <span class="o">=</span> <span class="n">title_format</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="n">util</span><span class="o">.</span><span class="n">safe_unicode</span><span class="p">(</span><span class="n">label</span><span class="p">),</span>
                                         <span class="n">group</span><span class="o">=</span><span class="n">util</span><span class="o">.</span><span class="n">safe_unicode</span><span class="p">(</span><span class="n">group</span><span class="p">),</span>
                                         <span class="nb">type</span><span class="o">=</span><span class="n">type_name</span><span class="p">)</span>
-        <span class="n">dim_title</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_frame_title</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">dim_title</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_frame_title</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">separator</span><span class="o">=</span><span class="n">separator</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">title</span> <span class="ow">or</span> <span class="n">title</span><span class="o">.</span><span class="n">isspace</span><span class="p">():</span>
             <span class="k">return</span> <span class="n">dim_title</span>
         <span class="k">elif</span> <span class="ow">not</span> <span class="n">dim_title</span> <span class="ow">or</span> <span class="n">dim_title</span><span class="o">.</span><span class="n">isspace</span><span class="p">():</span>
             <span class="k">return</span> <span class="n">title</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">title</span><span class="p">,</span> <span class="n">dim_title</span><span class="p">])</span>
+            <span class="k">return</span> <span class="n">separator</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">title</span><span class="p">,</span> <span class="n">dim_title</span><span class="p">])</span>
 
 
 <div class="viewcode-block" id="GenericElementPlot.update_frame"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.plotting.html#holoviews.plotting.plot.GenericElementPlot.update_frame">[docs]</a>    <span class="k">def</span> <span class="nf">update_frame</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">ranges</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
@@ -606,8 +649,8 @@
         <span class="nb">super</span><span class="p">(</span><span class="n">GenericOverlayPlot</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">overlay</span><span class="p">,</span> <span class="n">ranges</span><span class="o">=</span><span class="n">ranges</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
 
         <span class="c"># Apply data collapse</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">map</span> <span class="o">=</span> <span class="n">Compositor</span><span class="o">.</span><span class="n">collapse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">map</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s">&#39;data&#39;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">map</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apply_compositor</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">map</span><span class="p">,</span> <span class="n">ranges</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hmap</span> <span class="o">=</span> <span class="n">Compositor</span><span class="o">.</span><span class="n">collapse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hmap</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s">&#39;data&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hmap</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apply_compositor</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hmap</span><span class="p">,</span> <span class="n">ranges</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">subplots</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_subplots</span><span class="p">(</span><span class="n">ranges</span><span class="p">)</span>
 
 
@@ -638,18 +681,25 @@
         <span class="n">subplots</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
 
         <span class="n">length</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">style_grouping</span>
-        <span class="n">ordering</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">layer_sort</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">map</span><span class="p">)</span>
-        <span class="n">keys</span><span class="p">,</span> <span class="n">vmaps</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">map</span><span class="o">.</span><span class="n">split_overlays</span><span class="p">()</span>
+        <span class="n">ordering</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">layer_sort</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hmap</span><span class="p">)</span>
+        <span class="n">keys</span><span class="p">,</span> <span class="n">vmaps</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hmap</span><span class="o">.</span><span class="n">split_overlays</span><span class="p">()</span>
         <span class="n">group_fn</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">last</span><span class="o">.</span><span class="n">group</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">last</span><span class="o">.</span><span class="n">label</span><span class="p">)</span>
         <span class="n">map_lengths</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">()</span>
         <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">vmaps</span><span class="p">:</span>
             <span class="n">map_lengths</span><span class="p">[</span><span class="n">group_fn</span><span class="p">(</span><span class="n">m</span><span class="p">)[:</span><span class="n">length</span><span class="p">]]</span> <span class="o">+=</span> <span class="mi">1</span>
 
         <span class="n">zoffset</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="n">overlay_type</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">map</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">Overlay</span> <span class="k">else</span> <span class="mi">2</span>
+        <span class="n">overlay_type</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hmap</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">Overlay</span> <span class="k">else</span> <span class="mi">2</span>
         <span class="n">group_counter</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">()</span>
         <span class="k">for</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">vmap</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="n">vmaps</span><span class="p">):</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">map</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">Overlay</span><span class="p">:</span>
+            <span class="n">vtype</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">vmap</span><span class="o">.</span><span class="n">last</span><span class="p">)</span>
+            <span class="n">plottype</span> <span class="o">=</span> <span class="n">Store</span><span class="o">.</span><span class="n">registry</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">renderer</span><span class="o">.</span><span class="n">backend</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">vtype</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">plottype</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s">&quot;No plotting class for </span><span class="si">%s</span><span class="s"> type and </span><span class="si">%s</span><span class="s"> backend &quot;</span>
+                             <span class="s">&quot;found. &quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">vtype</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">renderer</span><span class="o">.</span><span class="n">backend</span><span class="p">))</span>
+                <span class="k">continue</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hmap</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">Overlay</span><span class="p">:</span>
                 <span class="n">style_key</span> <span class="o">=</span> <span class="p">(</span><span class="n">vmap</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">__name__</span><span class="p">,)</span> <span class="o">+</span> <span class="n">key</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span> <span class="n">key</span> <span class="o">=</span> <span class="p">(</span><span class="n">key</span><span class="p">,)</span>
@@ -666,24 +716,20 @@
                             <span class="n">show_title</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">show_title</span><span class="p">,</span> <span class="n">dimensions</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dimensions</span><span class="p">,</span>
                             <span class="n">uniform</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">uniform</span><span class="p">,</span> <span class="n">show_legend</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">show_legend</span><span class="p">,</span>
                             <span class="o">**</span><span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_passed_handles</span><span class="p">})</span>
-            <span class="n">plotype</span> <span class="o">=</span> <span class="n">Store</span><span class="o">.</span><span class="n">registry</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">renderer</span><span class="o">.</span><span class="n">backend</span><span class="p">][</span><span class="nb">type</span><span class="p">(</span><span class="n">vmap</span><span class="o">.</span><span class="n">last</span><span class="p">)]</span>
+
             <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span> <span class="n">key</span> <span class="o">=</span> <span class="p">(</span><span class="n">key</span><span class="p">,)</span>
-            <span class="n">subplots</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">plotype</span><span class="p">(</span><span class="n">vmap</span><span class="p">,</span> <span class="o">**</span><span class="n">plotopts</span><span class="p">)</span>
-            <span class="k">if</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">plotype</span><span class="p">,</span> <span class="n">GenericOverlayPlot</span><span class="p">):</span>
+            <span class="n">subplots</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">plottype</span><span class="p">(</span><span class="n">vmap</span><span class="p">,</span> <span class="o">**</span><span class="n">plotopts</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">plottype</span><span class="p">,</span> <span class="n">PlotSelector</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">plottype</span><span class="p">,</span> <span class="n">GenericOverlayPlot</span><span class="p">):</span>
                 <span class="n">zoffset</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">([</span><span class="n">k</span> <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">vmap</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">o</span><span class="o">.</span><span class="n">keys</span><span class="p">()]))</span> <span class="o">-</span> <span class="mi">1</span>
 
         <span class="k">return</span> <span class="n">subplots</span>
-
-
-    <span class="k">def</span> <span class="nf">_axis_labels</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">view</span><span class="p">,</span> <span class="n">subplots</span><span class="p">,</span> <span class="n">xlabel</span><span class="p">,</span> <span class="n">ylabel</span><span class="p">,</span> <span class="n">zlabel</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">xlabel</span><span class="p">,</span> <span class="n">ylabel</span><span class="p">,</span> <span class="n">zlabel</span>
 
 
     <span class="k">def</span> <span class="nf">get_extents</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">overlay</span><span class="p">,</span> <span class="n">ranges</span><span class="p">):</span>
         <span class="n">extents</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">subplot</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">subplots</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="n">layer</span> <span class="o">=</span> <span class="n">overlay</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">layer</span> <span class="ow">and</span> <span class="n">subplot</span><span class="o">.</span><span class="n">apply_ranges</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">layer</span><span class="p">,</span> <span class="n">Annotation</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">layer</span> <span class="ow">and</span> <span class="n">subplot</span><span class="o">.</span><span class="n">apply_ranges</span><span class="p">:</span>
                 <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">layer</span><span class="p">,</span> <span class="n">CompositeOverlay</span><span class="p">):</span>
                     <span class="n">sp_ranges</span> <span class="o">=</span> <span class="n">ranges</span>
                 <span class="k">else</span><span class="p">:</span>
@@ -692,7 +738,7 @@
         <span class="k">return</span> <span class="n">util</span><span class="o">.</span><span class="n">max_extents</span><span class="p">(</span><span class="n">extents</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">projection</span> <span class="o">==</span> <span class="s">&#39;3d&#39;</span><span class="p">)</span>
 
 
-    <span class="k">def</span> <span class="nf">_format_title</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_format_title</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">separator</span><span class="o">=</span><span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">):</span>
         <span class="n">frame</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_frame</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">frame</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span> <span class="k">return</span> <span class="bp">None</span>
 
@@ -712,7 +758,7 @@
         <span class="k">elif</span> <span class="ow">not</span> <span class="n">dim_title</span> <span class="ow">or</span> <span class="n">dim_title</span><span class="o">.</span><span class="n">isspace</span><span class="p">():</span>
             <span class="k">return</span> <span class="n">title</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">title</span><span class="p">,</span> <span class="n">dim_title</span><span class="p">])</span>
+            <span class="k">return</span> <span class="n">separator</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">title</span><span class="p">,</span> <span class="n">dim_title</span><span class="p">])</span>
 
 
 </div>
@@ -726,6 +772,11 @@
         <span class="n">layout_frame</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">clone</span><span class="p">(</span><span class="n">shared_data</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
         <span class="n">nthkey_fn</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">zip</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">x</span><span class="o">.</span><span class="n">kdims</span><span class="p">),</span>
                                   <span class="nb">list</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="nb">min</span><span class="p">([</span><span class="n">key</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">])])</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_key</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_frame</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">current_key</span> <span class="o">=</span> <span class="n">key</span>
+
         <span class="k">for</span> <span class="n">path</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">uniform</span><span class="p">:</span>
                 <span class="n">dim_keys</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">([</span><span class="n">d</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">dimensions</span>
@@ -740,6 +791,8 @@
                     <span class="n">layout_frame</span><span class="p">[</span><span class="n">path</span><span class="p">]</span> <span class="o">=</span> <span class="n">obj</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">layout_frame</span><span class="p">[</span><span class="n">path</span><span class="p">]</span> <span class="o">=</span> <span class="n">item</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_frame</span> <span class="o">=</span> <span class="n">layout_frame</span>
         <span class="k">return</span> <span class="n">layout_frame</span>
 
 
@@ -747,8 +800,8 @@
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">)</span>
 
 
-    <span class="k">def</span> <span class="nf">_format_title</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
-        <span class="n">dim_title</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_frame_title</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">_format_title</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">separator</span><span class="o">=</span><span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">):</span>
+        <span class="n">dim_title</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_frame_title</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">separator</span><span class="p">)</span>
         <span class="n">layout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">layout</span>
         <span class="n">type_name</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">layout</span><span class="p">)</span><span class="o">.</span><span class="n">__name__</span>
         <span class="n">group</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">safe_unicode</span><span class="p">(</span><span class="n">layout</span><span class="o">.</span><span class="n">group</span> <span class="k">if</span> <span class="n">layout</span><span class="o">.</span><span class="n">group</span> <span class="o">!=</span> <span class="n">type_name</span> <span class="k">else</span> <span class="s">&#39;&#39;</span><span class="p">)</span>
@@ -762,7 +815,7 @@
         <span class="k">elif</span> <span class="ow">not</span> <span class="n">dim_title</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">title</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">title</span><span class="p">,</span> <span class="n">dim_title</span><span class="p">])</span>
+            <span class="k">return</span> <span class="n">separator</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">title</span><span class="p">,</span> <span class="n">dim_title</span><span class="p">])</span>
 
 
 

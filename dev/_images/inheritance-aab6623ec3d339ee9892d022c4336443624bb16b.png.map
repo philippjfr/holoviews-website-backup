@@ -1,0 +1,8 @@
+<map id="inheritance21948d01da" name="inheritance21948d01da">
+<area shape="rect" id="node3" href="holoviews.plotting.widgets.html#holoviews.plotting.widgets.ScrubberWidget" title="ScrubberWidget generates a basic animation widget with a slider" alt="" coords="617,4,842,23"/>
+<area shape="rect" id="node5" href="holoviews.plotting.widgets.html#holoviews.plotting.widgets.SelectionWidget" title="Javascript based widget to select and view ViewableElement objects" alt="" coords="616,80,843,99"/>
+<area shape="rect" id="node6" href="holoviews.plotting.widgets.html#holoviews.plotting.widgets.NdWidget" title="NdWidget is an abstract base class implementing a method to find" alt="" coords="347,42,541,61"/>
+<area shape="rect" id="node7" href="#holoviews.plotting.mpl.widgets.WidgetCommSocket" title="CustomCommSocket provides communication between the IPython" alt="" coords="309,4,579,23"/>
+<area shape="rect" id="node8" title="Manages the Comm connection between IPython and the browser (client)." alt="" coords="4,4,272,23"/>
+<area shape="rect" id="node9" title="params(name=String)" alt="" coords="38,42,238,61"/>
+</map>

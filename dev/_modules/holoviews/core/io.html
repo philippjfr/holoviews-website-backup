@@ -144,6 +144,7 @@
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
 
 <span class="kn">import</span> <span class="nn">re</span><span class="o">,</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">time</span><span class="o">,</span> <span class="nn">string</span><span class="o">,</span> <span class="nn">zipfile</span><span class="o">,</span> <span class="nn">tarfile</span><span class="o">,</span> <span class="nn">shutil</span><span class="o">,</span> <span class="nn">itertools</span><span class="o">,</span> <span class="nn">pickle</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
 
 <span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">BytesIO</span>
 <span class="kn">from</span> <span class="nn">hashlib</span> <span class="kn">import</span> <span class="n">sha256</span>
@@ -151,11 +152,12 @@
 <span class="kn">import</span> <span class="nn">param</span>
 <span class="kn">from</span> <span class="nn">param.parameterized</span> <span class="kn">import</span> <span class="n">bothmethod</span>
 
+<span class="kn">from</span> <span class="nn">.dimension</span> <span class="kn">import</span> <span class="n">LabelledData</span>
+<span class="kn">from</span> <span class="nn">.element</span> <span class="kn">import</span> <span class="n">Collator</span>
+<span class="kn">from</span> <span class="nn">.layout</span> <span class="kn">import</span> <span class="n">Layout</span>
+<span class="kn">from</span> <span class="nn">.ndmapping</span> <span class="kn">import</span> <span class="n">OrderedDict</span><span class="p">,</span> <span class="n">NdMapping</span><span class="p">,</span> <span class="n">UniformNdMapping</span>
 <span class="kn">from</span> <span class="nn">.options</span> <span class="kn">import</span> <span class="n">Store</span>
 <span class="kn">from</span> <span class="nn">.util</span> <span class="kn">import</span> <span class="n">unique_iterator</span><span class="p">,</span> <span class="n">sanitize_identifier</span>
-<span class="kn">from</span> <span class="nn">.ndmapping</span> <span class="kn">import</span> <span class="n">OrderedDict</span><span class="p">,</span> <span class="n">UniformNdMapping</span>
-<span class="kn">from</span> <span class="nn">.layout</span> <span class="kn">import</span> <span class="n">Layout</span>
-<span class="kn">from</span> <span class="nn">.dimension</span> <span class="kn">import</span> <span class="n">LabelledData</span>
 
 
 <div class="viewcode-block" id="Reference"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.core.html#holoviews.core.io.Reference">[docs]</a><span class="k">class</span> <span class="nc">Reference</span><span class="p">(</span><span class="n">param</span><span class="o">.</span><span class="n">Parameterized</span><span class="p">):</span>
@@ -309,7 +311,7 @@
 
 
     <span class="nd">@bothmethod</span>
-<div class="viewcode-block" id="Importer.load"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.core.html#holoviews.core.io.Importer.load">[docs]</a>    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="n">self_or_cls</span><span class="p">,</span> <span class="n">src</span><span class="p">,</span> <span class="n">entry</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<div class="viewcode-block" id="Importer.load"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.core.html#holoviews.core.io.Importer.load">[docs]</a>    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="n">self_or_cls</span><span class="p">,</span> <span class="n">src</span><span class="p">,</span> <span class="n">entries</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Given some source (e.g. a filename, a network connection etc),</span>
 <span class="sd">        return the loaded HoloViews object.</span>
@@ -317,6 +319,11 @@
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s">&quot;Importer load method not implemented.&quot;</span><span class="p">)</span>
 
 </div>
+    <span class="nd">@bothmethod</span>
+    <span class="k">def</span> <span class="nf">loader</span><span class="p">(</span><span class="n">self_or_cls</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">self_or_cls</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+
     <span class="nd">@bothmethod</span>
 <div class="viewcode-block" id="Importer.info"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.core.html#holoviews.core.io.Importer.info">[docs]</a>    <span class="k">def</span> <span class="nf">info</span><span class="p">(</span><span class="n">self_or_cls</span><span class="p">,</span> <span class="n">src</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -526,8 +533,60 @@
         <span class="k">with</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="k">return</span> <span class="p">[</span><span class="n">el</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">namelist</span><span class="p">()</span> <span class="k">if</span> <span class="n">el</span> <span class="o">!=</span> <span class="s">&#39;metadata&#39;</span><span class="p">]</span>
 
+    <span class="nd">@bothmethod</span>
+<div class="viewcode-block" id="Unpickler.collect"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.core.html#holoviews.core.io.Unpickler.collect">[docs]</a>    <span class="k">def</span> <span class="nf">collect</span><span class="p">(</span><span class="n">self_or_cls</span><span class="p">,</span> <span class="n">files</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="p">[],</span> <span class="n">metadata</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Given a list or NdMapping type containing file paths return a</span>
+<span class="sd">        Layout of Collators, which can be called to load a given set</span>
+<span class="sd">        of files using the current Importer.</span>
 
-</div>
+<span class="sd">        If supplied as a list each file is expected to disambiguate</span>
+<span class="sd">        itself with contained metadata. If an NdMapping type is</span>
+<span class="sd">        supplied additional key dimensions may be supplied as long as</span>
+<span class="sd">        they do not clash with the file metadata. Any key dimension</span>
+<span class="sd">        may be dropped by name by supplying a drop argument.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">aslist</span> <span class="o">=</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">files</span><span class="p">,</span> <span class="n">NdMapping</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">aslist</span><span class="p">:</span>
+            <span class="n">files</span> <span class="o">=</span> <span class="n">Collator</span><span class="p">(</span><span class="n">files</span><span class="p">,</span> <span class="n">vdims</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;filename&#39;</span><span class="p">])</span>
+            <span class="n">file_kdims</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">file_kdims</span> <span class="o">=</span> <span class="n">files</span><span class="o">.</span><span class="n">kdims</span>
+        <span class="n">drop_extra</span> <span class="o">=</span> <span class="n">files</span><span class="o">.</span><span class="n">drop</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">files</span><span class="p">,</span> <span class="n">Collator</span><span class="p">)</span> <span class="k">else</span> <span class="p">[]</span>
+
+        <span class="n">mdata_dims</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="n">metadata</span><span class="p">:</span>
+            <span class="n">fnames</span> <span class="o">=</span> <span class="p">[</span><span class="n">fname</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)</span> <span class="k">else</span> <span class="n">fname</span>
+                      <span class="k">for</span> <span class="n">fname</span> <span class="ow">in</span> <span class="n">files</span><span class="o">.</span><span class="n">values</span><span class="p">()]</span>
+            <span class="n">mdata_dims</span> <span class="o">=</span> <span class="p">{</span><span class="n">kdim</span> <span class="k">for</span> <span class="n">fname</span> <span class="ow">in</span> <span class="n">fnames</span>
+                          <span class="k">for</span> <span class="n">kdim</span> <span class="ow">in</span> <span class="n">self_or_cls</span><span class="o">.</span><span class="n">key</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span><span class="o">.</span><span class="n">keys</span><span class="p">()}</span>
+        <span class="n">file_dims</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">files</span><span class="o">.</span><span class="n">dimensions</span><span class="p">(</span><span class="s">&#39;key&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
+        <span class="n">added_dims</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">mdata_dims</span><span class="p">)</span> <span class="o">-</span> <span class="n">file_dims</span>
+        <span class="n">overlap_dims</span> <span class="o">=</span> <span class="n">file_dims</span> <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="n">mdata_dims</span><span class="p">)</span>
+        <span class="n">kwargs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">kdims</span><span class="o">=</span><span class="n">file_kdims</span> <span class="o">+</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">added_dims</span><span class="p">),</span>
+                      <span class="n">vdims</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;filename&#39;</span><span class="p">,</span> <span class="s">&#39;entries&#39;</span><span class="p">],</span>
+                      <span class="n">value_transform</span><span class="o">=</span><span class="n">self_or_cls</span><span class="o">.</span><span class="n">loader</span><span class="p">,</span>
+                      <span class="n">drop</span><span class="o">=</span><span class="n">drop_extra</span> <span class="o">+</span> <span class="n">drop</span><span class="p">)</span>
+        <span class="n">layout_data</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">Collator</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">fname</span> <span class="ow">in</span> <span class="n">files</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">fname</span> <span class="o">=</span> <span class="n">fname</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)</span> <span class="k">else</span> <span class="n">fname</span>
+            <span class="n">mdata</span> <span class="o">=</span> <span class="n">self_or_cls</span><span class="o">.</span><span class="n">key</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span> <span class="k">if</span> <span class="n">metadata</span> <span class="k">else</span> <span class="p">{}</span>
+            <span class="k">for</span> <span class="n">odim</span> <span class="ow">in</span> <span class="n">overlap_dims</span><span class="p">:</span>
+                <span class="n">kval</span> <span class="o">=</span> <span class="n">key</span><span class="p">[</span><span class="n">files</span><span class="o">.</span><span class="n">get_dimension_index</span><span class="p">(</span><span class="n">odim</span><span class="p">)]</span>
+                <span class="k">if</span> <span class="n">kval</span> <span class="o">!=</span> <span class="n">mdata</span><span class="p">[</span><span class="n">odim</span><span class="p">]:</span>
+                    <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s">&quot;Metadata supplies inconsistent &quot;</span>
+                                   <span class="s">&quot;value for dimension </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">odim</span><span class="p">)</span>
+            <span class="n">mkey</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">mdata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">added_dims</span><span class="p">)</span>
+            <span class="n">key</span> <span class="o">=</span> <span class="n">mkey</span> <span class="k">if</span> <span class="n">aslist</span> <span class="k">else</span> <span class="n">key</span> <span class="o">+</span> <span class="n">mkey</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="p">(</span><span class="n">fname</span><span class="p">,)</span> <span class="o">=</span> <span class="n">fname</span>
+            <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">self_or_cls</span><span class="o">.</span><span class="n">entries</span><span class="p">(</span><span class="n">fname</span><span class="p">):</span>
+                <span class="n">layout_data</span><span class="p">[</span><span class="n">entry</span><span class="p">][</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="p">[</span><span class="n">entry</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">Layout</span><span class="p">(</span><span class="n">layout_data</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+
+
+</div></div>
 <div class="viewcode-block" id="Archive"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.core.html#holoviews.core.io.Archive">[docs]</a><span class="k">class</span> <span class="nc">Archive</span><span class="p">(</span><span class="n">param</span><span class="o">.</span><span class="n">Parameterized</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    An Archive is a means to collect and store a collection of</span>

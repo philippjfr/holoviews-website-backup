@@ -160,6 +160,19 @@ holoviews.core Package
 
 -------
 
+:mod:`spaces` Module
+--------------------
+
+.. inheritance-diagram:: holoviews.core.spaces
+
+
+.. automodule:: holoviews.core.spaces
+    :members:
+    :inherited-members:
+    :show-inheritance:
+
+-------
+
 :mod:`traversal` Module
 -----------------------
 

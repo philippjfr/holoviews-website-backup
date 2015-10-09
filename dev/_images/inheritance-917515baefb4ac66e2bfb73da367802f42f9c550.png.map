@@ -1,0 +1,12 @@
+<map id="inheritance40c19db063" name="inheritance40c19db063">
+<area shape="rect" id="node3" href="#holoviews.plotting.mpl.chart.PointPlot" title="Note that the &#39;cmap&#39;, &#39;vmin&#39; and &#39;vmax&#39; style arguments control" alt="" coords="869,2,987,14"/>
+<area shape="rect" id="node6" href="#holoviews.plotting.mpl.chart3d.Scatter3DPlot" title="Subclass of PointPlot allowing plotting of Points" alt="" coords="1010,2,1150,14"/>
+<area shape="rect" id="node5" href="#holoviews.plotting.mpl.chart3d.Plot3D" title="Plot3D provides a common baseclass for mplot3d based" alt="" coords="869,24,987,36"/>
+<area shape="rect" id="node7" href="#holoviews.plotting.mpl.chart3d.SurfacePlot" title="Plots surfaces wireframes and contours in 3D space." alt="" coords="1013,24,1146,36"/>
+<area shape="rect" id="node8" href="#holoviews.plotting.mpl.chart3d.TrisurfacePlot" title="Plots a trisurface given a Trisurface element, containing" alt="" coords="1011,47,1148,58"/>
+<area shape="rect" id="node9" href="holoviews.plotting.html#holoviews.plotting.plot.GenericElementPlot" title="Plotting baseclass to render contents of an Element. Implements" alt="" coords="396,2,529,14"/>
+<area shape="rect" id="node10" href="#holoviews.plotting.mpl.plot.MPLPlot" title="An MPLPlot object draws a matplotlib figure object when called or" alt="" coords="407,24,518,36"/>
+<area shape="rect" id="node11" href="holoviews.plotting.html#holoviews.plotting.plot.DimensionedPlot" title="DimensionedPlot implements a number of useful methods" alt="" coords="250,14,374,25"/>
+<area shape="rect" id="node12" href="holoviews.plotting.html#holoviews.plotting.plot.Plot" title="Base class of all Plot classes in HoloViews, designed to be" alt="" coords="142,14,228,25"/>
+<area shape="rect" id="node13" title="params(name=String)" alt="" coords="2,14,120,25"/>
+</map>

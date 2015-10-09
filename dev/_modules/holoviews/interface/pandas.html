@@ -344,7 +344,10 @@
 
 
 <span class="k">def</span> <span class="nf">is_number</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">is_type</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">number</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">is_type</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">number</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">False</span>
 
 
 <div class="viewcode-block" id="DFrame"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.interface.html#holoviews.interface.pandas.DFrame">[docs]</a><span class="k">class</span> <span class="nc">DFrame</span><span class="p">(</span><span class="n">DataFrameView</span><span class="p">):</span>
