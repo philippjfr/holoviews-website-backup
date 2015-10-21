@@ -244,6 +244,12 @@ over the whole animation) and finally compute the dimension
 ranges in each group. The new set of ranges is returned.</p>
 </dd></dl>
 
+<dl class="attribute">
+<dt id="holoviews.plotting.bokeh.annotation.SplinePlot.current_handles">
+<tt class="descname">current_handles</tt><a class="headerlink" href="#holoviews.plotting.bokeh.annotation.SplinePlot.current_handles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of the plot objects to update.</p>
+</dd></dl>
+
 <dl class="method">
 <dt id="holoviews.plotting.bokeh.annotation.SplinePlot.debug">
 <tt class="descname">debug</tt><big>(</big><em>msg</em>, <em>*args</em>, <em>**kw</em><big>)</big><a class="headerlink" href="#holoviews.plotting.bokeh.annotation.SplinePlot.debug" title="Permalink to this definition">¶</a></dt>
@@ -262,7 +268,7 @@ instantiated.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.bokeh.annotation.SplinePlot.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b91741eb260&gt;</em><a class="headerlink" href="#holoviews.plotting.bokeh.annotation.SplinePlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b1462975730&gt;</em><a class="headerlink" href="#holoviews.plotting.bokeh.annotation.SplinePlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -283,7 +289,7 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.bokeh.annotation.SplinePlot.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b91741eb2b8&gt;</em><a class="headerlink" href="#holoviews.plotting.bokeh.annotation.SplinePlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b14629754c8&gt;</em><a class="headerlink" href="#holoviews.plotting.bokeh.annotation.SplinePlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -294,8 +300,14 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.bokeh.annotation.SplinePlot.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b91741eb208&gt;</em><a class="headerlink" href="#holoviews.plotting.bokeh.annotation.SplinePlot.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b14629757e0&gt;</em><a class="headerlink" href="#holoviews.plotting.bokeh.annotation.SplinePlot.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.bokeh.annotation.SplinePlot.matches">
+<tt class="descname">matches</tt><big>(</big><em>spec</em><big>)</big><a class="headerlink" href="#holoviews.plotting.bokeh.annotation.SplinePlot.matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Matches a specification against the current Plot.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="holoviews.plotting.bokeh.annotation.SplinePlot.message">
@@ -347,12 +359,12 @@ evaluated with eval. See pprint() function for more details.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.bokeh.annotation.SplinePlot.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b91741eb3c0&gt;</em><a class="headerlink" href="#holoviews.plotting.bokeh.annotation.SplinePlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b14629756d8&gt;</em><a class="headerlink" href="#holoviews.plotting.bokeh.annotation.SplinePlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.bokeh.annotation.SplinePlot.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b91741eb368&gt;</em><a class="headerlink" href="#holoviews.plotting.bokeh.annotation.SplinePlot.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b1462975838&gt;</em><a class="headerlink" href="#holoviews.plotting.bokeh.annotation.SplinePlot.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -380,6 +392,15 @@ save and restore that state using state_push() and
 state_pop().</p>
 <p>Generally, this method is used by operations that need to test
 something without permanently altering the objects&#8217; state.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.bokeh.annotation.SplinePlot.traverse">
+<tt class="descname">traverse</tt><big>(</big><em>fn=None</em>, <em>specs=None</em>, <em>full_breadth=True</em><big>)</big><a class="headerlink" href="#holoviews.plotting.bokeh.annotation.SplinePlot.traverse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Traverses any nested DimensionedPlot returning a list
+of all plots that match the specs. The specs should
+be supplied as a list of either Plot types or callables,
+which should return a boolean given the plot class.</p>
 </dd></dl>
 
 <dl class="method">
@@ -534,6 +555,12 @@ over the whole animation) and finally compute the dimension
 ranges in each group. The new set of ranges is returned.</p>
 </dd></dl>
 
+<dl class="attribute">
+<dt id="holoviews.plotting.bokeh.element.BokehMPLRawWrapper.current_handles">
+<tt class="descname">current_handles</tt><a class="headerlink" href="#holoviews.plotting.bokeh.element.BokehMPLRawWrapper.current_handles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of the plot objects to update.</p>
+</dd></dl>
+
 <dl class="method">
 <dt id="holoviews.plotting.bokeh.element.BokehMPLRawWrapper.debug">
 <tt class="descname">debug</tt><big>(</big><em>msg</em>, <em>*args</em>, <em>**kw</em><big>)</big><a class="headerlink" href="#holoviews.plotting.bokeh.element.BokehMPLRawWrapper.debug" title="Permalink to this definition">¶</a></dt>
@@ -552,7 +579,7 @@ instantiated.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.bokeh.element.BokehMPLRawWrapper.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b91744abe10&gt;</em><a class="headerlink" href="#holoviews.plotting.bokeh.element.BokehMPLRawWrapper.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b1462e1c578&gt;</em><a class="headerlink" href="#holoviews.plotting.bokeh.element.BokehMPLRawWrapper.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -582,13 +609,19 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.bokeh.element.BokehMPLRawWrapper.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b917477d050&gt;</em><a class="headerlink" href="#holoviews.plotting.bokeh.element.BokehMPLRawWrapper.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b1462e1c838&gt;</em><a class="headerlink" href="#holoviews.plotting.bokeh.element.BokehMPLRawWrapper.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.bokeh.element.BokehMPLRawWrapper.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b917477d100&gt;</em><a class="headerlink" href="#holoviews.plotting.bokeh.element.BokehMPLRawWrapper.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b1462e1c940&gt;</em><a class="headerlink" href="#holoviews.plotting.bokeh.element.BokehMPLRawWrapper.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.bokeh.element.BokehMPLRawWrapper.matches">
+<tt class="descname">matches</tt><big>(</big><em>spec</em><big>)</big><a class="headerlink" href="#holoviews.plotting.bokeh.element.BokehMPLRawWrapper.matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Matches a specification against the current Plot.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="holoviews.plotting.bokeh.element.BokehMPLRawWrapper.message">
@@ -640,12 +673,12 @@ evaluated with eval. See pprint() function for more details.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.bokeh.element.BokehMPLRawWrapper.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b917477d158&gt;</em><a class="headerlink" href="#holoviews.plotting.bokeh.element.BokehMPLRawWrapper.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b1462e1c5d0&gt;</em><a class="headerlink" href="#holoviews.plotting.bokeh.element.BokehMPLRawWrapper.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.bokeh.element.BokehMPLRawWrapper.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b917477d208&gt;</em><a class="headerlink" href="#holoviews.plotting.bokeh.element.BokehMPLRawWrapper.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b1462e1c9f0&gt;</em><a class="headerlink" href="#holoviews.plotting.bokeh.element.BokehMPLRawWrapper.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -673,6 +706,15 @@ save and restore that state using state_push() and
 state_pop().</p>
 <p>Generally, this method is used by operations that need to test
 something without permanently altering the objects&#8217; state.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.bokeh.element.BokehMPLRawWrapper.traverse">
+<tt class="descname">traverse</tt><big>(</big><em>fn=None</em>, <em>specs=None</em>, <em>full_breadth=True</em><big>)</big><a class="headerlink" href="#holoviews.plotting.bokeh.element.BokehMPLRawWrapper.traverse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Traverses any nested DimensionedPlot returning a list
+of all plots that match the specs. The specs should
+be supplied as a list of either Plot types or callables,
+which should return a boolean given the plot class.</p>
 </dd></dl>
 
 <dl class="method">
@@ -789,6 +831,12 @@ over the whole animation) and finally compute the dimension
 ranges in each group. The new set of ranges is returned.</p>
 </dd></dl>
 
+<dl class="attribute">
+<dt id="holoviews.plotting.bokeh.element.BokehMPLWrapper.current_handles">
+<tt class="descname">current_handles</tt><a class="headerlink" href="#holoviews.plotting.bokeh.element.BokehMPLWrapper.current_handles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of the plot objects to update.</p>
+</dd></dl>
+
 <dl class="method">
 <dt id="holoviews.plotting.bokeh.element.BokehMPLWrapper.debug">
 <tt class="descname">debug</tt><big>(</big><em>msg</em>, <em>*args</em>, <em>**kw</em><big>)</big><a class="headerlink" href="#holoviews.plotting.bokeh.element.BokehMPLWrapper.debug" title="Permalink to this definition">¶</a></dt>
@@ -807,7 +855,7 @@ instantiated.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.bokeh.element.BokehMPLWrapper.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b91744abdb8&gt;</em><a class="headerlink" href="#holoviews.plotting.bokeh.element.BokehMPLWrapper.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b1462e1c940&gt;</em><a class="headerlink" href="#holoviews.plotting.bokeh.element.BokehMPLWrapper.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -837,13 +885,19 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.bokeh.element.BokehMPLWrapper.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b917478d050&gt;</em><a class="headerlink" href="#holoviews.plotting.bokeh.element.BokehMPLWrapper.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b1462e1c730&gt;</em><a class="headerlink" href="#holoviews.plotting.bokeh.element.BokehMPLWrapper.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.bokeh.element.BokehMPLWrapper.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b917478d100&gt;</em><a class="headerlink" href="#holoviews.plotting.bokeh.element.BokehMPLWrapper.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b1462e1c628&gt;</em><a class="headerlink" href="#holoviews.plotting.bokeh.element.BokehMPLWrapper.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.bokeh.element.BokehMPLWrapper.matches">
+<tt class="descname">matches</tt><big>(</big><em>spec</em><big>)</big><a class="headerlink" href="#holoviews.plotting.bokeh.element.BokehMPLWrapper.matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Matches a specification against the current Plot.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="holoviews.plotting.bokeh.element.BokehMPLWrapper.message">
@@ -895,12 +949,12 @@ evaluated with eval. See pprint() function for more details.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.bokeh.element.BokehMPLWrapper.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b917478d158&gt;</em><a class="headerlink" href="#holoviews.plotting.bokeh.element.BokehMPLWrapper.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b1462e1c838&gt;</em><a class="headerlink" href="#holoviews.plotting.bokeh.element.BokehMPLWrapper.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.bokeh.element.BokehMPLWrapper.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b917478d208&gt;</em><a class="headerlink" href="#holoviews.plotting.bokeh.element.BokehMPLWrapper.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b1462e1c8e8&gt;</em><a class="headerlink" href="#holoviews.plotting.bokeh.element.BokehMPLWrapper.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -928,6 +982,15 @@ save and restore that state using state_push() and
 state_pop().</p>
 <p>Generally, this method is used by operations that need to test
 something without permanently altering the objects&#8217; state.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.bokeh.element.BokehMPLWrapper.traverse">
+<tt class="descname">traverse</tt><big>(</big><em>fn=None</em>, <em>specs=None</em>, <em>full_breadth=True</em><big>)</big><a class="headerlink" href="#holoviews.plotting.bokeh.element.BokehMPLWrapper.traverse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Traverses any nested DimensionedPlot returning a list
+of all plots that match the specs. The specs should
+be supplied as a list of either Plot types or callables,
+which should return a boolean given the plot class.</p>
 </dd></dl>
 
 <dl class="method">
@@ -989,6 +1052,13 @@ plotting interface for Bokeh based plots.</p>
 <dt><em>param Integer</em> <tt class="docutils literal"><span class="pre">height</span></tt> (<em>allow_None=False, bounds=None, constant=False, default=300, inclusive_bounds=(True, True), instantiate=False, pickle_default_value=True, precedence=None, readonly=False, time_dependent=False, time_fn=&lt;Time Time00001&gt;</em>)</dt>
 <dd>Height of the plot in pixels</dd>
 </dl>
+<dl class="attribute">
+<dt id="holoviews.plotting.bokeh.plot.BokehPlot.current_handles">
+<tt class="descname">current_handles</tt><a class="reference internal" href="../_modules/holoviews/plotting/bokeh/plot.html#BokehPlot.current_handles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#holoviews.plotting.bokeh.plot.BokehPlot.current_handles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Should return a list of plot objects that have changed and
+should be updated.</p>
+</dd></dl>
+
 <dl class="method">
 <dt id="holoviews.plotting.bokeh.plot.BokehPlot.debug">
 <tt class="descname">debug</tt><big>(</big><em>msg</em>, <em>*args</em>, <em>**kw</em><big>)</big><a class="headerlink" href="#holoviews.plotting.bokeh.plot.BokehPlot.debug" title="Permalink to this definition">¶</a></dt>
@@ -1007,7 +1077,7 @@ instantiated.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.bokeh.plot.BokehPlot.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b9174b52998&gt;</em><a class="headerlink" href="#holoviews.plotting.bokeh.plot.BokehPlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b14632ce418&gt;</em><a class="headerlink" href="#holoviews.plotting.bokeh.plot.BokehPlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -1030,7 +1100,7 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.bokeh.plot.BokehPlot.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b9174b528e8&gt;</em><a class="headerlink" href="#holoviews.plotting.bokeh.plot.BokehPlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b14632ce2b8&gt;</em><a class="headerlink" href="#holoviews.plotting.bokeh.plot.BokehPlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -1041,7 +1111,7 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.bokeh.plot.BokehPlot.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b9174b529f0&gt;</em><a class="headerlink" href="#holoviews.plotting.bokeh.plot.BokehPlot.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b14632ce3c0&gt;</em><a class="headerlink" href="#holoviews.plotting.bokeh.plot.BokehPlot.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -1094,12 +1164,12 @@ evaluated with eval. See pprint() function for more details.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.bokeh.plot.BokehPlot.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b9174b52890&gt;</em><a class="headerlink" href="#holoviews.plotting.bokeh.plot.BokehPlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b14632ce260&gt;</em><a class="headerlink" href="#holoviews.plotting.bokeh.plot.BokehPlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.bokeh.plot.BokehPlot.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b9174b52aa0&gt;</em><a class="headerlink" href="#holoviews.plotting.bokeh.plot.BokehPlot.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b14632ce470&gt;</em><a class="headerlink" href="#holoviews.plotting.bokeh.plot.BokehPlot.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -1194,6 +1264,13 @@ over the whole animation) and finally compute the dimension
 ranges in each group. The new set of ranges is returned.</p>
 </dd></dl>
 
+<dl class="attribute">
+<dt id="holoviews.plotting.bokeh.plot.GridPlot.current_handles">
+<tt class="descname">current_handles</tt><a class="headerlink" href="#holoviews.plotting.bokeh.plot.GridPlot.current_handles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Should return a list of plot objects that have changed and
+should be updated.</p>
+</dd></dl>
+
 <dl class="method">
 <dt id="holoviews.plotting.bokeh.plot.GridPlot.debug">
 <tt class="descname">debug</tt><big>(</big><em>msg</em>, <em>*args</em>, <em>**kw</em><big>)</big><a class="headerlink" href="#holoviews.plotting.bokeh.plot.GridPlot.debug" title="Permalink to this definition">¶</a></dt>
@@ -1212,7 +1289,7 @@ instantiated.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.bokeh.plot.GridPlot.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b9174b52788&gt;</em><a class="headerlink" href="#holoviews.plotting.bokeh.plot.GridPlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b14632ce100&gt;</em><a class="headerlink" href="#holoviews.plotting.bokeh.plot.GridPlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -1235,13 +1312,19 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.bokeh.plot.GridPlot.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b9174b526d8&gt;</em><a class="headerlink" href="#holoviews.plotting.bokeh.plot.GridPlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b14632ce0a8&gt;</em><a class="headerlink" href="#holoviews.plotting.bokeh.plot.GridPlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.bokeh.plot.GridPlot.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b9174b527e0&gt;</em><a class="headerlink" href="#holoviews.plotting.bokeh.plot.GridPlot.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b14632ce1b0&gt;</em><a class="headerlink" href="#holoviews.plotting.bokeh.plot.GridPlot.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.bokeh.plot.GridPlot.matches">
+<tt class="descname">matches</tt><big>(</big><em>spec</em><big>)</big><a class="headerlink" href="#holoviews.plotting.bokeh.plot.GridPlot.matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Matches a specification against the current Plot.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="holoviews.plotting.bokeh.plot.GridPlot.message">
@@ -1293,12 +1376,12 @@ evaluated with eval. See pprint() function for more details.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.bokeh.plot.GridPlot.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b9174b52680&gt;</em><a class="headerlink" href="#holoviews.plotting.bokeh.plot.GridPlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b14632ce158&gt;</em><a class="headerlink" href="#holoviews.plotting.bokeh.plot.GridPlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.bokeh.plot.GridPlot.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b9174b52730&gt;</em><a class="headerlink" href="#holoviews.plotting.bokeh.plot.GridPlot.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b14632ce050&gt;</em><a class="headerlink" href="#holoviews.plotting.bokeh.plot.GridPlot.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -1326,6 +1409,15 @@ save and restore that state using state_push() and
 state_pop().</p>
 <p>Generally, this method is used by operations that need to test
 something without permanently altering the objects&#8217; state.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.bokeh.plot.GridPlot.traverse">
+<tt class="descname">traverse</tt><big>(</big><em>fn=None</em>, <em>specs=None</em>, <em>full_breadth=True</em><big>)</big><a class="headerlink" href="#holoviews.plotting.bokeh.plot.GridPlot.traverse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Traverses any nested DimensionedPlot returning a list
+of all plots that match the specs. The specs should
+be supplied as a list of either Plot types or callables,
+which should return a boolean given the plot class.</p>
 </dd></dl>
 
 <dl class="method">

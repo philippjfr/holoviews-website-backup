@@ -315,7 +315,7 @@ instantiated.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.annotation.AnnotationPlot.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b9174ee8d60&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.annotation.AnnotationPlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b146369a8e8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.annotation.AnnotationPlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -336,13 +336,19 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.annotation.AnnotationPlot.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b9174ee8fc8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.annotation.AnnotationPlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b146369ab50&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.annotation.AnnotationPlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.annotation.AnnotationPlot.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b9174ee8f70&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.annotation.AnnotationPlot.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b146369ac00&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.annotation.AnnotationPlot.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.mpl.annotation.AnnotationPlot.matches">
+<tt class="descname">matches</tt><big>(</big><em>spec</em><big>)</big><a class="headerlink" href="#holoviews.plotting.mpl.annotation.AnnotationPlot.matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Matches a specification against the current Plot.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="holoviews.plotting.mpl.annotation.AnnotationPlot.message">
@@ -400,12 +406,12 @@ evaluated with eval. See pprint() function for more details.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.annotation.AnnotationPlot.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b91750b30a8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.annotation.AnnotationPlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b146369aba8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.annotation.AnnotationPlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.annotation.AnnotationPlot.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b91750b3158&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.annotation.AnnotationPlot.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b146369acb0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.annotation.AnnotationPlot.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -426,6 +432,15 @@ save and restore that state using state_push() and
 state_pop().</p>
 <p>Generally, this method is used by operations that need to test
 something without permanently altering the objects&#8217; state.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.mpl.annotation.AnnotationPlot.traverse">
+<tt class="descname">traverse</tt><big>(</big><em>fn=None</em>, <em>specs=None</em>, <em>full_breadth=True</em><big>)</big><a class="headerlink" href="#holoviews.plotting.mpl.annotation.AnnotationPlot.traverse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Traverses any nested DimensionedPlot returning a list
+of all plots that match the specs. The specs should
+be supplied as a list of either Plot types or callables,
+which should return a boolean given the plot class.</p>
 </dd></dl>
 
 <dl class="method">
@@ -611,7 +626,7 @@ instantiated.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.annotation.ArrowPlot.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b9174ee8fc8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.annotation.ArrowPlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b146369aaa0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.annotation.ArrowPlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -632,13 +647,19 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.annotation.ArrowPlot.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b9174ee8f18&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.annotation.ArrowPlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b146369ac00&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.annotation.ArrowPlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.annotation.ArrowPlot.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b9174ee8d08&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.annotation.ArrowPlot.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b146369a890&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.annotation.ArrowPlot.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.mpl.annotation.ArrowPlot.matches">
+<tt class="descname">matches</tt><big>(</big><em>spec</em><big>)</big><a class="headerlink" href="#holoviews.plotting.mpl.annotation.ArrowPlot.matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Matches a specification against the current Plot.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="holoviews.plotting.mpl.annotation.ArrowPlot.message">
@@ -696,12 +717,12 @@ evaluated with eval. See pprint() function for more details.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.annotation.ArrowPlot.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b91750bf050&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.annotation.ArrowPlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b146369a9f0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.annotation.ArrowPlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.annotation.ArrowPlot.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b91750bf158&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.annotation.ArrowPlot.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b146369ad08&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.annotation.ArrowPlot.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -722,6 +743,15 @@ save and restore that state using state_push() and
 state_pop().</p>
 <p>Generally, this method is used by operations that need to test
 something without permanently altering the objects&#8217; state.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.mpl.annotation.ArrowPlot.traverse">
+<tt class="descname">traverse</tt><big>(</big><em>fn=None</em>, <em>specs=None</em>, <em>full_breadth=True</em><big>)</big><a class="headerlink" href="#holoviews.plotting.mpl.annotation.ArrowPlot.traverse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Traverses any nested DimensionedPlot returning a list
+of all plots that match the specs. The specs should
+be supplied as a list of either Plot types or callables,
+which should return a boolean given the plot class.</p>
 </dd></dl>
 
 <dl class="method">
@@ -913,7 +943,7 @@ instantiated.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.annotation.HLinePlot.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b9174ee8f18&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.annotation.HLinePlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b146369a890&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.annotation.HLinePlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -934,13 +964,19 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.annotation.HLinePlot.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b9174ee8d08&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.annotation.HLinePlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b146369aba8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.annotation.HLinePlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.annotation.HLinePlot.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b9174ee8d60&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.annotation.HLinePlot.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b146369a8e8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.annotation.HLinePlot.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.mpl.annotation.HLinePlot.matches">
+<tt class="descname">matches</tt><big>(</big><em>spec</em><big>)</big><a class="headerlink" href="#holoviews.plotting.mpl.annotation.HLinePlot.matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Matches a specification against the current Plot.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="holoviews.plotting.mpl.annotation.HLinePlot.message">
@@ -998,12 +1034,12 @@ evaluated with eval. See pprint() function for more details.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.annotation.HLinePlot.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b91750d00a8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.annotation.HLinePlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b146369acb0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.annotation.HLinePlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.annotation.HLinePlot.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b91750d0158&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.annotation.HLinePlot.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b146369aaf8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.annotation.HLinePlot.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -1024,6 +1060,15 @@ save and restore that state using state_push() and
 state_pop().</p>
 <p>Generally, this method is used by operations that need to test
 something without permanently altering the objects&#8217; state.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.mpl.annotation.HLinePlot.traverse">
+<tt class="descname">traverse</tt><big>(</big><em>fn=None</em>, <em>specs=None</em>, <em>full_breadth=True</em><big>)</big><a class="headerlink" href="#holoviews.plotting.mpl.annotation.HLinePlot.traverse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Traverses any nested DimensionedPlot returning a list
+of all plots that match the specs. The specs should
+be supplied as a list of either Plot types or callables,
+which should return a boolean given the plot class.</p>
 </dd></dl>
 
 <dl class="method">
@@ -1209,7 +1254,7 @@ instantiated.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.annotation.SplinePlot.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b9174ee8fc8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.annotation.SplinePlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b146369a9f0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.annotation.SplinePlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -1230,13 +1275,19 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.annotation.SplinePlot.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b9174ee8e68&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.annotation.SplinePlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b146369a8e8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.annotation.SplinePlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.annotation.SplinePlot.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b9174ee8d08&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.annotation.SplinePlot.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b146369aaa0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.annotation.SplinePlot.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.mpl.annotation.SplinePlot.matches">
+<tt class="descname">matches</tt><big>(</big><em>spec</em><big>)</big><a class="headerlink" href="#holoviews.plotting.mpl.annotation.SplinePlot.matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Matches a specification against the current Plot.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="holoviews.plotting.mpl.annotation.SplinePlot.message">
@@ -1294,12 +1345,12 @@ evaluated with eval. See pprint() function for more details.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.annotation.SplinePlot.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b91750e40a8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.annotation.SplinePlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b146369aba8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.annotation.SplinePlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.annotation.SplinePlot.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b91750e4050&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.annotation.SplinePlot.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b146369a940&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.annotation.SplinePlot.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -1320,6 +1371,15 @@ save and restore that state using state_push() and
 state_pop().</p>
 <p>Generally, this method is used by operations that need to test
 something without permanently altering the objects&#8217; state.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.mpl.annotation.SplinePlot.traverse">
+<tt class="descname">traverse</tt><big>(</big><em>fn=None</em>, <em>specs=None</em>, <em>full_breadth=True</em><big>)</big><a class="headerlink" href="#holoviews.plotting.mpl.annotation.SplinePlot.traverse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Traverses any nested DimensionedPlot returning a list
+of all plots that match the specs. The specs should
+be supplied as a list of either Plot types or callables,
+which should return a boolean given the plot class.</p>
 </dd></dl>
 
 <dl class="method">
@@ -1505,7 +1565,7 @@ instantiated.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.annotation.TextPlot.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b9174ee8e68&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.annotation.TextPlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b146369aaa0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.annotation.TextPlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -1526,13 +1586,19 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.annotation.TextPlot.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b9174ee8e10&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.annotation.TextPlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b146369aaf8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.annotation.TextPlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.annotation.TextPlot.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b9174ee8f18&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.annotation.TextPlot.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b146369a890&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.annotation.TextPlot.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.mpl.annotation.TextPlot.matches">
+<tt class="descname">matches</tt><big>(</big><em>spec</em><big>)</big><a class="headerlink" href="#holoviews.plotting.mpl.annotation.TextPlot.matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Matches a specification against the current Plot.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="holoviews.plotting.mpl.annotation.TextPlot.message">
@@ -1590,12 +1656,12 @@ evaluated with eval. See pprint() function for more details.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.annotation.TextPlot.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b91750f3050&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.annotation.TextPlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b146369acb0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.annotation.TextPlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.annotation.TextPlot.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b91750f3158&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.annotation.TextPlot.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b146369a998&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.annotation.TextPlot.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -1616,6 +1682,15 @@ save and restore that state using state_push() and
 state_pop().</p>
 <p>Generally, this method is used by operations that need to test
 something without permanently altering the objects&#8217; state.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.mpl.annotation.TextPlot.traverse">
+<tt class="descname">traverse</tt><big>(</big><em>fn=None</em>, <em>specs=None</em>, <em>full_breadth=True</em><big>)</big><a class="headerlink" href="#holoviews.plotting.mpl.annotation.TextPlot.traverse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Traverses any nested DimensionedPlot returning a list
+of all plots that match the specs. The specs should
+be supplied as a list of either Plot types or callables,
+which should return a boolean given the plot class.</p>
 </dd></dl>
 
 <dl class="method">
@@ -1801,7 +1876,7 @@ instantiated.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.annotation.VLinePlot.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b9174ee8e10&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.annotation.VLinePlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b146369a890&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.annotation.VLinePlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -1822,13 +1897,19 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.annotation.VLinePlot.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b9174ee8f18&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.annotation.VLinePlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b146369aba8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.annotation.VLinePlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.annotation.VLinePlot.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b9174ee8fc8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.annotation.VLinePlot.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b146369a9f0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.annotation.VLinePlot.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.mpl.annotation.VLinePlot.matches">
+<tt class="descname">matches</tt><big>(</big><em>spec</em><big>)</big><a class="headerlink" href="#holoviews.plotting.mpl.annotation.VLinePlot.matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Matches a specification against the current Plot.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="holoviews.plotting.mpl.annotation.VLinePlot.message">
@@ -1886,12 +1967,12 @@ evaluated with eval. See pprint() function for more details.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.annotation.VLinePlot.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b9175103050&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.annotation.VLinePlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b146369a940&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.annotation.VLinePlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.annotation.VLinePlot.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b9175103158&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.annotation.VLinePlot.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b146369aa48&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.annotation.VLinePlot.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -1912,6 +1993,15 @@ save and restore that state using state_push() and
 state_pop().</p>
 <p>Generally, this method is used by operations that need to test
 something without permanently altering the objects&#8217; state.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.mpl.annotation.VLinePlot.traverse">
+<tt class="descname">traverse</tt><big>(</big><em>fn=None</em>, <em>specs=None</em>, <em>full_breadth=True</em><big>)</big><a class="headerlink" href="#holoviews.plotting.mpl.annotation.VLinePlot.traverse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Traverses any nested DimensionedPlot returning a list
+of all plots that match the specs. The specs should
+be supplied as a list of either Plot types or callables,
+which should return a boolean given the plot class.</p>
 </dd></dl>
 
 <dl class="method">
@@ -2133,7 +2223,7 @@ instantiated.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.chart.CurvePlot.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b9165a89418&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart.CurvePlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b1463b02890&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart.CurvePlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -2154,13 +2244,19 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.chart.CurvePlot.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b9165a89cb0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart.CurvePlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b1463b027e0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart.CurvePlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.chart.CurvePlot.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b9165a89ec0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart.CurvePlot.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b1463b028e8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart.CurvePlot.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.mpl.chart.CurvePlot.matches">
+<tt class="descname">matches</tt><big>(</big><em>spec</em><big>)</big><a class="headerlink" href="#holoviews.plotting.mpl.chart.CurvePlot.matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Matches a specification against the current Plot.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="holoviews.plotting.mpl.chart.CurvePlot.message">
@@ -2218,12 +2314,12 @@ evaluated with eval. See pprint() function for more details.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.chart.CurvePlot.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b9165a89db8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart.CurvePlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b1463b02788&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart.CurvePlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.chart.CurvePlot.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b9165a89fc8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart.CurvePlot.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b1463b02998&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart.CurvePlot.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -2244,6 +2340,15 @@ save and restore that state using state_push() and
 state_pop().</p>
 <p>Generally, this method is used by operations that need to test
 something without permanently altering the objects&#8217; state.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.mpl.chart.CurvePlot.traverse">
+<tt class="descname">traverse</tt><big>(</big><em>fn=None</em>, <em>specs=None</em>, <em>full_breadth=True</em><big>)</big><a class="headerlink" href="#holoviews.plotting.mpl.chart.CurvePlot.traverse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Traverses any nested DimensionedPlot returning a list
+of all plots that match the specs. The specs should
+be supplied as a list of either Plot types or callables,
+which should return a boolean given the plot class.</p>
 </dd></dl>
 
 <dl class="method">
@@ -2431,7 +2536,7 @@ instantiated.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.chart.ErrorPlot.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b9165a89470&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart.ErrorPlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b1463b027e0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart.ErrorPlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -2452,13 +2557,19 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.chart.ErrorPlot.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b9165a89ec0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart.ErrorPlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b1463b028e8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart.ErrorPlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.chart.ErrorPlot.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b9165a893c0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart.ErrorPlot.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b1463b025d0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart.ErrorPlot.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.mpl.chart.ErrorPlot.matches">
+<tt class="descname">matches</tt><big>(</big><em>spec</em><big>)</big><a class="headerlink" href="#holoviews.plotting.mpl.chart.ErrorPlot.matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Matches a specification against the current Plot.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="holoviews.plotting.mpl.chart.ErrorPlot.message">
@@ -2516,12 +2627,12 @@ evaluated with eval. See pprint() function for more details.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.chart.ErrorPlot.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b9165a89aa0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart.ErrorPlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b1463b02628&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart.ErrorPlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.chart.ErrorPlot.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b9165a89d60&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart.ErrorPlot.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b1463b02940&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart.ErrorPlot.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -2542,6 +2653,15 @@ save and restore that state using state_push() and
 state_pop().</p>
 <p>Generally, this method is used by operations that need to test
 something without permanently altering the objects&#8217; state.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.mpl.chart.ErrorPlot.traverse">
+<tt class="descname">traverse</tt><big>(</big><em>fn=None</em>, <em>specs=None</em>, <em>full_breadth=True</em><big>)</big><a class="headerlink" href="#holoviews.plotting.mpl.chart.ErrorPlot.traverse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Traverses any nested DimensionedPlot returning a list
+of all plots that match the specs. The specs should
+be supplied as a list of either Plot types or callables,
+which should return a boolean given the plot class.</p>
 </dd></dl>
 
 <dl class="method">
@@ -2729,7 +2849,7 @@ instantiated.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.chart.HistogramPlot.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b9165a89ec0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart.HistogramPlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b1463b02998&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart.HistogramPlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -2743,13 +2863,19 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.chart.HistogramPlot.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b9165a89a48&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart.HistogramPlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b1463b02680&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart.HistogramPlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.chart.HistogramPlot.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b9165a89418&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart.HistogramPlot.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b1463b02890&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart.HistogramPlot.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.mpl.chart.HistogramPlot.matches">
+<tt class="descname">matches</tt><big>(</big><em>spec</em><big>)</big><a class="headerlink" href="#holoviews.plotting.mpl.chart.HistogramPlot.matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Matches a specification against the current Plot.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="holoviews.plotting.mpl.chart.HistogramPlot.message">
@@ -2807,12 +2933,12 @@ evaluated with eval. See pprint() function for more details.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.chart.HistogramPlot.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b9165a89db8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart.HistogramPlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b1463b02788&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart.HistogramPlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.chart.HistogramPlot.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b9165a89e68&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart.HistogramPlot.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b1463b029f0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart.HistogramPlot.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -2833,6 +2959,15 @@ save and restore that state using state_push() and
 state_pop().</p>
 <p>Generally, this method is used by operations that need to test
 something without permanently altering the objects&#8217; state.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.mpl.chart.HistogramPlot.traverse">
+<tt class="descname">traverse</tt><big>(</big><em>fn=None</em>, <em>specs=None</em>, <em>full_breadth=True</em><big>)</big><a class="headerlink" href="#holoviews.plotting.mpl.chart.HistogramPlot.traverse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Traverses any nested DimensionedPlot returning a list
+of all plots that match the specs. The specs should
+be supplied as a list of either Plot types or callables,
+which should return a boolean given the plot class.</p>
 </dd></dl>
 
 <dl class="method">
@@ -3052,7 +3187,7 @@ instantiated.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.chart.PointPlot.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b9165a89a48&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart.PointPlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b1463b02578&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart.PointPlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -3073,13 +3208,19 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.chart.PointPlot.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b9165a89aa0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart.PointPlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b1463b02628&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart.PointPlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.chart.PointPlot.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b9165a89470&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart.PointPlot.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b1463b027e0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart.PointPlot.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.mpl.chart.PointPlot.matches">
+<tt class="descname">matches</tt><big>(</big><em>spec</em><big>)</big><a class="headerlink" href="#holoviews.plotting.mpl.chart.PointPlot.matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Matches a specification against the current Plot.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="holoviews.plotting.mpl.chart.PointPlot.message">
@@ -3137,12 +3278,12 @@ evaluated with eval. See pprint() function for more details.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.chart.PointPlot.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b9165a89d08&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart.PointPlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b1463b02890&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart.PointPlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.chart.PointPlot.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b9165a89f70&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart.PointPlot.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b1463b02730&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart.PointPlot.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -3168,6 +3309,15 @@ save and restore that state using state_push() and
 state_pop().</p>
 <p>Generally, this method is used by operations that need to test
 something without permanently altering the objects&#8217; state.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.mpl.chart.PointPlot.traverse">
+<tt class="descname">traverse</tt><big>(</big><em>fn=None</em>, <em>specs=None</em>, <em>full_breadth=True</em><big>)</big><a class="headerlink" href="#holoviews.plotting.mpl.chart.PointPlot.traverse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Traverses any nested DimensionedPlot returning a list
+of all plots that match the specs. The specs should
+be supplied as a list of either Plot types or callables,
+which should return a boolean given the plot class.</p>
 </dd></dl>
 
 <dl class="method">
@@ -3353,7 +3503,7 @@ instantiated.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.chart.SpreadPlot.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b9165a89e68&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart.SpreadPlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b1463b02628&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart.SpreadPlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -3374,13 +3524,19 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.chart.SpreadPlot.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b9165a89cb0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart.SpreadPlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b1463b026d8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart.SpreadPlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.chart.SpreadPlot.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b9165a89ec0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart.SpreadPlot.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b1463b02998&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart.SpreadPlot.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.mpl.chart.SpreadPlot.matches">
+<tt class="descname">matches</tt><big>(</big><em>spec</em><big>)</big><a class="headerlink" href="#holoviews.plotting.mpl.chart.SpreadPlot.matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Matches a specification against the current Plot.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="holoviews.plotting.mpl.chart.SpreadPlot.message">
@@ -3438,12 +3594,12 @@ evaluated with eval. See pprint() function for more details.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.chart.SpreadPlot.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b9165a89470&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart.SpreadPlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b1463b029f0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart.SpreadPlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.chart.SpreadPlot.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b9165a89db8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart.SpreadPlot.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b1463b02788&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart.SpreadPlot.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -3464,6 +3620,15 @@ save and restore that state using state_push() and
 state_pop().</p>
 <p>Generally, this method is used by operations that need to test
 something without permanently altering the objects&#8217; state.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.mpl.chart.SpreadPlot.traverse">
+<tt class="descname">traverse</tt><big>(</big><em>fn=None</em>, <em>specs=None</em>, <em>full_breadth=True</em><big>)</big><a class="headerlink" href="#holoviews.plotting.mpl.chart.SpreadPlot.traverse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Traverses any nested DimensionedPlot returning a list
+of all plots that match the specs. The specs should
+be supplied as a list of either Plot types or callables,
+which should return a boolean given the plot class.</p>
 </dd></dl>
 
 <dl class="method">
@@ -3670,7 +3835,7 @@ instantiated.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.chart.VectorFieldPlot.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b9165a89cb0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart.VectorFieldPlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b1463b026d8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart.VectorFieldPlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -3691,13 +3856,19 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.chart.VectorFieldPlot.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b9165a89d08&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart.VectorFieldPlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b1463b02890&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart.VectorFieldPlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.chart.VectorFieldPlot.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b9165a89a48&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart.VectorFieldPlot.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b1463b02578&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart.VectorFieldPlot.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.mpl.chart.VectorFieldPlot.matches">
+<tt class="descname">matches</tt><big>(</big><em>spec</em><big>)</big><a class="headerlink" href="#holoviews.plotting.mpl.chart.VectorFieldPlot.matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Matches a specification against the current Plot.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="holoviews.plotting.mpl.chart.VectorFieldPlot.message">
@@ -3755,12 +3926,12 @@ evaluated with eval. See pprint() function for more details.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.chart.VectorFieldPlot.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b9165a89f70&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart.VectorFieldPlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b1463b02730&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart.VectorFieldPlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.chart.VectorFieldPlot.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b9165a893c0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart.VectorFieldPlot.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b1463b028e8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart.VectorFieldPlot.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -3781,6 +3952,15 @@ save and restore that state using state_push() and
 state_pop().</p>
 <p>Generally, this method is used by operations that need to test
 something without permanently altering the objects&#8217; state.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.mpl.chart.VectorFieldPlot.traverse">
+<tt class="descname">traverse</tt><big>(</big><em>fn=None</em>, <em>specs=None</em>, <em>full_breadth=True</em><big>)</big><a class="headerlink" href="#holoviews.plotting.mpl.chart.VectorFieldPlot.traverse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Traverses any nested DimensionedPlot returning a list
+of all plots that match the specs. The specs should
+be supplied as a list of either Plot types or callables,
+which should return a boolean given the plot class.</p>
 </dd></dl>
 
 <dl class="method">
@@ -4003,7 +4183,7 @@ instantiated.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.chart3d.Plot3D.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b91743cd730&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart3d.Plot3D.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b146314d9f0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart3d.Plot3D.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -4024,7 +4204,7 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.chart3d.Plot3D.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b91743cd788&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart3d.Plot3D.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b146314da48&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart3d.Plot3D.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -4035,8 +4215,14 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.chart3d.Plot3D.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b91743cd9f0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart3d.Plot3D.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b146314dcb0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart3d.Plot3D.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.mpl.chart3d.Plot3D.matches">
+<tt class="descname">matches</tt><big>(</big><em>spec</em><big>)</big><a class="headerlink" href="#holoviews.plotting.mpl.chart3d.Plot3D.matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Matches a specification against the current Plot.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="holoviews.plotting.mpl.chart3d.Plot3D.message">
@@ -4094,12 +4280,12 @@ evaluated with eval. See pprint() function for more details.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.chart3d.Plot3D.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b91743cd998&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart3d.Plot3D.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b146314dc58&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart3d.Plot3D.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.chart3d.Plot3D.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b91743cdaf8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart3d.Plot3D.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b146314ddb8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart3d.Plot3D.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -4120,6 +4306,15 @@ save and restore that state using state_push() and
 state_pop().</p>
 <p>Generally, this method is used by operations that need to test
 something without permanently altering the objects&#8217; state.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.mpl.chart3d.Plot3D.traverse">
+<tt class="descname">traverse</tt><big>(</big><em>fn=None</em>, <em>specs=None</em>, <em>full_breadth=True</em><big>)</big><a class="headerlink" href="#holoviews.plotting.mpl.chart3d.Plot3D.traverse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Traverses any nested DimensionedPlot returning a list
+of all plots that match the specs. The specs should
+be supplied as a list of either Plot types or callables,
+which should return a boolean given the plot class.</p>
 </dd></dl>
 
 <dl class="method">
@@ -4341,7 +4536,7 @@ instantiated.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.chart3d.Scatter3DPlot.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b91743cd730&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart3d.Scatter3DPlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b146314db50&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart3d.Scatter3DPlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -4362,13 +4557,19 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.chart3d.Scatter3DPlot.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b91743cd8e8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart3d.Scatter3DPlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b146314dba8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart3d.Scatter3DPlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.chart3d.Scatter3DPlot.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b91743cd9f0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart3d.Scatter3DPlot.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b146314dcb0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart3d.Scatter3DPlot.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.mpl.chart3d.Scatter3DPlot.matches">
+<tt class="descname">matches</tt><big>(</big><em>spec</em><big>)</big><a class="headerlink" href="#holoviews.plotting.mpl.chart3d.Scatter3DPlot.matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Matches a specification against the current Plot.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="holoviews.plotting.mpl.chart3d.Scatter3DPlot.message">
@@ -4426,12 +4627,12 @@ evaluated with eval. See pprint() function for more details.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.chart3d.Scatter3DPlot.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b91743cd788&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart3d.Scatter3DPlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b146314da48&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart3d.Scatter3DPlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.chart3d.Scatter3DPlot.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b91743cda48&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart3d.Scatter3DPlot.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b146314dd08&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart3d.Scatter3DPlot.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -4457,6 +4658,15 @@ save and restore that state using state_push() and
 state_pop().</p>
 <p>Generally, this method is used by operations that need to test
 something without permanently altering the objects&#8217; state.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.mpl.chart3d.Scatter3DPlot.traverse">
+<tt class="descname">traverse</tt><big>(</big><em>fn=None</em>, <em>specs=None</em>, <em>full_breadth=True</em><big>)</big><a class="headerlink" href="#holoviews.plotting.mpl.chart3d.Scatter3DPlot.traverse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Traverses any nested DimensionedPlot returning a list
+of all plots that match the specs. The specs should
+be supplied as a list of either Plot types or callables,
+which should return a boolean given the plot class.</p>
 </dd></dl>
 
 <dl class="method">
@@ -4660,7 +4870,7 @@ instantiated.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.chart3d.SurfacePlot.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b91743cd838&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart3d.SurfacePlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b146314ddb8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart3d.SurfacePlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -4681,13 +4891,19 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.chart3d.SurfacePlot.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b91743cd9f0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart3d.SurfacePlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b146314dcb0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart3d.SurfacePlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.chart3d.SurfacePlot.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b91743cd730&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart3d.SurfacePlot.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b146314db50&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart3d.SurfacePlot.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.mpl.chart3d.SurfacePlot.matches">
+<tt class="descname">matches</tt><big>(</big><em>spec</em><big>)</big><a class="headerlink" href="#holoviews.plotting.mpl.chart3d.SurfacePlot.matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Matches a specification against the current Plot.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="holoviews.plotting.mpl.chart3d.SurfacePlot.message">
@@ -4745,12 +4961,12 @@ evaluated with eval. See pprint() function for more details.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.chart3d.SurfacePlot.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b91743cdba8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart3d.SurfacePlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b146314de68&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart3d.SurfacePlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.chart3d.SurfacePlot.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b91743cd890&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart3d.SurfacePlot.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b146314dc00&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart3d.SurfacePlot.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -4771,6 +4987,15 @@ save and restore that state using state_push() and
 state_pop().</p>
 <p>Generally, this method is used by operations that need to test
 something without permanently altering the objects&#8217; state.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.mpl.chart3d.SurfacePlot.traverse">
+<tt class="descname">traverse</tt><big>(</big><em>fn=None</em>, <em>specs=None</em>, <em>full_breadth=True</em><big>)</big><a class="headerlink" href="#holoviews.plotting.mpl.chart3d.SurfacePlot.traverse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Traverses any nested DimensionedPlot returning a list
+of all plots that match the specs. The specs should
+be supplied as a list of either Plot types or callables,
+which should return a boolean given the plot class.</p>
 </dd></dl>
 
 <dl class="method">
@@ -4970,7 +5195,7 @@ instantiated.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.chart3d.TrisurfacePlot.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b91743cda48&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart3d.TrisurfacePlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b146314d998&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart3d.TrisurfacePlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -4991,13 +5216,19 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.chart3d.TrisurfacePlot.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b91743cd998&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart3d.TrisurfacePlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b146314dc58&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart3d.TrisurfacePlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.chart3d.TrisurfacePlot.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b91743cd838&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart3d.TrisurfacePlot.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b146314ddb8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart3d.TrisurfacePlot.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.mpl.chart3d.TrisurfacePlot.matches">
+<tt class="descname">matches</tt><big>(</big><em>spec</em><big>)</big><a class="headerlink" href="#holoviews.plotting.mpl.chart3d.TrisurfacePlot.matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Matches a specification against the current Plot.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="holoviews.plotting.mpl.chart3d.TrisurfacePlot.message">
@@ -5055,12 +5286,12 @@ evaluated with eval. See pprint() function for more details.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.chart3d.TrisurfacePlot.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b91743cd730&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart3d.TrisurfacePlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b146314dd08&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart3d.TrisurfacePlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.chart3d.TrisurfacePlot.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b91743cdaa0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart3d.TrisurfacePlot.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b146314daf8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.chart3d.TrisurfacePlot.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -5081,6 +5312,15 @@ save and restore that state using state_push() and
 state_pop().</p>
 <p>Generally, this method is used by operations that need to test
 something without permanently altering the objects&#8217; state.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.mpl.chart3d.TrisurfacePlot.traverse">
+<tt class="descname">traverse</tt><big>(</big><em>fn=None</em>, <em>specs=None</em>, <em>full_breadth=True</em><big>)</big><a class="headerlink" href="#holoviews.plotting.mpl.chart3d.TrisurfacePlot.traverse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Traverses any nested DimensionedPlot returning a list
+of all plots that match the specs. The specs should
+be supplied as a list of either Plot types or callables,
+which should return a boolean given the plot class.</p>
 </dd></dl>
 
 <dl class="method">
@@ -5293,7 +5533,7 @@ commands to render the element to the supplied axis.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.element.DrawPlot.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b9175808cb0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.element.DrawPlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b14640ea628&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.element.DrawPlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -5314,13 +5554,19 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.element.DrawPlot.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b9175808f70&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.element.DrawPlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b14640ea310&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.element.DrawPlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.element.DrawPlot.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b9175808fc8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.element.DrawPlot.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b14640ea680&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.element.DrawPlot.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.mpl.element.DrawPlot.matches">
+<tt class="descname">matches</tt><big>(</big><em>spec</em><big>)</big><a class="headerlink" href="#holoviews.plotting.mpl.element.DrawPlot.matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Matches a specification against the current Plot.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="holoviews.plotting.mpl.element.DrawPlot.message">
@@ -5378,12 +5624,12 @@ evaluated with eval. See pprint() function for more details.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.element.DrawPlot.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b9175808f18&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.element.DrawPlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b14640ea368&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.element.DrawPlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.element.DrawPlot.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b91759ec0a8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.element.DrawPlot.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b14640ea730&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.element.DrawPlot.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -5404,6 +5650,15 @@ save and restore that state using state_push() and
 state_pop().</p>
 <p>Generally, this method is used by operations that need to test
 something without permanently altering the objects&#8217; state.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.mpl.element.DrawPlot.traverse">
+<tt class="descname">traverse</tt><big>(</big><em>fn=None</em>, <em>specs=None</em>, <em>full_breadth=True</em><big>)</big><a class="headerlink" href="#holoviews.plotting.mpl.element.DrawPlot.traverse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Traverses any nested DimensionedPlot returning a list
+of all plots that match the specs. The specs should
+be supplied as a list of either Plot types or callables,
+which should return a boolean given the plot class.</p>
 </dd></dl>
 
 <dl class="method">
@@ -5601,7 +5856,7 @@ instantiated.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.element.OverlayPlot.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b9175808e68&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.element.OverlayPlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b14640ea628&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.element.OverlayPlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -5615,13 +5870,19 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.element.OverlayPlot.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b9175808d08&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.element.OverlayPlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b14640ea520&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.element.OverlayPlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.element.OverlayPlot.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b9175808c58&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.element.OverlayPlot.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b14640ea3c0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.element.OverlayPlot.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.mpl.element.OverlayPlot.matches">
+<tt class="descname">matches</tt><big>(</big><em>spec</em><big>)</big><a class="headerlink" href="#holoviews.plotting.mpl.element.OverlayPlot.matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Matches a specification against the current Plot.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="holoviews.plotting.mpl.element.OverlayPlot.message">
@@ -5679,12 +5940,12 @@ evaluated with eval. See pprint() function for more details.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.element.OverlayPlot.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b9175808f70&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.element.OverlayPlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b14640ea310&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.element.OverlayPlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.element.OverlayPlot.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b91759fa0a8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.element.OverlayPlot.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b14640ea788&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.element.OverlayPlot.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -5705,6 +5966,15 @@ save and restore that state using state_push() and
 state_pop().</p>
 <p>Generally, this method is used by operations that need to test
 something without permanently altering the objects&#8217; state.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.mpl.element.OverlayPlot.traverse">
+<tt class="descname">traverse</tt><big>(</big><em>fn=None</em>, <em>specs=None</em>, <em>full_breadth=True</em><big>)</big><a class="headerlink" href="#holoviews.plotting.mpl.element.OverlayPlot.traverse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Traverses any nested DimensionedPlot returning a list
+of all plots that match the specs. The specs should
+be supplied as a list of either Plot types or callables,
+which should return a boolean given the plot class.</p>
 </dd></dl>
 
 <dl class="method">
@@ -5790,7 +6060,7 @@ instantiated.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.hooks.CurvePlugin.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b9175c75ba8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.CurvePlugin.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b1464405418&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.CurvePlugin.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -5804,17 +6074,17 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.hooks.CurvePlugin.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b9175c75e10&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.CurvePlugin.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b1464405680&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.CurvePlugin.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.hooks.CurvePlugin.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b9175c75ec0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.CurvePlugin.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b1464405730&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.CurvePlugin.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.hooks.CurvePlugin.instance">
-<tt class="descname">instance</tt><em class="property"> = &lt;functools.partial object at 0x2b9175c75e68&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.CurvePlugin.instance" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">instance</tt><em class="property"> = &lt;functools.partial object at 0x2b14644056d8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.CurvePlugin.instance" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -5868,12 +6138,12 @@ is replaced with X.classname.instance(Y</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.hooks.CurvePlugin.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b9175c75db8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.CurvePlugin.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b1464405628&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.CurvePlugin.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.hooks.CurvePlugin.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b9175c75f70&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.CurvePlugin.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b1464405890&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.CurvePlugin.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -5952,7 +6222,7 @@ instantiated.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.hooks.HistogramPlugin.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b9175c75b50&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.HistogramPlugin.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b14644053c0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.HistogramPlugin.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -5966,17 +6236,17 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.hooks.HistogramPlugin.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b9175c75c00&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.HistogramPlugin.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b1464405470&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.HistogramPlugin.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.hooks.HistogramPlugin.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b9175c75c58&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.HistogramPlugin.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b14644054c8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.HistogramPlugin.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.hooks.HistogramPlugin.instance">
-<tt class="descname">instance</tt><em class="property"> = &lt;functools.partial object at 0x2b9175c75cb0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.HistogramPlugin.instance" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">instance</tt><em class="property"> = &lt;functools.partial object at 0x2b1464405520&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.HistogramPlugin.instance" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -6030,12 +6300,12 @@ is replaced with X.classname.instance(Y</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.hooks.HistogramPlugin.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b9175c75d08&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.HistogramPlugin.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b1464405578&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.HistogramPlugin.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.hooks.HistogramPlugin.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b9175c75fc8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.HistogramPlugin.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b14644058e8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.HistogramPlugin.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -6119,7 +6389,7 @@ instantiated.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.hooks.LegendPlugin.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b9175c75b50&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.LegendPlugin.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b14644053c0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.LegendPlugin.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -6133,17 +6403,17 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.hooks.LegendPlugin.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b9175c75e10&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.LegendPlugin.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b1464405680&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.LegendPlugin.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.hooks.LegendPlugin.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b9175c75f18&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.LegendPlugin.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b1464405788&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.LegendPlugin.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.hooks.LegendPlugin.instance">
-<tt class="descname">instance</tt><em class="property"> = &lt;functools.partial object at 0x2b9175c75db8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.LegendPlugin.instance" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">instance</tt><em class="property"> = &lt;functools.partial object at 0x2b1464405628&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.LegendPlugin.instance" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -6197,12 +6467,12 @@ is replaced with X.classname.instance(Y</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.hooks.LegendPlugin.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b9175c75f70&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.LegendPlugin.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b1464405890&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.LegendPlugin.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.hooks.LegendPlugin.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b9175c75d60&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.LegendPlugin.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b14644057e0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.LegendPlugin.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -6284,7 +6554,7 @@ instantiated.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.hooks.MplD3Plugin.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b9175c75ba8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.MplD3Plugin.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b1464405418&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.MplD3Plugin.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -6298,17 +6568,17 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.hooks.MplD3Plugin.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b9175c75cb0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.MplD3Plugin.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b1464405520&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.MplD3Plugin.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.hooks.MplD3Plugin.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b9175c75b50&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.MplD3Plugin.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b14644053c0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.MplD3Plugin.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.hooks.MplD3Plugin.instance">
-<tt class="descname">instance</tt><em class="property"> = &lt;functools.partial object at 0x2b9175c75c58&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.MplD3Plugin.instance" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">instance</tt><em class="property"> = &lt;functools.partial object at 0x2b14644054c8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.MplD3Plugin.instance" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -6362,12 +6632,12 @@ is replaced with X.classname.instance(Y</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.hooks.MplD3Plugin.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b9175c75c00&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.MplD3Plugin.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b1464405470&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.MplD3Plugin.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.hooks.MplD3Plugin.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b9175c75fc8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.MplD3Plugin.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b1464405838&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.MplD3Plugin.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -6442,7 +6712,7 @@ instantiated.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.hooks.PlottingHook.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b9175c75db8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.PlottingHook.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b1464405628&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.PlottingHook.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -6456,17 +6726,17 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.hooks.PlottingHook.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b9175c75f18&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.PlottingHook.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b1464405788&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.PlottingHook.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.hooks.PlottingHook.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b9175c75ec0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.PlottingHook.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b1464405730&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.PlottingHook.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.hooks.PlottingHook.instance">
-<tt class="descname">instance</tt><em class="property"> = &lt;functools.partial object at 0x2b9175c75f70&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.PlottingHook.instance" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">instance</tt><em class="property"> = &lt;functools.partial object at 0x2b1464405890&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.PlottingHook.instance" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -6520,12 +6790,12 @@ is replaced with X.classname.instance(Y</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.hooks.PlottingHook.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b9175c75d60&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.PlottingHook.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b14644057e0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.PlottingHook.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.hooks.PlottingHook.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b9175c75e68&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.PlottingHook.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b14644055d0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.PlottingHook.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -6604,7 +6874,7 @@ instantiated.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.hooks.PointPlugin.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b9175c75b50&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.PointPlugin.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b14644053c0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.PointPlugin.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -6618,17 +6888,17 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.hooks.PointPlugin.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b9175c75cb0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.PointPlugin.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b1464405520&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.PointPlugin.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.hooks.PointPlugin.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b9175c75d08&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.PointPlugin.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b1464405578&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.PointPlugin.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.hooks.PointPlugin.instance">
-<tt class="descname">instance</tt><em class="property"> = &lt;functools.partial object at 0x2b9175c75c58&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.PointPlugin.instance" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">instance</tt><em class="property"> = &lt;functools.partial object at 0x2b14644054c8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.PointPlugin.instance" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -6682,12 +6952,12 @@ is replaced with X.classname.instance(Y</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.hooks.PointPlugin.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b9175c75db8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.PointPlugin.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b1464405628&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.PointPlugin.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.hooks.PointPlugin.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b9175c75fc8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.PointPlugin.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b14644058e8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.PointPlugin.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -6767,7 +7037,7 @@ instantiated.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.hooks.RasterPlugin.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b9175c75ec0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.RasterPlugin.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b1464405730&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.RasterPlugin.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -6781,17 +7051,17 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.hooks.RasterPlugin.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b9175c75f18&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.RasterPlugin.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b1464405788&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.RasterPlugin.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.hooks.RasterPlugin.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b9175c75e10&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.RasterPlugin.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b1464405680&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.RasterPlugin.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.hooks.RasterPlugin.instance">
-<tt class="descname">instance</tt><em class="property"> = &lt;functools.partial object at 0x2b9175c75d60&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.RasterPlugin.instance" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">instance</tt><em class="property"> = &lt;functools.partial object at 0x2b14644057e0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.RasterPlugin.instance" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -6845,12 +7115,12 @@ is replaced with X.classname.instance(Y</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.hooks.RasterPlugin.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b9175c75e68&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.RasterPlugin.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b14644055d0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.RasterPlugin.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.hooks.RasterPlugin.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b9175c75ba8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.RasterPlugin.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b14644056d8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.hooks.RasterPlugin.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -7057,7 +7327,7 @@ instantiated.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.pandas.DFrameViewPlot.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b9176037050&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.pandas.DFrameViewPlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b1463280e68&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.pandas.DFrameViewPlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -7071,13 +7341,19 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.pandas.DFrameViewPlot.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b9176037100&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.pandas.DFrameViewPlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b1463280d60&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.pandas.DFrameViewPlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.pandas.DFrameViewPlot.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b9176037158&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.pandas.DFrameViewPlot.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b1463280ec0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.pandas.DFrameViewPlot.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.mpl.pandas.DFrameViewPlot.matches">
+<tt class="descname">matches</tt><big>(</big><em>spec</em><big>)</big><a class="headerlink" href="#holoviews.plotting.mpl.pandas.DFrameViewPlot.matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Matches a specification against the current Plot.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="holoviews.plotting.mpl.pandas.DFrameViewPlot.message">
@@ -7135,12 +7411,12 @@ evaluated with eval. See pprint() function for more details.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.pandas.DFrameViewPlot.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b91760371b0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.pandas.DFrameViewPlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b1463280db8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.pandas.DFrameViewPlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.pandas.DFrameViewPlot.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b9176037260&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.pandas.DFrameViewPlot.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b1463280f70&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.pandas.DFrameViewPlot.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -7161,6 +7437,15 @@ save and restore that state using state_push() and
 state_pop().</p>
 <p>Generally, this method is used by operations that need to test
 something without permanently altering the objects&#8217; state.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.mpl.pandas.DFrameViewPlot.traverse">
+<tt class="descname">traverse</tt><big>(</big><em>fn=None</em>, <em>specs=None</em>, <em>full_breadth=True</em><big>)</big><a class="headerlink" href="#holoviews.plotting.mpl.pandas.DFrameViewPlot.traverse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Traverses any nested DimensionedPlot returning a list
+of all plots that match the specs. The specs should
+be supplied as a list of either Plot types or callables,
+which should return a boolean given the plot class.</p>
 </dd></dl>
 
 <dl class="method">
@@ -7383,7 +7668,7 @@ instantiated.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.path.PolygonPlot.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b917608bba8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.path.PolygonPlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b1462e53418&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.path.PolygonPlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -7404,13 +7689,19 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.path.PolygonPlot.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b917608bdb8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.path.PolygonPlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b1462e536d8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.path.PolygonPlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.path.PolygonPlot.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b917608bd60&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.path.PolygonPlot.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b1462e53680&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.path.PolygonPlot.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.mpl.path.PolygonPlot.matches">
+<tt class="descname">matches</tt><big>(</big><em>spec</em><big>)</big><a class="headerlink" href="#holoviews.plotting.mpl.path.PolygonPlot.matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Matches a specification against the current Plot.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="holoviews.plotting.mpl.path.PolygonPlot.message">
@@ -7468,12 +7759,12 @@ evaluated with eval. See pprint() function for more details.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.path.PolygonPlot.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b917608bec0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.path.PolygonPlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b1462e537e0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.path.PolygonPlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.path.PolygonPlot.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b917608bf18&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.path.PolygonPlot.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b1462e53838&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.path.PolygonPlot.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -7494,6 +7785,15 @@ save and restore that state using state_push() and
 state_pop().</p>
 <p>Generally, this method is used by operations that need to test
 something without permanently altering the objects&#8217; state.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.mpl.path.PolygonPlot.traverse">
+<tt class="descname">traverse</tt><big>(</big><em>fn=None</em>, <em>specs=None</em>, <em>full_breadth=True</em><big>)</big><a class="headerlink" href="#holoviews.plotting.mpl.path.PolygonPlot.traverse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Traverses any nested DimensionedPlot returning a list
+of all plots that match the specs. The specs should
+be supplied as a list of either Plot types or callables,
+which should return a boolean given the plot class.</p>
 </dd></dl>
 
 <dl class="method">
@@ -7656,7 +7956,7 @@ instantiated.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.plot.AdjointLayoutPlot.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b917476d730&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.plot.AdjointLayoutPlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b14640a11b0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.plot.AdjointLayoutPlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -7670,7 +7970,7 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.plot.AdjointLayoutPlot.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b917476d5d0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.plot.AdjointLayoutPlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b14640a1208&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.plot.AdjointLayoutPlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -7685,8 +7985,14 @@ empty axes as necessary.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.plot.AdjointLayoutPlot.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b917476d838&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.plot.AdjointLayoutPlot.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b14640a1260&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.plot.AdjointLayoutPlot.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.mpl.plot.AdjointLayoutPlot.matches">
+<tt class="descname">matches</tt><big>(</big><em>spec</em><big>)</big><a class="headerlink" href="#holoviews.plotting.mpl.plot.AdjointLayoutPlot.matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Matches a specification against the current Plot.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="holoviews.plotting.mpl.plot.AdjointLayoutPlot.message">
@@ -7744,12 +8050,12 @@ evaluated with eval. See pprint() function for more details.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.plot.AdjointLayoutPlot.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b917476d7e0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.plot.AdjointLayoutPlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b14640a12b8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.plot.AdjointLayoutPlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.plot.AdjointLayoutPlot.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b917476d940&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.plot.AdjointLayoutPlot.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b14640a1368&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.plot.AdjointLayoutPlot.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -7770,6 +8076,15 @@ save and restore that state using state_push() and
 state_pop().</p>
 <p>Generally, this method is used by operations that need to test
 something without permanently altering the objects&#8217; state.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.mpl.plot.AdjointLayoutPlot.traverse">
+<tt class="descname">traverse</tt><big>(</big><em>fn=None</em>, <em>specs=None</em>, <em>full_breadth=True</em><big>)</big><a class="headerlink" href="#holoviews.plotting.mpl.plot.AdjointLayoutPlot.traverse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Traverses any nested DimensionedPlot returning a list
+of all plots that match the specs. The specs should
+be supplied as a list of either Plot types or callables,
+which should return a boolean given the plot class.</p>
 </dd></dl>
 
 <dl class="method">
@@ -7884,7 +8199,7 @@ instantiated.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.plot.CompositePlot.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b917476d5d0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.plot.CompositePlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b14640a4100&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.plot.CompositePlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -7898,7 +8213,7 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.plot.CompositePlot.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b917476d628&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.plot.CompositePlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b14640a4158&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.plot.CompositePlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -7909,8 +8224,14 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.plot.CompositePlot.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b917476d520&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.plot.CompositePlot.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b14640a4208&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.plot.CompositePlot.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.mpl.plot.CompositePlot.matches">
+<tt class="descname">matches</tt><big>(</big><em>spec</em><big>)</big><a class="headerlink" href="#holoviews.plotting.mpl.plot.CompositePlot.matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Matches a specification against the current Plot.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="holoviews.plotting.mpl.plot.CompositePlot.message">
@@ -7968,12 +8289,12 @@ evaluated with eval. See pprint() function for more details.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.plot.CompositePlot.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b917476d680&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.plot.CompositePlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b14640a4260&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.plot.CompositePlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.plot.CompositePlot.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b917476d890&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.plot.CompositePlot.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b14640a4310&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.plot.CompositePlot.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -7994,6 +8315,15 @@ save and restore that state using state_push() and
 state_pop().</p>
 <p>Generally, this method is used by operations that need to test
 something without permanently altering the objects&#8217; state.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.mpl.plot.CompositePlot.traverse">
+<tt class="descname">traverse</tt><big>(</big><em>fn=None</em>, <em>specs=None</em>, <em>full_breadth=True</em><big>)</big><a class="headerlink" href="#holoviews.plotting.mpl.plot.CompositePlot.traverse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Traverses any nested DimensionedPlot returning a list
+of all plots that match the specs. The specs should
+be supplied as a list of either Plot types or callables,
+which should return a boolean given the plot class.</p>
 </dd></dl>
 
 <dl class="method">
@@ -8130,7 +8460,7 @@ instantiated.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.plot.GridPlot.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b917476d730&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.plot.GridPlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b14640a71b0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.plot.GridPlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -8144,13 +8474,19 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.plot.GridPlot.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b917476d520&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.plot.GridPlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b14640a7158&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.plot.GridPlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.plot.GridPlot.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b917476d788&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.plot.GridPlot.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b14640a7208&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.plot.GridPlot.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.mpl.plot.GridPlot.matches">
+<tt class="descname">matches</tt><big>(</big><em>spec</em><big>)</big><a class="headerlink" href="#holoviews.plotting.mpl.plot.GridPlot.matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Matches a specification against the current Plot.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="holoviews.plotting.mpl.plot.GridPlot.message">
@@ -8208,12 +8544,12 @@ evaluated with eval. See pprint() function for more details.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.plot.GridPlot.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b917476d578&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.plot.GridPlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b14640a7100&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.plot.GridPlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.plot.GridPlot.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b917476d998&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.plot.GridPlot.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b14640a7310&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.plot.GridPlot.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -8234,6 +8570,15 @@ save and restore that state using state_push() and
 state_pop().</p>
 <p>Generally, this method is used by operations that need to test
 something without permanently altering the objects&#8217; state.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.mpl.plot.GridPlot.traverse">
+<tt class="descname">traverse</tt><big>(</big><em>fn=None</em>, <em>specs=None</em>, <em>full_breadth=True</em><big>)</big><a class="headerlink" href="#holoviews.plotting.mpl.plot.GridPlot.traverse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Traverses any nested DimensionedPlot returning a list
+of all plots that match the specs. The specs should
+be supplied as a list of either Plot types or callables,
+which should return a boolean given the plot class.</p>
 </dd></dl>
 
 <dl class="method">
@@ -8369,7 +8714,7 @@ instantiated.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.plot.LayoutPlot.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b917476d628&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.plot.LayoutPlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b1464079100&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.plot.LayoutPlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -8383,7 +8728,7 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.plot.LayoutPlot.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b917476d680&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.plot.LayoutPlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b1464079158&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.plot.LayoutPlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -8402,8 +8747,14 @@ the all the required layout axes.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.plot.LayoutPlot.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b917476d890&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.plot.LayoutPlot.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b14640791b0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.plot.LayoutPlot.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.mpl.plot.LayoutPlot.matches">
+<tt class="descname">matches</tt><big>(</big><em>spec</em><big>)</big><a class="headerlink" href="#holoviews.plotting.mpl.plot.LayoutPlot.matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Matches a specification against the current Plot.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="holoviews.plotting.mpl.plot.LayoutPlot.message">
@@ -8461,12 +8812,12 @@ evaluated with eval. See pprint() function for more details.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.plot.LayoutPlot.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b917476d5d0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.plot.LayoutPlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b1464079208&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.plot.LayoutPlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.plot.LayoutPlot.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b917476d4c8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.plot.LayoutPlot.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b14640792b8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.plot.LayoutPlot.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -8487,6 +8838,15 @@ save and restore that state using state_push() and
 state_pop().</p>
 <p>Generally, this method is used by operations that need to test
 something without permanently altering the objects&#8217; state.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.mpl.plot.LayoutPlot.traverse">
+<tt class="descname">traverse</tt><big>(</big><em>fn=None</em>, <em>specs=None</em>, <em>full_breadth=True</em><big>)</big><a class="headerlink" href="#holoviews.plotting.mpl.plot.LayoutPlot.traverse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Traverses any nested DimensionedPlot returning a list
+of all plots that match the specs. The specs should
+be supplied as a list of either Plot types or callables,
+which should return a boolean given the plot class.</p>
 </dd></dl>
 
 <dl class="method">
@@ -8612,7 +8972,7 @@ instantiated.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.plot.MPLPlot.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b917476d890&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.plot.MPLPlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b146407f1b0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.plot.MPLPlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -8626,7 +8986,7 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.plot.MPLPlot.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b917476d520&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.plot.MPLPlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b146407f158&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.plot.MPLPlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -8637,8 +8997,14 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.plot.MPLPlot.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b917476d578&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.plot.MPLPlot.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b146407f208&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.plot.MPLPlot.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.mpl.plot.MPLPlot.matches">
+<tt class="descname">matches</tt><big>(</big><em>spec</em><big>)</big><a class="headerlink" href="#holoviews.plotting.mpl.plot.MPLPlot.matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Matches a specification against the current Plot.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="holoviews.plotting.mpl.plot.MPLPlot.message">
@@ -8696,12 +9062,12 @@ evaluated with eval. See pprint() function for more details.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.plot.MPLPlot.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b917476d730&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.plot.MPLPlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b146407f100&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.plot.MPLPlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.plot.MPLPlot.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b917476d7e0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.plot.MPLPlot.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b146407f310&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.plot.MPLPlot.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -8722,6 +9088,15 @@ save and restore that state using state_push() and
 state_pop().</p>
 <p>Generally, this method is used by operations that need to test
 something without permanently altering the objects&#8217; state.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.mpl.plot.MPLPlot.traverse">
+<tt class="descname">traverse</tt><big>(</big><em>fn=None</em>, <em>specs=None</em>, <em>full_breadth=True</em><big>)</big><a class="headerlink" href="#holoviews.plotting.mpl.plot.MPLPlot.traverse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Traverses any nested DimensionedPlot returning a list
+of all plots that match the specs. The specs should
+be supplied as a list of either Plot types or callables,
+which should return a boolean given the plot class.</p>
 </dd></dl>
 
 <dl class="method">
@@ -8934,7 +9309,7 @@ instantiated.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.raster.RasterGridPlot.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b9176372998&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.raster.RasterGridPlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b1464cc9890&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.raster.RasterGridPlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -8948,13 +9323,19 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.raster.RasterGridPlot.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b91763727e0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.raster.RasterGridPlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b1464cc9628&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.raster.RasterGridPlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.raster.RasterGridPlot.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b9176372788&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.raster.RasterGridPlot.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b1464cc95d0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.raster.RasterGridPlot.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.mpl.raster.RasterGridPlot.matches">
+<tt class="descname">matches</tt><big>(</big><em>spec</em><big>)</big><a class="headerlink" href="#holoviews.plotting.mpl.raster.RasterGridPlot.matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Matches a specification against the current Plot.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="holoviews.plotting.mpl.raster.RasterGridPlot.message">
@@ -9012,12 +9393,12 @@ evaluated with eval. See pprint() function for more details.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.raster.RasterGridPlot.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b91763729f0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.raster.RasterGridPlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b1464cc97e0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.raster.RasterGridPlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.raster.RasterGridPlot.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b9176372b50&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.raster.RasterGridPlot.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b1464cc9998&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.raster.RasterGridPlot.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -9038,6 +9419,15 @@ save and restore that state using state_push() and
 state_pop().</p>
 <p>Generally, this method is used by operations that need to test
 something without permanently altering the objects&#8217; state.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.mpl.raster.RasterGridPlot.traverse">
+<tt class="descname">traverse</tt><big>(</big><em>fn=None</em>, <em>specs=None</em>, <em>full_breadth=True</em><big>)</big><a class="headerlink" href="#holoviews.plotting.mpl.raster.RasterGridPlot.traverse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Traverses any nested DimensionedPlot returning a list
+of all plots that match the specs. The specs should
+be supplied as a list of either Plot types or callables,
+which should return a boolean given the plot class.</p>
 </dd></dl>
 
 <dl class="method">
@@ -9146,7 +9536,7 @@ data in the appropriate encoding.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.renderer.MPLRenderer.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b9176647c00&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.renderer.MPLRenderer.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b1464edbaf8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.renderer.MPLRenderer.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -9160,7 +9550,7 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.renderer.MPLRenderer.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b9176647b50&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.renderer.MPLRenderer.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b1464edba48&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.renderer.MPLRenderer.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -9171,12 +9561,12 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.renderer.MPLRenderer.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b9176647ba8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.renderer.MPLRenderer.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b1464edbaa0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.renderer.MPLRenderer.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.renderer.MPLRenderer.instance">
-<tt class="descname">instance</tt><em class="property"> = &lt;functools.partial object at 0x2b9176647730&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.renderer.MPLRenderer.instance" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">instance</tt><em class="property"> = &lt;functools.partial object at 0x2b1464edb628&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.renderer.MPLRenderer.instance" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -9237,7 +9627,7 @@ is replaced with X.classname.instance(Y</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.renderer.MPLRenderer.save">
-<tt class="descname">save</tt><em class="property"> = &lt;functools.partial object at 0x2b9176647c58&gt;</em><a class="reference internal" href="../_modules/holoviews/plotting/mpl/renderer.html#MPLRenderer.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#holoviews.plotting.mpl.renderer.MPLRenderer.save" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">save</tt><em class="property"> = &lt;functools.partial object at 0x2b1464edbb50&gt;</em><a class="reference internal" href="../_modules/holoviews/plotting/mpl/renderer.html#MPLRenderer.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#holoviews.plotting.mpl.renderer.MPLRenderer.save" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -9256,12 +9646,12 @@ is replaced with X.classname.instance(Y</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.renderer.MPLRenderer.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b9176647d60&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.renderer.MPLRenderer.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b1464edbc58&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.renderer.MPLRenderer.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.renderer.MPLRenderer.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b9176647db8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.renderer.MPLRenderer.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b1464edbcb0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.renderer.MPLRenderer.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -9486,7 +9876,7 @@ instantiated.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.seaborn.BivariatePlot.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b91769167e0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.BivariatePlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b14651f5628&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.BivariatePlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -9507,13 +9897,19 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.seaborn.BivariatePlot.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b9176916788&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.BivariatePlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b14651f5680&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.BivariatePlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.seaborn.BivariatePlot.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b9176916520&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.BivariatePlot.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b14651f5418&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.BivariatePlot.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.mpl.seaborn.BivariatePlot.matches">
+<tt class="descname">matches</tt><big>(</big><em>spec</em><big>)</big><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.BivariatePlot.matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Matches a specification against the current Plot.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="holoviews.plotting.mpl.seaborn.BivariatePlot.message">
@@ -9571,12 +9967,12 @@ evaluated with eval. See pprint() function for more details.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.seaborn.BivariatePlot.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b9176916838&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.BivariatePlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b14651f5730&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.BivariatePlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.seaborn.BivariatePlot.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b91769166d8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.BivariatePlot.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b14651f55d0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.BivariatePlot.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -9597,6 +9993,15 @@ save and restore that state using state_push() and
 state_pop().</p>
 <p>Generally, this method is used by operations that need to test
 something without permanently altering the objects&#8217; state.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.mpl.seaborn.BivariatePlot.traverse">
+<tt class="descname">traverse</tt><big>(</big><em>fn=None</em>, <em>specs=None</em>, <em>full_breadth=True</em><big>)</big><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.BivariatePlot.traverse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Traverses any nested DimensionedPlot returning a list
+of all plots that match the specs. The specs should
+be supplied as a list of either Plot types or callables,
+which should return a boolean given the plot class.</p>
 </dd></dl>
 
 <dl class="method">
@@ -9784,7 +10189,7 @@ instantiated.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.seaborn.DistributionPlot.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b91769167e0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.DistributionPlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b14651f5628&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.DistributionPlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -9805,13 +10210,19 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.seaborn.DistributionPlot.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b9176916520&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.DistributionPlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b14651f5418&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.DistributionPlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.seaborn.DistributionPlot.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b91769164c8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.DistributionPlot.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b14651f53c0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.DistributionPlot.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.mpl.seaborn.DistributionPlot.matches">
+<tt class="descname">matches</tt><big>(</big><em>spec</em><big>)</big><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.DistributionPlot.matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Matches a specification against the current Plot.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="holoviews.plotting.mpl.seaborn.DistributionPlot.message">
@@ -9869,12 +10280,12 @@ evaluated with eval. See pprint() function for more details.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.seaborn.DistributionPlot.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b9176916680&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.DistributionPlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b14651f5578&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.DistributionPlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.seaborn.DistributionPlot.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b91769168e8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.DistributionPlot.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b14651f57e0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.DistributionPlot.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -9895,6 +10306,15 @@ save and restore that state using state_push() and
 state_pop().</p>
 <p>Generally, this method is used by operations that need to test
 something without permanently altering the objects&#8217; state.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.mpl.seaborn.DistributionPlot.traverse">
+<tt class="descname">traverse</tt><big>(</big><em>fn=None</em>, <em>specs=None</em>, <em>full_breadth=True</em><big>)</big><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.DistributionPlot.traverse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Traverses any nested DimensionedPlot returning a list
+of all plots that match the specs. The specs should
+be supplied as a list of either Plot types or callables,
+which should return a boolean given the plot class.</p>
 </dd></dl>
 
 <dl class="method">
@@ -10082,7 +10502,7 @@ instantiated.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.seaborn.FullRedrawPlot.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b9176916838&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.FullRedrawPlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b14651f54c8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.FullRedrawPlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -10103,7 +10523,7 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.seaborn.FullRedrawPlot.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b91769164c8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.FullRedrawPlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b14651f53c0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.FullRedrawPlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -10114,8 +10534,14 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.seaborn.FullRedrawPlot.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b9176916628&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.FullRedrawPlot.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b14651f5520&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.FullRedrawPlot.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.mpl.seaborn.FullRedrawPlot.matches">
+<tt class="descname">matches</tt><big>(</big><em>spec</em><big>)</big><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.FullRedrawPlot.matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Matches a specification against the current Plot.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="holoviews.plotting.mpl.seaborn.FullRedrawPlot.message">
@@ -10173,12 +10599,12 @@ evaluated with eval. See pprint() function for more details.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.seaborn.FullRedrawPlot.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b9176916578&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.FullRedrawPlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b14651f5730&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.FullRedrawPlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.seaborn.FullRedrawPlot.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b9176916470&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.FullRedrawPlot.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b14651f56d8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.FullRedrawPlot.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -10199,6 +10625,15 @@ save and restore that state using state_push() and
 state_pop().</p>
 <p>Generally, this method is used by operations that need to test
 something without permanently altering the objects&#8217; state.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.mpl.seaborn.FullRedrawPlot.traverse">
+<tt class="descname">traverse</tt><big>(</big><em>fn=None</em>, <em>specs=None</em>, <em>full_breadth=True</em><big>)</big><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.FullRedrawPlot.traverse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Traverses any nested DimensionedPlot returning a list
+of all plots that match the specs. The specs should
+be supplied as a list of either Plot types or callables,
+which should return a boolean given the plot class.</p>
 </dd></dl>
 
 <dl class="method">
@@ -10387,7 +10822,7 @@ instantiated.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.seaborn.RegressionPlot.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b9176916680&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.RegressionPlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b14651f53c0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.RegressionPlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -10408,13 +10843,19 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.seaborn.RegressionPlot.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b91769168e8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.RegressionPlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b14651f57e0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.RegressionPlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.seaborn.RegressionPlot.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b9176916520&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.RegressionPlot.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b14651f5418&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.RegressionPlot.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.mpl.seaborn.RegressionPlot.matches">
+<tt class="descname">matches</tt><big>(</big><em>spec</em><big>)</big><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.RegressionPlot.matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Matches a specification against the current Plot.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="holoviews.plotting.mpl.seaborn.RegressionPlot.message">
@@ -10472,12 +10913,12 @@ evaluated with eval. See pprint() function for more details.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.seaborn.RegressionPlot.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b9176916628&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.RegressionPlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b14651f5578&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.RegressionPlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.seaborn.RegressionPlot.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b9176916940&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.RegressionPlot.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b14651f5838&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.RegressionPlot.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -10498,6 +10939,15 @@ save and restore that state using state_push() and
 state_pop().</p>
 <p>Generally, this method is used by operations that need to test
 something without permanently altering the objects&#8217; state.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.mpl.seaborn.RegressionPlot.traverse">
+<tt class="descname">traverse</tt><big>(</big><em>fn=None</em>, <em>specs=None</em>, <em>full_breadth=True</em><big>)</big><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.RegressionPlot.traverse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Traverses any nested DimensionedPlot returning a list
+of all plots that match the specs. The specs should
+be supplied as a list of either Plot types or callables,
+which should return a boolean given the plot class.</p>
 </dd></dl>
 
 <dl class="method">
@@ -10681,7 +11131,7 @@ instantiated.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.seaborn.SNSFramePlot.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b9176916838&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.SNSFramePlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b14651f5418&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.SNSFramePlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -10695,13 +11145,19 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.seaborn.SNSFramePlot.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b9176916470&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.SNSFramePlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b14651f56d8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.SNSFramePlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.seaborn.SNSFramePlot.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b9176916578&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.SNSFramePlot.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b14651f5730&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.SNSFramePlot.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.mpl.seaborn.SNSFramePlot.matches">
+<tt class="descname">matches</tt><big>(</big><em>spec</em><big>)</big><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.SNSFramePlot.matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Matches a specification against the current Plot.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="holoviews.plotting.mpl.seaborn.SNSFramePlot.message">
@@ -10759,12 +11215,12 @@ evaluated with eval. See pprint() function for more details.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.seaborn.SNSFramePlot.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b9176916730&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.SNSFramePlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b14651f5680&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.SNSFramePlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.seaborn.SNSFramePlot.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b91769168e8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.SNSFramePlot.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b14651f57e0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.SNSFramePlot.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -10785,6 +11241,15 @@ save and restore that state using state_push() and
 state_pop().</p>
 <p>Generally, this method is used by operations that need to test
 something without permanently altering the objects&#8217; state.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.mpl.seaborn.SNSFramePlot.traverse">
+<tt class="descname">traverse</tt><big>(</big><em>fn=None</em>, <em>specs=None</em>, <em>full_breadth=True</em><big>)</big><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.SNSFramePlot.traverse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Traverses any nested DimensionedPlot returning a list
+of all plots that match the specs. The specs should
+be supplied as a list of either Plot types or callables,
+which should return a boolean given the plot class.</p>
 </dd></dl>
 
 <dl class="method">
@@ -10969,7 +11434,7 @@ instantiated.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.seaborn.TimeSeriesPlot.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b91769165d0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.TimeSeriesPlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b14651f5418&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.TimeSeriesPlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -10990,13 +11455,19 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.seaborn.TimeSeriesPlot.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b9176916470&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.TimeSeriesPlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b14651f56d8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.TimeSeriesPlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.seaborn.TimeSeriesPlot.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b9176916940&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.TimeSeriesPlot.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b14651f5838&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.TimeSeriesPlot.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.mpl.seaborn.TimeSeriesPlot.matches">
+<tt class="descname">matches</tt><big>(</big><em>spec</em><big>)</big><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.TimeSeriesPlot.matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Matches a specification against the current Plot.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="holoviews.plotting.mpl.seaborn.TimeSeriesPlot.message">
@@ -11054,12 +11525,12 @@ evaluated with eval. See pprint() function for more details.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.seaborn.TimeSeriesPlot.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b9176916578&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.TimeSeriesPlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b14651f5470&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.TimeSeriesPlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.seaborn.TimeSeriesPlot.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b91769166d8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.TimeSeriesPlot.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b14651f55d0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.TimeSeriesPlot.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -11080,6 +11551,15 @@ save and restore that state using state_push() and
 state_pop().</p>
 <p>Generally, this method is used by operations that need to test
 something without permanently altering the objects&#8217; state.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.mpl.seaborn.TimeSeriesPlot.traverse">
+<tt class="descname">traverse</tt><big>(</big><em>fn=None</em>, <em>specs=None</em>, <em>full_breadth=True</em><big>)</big><a class="headerlink" href="#holoviews.plotting.mpl.seaborn.TimeSeriesPlot.traverse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Traverses any nested DimensionedPlot returning a list
+of all plots that match the specs. The specs should
+be supplied as a list of either Plot types or callables,
+which should return a boolean given the plot class.</p>
 </dd></dl>
 
 <dl class="method">
@@ -11168,7 +11648,7 @@ respectively.</p>
         the plot as an element of a grid). The modes &#8216;auto&#8217; and
         &#8216;equal&#8217; correspond to the axis modes of the same name in
         matplotlib, a numeric value may also be passed.</dd>
-<dt><em>param Dict</em> <tt class="docutils literal"><span class="pre">font_types</span></tt> (<em>allow_None=False, constant=False, default={&#8216;heading&#8217;: &lt;matplotlib.font_manager.FontProperties object at 0x2b9165021e50&gt;}, instantiate=True, is_instance=True, pickle_default_value=True, precedence=None, readonly=False</em>)</dt>
+<dt><em>param Dict</em> <tt class="docutils literal"><span class="pre">font_types</span></tt> (<em>allow_None=False, constant=False, default={&#8216;heading&#8217;: &lt;matplotlib.font_manager.FontProperties object at 0x2b1451cdc790&gt;}, instantiate=True, is_instance=True, pickle_default_value=True, precedence=None, readonly=False</em>)</dt>
 <dd>The font style used for heading labels used for emphasis.</dd>
 <dt><em>param Number</em> <tt class="docutils literal"><span class="pre">border</span></tt> (<em>allow_None=False, bounds=(0.0, 0.5), constant=False, default=0.05, inclusive_bounds=(True, True), instantiate=False, pickle_default_value=True, precedence=None, readonly=False, time_dependent=False, time_fn=&lt;Time Time00001&gt;</em>)</dt>
 <dd>The fraction of the plot that should be empty around the
@@ -11300,7 +11780,7 @@ instantiated.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.tabular.TablePlot.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b9176f6ae10&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.tabular.TablePlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b1465876418&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.tabular.TablePlot.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -11321,13 +11801,19 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.tabular.TablePlot.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b9176f6afc8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.tabular.TablePlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b14658761b0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.tabular.TablePlot.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.tabular.TablePlot.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b9176fe9050&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.tabular.TablePlot.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b14658764c8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.tabular.TablePlot.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.mpl.tabular.TablePlot.matches">
+<tt class="descname">matches</tt><big>(</big><em>spec</em><big>)</big><a class="headerlink" href="#holoviews.plotting.mpl.tabular.TablePlot.matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Matches a specification against the current Plot.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="holoviews.plotting.mpl.tabular.TablePlot.message">
@@ -11392,12 +11878,12 @@ inclusion in a table cell.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.tabular.TablePlot.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b9176fe90a8&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.tabular.TablePlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b1465876260&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.tabular.TablePlot.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.mpl.tabular.TablePlot.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b9176fe91b0&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.tabular.TablePlot.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b1465876628&gt;</em><a class="headerlink" href="#holoviews.plotting.mpl.tabular.TablePlot.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -11418,6 +11904,15 @@ save and restore that state using state_push() and
 state_pop().</p>
 <p>Generally, this method is used by operations that need to test
 something without permanently altering the objects&#8217; state.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="holoviews.plotting.mpl.tabular.TablePlot.traverse">
+<tt class="descname">traverse</tt><big>(</big><em>fn=None</em>, <em>specs=None</em>, <em>full_breadth=True</em><big>)</big><a class="headerlink" href="#holoviews.plotting.mpl.tabular.TablePlot.traverse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Traverses any nested DimensionedPlot returning a list
+of all plots that match the specs. The specs should
+be supplied as a list of either Plot types or callables,
+which should return a boolean given the plot class.</p>
 </dd></dl>
 
 <dl class="method">

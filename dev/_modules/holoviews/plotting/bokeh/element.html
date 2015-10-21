@@ -256,6 +256,11 @@
     <span class="c"># ElementPlot</span>
     <span class="n">_plot_method</span> <span class="o">=</span> <span class="bp">None</span>
 
+    <span class="c"># The plot objects to be updated on each frame</span>
+    <span class="c"># Any entries should be existing keys in the handles</span>
+    <span class="c"># instance attribute.</span>
+    <span class="n">_update_handles</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;source&#39;</span><span class="p">,</span> <span class="s">&#39;glyph&#39;</span><span class="p">]</span>
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">invert_axes</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
                  <span class="n">show_labels</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;x&#39;</span><span class="p">,</span> <span class="s">&#39;y&#39;</span><span class="p">],</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">invert_axes</span> <span class="o">=</span> <span class="n">invert_axes</span>
@@ -300,6 +305,10 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">l</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_extents</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">ranges</span><span class="p">)</span>
                 <span class="n">low</span><span class="p">,</span> <span class="n">high</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">invert_axes</span> <span class="k">else</span> <span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">low</span> <span class="o">==</span> <span class="n">high</span><span class="p">:</span>
+                    <span class="n">offset</span> <span class="o">=</span> <span class="n">low</span><span class="o">*</span><span class="mf">0.1</span> <span class="k">if</span> <span class="n">low</span> <span class="k">else</span> <span class="mf">0.5</span>
+                    <span class="n">low</span> <span class="o">-=</span> <span class="n">offset</span>
+                    <span class="n">high</span> <span class="o">+=</span> <span class="n">offset</span>
                 <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">(</span><span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">)):</span>
                     <span class="n">plot_ranges</span><span class="p">[</span><span class="s">&#39;x_range&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">]</span>
 
@@ -312,6 +321,10 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">l</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_extents</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">ranges</span><span class="p">)</span>
                 <span class="n">low</span><span class="p">,</span> <span class="n">high</span> <span class="o">=</span> <span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">invert_axes</span> <span class="k">else</span> <span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">low</span> <span class="o">==</span> <span class="n">high</span><span class="p">:</span>
+                    <span class="n">offset</span> <span class="o">=</span> <span class="n">low</span><span class="o">*</span><span class="mf">0.1</span> <span class="k">if</span> <span class="n">low</span> <span class="k">else</span> <span class="mf">0.5</span>
+                    <span class="n">low</span> <span class="o">-=</span> <span class="n">offset</span>
+                    <span class="n">high</span> <span class="o">+=</span> <span class="n">offset</span>
                 <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">y</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="p">(</span><span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">)):</span>
                     <span class="n">plot_ranges</span><span class="p">[</span><span class="s">&#39;y_range&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">]</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">:</span>
@@ -426,6 +439,30 @@
         <span class="n">plot</span><span class="o">.</span><span class="n">yaxis</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="o">**</span><span class="n">props</span><span class="p">[</span><span class="s">&#39;y&#39;</span><span class="p">])</span>
 
 
+    <span class="k">def</span> <span class="nf">_update_ranges</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">,</span> <span class="n">ranges</span><span class="p">):</span>
+        <span class="n">framewise</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lookup_options</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="s">&#39;norm&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;framewise&#39;</span><span class="p">)</span>
+        <span class="n">l</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_extents</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">ranges</span><span class="p">)</span>
+        <span class="n">dims</span> <span class="o">=</span> <span class="n">element</span><span class="o">.</span><span class="n">dimensions</span><span class="p">()</span>
+        <span class="n">dim_ranges</span> <span class="o">=</span> <span class="n">dims</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">range</span> <span class="o">+</span> <span class="n">dims</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">range</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">framewise</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="n">plot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">[</span><span class="s">&#39;plot&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">invert_axes</span><span class="p">:</span>
+            <span class="n">l</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">r</span>
+        <span class="k">if</span> <span class="n">l</span> <span class="o">==</span> <span class="n">r</span><span class="p">:</span>
+            <span class="n">offset</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">l</span><span class="o">*</span><span class="mf">0.1</span> <span class="k">if</span> <span class="n">l</span> <span class="k">else</span> <span class="mf">0.5</span><span class="p">)</span>
+            <span class="n">l</span> <span class="o">-=</span> <span class="n">offset</span>
+            <span class="n">r</span> <span class="o">+=</span> <span class="n">offset</span>
+        <span class="k">if</span> <span class="n">b</span> <span class="o">==</span> <span class="n">t</span><span class="p">:</span>
+            <span class="n">offset</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">b</span><span class="o">*</span><span class="mf">0.1</span> <span class="k">if</span> <span class="n">b</span> <span class="k">else</span> <span class="mf">0.5</span><span class="p">)</span>
+            <span class="n">b</span> <span class="o">-=</span> <span class="n">offset</span>
+            <span class="n">t</span> <span class="o">+=</span> <span class="n">offset</span>
+        <span class="n">plot</span><span class="o">.</span><span class="n">x_range</span><span class="o">.</span><span class="n">start</span> <span class="o">=</span> <span class="n">l</span>
+        <span class="n">plot</span><span class="o">.</span><span class="n">x_range</span><span class="o">.</span><span class="n">end</span>   <span class="o">=</span> <span class="n">r</span>
+        <span class="n">plot</span><span class="o">.</span><span class="n">y_range</span><span class="o">.</span><span class="n">start</span> <span class="o">=</span> <span class="n">b</span>
+        <span class="n">plot</span><span class="o">.</span><span class="n">y_range</span><span class="o">.</span><span class="n">end</span>   <span class="o">=</span> <span class="n">t</span>
+
+
     <span class="k">def</span> <span class="nf">_process_legend</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Disables legends if show_legend is disabled.</span>
@@ -485,6 +522,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">[</span><span class="s">&#39;glyph&#39;</span><span class="p">]</span>  <span class="o">=</span> <span class="n">glyph</span>
 
         <span class="c"># Update plot, source and glyph</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_update_glyph</span><span class="p">(</span><span class="n">glyph</span><span class="p">,</span> <span class="n">properties</span><span class="p">,</span> <span class="n">mapping</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">overlaid</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_update_plot</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">plot</span><span class="p">,</span> <span class="n">element</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_process_legend</span><span class="p">()</span>
@@ -500,6 +538,8 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">element</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_frame</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">element</span><span class="p">:</span>
+            <span class="n">source</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">[</span><span class="s">&#39;source&#39;</span><span class="p">]</span>
+            <span class="n">source</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="p">[]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">source</span><span class="o">.</span><span class="n">data</span><span class="p">}</span>
             <span class="k">return</span>
 
         <span class="n">ranges</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_ranges</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hmap</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">ranges</span><span class="p">)</span>
@@ -509,8 +549,34 @@
         <span class="n">source</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">[</span><span class="s">&#39;source&#39;</span><span class="p">]</span>
         <span class="n">data</span><span class="p">,</span> <span class="n">mapping</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">ranges</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_update_datasource</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s">&#39;glyph&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">:</span>
+            <span class="n">properties</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_glyph_properties</span><span class="p">(</span><span class="n">plot</span><span class="p">,</span> <span class="n">element</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">ranges</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_update_glyph</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">[</span><span class="s">&#39;glyph&#39;</span><span class="p">],</span> <span class="n">properties</span><span class="p">,</span> <span class="n">mapping</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">overlaid</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_update_ranges</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">ranges</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_update_plot</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">plot</span><span class="p">,</span> <span class="n">element</span><span class="p">)</span>
+
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">current_handles</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a list of the plot objects to update.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">handles</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">handle</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_update_handles</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">handle</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">:</span>
+                <span class="n">handles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">[</span><span class="n">handle</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">overlaid</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">handles</span>
+
+        <span class="n">plot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span>
+        <span class="n">handles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">plot</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_frame</span><span class="p">:</span>
+            <span class="n">framewise</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lookup_options</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_frame</span><span class="p">,</span> <span class="s">&#39;norm&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;framewise&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">framewise</span><span class="p">:</span>
+                <span class="n">handles</span> <span class="o">+=</span> <span class="p">[</span><span class="n">plot</span><span class="o">.</span><span class="n">x_range</span><span class="p">,</span> <span class="n">plot</span><span class="o">.</span><span class="n">y_range</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">handles</span>
 
 
 
@@ -606,6 +672,8 @@
 
     <span class="n">style_opts</span> <span class="o">=</span> <span class="n">legend_dimensions</span> <span class="o">+</span> <span class="n">line_properties</span> <span class="o">+</span> <span class="n">text_properties</span>
 
+    <span class="n">_update_handles</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;source&#39;</span><span class="p">]</span>
+
     <span class="k">def</span> <span class="nf">_process_legend</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">plot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">[</span><span class="s">&#39;plot&#39;</span><span class="p">]</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">show_legend</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">plot</span><span class="o">.</span><span class="n">legend</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">:</span>
@@ -690,6 +758,7 @@
         <span class="k">for</span> <span class="n">subplot</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">subplots</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
             <span class="n">subplot</span><span class="o">.</span><span class="n">update_frame</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">ranges</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">overlaid</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">tabs</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_update_ranges</span><span class="p">(</span><span class="n">overlay</span><span class="p">,</span> <span class="n">ranges</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_update_plot</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">[</span><span class="s">&#39;plot&#39;</span><span class="p">],</span> <span class="n">overlay</span><span class="p">)</span>
 </pre></div>
 
