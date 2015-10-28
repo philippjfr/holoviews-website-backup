@@ -131,7 +131,7 @@
 <span class="sd">Supplies MultiDimensionalMapping and NdMapping which are multi-dimensional</span>
 <span class="sd">map types. The former class only allows indexing whereas the latter</span>
 <span class="sd">also enables slicing over multiple dimension ranges.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">s&quot;&quot;&quot;</span>
 
 <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Sequence</span>
 <span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">cycle</span>
@@ -293,8 +293,8 @@
             <span class="n">valid_vals</span> <span class="o">=</span> <span class="p">[]</span>
 
         <span class="k">for</span> <span class="n">dim</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">valid_vals</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cached_index_values</span><span class="p">[</span><span class="n">dim</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;initial&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cached_index_values</span><span class="p">[</span><span class="n">dim</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="n">vals</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cached_index_values</span><span class="p">[</span><span class="n">dim</span><span class="p">]</span>
-            <span class="k">if</span> <span class="n">vals</span> <span class="o">==</span> <span class="s">&#39;initial&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cached_index_values</span><span class="p">[</span><span class="n">dim</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_instantiated</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_dimension</span><span class="p">(</span><span class="n">dim</span><span class="p">)</span><span class="o">.</span><span class="n">values</span> <span class="o">==</span> <span class="s">&#39;initial&#39;</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">val</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">vals</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">_cached_index_values</span><span class="p">[</span><span class="n">dim</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
