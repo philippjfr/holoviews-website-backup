@@ -136,6 +136,8 @@
 
 
 <span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">distutils.version</span> <span class="kn">import</span> <span class="n">LooseVersion</span>
+
 <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">rc_params_from_file</span>
 
 <span class="kn">from</span> <span class="nn">...core</span> <span class="kn">import</span> <span class="n">Layout</span><span class="p">,</span> <span class="n">NdOverlay</span><span class="p">,</span> <span class="n">Collator</span>
@@ -154,6 +156,8 @@
 
 <span class="kn">from</span> <span class="nn">.renderer</span> <span class="kn">import</span> <span class="n">MPLRenderer</span>
 
+
+<span class="n">mpl_ge_150</span> <span class="o">=</span> <span class="n">LooseVersion</span><span class="p">(</span><span class="n">mpl</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="s">&#39;1.5.0&#39;</span>
 
 
 <span class="k">def</span> <span class="nf">set_style</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
@@ -177,11 +181,29 @@
 
         <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">new_style</span><span class="p">)</span>
 
-<span class="n">styles</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;default&#39;</span><span class="p">:</span> <span class="s">&#39;./default.mplstyle&#39;</span><span class="p">}</span></div>
-<span class="n">set_style</span><span class="p">(</span><span class="s">&#39;default&#39;</span><span class="p">)</span>
+
+<span class="n">styles</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;default&#39;</span><span class="p">:</span> <span class="s">&#39;./default.mplstyle&#39;</span><span class="p">,</span></div>
+          <span class="s">&#39;default&gt;1.5&#39;</span><span class="p">:</span> <span class="s">&#39;./default1.5.mplstyle&#39;</span><span class="p">}</span>
+
+<span class="k">if</span> <span class="n">mpl_ge_150</span><span class="p">:</span>
+    <span class="n">set_style</span><span class="p">(</span><span class="s">&#39;default&gt;1.5&#39;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">set_style</span><span class="p">(</span><span class="s">&#39;default&#39;</span><span class="p">)</span>
 
 <span class="c"># Define matplotlib based style cycles and Palettes</span>
-<span class="n">Cycle</span><span class="o">.</span><span class="n">default_cycles</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s">&#39;default_colors&#39;</span><span class="p">:</span> <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s">&#39;axes.color_cycle&#39;</span><span class="p">]})</span>
+<span class="k">def</span> <span class="nf">get_color_cycle</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">mpl_ge_150</span><span class="p">:</span>
+        <span class="n">cyl</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s">&#39;axes.prop_cycle&#39;</span><span class="p">]</span>
+        <span class="c"># matplotlib 1.5 verifies that axes.prop_cycle *is* a cycler</span>
+        <span class="c"># but no garuantee that there&#39;s a `color` key.</span>
+        <span class="c"># so users could have a custom rcParmas w/ no color...</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="s">&#39;color&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">cyl</span><span class="p">]</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="k">pass</span>  <span class="c"># just return axes.color style below</span>
+    <span class="k">return</span> <span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s">&#39;axes.color_cycle&#39;</span><span class="p">]</span>
+
+<span class="n">Cycle</span><span class="o">.</span><span class="n">default_cycles</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s">&#39;default_colors&#39;</span><span class="p">:</span> <span class="n">get_color_cycle</span><span class="p">()})</span>
 <span class="n">Palette</span><span class="o">.</span><span class="n">colormaps</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">cm</span><span class="p">:</span> <span class="n">plt</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="n">cm</span><span class="p">)</span> <span class="k">for</span> <span class="n">cm</span> <span class="ow">in</span> <span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">datad</span><span class="p">})</span>
 
 <span class="n">style_aliases</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;edgecolor&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;ec&#39;</span><span class="p">,</span> <span class="s">&#39;ecolor&#39;</span><span class="p">],</span> <span class="s">&#39;facecolor&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;fc&#39;</span><span class="p">],</span>
