@@ -483,7 +483,13 @@
 
     <span class="k">def</span> <span class="nf">_glyph_properties</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">plot</span><span class="p">,</span> <span class="n">element</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">ranges</span><span class="p">):</span>
         <span class="n">properties</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">style</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">cyclic_index</span><span class="p">]</span>
-        <span class="n">properties</span><span class="p">[</span><span class="s">&#39;legend&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">element</span><span class="o">.</span><span class="n">label</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">overlay_dims</span><span class="p">:</span>
+            <span class="n">legend</span> <span class="o">=</span> <span class="s">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">d</span><span class="o">.</span><span class="n">pprint_value_string</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span>
+                                <span class="bp">self</span><span class="o">.</span><span class="n">overlay_dims</span><span class="o">.</span><span class="n">items</span><span class="p">()])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">legend</span> <span class="o">=</span> <span class="n">element</span><span class="o">.</span><span class="n">label</span>
+        <span class="n">properties</span><span class="p">[</span><span class="s">&#39;legend&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">legend</span>
         <span class="n">properties</span><span class="p">[</span><span class="s">&#39;source&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">source</span>
         <span class="k">return</span> <span class="n">properties</span>
 
@@ -676,7 +682,7 @@
 
     <span class="k">def</span> <span class="nf">_process_legend</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">plot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">[</span><span class="s">&#39;plot&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">show_legend</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">plot</span><span class="o">.</span><span class="n">legend</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">show_legend</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">plot</span><span class="o">.</span><span class="n">legend</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">plot</span><span class="o">.</span><span class="n">legend</span><span class="p">:</span>
                 <span class="n">l</span><span class="o">.</span><span class="n">legends</span><span class="p">[:]</span> <span class="o">=</span> <span class="p">[]</span>
                 <span class="n">l</span><span class="o">.</span><span class="n">border_line_alpha</span> <span class="o">=</span> <span class="mi">0</span>
