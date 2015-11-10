@@ -1,0 +1,8 @@
+<map id="inheritance8849138e9f" name="inheritance8849138e9f">
+<area shape="rect" id="node3" href="#holoviews.plotting.bokeh.annotation.SplinePlot" title="Draw the supplied Spline annotation (see Spline docstring)." alt="" coords="945,32,1132,47"/>
+<area shape="rect" id="node5" href="#holoviews.plotting.bokeh.plot.BokehPlot" title="Plotting baseclass for the Bokeh backends, implementing the basic" alt="" coords="519,17,680,32"/>
+<area shape="rect" id="node6" href="holoviews.plotting.html#holoviews.plotting.plot.GenericElementPlot" title="Plotting baseclass to render contents of an Element. Implements" alt="" coords="513,46,686,61"/>
+<area shape="rect" id="node7" href="holoviews.plotting.html#holoviews.plotting.plot.DimensionedPlot" title="DimensionedPlot implements a number of useful methods" alt="" coords="324,32,485,47"/>
+<area shape="rect" id="node8" href="holoviews.plotting.html#holoviews.plotting.plot.Plot" title="Base class of all Plot classes in HoloViews, designed to be" alt="" coords="184,32,295,47"/>
+<area shape="rect" id="node9" title="params(name=String)" alt="" coords="3,32,155,47"/>
+</map>

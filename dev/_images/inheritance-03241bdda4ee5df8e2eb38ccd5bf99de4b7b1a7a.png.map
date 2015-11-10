@@ -1,0 +1,18 @@
+<map id="inheritanceecf70b2a86" name="inheritanceecf70b2a86">
+<area shape="rect" id="node1" href="holoviews.core.html#holoviews.core.operation.ElementOperation" title="An ElementOperation process an Element or HoloMap at the level of" alt="" coords="694,175,903,193"/>
+<area shape="rect" id="node4" href="#holoviews.operation.element.chain" title="Defining an ElementOperation chain is an easy way to define a new" alt="" coords="958,3,1127,21"/>
+<area shape="rect" id="node5" href="#holoviews.operation.element.collapse_curve" title="Given an overlay of Curves, compute a new curve which is collapsed" alt="" coords="937,38,1148,55"/>
+<area shape="rect" id="node6" href="#holoviews.operation.element.contours" title="Given a Image with a single channel, annotate it with contour" alt="" coords="950,72,1135,90"/>
+<area shape="rect" id="node7" href="#holoviews.operation.element.convolve" title="Apply a convolution to an overlay using the top layer as the" alt="" coords="950,106,1135,124"/>
+<area shape="rect" id="node8" href="#holoviews.operation.element.factory" title="Simple operation that constructs any element that accepts some" alt="" coords="954,141,1131,158"/>
+<area shape="rect" id="node9" href="#holoviews.operation.element.gradient" title="Compute the gradient plot of the supplied Image." alt="" coords="951,175,1134,193"/>
+<area shape="rect" id="node11" href="#holoviews.operation.element.histogram" title="Returns a Histogram of the input element data, binned into" alt="" coords="947,209,1138,227"/>
+<area shape="rect" id="node12" href="#holoviews.operation.element.image_overlay" title="Operation to build a overlay of images to a specification from a" alt="" coords="937,244,1148,262"/>
+<area shape="rect" id="node13" href="#holoviews.operation.element.operation" title="The most generic operation that wraps any callable into an" alt="" coords="948,278,1137,296"/>
+<area shape="rect" id="node14" href="#holoviews.operation.element.threshold" title="Threshold a given Image whereby all values higher than a given" alt="" coords="949,313,1136,330"/>
+<area shape="rect" id="node15" href="#holoviews.operation.element.transform" title="Generic ElementOperation to transform an input Image or RGBA" alt="" coords="948,347,1137,365"/>
+<area shape="rect" id="node2" href="holoviews.core.html#holoviews.core.operation.Operation" title="Base class for all Operation types." alt="" coords="478,175,650,193"/>
+<area shape="rect" id="node3" title="params(name=String)" alt="" coords="217,193,435,210"/>
+<area shape="rect" id="node10" href="#holoviews.operation.element.gridmatrix" title="The gridmatrix operation takes an Element or HoloMap" alt="" coords="468,209,660,227"/>
+<area shape="rect" id="node16" title="params(name=String)" alt="" coords="4,193,184,210"/>
+</map>

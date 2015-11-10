@@ -140,6 +140,7 @@
 <span class="k">except</span><span class="p">:</span>
     <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
 
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">param</span>
 
 <span class="kn">from</span> <span class="nn">..core.util</span> <span class="kn">import</span> <span class="nb">basestring</span><span class="p">,</span> <span class="n">sanitize_identifier</span><span class="p">,</span> <span class="n">max_range</span><span class="p">,</span> <span class="n">find_range</span>
@@ -301,9 +302,13 @@
 
 
     <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="s">&quot;Dimensions are sorted alphanumerically by name&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">name</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Dimension</span><span class="p">)</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">other</span>
+        <span class="s">&quot;Implements equals operator including sanitized comparison.&quot;</span>
+        <span class="n">dim_matches</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">sanitize_identifier</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)]</span>
+        <span class="k">return</span> <span class="n">other</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="n">dim_matches</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Dimension</span><span class="p">)</span> <span class="k">else</span> <span class="n">other</span> <span class="ow">in</span> <span class="n">dim_matches</span>
 
+    <span class="k">def</span> <span class="nf">__ne__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="s">&quot;Implements not equal operator including sanitized comparison.&quot;</span>
+        <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">__eq__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__lt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="s">&quot;Dimensions are sorted alphanumerically by name&quot;</span>
@@ -380,7 +385,8 @@
 <span class="sd">        If shared_data is set to True and no data explicitly supplied,</span>
 <span class="sd">        the clone will share data with the original.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">settings</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_param_values</span><span class="p">(),</span> <span class="o">**</span><span class="n">overrides</span><span class="p">)</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_param_values</span><span class="p">())</span>
+        <span class="n">settings</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="o">**</span><span class="n">overrides</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">shared_data</span><span class="p">:</span>
             <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">settings</span><span class="p">)</span>
@@ -645,8 +651,6 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">ndims</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">kdims</span><span class="p">)</span>
         <span class="n">cdims</span> <span class="o">=</span> <span class="p">[(</span><span class="n">d</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cdims</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_cached_constants</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">(</span><span class="n">cdims</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_cached_index_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">d</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">kdims</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_cached_value_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">d</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">vdims</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_settings</span> <span class="o">=</span> <span class="bp">None</span>
 
 
@@ -662,7 +666,7 @@
         <span class="n">valid_dimensions</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">dim</span> <span class="ow">in</span> <span class="n">dimensions</span><span class="p">:</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">Dimension</span><span class="p">):</span> <span class="n">dim</span> <span class="o">=</span> <span class="n">dim</span><span class="o">.</span><span class="n">name</span>
-            <span class="k">if</span> <span class="n">dim</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cached_index_names</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">dim</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">kdims</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s">&quot;Supplied dimensions </span><span class="si">%s</span><span class="s"> not found.&quot;</span> <span class="o">%</span> <span class="n">dim</span><span class="p">)</span>
             <span class="n">valid_dimensions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dim</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">valid_dimensions</span>
@@ -728,7 +732,7 @@
                 <span class="k">return</span> <span class="ne">IndexError</span><span class="p">(</span><span class="s">&#39;Dimension index out of bounds&#39;</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">sanitized</span> <span class="o">=</span> <span class="p">{</span><span class="n">sanitize_identifier</span><span class="p">(</span><span class="n">kd</span><span class="p">):</span> <span class="n">kd</span>
-                         <span class="k">for</span> <span class="n">kd</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cached_index_names</span><span class="p">}</span>
+                         <span class="k">for</span> <span class="n">kd</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">dimensions</span><span class="p">(</span><span class="s">&#39;key&#39;</span><span class="p">,</span> <span class="bp">True</span><span class="p">)}</span>
             <span class="k">return</span> <span class="p">[</span><span class="n">d</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">dimensions</span><span class="p">()]</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">sanitized</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">dim</span><span class="p">))</span>
         <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s">&quot;Dimension </span><span class="si">%s</span><span class="s"> not found in </span><span class="si">%s</span><span class="s">.&quot;</span> <span class="o">%</span>
@@ -780,13 +784,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="c"># Apply all indexes applying on this object</span>
-        <span class="n">val_dim</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;value&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">vdims</span> <span class="k">else</span> <span class="p">[]</span>
-        <span class="n">sanitized</span> <span class="o">=</span> <span class="p">{</span><span class="n">sanitize_identifier</span><span class="p">(</span><span class="n">kd</span><span class="p">):</span> <span class="n">kd</span>
-                     <span class="k">for</span> <span class="n">kd</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cached_index_names</span><span class="p">}</span>
-        <span class="n">local_dims</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cached_index_names</span>
-                      <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">sanitized</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">+</span> <span class="n">val_dim</span><span class="p">)</span>
+        <span class="n">vdims</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vdims</span><span class="o">+</span><span class="p">[</span><span class="s">&#39;value&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">vdims</span> <span class="k">else</span> <span class="p">[]</span>
+        <span class="n">kdims</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">kdims</span>
         <span class="n">local_kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
-                        <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">local_dims</span><span class="p">}</span>
+                        <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">kdims</span><span class="o">+</span><span class="n">vdims</span><span class="p">}</span>
 
         <span class="c"># Check selection_spec applies</span>
         <span class="k">if</span> <span class="n">selection_specs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
@@ -795,14 +796,16 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">matches</span> <span class="o">=</span> <span class="bp">True</span>
 
+        <span class="c"># Apply selection to self</span>
         <span class="k">if</span> <span class="n">local_kwargs</span> <span class="ow">and</span> <span class="n">matches</span><span class="p">:</span>
-            <span class="n">select</span> <span class="o">=</span> <span class="p">[</span><span class="nb">slice</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ndims</span><span class="p">)]</span>
+            <span class="n">ndims</span> <span class="o">=</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dimensions</span><span class="p">())</span> <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">d</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">vdims</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">)</span>
+                     <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">ndims</span><span class="p">)</span>
+            <span class="n">select</span> <span class="o">=</span> <span class="p">[</span><span class="nb">slice</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ndims</span><span class="p">)]</span>
             <span class="k">for</span> <span class="n">dim</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">local_kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
                 <span class="k">if</span> <span class="n">dim</span> <span class="o">==</span> <span class="s">&#39;value&#39;</span><span class="p">:</span>
                     <span class="n">select</span> <span class="o">+=</span> <span class="p">[</span><span class="n">val</span><span class="p">]</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span> <span class="n">val</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="o">*</span><span class="n">val</span><span class="p">)</span>
-                    <span class="n">dim</span> <span class="o">=</span> <span class="n">sanitized</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">dim</span><span class="p">)</span>
                     <span class="n">select</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">get_dimension_index</span><span class="p">(</span><span class="n">dim</span><span class="p">)]</span> <span class="o">=</span> <span class="n">val</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_deep_indexable</span><span class="p">:</span>
                 <span class="n">selection</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">select</span><span class="p">),</span>
@@ -812,13 +815,15 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">selection</span> <span class="o">=</span> <span class="bp">self</span>
 
-        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">selection</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">selection</span><span class="p">,</span> <span class="n">Dimensioned</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">selection</span>
+        <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">selection</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">selection</span><span class="p">,</span> <span class="n">Dimensioned</span><span class="p">):</span>
             <span class="c"># Apply the selection on the selected object of a different type</span>
             <span class="n">val_dim</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;value&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="n">selection</span><span class="o">.</span><span class="n">vdims</span> <span class="k">else</span> <span class="p">[]</span>
             <span class="n">key_dims</span> <span class="o">=</span> <span class="n">selection</span><span class="o">.</span><span class="n">dimensions</span><span class="p">(</span><span class="s">&#39;key&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span> <span class="o">+</span> <span class="n">val_dim</span>
             <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">kw</span> <span class="ow">in</span> <span class="n">key_dims</span> <span class="k">for</span> <span class="n">kw</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">):</span>
                 <span class="n">selection</span> <span class="o">=</span> <span class="n">selection</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">selection_specs</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">selection</span><span class="o">.</span><span class="n">_deep_indexable</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">selection</span><span class="p">,</span> <span class="n">Dimensioned</span><span class="p">)</span> <span class="ow">and</span> <span class="n">selection</span><span class="o">.</span><span class="n">_deep_indexable</span><span class="p">:</span>
             <span class="c"># Apply the deep selection on each item in local selection</span>
             <span class="n">items</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">selection</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
@@ -842,7 +847,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">val</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cached_constants</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">dimension</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">val</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">val</span>
+            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">val</span><span class="p">])</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s">&quot;Dimension </span><span class="si">%s</span><span class="s"> not found in </span><span class="si">%s</span><span class="s">.&quot;</span> <span class="o">%</span>
                             <span class="p">(</span><span class="n">dimension</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">))</span>

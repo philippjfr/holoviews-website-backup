@@ -135,10 +135,12 @@
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 
 <span class="kn">import</span> <span class="nn">param</span>
+<span class="kn">from</span> <span class="nn">param</span> <span class="kn">import</span> <span class="n">_is_number</span>
 
-<span class="kn">from</span> <span class="nn">..core</span> <span class="kn">import</span> <span class="n">ElementOperation</span><span class="p">,</span> <span class="n">NdOverlay</span><span class="p">,</span> <span class="n">Overlay</span>
+<span class="kn">from</span> <span class="nn">..core</span> <span class="kn">import</span> <span class="p">(</span><span class="n">ElementOperation</span><span class="p">,</span> <span class="n">NdOverlay</span><span class="p">,</span> <span class="n">Overlay</span><span class="p">,</span> <span class="n">GridMatrix</span><span class="p">,</span>
+                    <span class="n">HoloMap</span><span class="p">,</span> <span class="n">Columns</span><span class="p">,</span> <span class="n">Element</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">..core.util</span> <span class="kn">import</span> <span class="n">find_minmax</span><span class="p">,</span> <span class="n">sanitize_identifier</span>
-<span class="kn">from</span> <span class="nn">..element.chart</span> <span class="kn">import</span> <span class="n">Histogram</span><span class="p">,</span> <span class="n">Curve</span>
+<span class="kn">from</span> <span class="nn">..element.chart</span> <span class="kn">import</span> <span class="n">Histogram</span><span class="p">,</span> <span class="n">Curve</span><span class="p">,</span> <span class="n">Scatter</span>
 <span class="kn">from</span> <span class="nn">..element.raster</span> <span class="kn">import</span> <span class="n">Raster</span><span class="p">,</span> <span class="n">Image</span><span class="p">,</span> <span class="n">RGB</span><span class="p">,</span> <span class="n">QuadMesh</span>
 <span class="kn">from</span> <span class="nn">..element.path</span> <span class="kn">import</span> <span class="n">Contours</span><span class="p">,</span> <span class="n">Polygons</span>
 
@@ -701,8 +703,81 @@
             <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">xval</span><span class="p">,</span> <span class="n">yval</span><span class="p">))</span>
 
         <span class="k">return</span> <span class="n">Curve</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">group</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">p</span><span class="o">.</span><span class="n">group</span><span class="p">,</span>
-                     <span class="n">label</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get_overlay_label</span><span class="p">(</span><span class="n">overlay</span><span class="p">))</span></div>
-</pre></div>
+                     <span class="n">label</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get_overlay_label</span><span class="p">(</span><span class="n">overlay</span><span class="p">))</span>
+
+
+</div>
+<div class="viewcode-block" id="gridmatrix"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.operation.html#holoviews.operation.element.gridmatrix">[docs]</a><span class="k">class</span> <span class="nc">gridmatrix</span><span class="p">(</span><span class="n">param</span><span class="o">.</span><span class="n">ParameterizedFunction</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The gridmatrix operation takes an Element or HoloMap</span>
+<span class="sd">    of Elements as input and creates a GridMatrix object,</span>
+<span class="sd">    which plots each dimension in the Element against</span>
+<span class="sd">    each other dimension. This provides a very useful</span>
+<span class="sd">    overview of high-dimensional data and is inspired</span>
+<span class="sd">    by pandas and seaborn scatter_matrix implementations.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">chart_type</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">Parameter</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="n">Scatter</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">        The Element type used to display bivariate distributions</span>
+<span class="s">        of the data.&quot;&quot;&quot;</span><span class="p">)</span>
+
+    <span class="n">diagonal_type</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">Parameter</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="n">Histogram</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">       The Element type along the diagonal, may be a Histogram or any</span>
+<span class="s">       other plot type which can visualize a univariate distribution.&quot;&quot;&quot;</span><span class="p">)</span>
+
+    <span class="n">overlay_dims</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">List</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="p">[],</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">       If a HoloMap is supplied this will allow overlaying one or</span>
+<span class="s">       more of it&#39;s key dimensions.&quot;&quot;&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">ParamOverrides</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">HoloMap</span><span class="p">):</span>
+            <span class="n">ranges</span> <span class="o">=</span> <span class="p">{</span><span class="n">d</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="n">data</span><span class="o">.</span><span class="n">range</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">dimensions</span><span class="p">()}</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">clone</span><span class="p">({</span><span class="n">k</span><span class="p">:</span> <span class="n">GridMatrix</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_process</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">ranges</span><span class="p">))</span>
+                               <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">items</span><span class="p">()})</span><span class="o">.</span><span class="n">collate</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">overlay_dims</span><span class="p">:</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">overlay</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">overlay_dims</span><span class="p">),</span> <span class="p">(</span><span class="n">HoloMap</span><span class="p">,))</span>
+            <span class="k">return</span> <span class="n">data</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">Element</span><span class="p">):</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_process</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">GridMatrix</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+
+    <span class="k">def</span> <span class="nf">_process</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">element</span><span class="p">,</span> <span class="n">ranges</span><span class="o">=</span><span class="p">{}):</span>
+        <span class="c"># Creates a unified Columns.data attribute</span>
+        <span class="c"># to draw the data from</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+            <span class="k">if</span> <span class="s">&#39;dataframe&#39;</span> <span class="ow">in</span> <span class="n">Columns</span><span class="o">.</span><span class="n">datatype</span><span class="p">:</span>
+                <span class="n">el_data</span> <span class="o">=</span> <span class="n">element</span><span class="o">.</span><span class="n">table</span><span class="p">(</span><span class="s">&#39;dataframe&#39;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">el_data</span> <span class="o">=</span> <span class="n">element</span><span class="o">.</span><span class="n">table</span><span class="p">(</span><span class="s">&#39;dictionary&#39;</span><span class="p">)</span>
+        <span class="n">el_data</span> <span class="o">=</span> <span class="n">element</span><span class="o">.</span><span class="n">data</span>
+
+        <span class="c"># Get dimensions to plot against each other</span>
+        <span class="n">dims</span> <span class="o">=</span> <span class="p">[</span><span class="n">d</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">element</span><span class="o">.</span><span class="n">dimensions</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">_is_number</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">range</span><span class="p">(</span><span class="n">d</span><span class="p">)[</span><span class="mi">0</span><span class="p">])]</span>
+        <span class="n">permuted_dims</span> <span class="o">=</span> <span class="p">[(</span><span class="n">d1</span><span class="p">,</span> <span class="n">d2</span><span class="p">)</span> <span class="k">for</span> <span class="n">d1</span> <span class="ow">in</span> <span class="n">dims</span>
+                         <span class="k">for</span> <span class="n">d2</span> <span class="ow">in</span> <span class="n">dims</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
+
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">d1</span><span class="p">,</span> <span class="n">d2</span> <span class="ow">in</span> <span class="n">permuted_dims</span><span class="p">:</span>
+            <span class="n">key</span> <span class="o">=</span> <span class="p">(</span><span class="n">d1</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">d2</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">d1</span> <span class="o">==</span> <span class="n">d2</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">diagonal_type</span> <span class="ow">is</span> <span class="n">Histogram</span><span class="p">:</span>
+                    <span class="n">bin_range</span> <span class="o">=</span> <span class="n">ranges</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">d1</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">element</span><span class="o">.</span><span class="n">range</span><span class="p">(</span><span class="n">d1</span><span class="p">))</span>
+                    <span class="n">el</span> <span class="o">=</span> <span class="n">element</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">dimension</span><span class="o">=</span><span class="n">d1</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+                                      <span class="n">bin_range</span><span class="o">=</span><span class="n">bin_range</span><span class="p">,</span>
+                                      <span class="n">adjoin</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">values</span> <span class="o">=</span> <span class="n">element</span><span class="o">.</span><span class="n">dimension_values</span><span class="p">(</span><span class="n">d1</span><span class="p">)</span>
+                    <span class="n">el</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">diagonal_type</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">kdims</span><span class="o">=</span><span class="p">[</span><span class="n">d1</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">el</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">chart_type</span><span class="p">(</span><span class="n">el_data</span><span class="p">,</span> <span class="n">kdims</span><span class="o">=</span><span class="p">[</span><span class="n">d1</span><span class="p">],</span>
+                                  <span class="n">vdims</span><span class="o">=</span><span class="p">[</span><span class="n">d2</span><span class="p">])</span>
+            <span class="n">data</span><span class="p">[(</span><span class="n">d1</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">d2</span><span class="o">.</span><span class="n">name</span><span class="p">)]</span> <span class="o">=</span> <span class="n">el</span>
+        <span class="k">return</span> <span class="n">data</span>
+</pre></div></div>
 
           </div>
           <footer>

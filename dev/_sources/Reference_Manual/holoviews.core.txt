@@ -30,6 +30,19 @@ holoviews.core Package
 
 -------
 
+:mod:`data` Module
+------------------
+
+.. inheritance-diagram:: holoviews.core.data
+
+
+.. automodule:: holoviews.core.data
+    :members:
+    :inherited-members:
+    :show-inheritance:
+
+-------
+
 :mod:`dimension` Module
 -----------------------
 

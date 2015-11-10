@@ -129,6 +129,23 @@
   <h1>Source code for holoviews.element.util</h1><div class="highlight"><pre>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">dask</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="n">dask</span> <span class="o">=</span> <span class="bp">None</span>
+
+<div class="viewcode-block" id="toarray"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.element.html#holoviews.element.util.toarray">[docs]</a><span class="k">def</span> <span class="nf">toarray</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">index_value</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Interface helper function to turn dask Arrays into numpy arrays as</span>
+<span class="sd">    necessary. If index_value is True, a value is returned instead of</span>
+<span class="sd">    an array holding a single value.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">dask</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">dask</span><span class="o">.</span><span class="n">array</span><span class="o">.</span><span class="n">Array</span><span class="p">):</span>
+        <span class="n">arr</span> <span class="o">=</span>  <span class="n">v</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">arr</span><span class="p">[()]</span> <span class="k">if</span> <span class="n">index_value</span> <span class="k">else</span> <span class="n">arr</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">v</span>
+</div>
 <div class="viewcode-block" id="compute_edges"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.element.html#holoviews.element.util.compute_edges">[docs]</a><span class="k">def</span> <span class="nf">compute_edges</span><span class="p">(</span><span class="n">edges</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Computes edges from a number of bin centers,</span>

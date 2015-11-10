@@ -1,0 +1,12 @@
+<map id="inheritance20bc0ddbc5" name="inheritance20bc0ddbc5">
+<area shape="rect" id="node1" href="holoviews.core.html#holoviews.core.data.Columns" title="Columns provides a general baseclass for column based Element types" alt="" coords="747,26,846,37"/>
+<area shape="rect" id="node10" href="#holoviews.interface.pandas.DataFrameView" title="DataFrameView provides a convenient compatibility wrapper around" alt="" coords="868,26,1010,37"/>
+<area shape="rect" id="node2" href="holoviews.core.html#holoviews.core.element.Element" title="Element is the baseclass for all ViewableElement types, with an x&#45; and" alt="" coords="616,26,725,37"/>
+<area shape="rect" id="node3" href="holoviews.core.html#holoviews.core.dimension.Dimensioned" title="Dimensioned is a base class that allows the data contents of a" alt="" coords="300,2,429,14"/>
+<area shape="rect" id="node6" href="holoviews.core.html#holoviews.core.dimension.ViewableElement" title="A ViewableElement is a dimensioned datastructure that may be" alt="" coords="452,2,594,14"/>
+<area shape="rect" id="node4" href="holoviews.core.html#holoviews.core.dimension.LabelledData" title="LabelledData is a mix&#45;in class designed to introduce the group and" alt="" coords="148,2,277,14"/>
+<area shape="rect" id="node5" title="params(name=String)" alt="" coords="3,2,125,14"/>
+<area shape="rect" id="node7" title="Composable is a mix&#45;in class to allow Dimensioned object to be" alt="" coords="466,26,580,37"/>
+<area shape="rect" id="node8" href="holoviews.core.html#holoviews.core.overlay.Overlayable" title="Overlayable provides a mix&#45;in class to support the" alt="" coords="466,49,580,61"/>
+<area shape="rect" id="node9" href="#holoviews.interface.pandas.DFrame" title="DFrame is a DataFrameView type, which additionally provides" alt="" coords="1032,26,1149,37"/>
+</map>
