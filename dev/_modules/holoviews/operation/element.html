@@ -671,40 +671,26 @@
 <span class="c">#==================#</span>
 
 </div>
-<div class="viewcode-block" id="collapse_curve"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.operation.html#holoviews.operation.element.collapse_curve">[docs]</a><span class="k">class</span> <span class="nc">collapse_curve</span><span class="p">(</span><span class="n">ElementOperation</span><span class="p">):</span>
+<div class="viewcode-block" id="collapse"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.operation.html#holoviews.operation.element.collapse">[docs]</a><span class="k">class</span> <span class="nc">collapse</span><span class="p">(</span><span class="n">ElementOperation</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Given an overlay of Curves, compute a new curve which is collapsed</span>
-<span class="sd">    for each x-value given a specified function.</span>
+<span class="sd">    Given an overlay of Element types, collapse into single Element</span>
+<span class="sd">    object using supplied function. Collapsing aggregates over the</span>
+<span class="sd">    key dimensions of each object applying the supplied fn to each group.</span>
 
 <span class="sd">    This is an example of an ElementOperation that does not involve</span>
 <span class="sd">    any Raster types.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">output_type</span> <span class="o">=</span> <span class="n">Curve</span>
-
     <span class="n">fn</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">Callable</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
 <span class="s">        The function that is used to collapse the curve y-values for</span>
 <span class="s">        each x-value.&quot;&quot;&quot;</span><span class="p">)</span>
 
-    <span class="n">group</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s">&#39;Collapses&#39;</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
-<span class="s">       The group assigned to the collapsed curve output.&quot;&quot;&quot;</span><span class="p">)</span>
-
     <span class="k">def</span> <span class="nf">_process</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">overlay</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-
-        <span class="k">for</span> <span class="n">curve</span> <span class="ow">in</span> <span class="n">overlay</span><span class="p">:</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">curve</span><span class="p">,</span> <span class="n">Curve</span><span class="p">):</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;The collapse_curve operation requires Curves as input.&quot;</span><span class="p">)</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="n">curve</span><span class="o">.</span><span class="n">data</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">overlay</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">data</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]):</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;All input curves must have same x-axis values.&quot;</span><span class="p">)</span>
-
-        <span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">xval</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">overlay</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">data</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]):</span>
-            <span class="n">yval</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">p</span><span class="o">.</span><span class="n">fn</span><span class="p">([</span><span class="n">c</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>  <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">overlay</span><span class="p">])</span>
-            <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">xval</span><span class="p">,</span> <span class="n">yval</span><span class="p">))</span>
-
-        <span class="k">return</span> <span class="n">Curve</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">group</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">p</span><span class="o">.</span><span class="n">group</span><span class="p">,</span>
-                     <span class="n">label</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get_overlay_label</span><span class="p">(</span><span class="n">overlay</span><span class="p">))</span>
-
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">overlay</span><span class="p">,</span> <span class="n">NdOverlay</span><span class="p">):</span>
+            <span class="n">collapse_map</span> <span class="o">=</span> <span class="n">HoloMap</span><span class="p">(</span><span class="n">overlay</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">collapse_map</span> <span class="o">=</span> <span class="n">HoloMap</span><span class="p">({</span><span class="n">i</span><span class="p">:</span> <span class="n">el</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">el</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">overlay</span><span class="p">)})</span>
+        <span class="k">return</span> <span class="n">collapse_map</span><span class="o">.</span><span class="n">collapse</span><span class="p">(</span><span class="n">function</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">p</span><span class="o">.</span><span class="n">fn</span><span class="p">)</span>
 
 </div>
 <div class="viewcode-block" id="gridmatrix"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.operation.html#holoviews.operation.element.gridmatrix">[docs]</a><span class="k">class</span> <span class="nc">gridmatrix</span><span class="p">(</span><span class="n">param</span><span class="o">.</span><span class="n">ParameterizedFunction</span><span class="p">):</span>

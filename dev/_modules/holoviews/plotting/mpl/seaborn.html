@@ -332,7 +332,10 @@
                                      <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
 <span class="s">        Selects which Seaborn plot type to use, when visualizing the</span>
 <span class="s">        SNSFrame. The options that can be passed to the plot_type are</span>
-<span class="s">        defined in dframe_options.&quot;&quot;&quot;</span><span class="p">)</span>
+<span class="s">        defined in dframe_options. Valid options are &#39;interact&#39;, &#39;regplot&#39;,</span>
+<span class="s">        &#39;lmplot&#39;, &#39;corrplot&#39;, &#39;plot&#39;, &#39;boxplot&#39;, &#39;hist&#39;, &#39;scatter_matrix&#39;,</span>
+<span class="s">        &#39;autocorrelation_plot&#39;, &#39;pairgrid&#39;, &#39;facetgrid&#39;, &#39;pairplot&#39;,</span>
+<span class="s">        &#39;violinplot&#39; and &#39;factorplot&#39;&quot;&quot;&quot;</span><span class="p">)</span>
 
     <span class="n">dframe_options</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">DFrameViewPlot</span><span class="o">.</span><span class="n">dframe_options</span><span class="p">,</span>
                           <span class="o">**</span><span class="p">{</span><span class="s">&#39;regplot&#39;</span><span class="p">:</span>   <span class="n">RegressionPlot</span><span class="o">.</span><span class="n">style_opts</span><span class="p">,</span>

@@ -250,11 +250,14 @@
 
     <span class="n">direction</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">ObjectSelector</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s">&#39;&lt;&#39;</span><span class="p">,</span>
                                      <span class="n">objects</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;&lt;&#39;</span><span class="p">,</span> <span class="s">&#39;^&#39;</span><span class="p">,</span> <span class="s">&#39;&gt;&#39;</span><span class="p">,</span> <span class="s">&#39;v&#39;</span><span class="p">],</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
-<span class="s">        The cardinal direction in which the arrow is pointing.&quot;&quot;&quot;</span><span class="p">)</span>
+<span class="s">        The cardinal direction in which the arrow is pointing. Accepted</span>
+<span class="s">        arrow directions are &#39;&lt;&#39;, &#39;^&#39;, &#39;&gt;&#39; and &#39;v&#39;.&quot;&quot;&quot;</span><span class="p">)</span>
 
     <span class="n">arrowstyle</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">ObjectSelector</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s">&#39;-&gt;&#39;</span><span class="p">,</span>
-                                       <span class="n">objects</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;-&#39;</span><span class="p">,</span> <span class="s">&#39;-&gt;&#39;</span><span class="p">,</span> <span class="s">&#39;-[&#39;</span><span class="p">,</span> <span class="s">&#39;-|&gt;&#39;</span><span class="p">,</span> <span class="s">&#39;&lt;-&gt;&#39;</span><span class="p">,</span> <span class="s">&#39;&lt;|-|&gt;&#39;</span><span class="p">],</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
-<span class="s">       The arrowstyle used to draw the arrow.&quot;&quot;&quot;</span><span class="p">)</span>
+                                      <span class="n">objects</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;-&#39;</span><span class="p">,</span> <span class="s">&#39;-&gt;&#39;</span><span class="p">,</span> <span class="s">&#39;-[&#39;</span><span class="p">,</span> <span class="s">&#39;-|&gt;&#39;</span><span class="p">,</span> <span class="s">&#39;&lt;-&gt;&#39;</span><span class="p">,</span> <span class="s">&#39;&lt;|-|&gt;&#39;</span><span class="p">],</span>
+                                      <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">        The arrowstyle used to draw the arrow. Accepted arrow styles are</span>
+<span class="s">        &#39;-&#39;, &#39;-&gt;&#39;, &#39;-[&#39;, &#39;-|&gt;&#39;, &#39;&lt;-&gt;&#39; and &#39;&lt;|-|&gt;&#39;&quot;&quot;&quot;</span><span class="p">)</span>
 
     <span class="n">points</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">Number</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;Font size of arrow text (if any).&quot;</span><span class="p">)</span>
 
@@ -294,11 +297,13 @@
 
     <span class="n">halign</span><span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">ObjectSelector</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s">&#39;center&#39;</span><span class="p">,</span>
                                  <span class="n">objects</span><span class="o">=</span> <span class="p">[</span><span class="s">&#39;left&#39;</span><span class="p">,</span> <span class="s">&#39;right&#39;</span><span class="p">,</span> <span class="s">&#39;center&#39;</span><span class="p">],</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
-<span class="s">       The horizontal alignment position of the displayed text.&quot;&quot;&quot;</span><span class="p">)</span>
+<span class="s">       The horizontal alignment position of the displayed text. Allowed values</span>
+<span class="s">       are &#39;left&#39;, &#39;right&#39; and &#39;center&#39;.&quot;&quot;&quot;</span><span class="p">)</span>
 
     <span class="n">valign</span><span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">ObjectSelector</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s">&#39;center&#39;</span><span class="p">,</span>
                                  <span class="n">objects</span><span class="o">=</span> <span class="p">[</span><span class="s">&#39;top&#39;</span><span class="p">,</span> <span class="s">&#39;bottom&#39;</span><span class="p">,</span> <span class="s">&#39;center&#39;</span><span class="p">],</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
-<span class="s">       The vertical alignment position of the displayed text.&quot;&quot;&quot;</span><span class="p">)</span>
+<span class="s">       The vertical alignment position of the displayed text. Allowed values</span>
+<span class="s">       are &#39;center&#39;, &#39;top&#39; and &#39;bottom&#39;.&quot;&quot;&quot;</span><span class="p">)</span>
 
     <span class="n">group</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s">&#39;Text&#39;</span><span class="p">,</span> <span class="n">constant</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 

@@ -158,6 +158,11 @@
     <span class="n">height</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">Integer</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
 <span class="s">        Height of the plot in pixels&quot;&quot;&quot;</span><span class="p">)</span>
 
+    <span class="n">shared_datasource</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">Boolean</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">        Whether Elements drawing the data from the same object should</span>
+<span class="s">        share their Bokeh data source allowing for linked brushing</span>
+<span class="s">        and other linked behaviors.&quot;&quot;&quot;</span><span class="p">)</span>
+
     <span class="n">renderer</span> <span class="o">=</span> <span class="n">BokehRenderer</span>
 
 <div class="viewcode-block" id="BokehPlot.get_data"><a class="viewcode-back" href="../../../../Reference_Manual/holoviews.plotting.bokeh.html#holoviews.plotting.bokeh.plot.BokehPlot.get_data">[docs]</a>    <span class="k">def</span> <span class="nf">get_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">,</span> <span class="n">ranges</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
@@ -218,7 +223,7 @@
 <span class="sd">        from the same object.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">get_sources</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="nb">id</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">current_frame</span><span class="o">.</span><span class="n">data</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span>
-        <span class="n">filter_fn</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">current_frame</span> <span class="ow">and</span>
+        <span class="n">filter_fn</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shared_datasource</span> <span class="ow">and</span> <span class="n">x</span><span class="o">.</span><span class="n">current_frame</span> <span class="ow">and</span>
                                <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">current_frame</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span>
                                <span class="ow">and</span> <span class="s">&#39;source&#39;</span> <span class="ow">in</span> <span class="n">x</span><span class="o">.</span><span class="n">handles</span><span class="p">)</span>
         <span class="n">data_sources</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">traverse</span><span class="p">(</span><span class="n">get_sources</span><span class="p">,</span> <span class="p">[</span><span class="n">filter_fn</span><span class="p">])</span>
@@ -245,11 +250,6 @@
 <span class="sd">    Plot a group of elements in a grid layout based on a GridSpace element</span>
 <span class="sd">    object.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">shared_datasource</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">Boolean</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
-<span class="s">        Whether Elements drawing the data from the same object should</span>
-<span class="s">        share their Bokeh data source allowing for linked brushing</span>
-<span class="s">        and other linked behaviors.&quot;&quot;&quot;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">layout</span><span class="p">,</span> <span class="n">ranges</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">keys</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">dimensions</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
                  <span class="n">layout_num</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>

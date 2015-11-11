@@ -215,12 +215,11 @@
 <span class="s">        A list of plugin tools to use on the plot.&quot;&quot;&quot;</span><span class="p">)</span>
 
     <span class="n">xaxis</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">ObjectSelector</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s">&#39;bottom&#39;</span><span class="p">,</span>
-                                 <span class="n">objects</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;top&#39;</span><span class="p">,</span> <span class="s">&#39;bottom&#39;</span><span class="p">,</span>
-                                          <span class="s">&#39;bare&#39;</span><span class="p">,</span> <span class="s">&#39;top-bare&#39;</span><span class="p">,</span>
-                                          <span class="s">&#39;bottom-bare&#39;</span><span class="p">,</span>
-                                          <span class="bp">None</span><span class="p">],</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
-<span class="s">        Whether and where to display the xaxis, bare options allow</span>
-<span class="s">        suppressing all axis labels including ticks and xlabel.&quot;&quot;&quot;</span><span class="p">)</span>
+                                 <span class="n">objects</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;top&#39;</span><span class="p">,</span> <span class="s">&#39;bottom&#39;</span><span class="p">,</span> <span class="s">&#39;bare&#39;</span><span class="p">,</span> <span class="s">&#39;top-bare&#39;</span><span class="p">,</span>
+                                          <span class="s">&#39;bottom-bare&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">],</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">        Whether and where to display the xaxis, bare options allow suppressing</span>
+<span class="s">        all axis labels including ticks and xlabel. Valid options are &#39;top&#39;,</span>
+<span class="s">        &#39;bottom&#39;, &#39;bare&#39;, &#39;top-bare&#39; and &#39;bottom-bare&#39;.&quot;&quot;&quot;</span><span class="p">)</span>
 
     <span class="n">logx</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">Boolean</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
 <span class="s">        Whether the x-axis of the plot will be a log axis.&quot;&quot;&quot;</span><span class="p">)</span>
@@ -234,12 +233,11 @@
 <span class="s">        bokeh ticking behavior is applied.&quot;&quot;&quot;</span><span class="p">)</span>
 
     <span class="n">yaxis</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">ObjectSelector</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s">&#39;left&#39;</span><span class="p">,</span>
-                                 <span class="n">objects</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;left&#39;</span><span class="p">,</span> <span class="s">&#39;right&#39;</span><span class="p">,</span> <span class="s">&#39;bare&#39;</span><span class="p">,</span>
-                                          <span class="s">&#39;left-bare&#39;</span><span class="p">,</span> <span class="s">&#39;right-bare&#39;</span><span class="p">,</span>
-                                          <span class="bp">None</span><span class="p">],</span>
-                                 <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
-<span class="s">        Whether and where to display the yaxis, bare options allow</span>
-<span class="s">        suppressing all axis labels including ticks and ylabel.&quot;&quot;&quot;</span><span class="p">)</span>
+                                      <span class="n">objects</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;left&#39;</span><span class="p">,</span> <span class="s">&#39;right&#39;</span><span class="p">,</span> <span class="s">&#39;bare&#39;</span><span class="p">,</span> <span class="s">&#39;left-bare&#39;</span><span class="p">,</span>
+                                               <span class="s">&#39;right-bare&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">],</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">        Whether and where to display the yaxis, bare options allow suppressing</span>
+<span class="s">        all axis labels including ticks and ylabel. Valid options are &#39;left&#39;,</span>
+<span class="s">        &#39;right&#39;, &#39;bare&#39; &#39;left-bare&#39; and &#39;right-bare&#39;.&quot;&quot;&quot;</span><span class="p">)</span>
 
     <span class="n">logy</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">Boolean</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
 <span class="s">        Whether the y-axis of the plot will be a log axis.&quot;&quot;&quot;</span><span class="p">)</span>

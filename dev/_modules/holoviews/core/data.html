@@ -373,6 +373,8 @@
 <span class="sd">        and a function to apply or a mapping between the dimensions and</span>
 <span class="sd">        functions to apply along each dimension.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">dim</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">vdims</span> <span class="k">for</span> <span class="n">dim</span> <span class="ow">in</span> <span class="n">dimensions</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s">&quot;Reduce cannot be applied to value dimensions&quot;</span><span class="p">)</span>
         <span class="n">reduce_dims</span><span class="p">,</span> <span class="n">reduce_map</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reduce_map</span><span class="p">(</span><span class="n">dimensions</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="n">reduce_map</span><span class="p">)</span>
         <span class="n">reduced</span> <span class="o">=</span> <span class="bp">self</span>
         <span class="k">for</span> <span class="n">reduce_fn</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">reduce_map</span><span class="p">:</span>
@@ -390,6 +392,8 @@
 <span class="sd">        Aggregates over the supplied key dimensions with the defined</span>
 <span class="sd">        function.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">function</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;The aggregate method requires a function to be specified&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dimensions</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span> <span class="n">dimensions</span> <span class="o">=</span> <span class="p">[</span><span class="n">dimensions</span><span class="p">]</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">dimensions</span><span class="p">:</span> <span class="n">dimensions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">kdims</span>
         <span class="n">aggregated</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">interface</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dimensions</span><span class="p">,</span> <span class="n">function</span><span class="p">)</span>
@@ -400,15 +404,15 @@
     <span class="k">def</span> <span class="nf">groupby</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dimensions</span><span class="o">=</span><span class="p">[],</span> <span class="n">container_type</span><span class="o">=</span><span class="n">HoloMap</span><span class="p">,</span> <span class="n">group_type</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dimensions</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span> <span class="n">dimensions</span> <span class="o">=</span> <span class="p">[</span><span class="n">dimensions</span><span class="p">]</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">dimensions</span><span class="p">):</span> <span class="n">dimensions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dimensions</span><span class="p">(</span><span class="s">&#39;key&#39;</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">group_type</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span> <span class="n">group_type</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
         <span class="n">dimensions</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">get_dimension</span><span class="p">(</span><span class="n">d</span><span class="p">)</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">dimensions</span><span class="p">]</span>
         <span class="n">invalid_dims</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">dimensions</span><span class="p">)</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dimensions</span><span class="p">(</span><span class="s">&#39;key&#39;</span><span class="p">,</span> <span class="bp">True</span><span class="p">)))</span>
         <span class="k">if</span> <span class="n">invalid_dims</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s">&#39;Following dimensions could not be found:</span><span class="se">\n</span><span class="si">%s</span><span class="s">.&#39;</span>
                             <span class="o">%</span> <span class="n">invalid_dims</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">group_type</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-            <span class="n">group_type</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">interface</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dimensions</span><span class="p">,</span> <span class="n">container_type</span><span class="p">,</span> <span class="n">group_type</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">interface</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dimensions</span><span class="p">,</span> <span class="n">container_type</span><span class="p">,</span>
+                                      <span class="n">group_type</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
     <span class="nd">@classmethod</span>
 <div class="viewcode-block" id="Columns.concat"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.core.html#holoviews.core.data.Columns.concat">[docs]</a>    <span class="k">def</span> <span class="nf">concat</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">columns_objs</span><span class="p">):</span>
@@ -510,6 +514,53 @@
                              <span class="s">&quot;were able to support the supplied data format.&quot;</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">data</span><span class="p">,</span> <span class="n">kdims</span><span class="p">,</span> <span class="n">vdims</span><span class="p">,</span> <span class="n">interface</span>
+
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">select_mask</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">columns</span><span class="p">,</span> <span class="n">selection</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Given a Columns object and a dictionary with dimension keys and</span>
+<span class="sd">        selection keys (i.e tuple ranges, slices, sets, lists or literals)</span>
+<span class="sd">        return a boolean mask over the rows in the Columns object that</span>
+<span class="sd">        have been selected.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">columns</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">bool</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">dim</span><span class="p">,</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">selection</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+                <span class="n">k</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="o">*</span><span class="n">k</span><span class="p">)</span>
+            <span class="n">arr</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="n">columns</span><span class="p">,</span> <span class="n">dim</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="nb">slice</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">k</span><span class="o">.</span><span class="n">start</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                    <span class="n">mask</span> <span class="o">&amp;=</span> <span class="n">k</span><span class="o">.</span><span class="n">start</span> <span class="o">&lt;=</span> <span class="n">arr</span>
+                <span class="k">if</span> <span class="n">k</span><span class="o">.</span><span class="n">stop</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                    <span class="n">mask</span> <span class="o">&amp;=</span> <span class="n">arr</span> <span class="o">&lt;</span> <span class="n">k</span><span class="o">.</span><span class="n">stop</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="p">(</span><span class="nb">set</span><span class="p">,</span> <span class="nb">list</span><span class="p">)):</span>
+                <span class="n">iter_slcs</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">for</span> <span class="n">ik</span> <span class="ow">in</span> <span class="n">k</span><span class="p">:</span>
+                    <span class="n">iter_slcs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">arr</span> <span class="o">==</span> <span class="n">ik</span><span class="p">)</span>
+                <span class="n">mask</span> <span class="o">&amp;=</span> <span class="n">np</span><span class="o">.</span><span class="n">logical_or</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="n">iter_slcs</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">index_mask</span> <span class="o">=</span> <span class="n">arr</span> <span class="o">==</span> <span class="n">k</span>
+                <span class="k">if</span> <span class="n">columns</span><span class="o">.</span><span class="n">ndims</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">index_mask</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">data_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">arr</span> <span class="o">-</span> <span class="n">k</span><span class="p">))</span>
+                    <span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">columns</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">bool</span><span class="p">)</span>
+                    <span class="n">mask</span><span class="p">[</span><span class="n">data_index</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">mask</span> <span class="o">&amp;=</span> <span class="n">index_mask</span>
+        <span class="k">return</span> <span class="n">mask</span>
+
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">indexed</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">columns</span><span class="p">,</span> <span class="n">selection</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Given a Columns object and selection to be applied returns</span>
+<span class="sd">        boolean to indicate whether a scalar value has been indexed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">selected</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">selection</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="n">all_scalar</span> <span class="o">=</span> <span class="nb">all</span><span class="p">(</span><span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sel</span><span class="p">,</span> <span class="p">(</span><span class="nb">tuple</span><span class="p">,</span> <span class="nb">slice</span><span class="p">,</span> <span class="nb">set</span><span class="p">,</span> <span class="nb">list</span><span class="p">))</span>
+                         <span class="k">for</span> <span class="n">sel</span> <span class="ow">in</span> <span class="n">selection</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+        <span class="n">all_kdims</span> <span class="o">=</span> <span class="nb">all</span><span class="p">(</span><span class="n">d</span> <span class="ow">in</span> <span class="n">selected</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">columns</span><span class="o">.</span><span class="n">kdims</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">all_scalar</span> <span class="ow">and</span> <span class="n">all_kdims</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">columns</span><span class="o">.</span><span class="n">vdims</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
 
 
     <span class="nd">@classmethod</span>
@@ -697,15 +748,19 @@
         <span class="n">element_dims</span> <span class="o">=</span> <span class="p">[</span><span class="n">kdim</span> <span class="k">for</span> <span class="n">kdim</span> <span class="ow">in</span> <span class="n">columns</span><span class="o">.</span><span class="n">kdims</span>
                         <span class="k">if</span> <span class="n">kdim</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">index_dims</span><span class="p">]</span>
 
-        <span class="n">element_kwargs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">get_param_values</span><span class="p">(</span><span class="n">columns</span><span class="p">),</span>
-                              <span class="n">kdims</span><span class="o">=</span><span class="n">element_dims</span><span class="p">)</span>
-        <span class="n">element_kwargs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="n">d</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">columns</span><span class="o">.</span><span class="n">dimensions</span><span class="p">()</span>
-                 <span class="k">if</span> <span class="n">d</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">dimensions</span><span class="p">]</span>
-        <span class="n">map_data</span> <span class="o">=</span> <span class="p">[(</span><span class="n">k</span><span class="p">,</span> <span class="n">group_type</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="o">**</span><span class="n">element_kwargs</span><span class="p">))</span>
-                    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">columns</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">dimensions</span><span class="p">)]</span>
-        <span class="k">with</span> <span class="n">item_check</span><span class="p">(</span><span class="bp">False</span><span class="p">),</span> <span class="n">sorted_context</span><span class="p">(</span><span class="bp">False</span><span class="p">):</span>
-            <span class="k">return</span> <span class="n">container_type</span><span class="p">(</span><span class="n">map_data</span><span class="p">,</span> <span class="n">kdims</span><span class="o">=</span><span class="n">index_dims</span><span class="p">)</span>
+        <span class="n">group_kwargs</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">if</span> <span class="n">group_type</span> <span class="o">!=</span> <span class="s">&#39;raw&#39;</span> <span class="ow">and</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">group_type</span><span class="p">,</span> <span class="n">Element</span><span class="p">):</span>
+            <span class="n">group_kwargs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">get_param_values</span><span class="p">(</span><span class="n">columns</span><span class="p">),</span>
+                                <span class="n">kdims</span><span class="o">=</span><span class="n">element_dims</span><span class="p">)</span>
+        <span class="n">group_kwargs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="n">data</span> <span class="o">=</span> <span class="p">[(</span><span class="n">k</span><span class="p">,</span> <span class="n">group_type</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="o">**</span><span class="n">group_kwargs</span><span class="p">))</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span>
+                <span class="n">columns</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">dimensions</span><span class="p">)]</span>
+        <span class="k">if</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">container_type</span><span class="p">,</span> <span class="n">NdMapping</span><span class="p">):</span>
+            <span class="k">with</span> <span class="n">item_check</span><span class="p">(</span><span class="bp">False</span><span class="p">),</span> <span class="n">sorted_context</span><span class="p">(</span><span class="bp">False</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">container_type</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">kdims</span><span class="o">=</span><span class="n">index_dims</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">container_type</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 
 
     <span class="nd">@classmethod</span>
@@ -757,30 +812,13 @@
 
 
     <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">select</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">columns</span><span class="p">,</span> <span class="n">selection_specs</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">select</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">select</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">columns</span><span class="p">,</span> <span class="o">**</span><span class="n">selection</span><span class="p">):</span>
         <span class="n">df</span> <span class="o">=</span> <span class="n">columns</span><span class="o">.</span><span class="n">data</span>
-        <span class="n">selected_kdims</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="n">mask</span> <span class="o">=</span> <span class="bp">True</span>
-        <span class="k">for</span> <span class="n">dim</span><span class="p">,</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">select</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
-                <span class="n">k</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="o">*</span><span class="n">k</span><span class="p">)</span>
-            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="nb">slice</span><span class="p">):</span>
-                <span class="k">if</span> <span class="n">k</span><span class="o">.</span><span class="n">start</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-                    <span class="n">mask</span> <span class="o">&amp;=</span> <span class="n">k</span><span class="o">.</span><span class="n">start</span> <span class="o">&lt;=</span> <span class="n">df</span><span class="p">[</span><span class="n">dim</span><span class="p">]</span>
-                <span class="k">if</span> <span class="n">k</span><span class="o">.</span><span class="n">stop</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-                    <span class="n">mask</span> <span class="o">&amp;=</span> <span class="n">df</span><span class="p">[</span><span class="n">dim</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">k</span><span class="o">.</span><span class="n">stop</span>
-            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="p">(</span><span class="nb">set</span><span class="p">,</span> <span class="nb">list</span><span class="p">)):</span>
-                <span class="n">iter_slcs</span> <span class="o">=</span> <span class="p">[]</span>
-                <span class="k">for</span> <span class="n">ik</span> <span class="ow">in</span> <span class="n">k</span><span class="p">:</span>
-                    <span class="n">iter_slcs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">dim</span><span class="p">]</span> <span class="o">==</span> <span class="n">ik</span><span class="p">)</span>
-                <span class="n">mask</span> <span class="o">&amp;=</span> <span class="n">np</span><span class="o">.</span><span class="n">logical_or</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="n">iter_slcs</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">dim</span> <span class="ow">in</span> <span class="n">columns</span><span class="o">.</span><span class="n">kdims</span><span class="p">:</span> <span class="n">selected_kdims</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dim</span><span class="p">)</span>
-                <span class="n">mask</span> <span class="o">&amp;=</span> <span class="n">df</span><span class="p">[</span><span class="n">dim</span><span class="p">]</span> <span class="o">==</span> <span class="n">k</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">select_mask</span><span class="p">(</span><span class="n">columns</span><span class="p">,</span> <span class="n">selection</span><span class="p">)</span>
+        <span class="n">indexed</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">indexed</span><span class="p">(</span><span class="n">columns</span><span class="p">,</span> <span class="n">selection</span><span class="p">)</span>
         <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">selected_kdims</span><span class="p">))</span> <span class="o">==</span> <span class="n">columns</span><span class="o">.</span><span class="n">ndims</span><span class="p">:</span>
-            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">columns</span><span class="o">.</span><span class="n">vdims</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-                <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">columns</span><span class="o">.</span><span class="n">vdims</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">indexed</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">df</span><span class="p">[</span><span class="n">columns</span><span class="o">.</span><span class="n">vdims</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">df</span>
 
 
@@ -908,28 +946,33 @@
 
 
     <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">groupby</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">columns</span><span class="p">,</span> <span class="n">dimensions</span><span class="p">,</span> <span class="n">container_type</span><span class="o">=</span><span class="n">HoloMap</span><span class="p">,</span>
-                <span class="n">group_type</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">raw</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">groupby</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">columns</span><span class="p">,</span> <span class="n">dimensions</span><span class="p">,</span> <span class="n">container_type</span><span class="p">,</span> <span class="n">group_type</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">data</span> <span class="o">=</span> <span class="n">columns</span><span class="o">.</span><span class="n">data</span>
 
         <span class="c"># Get dimension objects, labels, indexes and data</span>
         <span class="n">dimensions</span> <span class="o">=</span> <span class="p">[</span><span class="n">columns</span><span class="o">.</span><span class="n">get_dimension</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">dimensions</span><span class="p">]</span>
         <span class="n">dim_idxs</span> <span class="o">=</span> <span class="p">[</span><span class="n">columns</span><span class="o">.</span><span class="n">get_dimension_index</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">dimensions</span><span class="p">]</span>
         <span class="n">ndims</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dimensions</span><span class="p">)</span>
-        <span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;kdims&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">kdim</span> <span class="k">for</span> <span class="n">kdim</span> <span class="ow">in</span> <span class="n">columns</span><span class="o">.</span><span class="n">kdims</span>
-                           <span class="k">if</span> <span class="n">kdim</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">dimensions</span><span class="p">]</span>
+        <span class="n">kdims</span> <span class="o">=</span> <span class="p">[</span><span class="n">kdim</span> <span class="k">for</span> <span class="n">kdim</span> <span class="ow">in</span> <span class="n">columns</span><span class="o">.</span><span class="n">kdims</span>
+                 <span class="k">if</span> <span class="n">kdim</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">dimensions</span><span class="p">]</span>
+        <span class="n">vdims</span> <span class="o">=</span> <span class="n">columns</span><span class="o">.</span><span class="n">vdims</span>
 
         <span class="c"># Find unique entries along supplied dimensions</span>
         <span class="c"># by creating a view that treats the selected</span>
         <span class="c"># groupby keys as a single object.</span>
         <span class="n">indices</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span> <span class="n">dim_idxs</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-        <span class="n">view</span> <span class="o">=</span> <span class="n">indices</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">void</span><span class="p">,</span> <span class="n">indices</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">itemsize</span> <span class="o">*</span> <span class="n">indices</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])))</span>
+        <span class="n">group_shape</span> <span class="o">=</span> <span class="n">indices</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">itemsize</span> <span class="o">*</span> <span class="n">indices</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">view</span> <span class="o">=</span> <span class="n">indices</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">void</span><span class="p">,</span> <span class="n">group_shape</span><span class="p">)))</span>
         <span class="n">_</span><span class="p">,</span> <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">return_index</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
         <span class="n">idx</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
         <span class="n">unique_indices</span> <span class="o">=</span> <span class="n">indices</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
 
-        <span class="n">params</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">get_param_values</span><span class="p">(</span><span class="n">columns</span><span class="p">)</span>
-        <span class="n">params</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="c"># Get group</span>
+        <span class="n">group_kwargs</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">if</span> <span class="n">group_type</span> <span class="o">!=</span> <span class="s">&#39;raw&#39;</span> <span class="ow">and</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">group_type</span><span class="p">,</span> <span class="n">Element</span><span class="p">):</span>
+            <span class="n">group_kwargs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">get_param_values</span><span class="p">(</span><span class="n">columns</span><span class="p">))</span>
+            <span class="n">group_kwargs</span><span class="p">[</span><span class="s">&#39;kdims&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kdims</span>
+        <span class="n">group_kwargs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
 
         <span class="c"># Iterate over the unique entries building masks</span>
         <span class="c"># to apply the group selection</span>
@@ -938,51 +981,28 @@
             <span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logical_and</span><span class="o">.</span><span class="n">reduce</span><span class="p">([</span><span class="n">data</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">group</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
                                          <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ndims</span><span class="p">)])</span>
             <span class="n">group_data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">mask</span><span class="p">,</span> <span class="n">ndims</span><span class="p">:]</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">raw</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">group_type</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-                    <span class="n">group_data</span> <span class="o">=</span> <span class="n">columns</span><span class="o">.</span><span class="n">clone</span><span class="p">(</span><span class="n">group_data</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">group_type</span> <span class="o">==</span> <span class="s">&#39;raw&#39;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">group_type</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                    <span class="n">group_data</span> <span class="o">=</span> <span class="p">{</span><span class="n">d</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="n">group_data</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span>
+                                  <span class="nb">enumerate</span><span class="p">(</span><span class="n">kdims</span><span class="o">+</span><span class="n">vdims</span><span class="p">)}</span>
                 <span class="k">else</span><span class="p">:</span>
-                    <span class="n">group_data</span> <span class="o">=</span> <span class="n">group_type</span><span class="p">(</span><span class="n">group_data</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
+                    <span class="n">group_data</span> <span class="o">=</span> <span class="n">group_type</span><span class="p">(</span><span class="n">group_data</span><span class="p">,</span> <span class="o">**</span><span class="n">group_kwargs</span><span class="p">)</span>
             <span class="n">grouped_data</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="nb">tuple</span><span class="p">(</span><span class="n">group</span><span class="p">),</span> <span class="n">group_data</span><span class="p">))</span>
 
-        <span class="k">if</span> <span class="n">raw</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">grouped_data</span>
-        <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">container_type</span><span class="p">,</span> <span class="n">NdMapping</span><span class="p">):</span>
             <span class="k">with</span> <span class="n">item_check</span><span class="p">(</span><span class="bp">False</span><span class="p">),</span> <span class="n">sorted_context</span><span class="p">(</span><span class="bp">False</span><span class="p">):</span>
                 <span class="k">return</span> <span class="n">container_type</span><span class="p">(</span><span class="n">grouped_data</span><span class="p">,</span> <span class="n">kdims</span><span class="o">=</span><span class="n">dimensions</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">container_type</span><span class="p">(</span><span class="n">grouped_data</span><span class="p">)</span>
 
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">select</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">columns</span><span class="p">,</span> <span class="o">**</span><span class="n">selection</span><span class="p">):</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="n">columns</span><span class="o">.</span><span class="n">data</span>
-        <span class="n">mask</span> <span class="o">=</span> <span class="bp">True</span>
-        <span class="n">selected_kdims</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="n">value</span> <span class="o">=</span> <span class="n">selection</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&#39;value&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">d</span><span class="p">,</span> <span class="n">slc</span> <span class="ow">in</span> <span class="n">selection</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="n">idx</span> <span class="o">=</span> <span class="n">columns</span><span class="o">.</span><span class="n">get_dimension_index</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
-            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">slc</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
-                <span class="n">slc</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="o">*</span><span class="n">slc</span><span class="p">)</span>
-            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">slc</span><span class="p">,</span> <span class="nb">slice</span><span class="p">):</span>
-                <span class="k">if</span> <span class="n">slc</span><span class="o">.</span><span class="n">start</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-                    <span class="n">mask</span> <span class="o">&amp;=</span> <span class="n">slc</span><span class="o">.</span><span class="n">start</span> <span class="o">&lt;=</span> <span class="n">data</span><span class="p">[:,</span> <span class="n">idx</span><span class="p">]</span>
-                <span class="k">if</span> <span class="n">slc</span><span class="o">.</span><span class="n">stop</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-                    <span class="n">mask</span> <span class="o">&amp;=</span> <span class="n">data</span><span class="p">[:,</span> <span class="n">idx</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">slc</span><span class="o">.</span><span class="n">stop</span>
-            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">slc</span><span class="p">,</span> <span class="p">(</span><span class="nb">set</span><span class="p">,</span> <span class="nb">list</span><span class="p">)):</span>
-                <span class="n">mask</span> <span class="o">&amp;=</span> <span class="n">np</span><span class="o">.</span><span class="n">in1d</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span> <span class="n">idx</span><span class="p">],</span> <span class="nb">list</span><span class="p">(</span><span class="n">slc</span><span class="p">))</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">columns</span><span class="o">.</span><span class="n">kdims</span><span class="p">:</span> <span class="n">selected_kdims</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
-                <span class="k">if</span> <span class="n">columns</span><span class="o">.</span><span class="n">ndims</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-                    <span class="n">data_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span> <span class="n">idx</span><span class="p">]</span> <span class="o">-</span> <span class="n">slc</span><span class="p">))</span>
-                    <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data_index</span><span class="p">,</span> <span class="p">:]</span>
-                    <span class="k">break</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">mask</span> <span class="o">&amp;=</span> <span class="n">data</span><span class="p">[:,</span> <span class="n">idx</span><span class="p">]</span> <span class="o">==</span> <span class="n">slc</span>
-        <span class="k">if</span> <span class="n">mask</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">True</span><span class="p">:</span>
-            <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">mask</span><span class="p">,</span> <span class="p">:]</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_2d</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">selected_kdims</span><span class="p">))</span> <span class="o">==</span> <span class="n">columns</span><span class="o">.</span><span class="n">ndims</span><span class="p">:</span>
-            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">columns</span><span class="o">.</span><span class="n">vdims</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-                <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">columns</span><span class="o">.</span><span class="n">ndims</span><span class="p">]</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">select_mask</span><span class="p">(</span><span class="n">columns</span><span class="p">,</span> <span class="n">selection</span><span class="p">)</span>
+        <span class="n">indexed</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">indexed</span><span class="p">(</span><span class="n">columns</span><span class="p">,</span> <span class="n">selection</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_2d</span><span class="p">(</span><span class="n">columns</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">mask</span><span class="p">,</span> <span class="p">:])</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">indexed</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">columns</span><span class="o">.</span><span class="n">ndims</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">data</span>
 
 
@@ -995,7 +1015,7 @@
         <span class="n">joined_data</span> <span class="o">=</span> <span class="n">Columns</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">kdims</span><span class="o">=</span><span class="n">kdims</span><span class="p">,</span> <span class="n">vdims</span><span class="o">=</span><span class="n">vdims</span><span class="p">)</span>
 
         <span class="n">rows</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">cls</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">joined_data</span><span class="p">,</span> <span class="n">kdims</span><span class="p">,</span> <span class="n">raw</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">cls</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">joined_data</span><span class="p">,</span> <span class="n">kdims</span><span class="p">,</span> <span class="nb">list</span><span class="p">,</span> <span class="s">&#39;raw&#39;</span><span class="p">):</span>
             <span class="n">row</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">ndims</span><span class="p">)</span>
             <span class="n">row</span><span class="p">[:</span><span class="n">nkdims</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ufunc</span><span class="p">):</span>
@@ -1043,7 +1063,7 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dimensions</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">):</span> <span class="n">dimensions</span> <span class="o">=</span> <span class="p">[</span><span class="n">dimensions</span><span class="p">]</span>
         <span class="n">rows</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">reindexed</span> <span class="o">=</span> <span class="n">columns</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">dimensions</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">cls</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">reindexed</span><span class="p">,</span> <span class="n">dimensions</span><span class="p">,</span> <span class="n">raw</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">cls</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">reindexed</span><span class="p">,</span> <span class="n">dimensions</span><span class="p">,</span> <span class="nb">list</span><span class="p">,</span> <span class="s">&#39;raw&#39;</span><span class="p">):</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ufunc</span><span class="p">):</span>
                 <span class="n">reduced</span> <span class="o">=</span> <span class="n">function</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
