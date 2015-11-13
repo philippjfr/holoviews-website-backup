@@ -373,7 +373,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_process_underscores</span><span class="p">(</span><span class="n">sanitized</span> <span class="o">+</span> <span class="p">([</span><span class="n">chars</span><span class="p">]</span> <span class="k">if</span> <span class="n">chars</span> <span class="k">else</span> <span class="p">[]))</span>
 </div></div>
 <span class="n">sanitize_identifier</span> <span class="o">=</span> <span class="n">sanitize_identifier_fn</span><span class="o">.</span><span class="n">instance</span><span class="p">()</span>
-
+<span class="n">dimension_sanitizer</span> <span class="o">=</span> <span class="n">sanitize_identifier_fn</span><span class="o">.</span><span class="n">instance</span><span class="p">(</span><span class="n">capitalize</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 
 <div class="viewcode-block" id="find_minmax"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.core.html#holoviews.core.util.find_minmax">[docs]</a><span class="k">def</span> <span class="nf">find_minmax</span><span class="p">(</span><span class="n">lims</span><span class="p">,</span> <span class="n">olims</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
