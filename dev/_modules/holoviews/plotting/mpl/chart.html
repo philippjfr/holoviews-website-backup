@@ -137,7 +137,7 @@
 <span class="kn">import</span> <span class="nn">param</span>
 
 <span class="kn">from</span> <span class="nn">...core</span> <span class="kn">import</span> <span class="n">OrderedDict</span><span class="p">,</span> <span class="n">NdMapping</span><span class="p">,</span> <span class="n">CompositeOverlay</span><span class="p">,</span> <span class="n">HoloMap</span>
-<span class="kn">from</span> <span class="nn">...core.util</span> <span class="kn">import</span> <span class="n">match_spec</span>
+<span class="kn">from</span> <span class="nn">...core.util</span> <span class="kn">import</span> <span class="n">match_spec</span><span class="p">,</span> <span class="n">unique_iterator</span>
 <span class="kn">from</span> <span class="nn">...element</span> <span class="kn">import</span> <span class="n">Points</span><span class="p">,</span> <span class="n">Raster</span><span class="p">,</span> <span class="n">Polygons</span>
 <span class="kn">from</span> <span class="nn">..util</span> <span class="kn">import</span> <span class="n">compute_sizes</span><span class="p">,</span> <span class="n">get_sideplot_ranges</span>
 <span class="kn">from</span> <span class="nn">.element</span> <span class="kn">import</span> <span class="n">ElementPlot</span><span class="p">,</span> <span class="n">ColorbarPlot</span><span class="p">,</span> <span class="n">LegendPlot</span>
@@ -947,8 +947,7 @@
                 <span class="n">dimensions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
                 <span class="n">vals</span> <span class="o">=</span> <span class="p">[</span><span class="bp">None</span><span class="p">]</span>
                 <span class="n">params</span> <span class="o">=</span> <span class="p">{}</span>
-            <span class="n">values</span><span class="p">[</span><span class="n">vtype</span><span class="p">]</span> <span class="o">=</span> <span class="n">NdMapping</span><span class="p">([(</span><span class="n">v</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">vals</span><span class="p">],</span>
-                                      <span class="o">**</span><span class="n">params</span><span class="p">)</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+            <span class="n">values</span><span class="p">[</span><span class="n">vtype</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">unique_iterator</span><span class="p">(</span><span class="n">vals</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">values</span><span class="p">,</span> <span class="n">dimensions</span>
 
 
@@ -1038,7 +1037,7 @@
                 <span class="n">grp</span> <span class="o">=</span> <span class="n">gdim</span><span class="o">.</span><span class="n">pprint_value</span><span class="p">(</span><span class="n">grp_name</span><span class="p">)</span>
                 <span class="k">if</span> <span class="s">&#39;group&#39;</span> <span class="ow">in</span> <span class="n">style_groups</span><span class="p">:</span>
                     <span class="n">idx</span> <span class="o">=</span> <span class="n">style_groups</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s">&#39;group&#39;</span><span class="p">)</span>
-                    <span class="n">label_key</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">grp</span>
+                    <span class="n">label_key</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">grp</span><span class="p">)</span>
                     <span class="n">style_key</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">grp_name</span>
                 <span class="n">val_key</span><span class="p">[</span><span class="n">gi</span><span class="p">]</span> <span class="o">=</span> <span class="n">grp_name</span>
                 <span class="k">if</span> <span class="n">ci</span> <span class="o">&lt;</span> <span class="n">ndims</span><span class="p">:</span>
@@ -1052,7 +1051,7 @@
                     <span class="n">cat</span> <span class="o">=</span> <span class="n">gdim</span><span class="o">.</span><span class="n">pprint_value</span><span class="p">(</span><span class="n">cat_name</span><span class="p">)</span>
                     <span class="k">if</span> <span class="s">&#39;category&#39;</span> <span class="ow">in</span> <span class="n">style_groups</span><span class="p">:</span>
                         <span class="n">idx</span> <span class="o">=</span> <span class="n">style_groups</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s">&#39;category&#39;</span><span class="p">)</span>
-                        <span class="n">label_key</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">cat</span>
+                        <span class="n">label_key</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">cat</span><span class="p">)</span>
                         <span class="n">style_key</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">cat_name</span>
                     <span class="n">val_key</span><span class="p">[</span><span class="n">ci</span><span class="p">]</span> <span class="o">=</span> <span class="n">cat_name</span>
                     <span class="n">xticks</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">xpos</span><span class="o">+</span><span class="n">width</span><span class="o">/</span><span class="mf">2.</span><span class="p">,</span> <span class="n">cat</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
@@ -1062,7 +1061,7 @@
                         <span class="k">if</span> <span class="s">&#39;stack&#39;</span> <span class="ow">in</span> <span class="n">style_groups</span><span class="p">:</span>
                             <span class="n">idx</span> <span class="o">=</span> <span class="n">style_groups</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s">&#39;stack&#39;</span><span class="p">)</span>
                             <span class="n">stk</span> <span class="o">=</span> <span class="n">gdim</span><span class="o">.</span><span class="n">pprint_value</span><span class="p">(</span><span class="n">stk_name</span><span class="p">)</span>
-                            <span class="n">label_key</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">stk</span>
+                            <span class="n">label_key</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">stk</span><span class="p">)</span>
                             <span class="n">style_key</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">stk_name</span>
                         <span class="n">val_key</span><span class="p">[</span><span class="n">si</span><span class="p">]</span> <span class="o">=</span> <span class="n">stk_name</span>
                     <span class="n">vals</span> <span class="o">=</span> <span class="n">element</span><span class="o">.</span><span class="n">sample</span><span class="p">([</span><span class="nb">tuple</span><span class="p">(</span><span class="n">val_key</span><span class="p">)])</span><span class="o">.</span><span class="n">dimension_values</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">vdims</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
