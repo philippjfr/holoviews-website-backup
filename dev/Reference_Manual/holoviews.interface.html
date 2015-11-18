@@ -169,7 +169,7 @@ the x- and y-dimension limits and labels.</p>
 </dl>
 <dl class="method">
 <dt id="holoviews.interface.HoloMap.add_dimension">
-<tt class="descname">add_dimension</tt><big>(</big><em>dimension</em>, <em>dim_pos</em>, <em>dim_val</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#holoviews.interface.HoloMap.add_dimension" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">add_dimension</tt><big>(</big><em>dimension</em>, <em>dim_pos</em>, <em>dim_val</em>, <em>vdim=False</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#holoviews.interface.HoloMap.add_dimension" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a new object with an additional key dimensions.
 Requires the dimension name or object, the desired position
 in the key dimensions and a key value scalar or sequence of
@@ -187,7 +187,7 @@ the clone will share data with the original.</p>
 
 <dl class="method">
 <dt id="holoviews.interface.HoloMap.collapse">
-<tt class="descname">collapse</tt><big>(</big><em>dimensions=None</em>, <em>function=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#holoviews.interface.HoloMap.collapse" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">collapse</tt><big>(</big><em>dimensions=None</em>, <em>function=None</em>, <em>spreadfn=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#holoviews.interface.HoloMap.collapse" title="Permalink to this definition">¶</a></dt>
 <dd><p>Allows collapsing one of any number of key dimensions
 on the HoloMap. Homogenous Elements may be collapsed by
 supplying a function, inhomogenous elements are merged.</p>
@@ -263,7 +263,7 @@ By default &#8216;all&#8217; dimensions are returned.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.HoloMap.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2ba646adac58&gt;</em><a class="headerlink" href="#holoviews.interface.HoloMap.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b70f1d66c00&gt;</em><a class="headerlink" href="#holoviews.interface.HoloMap.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -303,7 +303,7 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.HoloMap.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2ba646adacb0&gt;</em><a class="headerlink" href="#holoviews.interface.HoloMap.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b70f1d66db8&gt;</em><a class="headerlink" href="#holoviews.interface.HoloMap.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -332,7 +332,7 @@ about its dimensions.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.HoloMap.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2ba646adadb8&gt;</em><a class="headerlink" href="#holoviews.interface.HoloMap.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b70f1d66ec0&gt;</em><a class="headerlink" href="#holoviews.interface.HoloMap.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -511,12 +511,12 @@ functions.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.HoloMap.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2ba646adaaf8&gt;</em><a class="headerlink" href="#holoviews.interface.HoloMap.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b70f1d66d60&gt;</em><a class="headerlink" href="#holoviews.interface.HoloMap.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.interface.HoloMap.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2ba646adad60&gt;</em><a class="headerlink" href="#holoviews.interface.HoloMap.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b70f1d66e68&gt;</em><a class="headerlink" href="#holoviews.interface.HoloMap.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -711,7 +711,7 @@ By default &#8216;all&#8217; dimensions are returned.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.Layout.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2ba646adaa48&gt;</em><a class="headerlink" href="#holoviews.interface.Layout.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b70f1d66b50&gt;</em><a class="headerlink" href="#holoviews.interface.Layout.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="classmethod">
@@ -752,12 +752,12 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.Layout.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2ba646adacb0&gt;</em><a class="headerlink" href="#holoviews.interface.Layout.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b70f1d66db8&gt;</em><a class="headerlink" href="#holoviews.interface.Layout.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.interface.Layout.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2ba646adaba8&gt;</em><a class="headerlink" href="#holoviews.interface.Layout.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b70f1d66cb0&gt;</em><a class="headerlink" href="#holoviews.interface.Layout.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -869,12 +869,12 @@ identifiers if necessary.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.Layout.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2ba646adab50&gt;</em><a class="headerlink" href="#holoviews.interface.Layout.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b70f1d66c58&gt;</em><a class="headerlink" href="#holoviews.interface.Layout.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.interface.Layout.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2ba646adac00&gt;</em><a class="headerlink" href="#holoviews.interface.Layout.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b70f1d66d08&gt;</em><a class="headerlink" href="#holoviews.interface.Layout.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -991,7 +991,7 @@ in a multi-dimensional Pandas dframe.</p>
 </dl>
 <dl class="method">
 <dt id="holoviews.interface.DFrame.add_dimension">
-<tt class="descname">add_dimension</tt><big>(</big><em>dimension</em>, <em>dim_pos</em>, <em>dim_val</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#holoviews.interface.DFrame.add_dimension" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">add_dimension</tt><big>(</big><em>dimension</em>, <em>dim_pos</em>, <em>dim_val</em>, <em>vdim=False</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#holoviews.interface.DFrame.add_dimension" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a new object with an additional key dimensions.  Requires
 the dimension name or object, the desired position in the key
 dimensions and a key value scalar or sequence of the same length
@@ -1000,7 +1000,7 @@ as the existing keys.</p>
 
 <dl class="method">
 <dt id="holoviews.interface.DFrame.aggregate">
-<tt class="descname">aggregate</tt><big>(</big><em>dimensions=</em>, <span class="optional">[</span><span class="optional">]</span><em>function=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#holoviews.interface.DFrame.aggregate" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">aggregate</tt><big>(</big><em>dimensions=</em>, <span class="optional">[</span><span class="optional">]</span><em>function=None</em>, <em>spreadfn=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#holoviews.interface.DFrame.aggregate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Aggregates over the supplied key dimensions with the defined
 function.</p>
 </dd></dl>
@@ -1088,7 +1088,7 @@ By default &#8216;all&#8217; dimensions are returned.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.DFrame.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2ba646adac58&gt;</em><a class="headerlink" href="#holoviews.interface.DFrame.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b70f1d66f18&gt;</em><a class="headerlink" href="#holoviews.interface.DFrame.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -1122,7 +1122,7 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.DFrame.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2ba646adad60&gt;</em><a class="headerlink" href="#holoviews.interface.DFrame.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b70f1d66e68&gt;</em><a class="headerlink" href="#holoviews.interface.DFrame.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -1150,7 +1150,7 @@ operation may also be supplied.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.DFrame.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2ba646adaaa0&gt;</em><a class="headerlink" href="#holoviews.interface.DFrame.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b70f1d66ba8&gt;</em><a class="headerlink" href="#holoviews.interface.DFrame.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -1219,7 +1219,7 @@ object.</p>
 
 <dl class="method">
 <dt id="holoviews.interface.DFrame.reduce">
-<tt class="descname">reduce</tt><big>(</big><em>dimensions=</em>, <span class="optional">[</span><span class="optional">]</span><em>function=None</em>, <em>**reduce_map</em><big>)</big><a class="headerlink" href="#holoviews.interface.DFrame.reduce" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">reduce</tt><big>(</big><em>dimensions=</em>, <span class="optional">[</span><span class="optional">]</span><em>function=None</em>, <em>spreadfn=None</em>, <em>**reduce_map</em><big>)</big><a class="headerlink" href="#holoviews.interface.DFrame.reduce" title="Permalink to this definition">¶</a></dt>
 <dd><p>Allows reducing the values along one or more key dimension with
 the supplied function. The dimensions may be supplied as a list
 and a function to apply or a mapping between the dimensions and
@@ -1275,12 +1275,12 @@ specs match the selected object.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.DFrame.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2ba646adae10&gt;</em><a class="headerlink" href="#holoviews.interface.DFrame.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b70f1d66c00&gt;</em><a class="headerlink" href="#holoviews.interface.DFrame.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.interface.DFrame.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2ba646adaf70&gt;</em><a class="headerlink" href="#holoviews.interface.DFrame.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b70f1d66f70&gt;</em><a class="headerlink" href="#holoviews.interface.DFrame.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -1387,7 +1387,7 @@ sampling and reduction methods for their Dimensioned type.</p>
 </dl>
 <dl class="method">
 <dt id="holoviews.interface.UniformNdMapping.add_dimension">
-<tt class="descname">add_dimension</tt><big>(</big><em>dimension</em>, <em>dim_pos</em>, <em>dim_val</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#holoviews.interface.UniformNdMapping.add_dimension" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">add_dimension</tt><big>(</big><em>dimension</em>, <em>dim_pos</em>, <em>dim_val</em>, <em>vdim=False</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#holoviews.interface.UniformNdMapping.add_dimension" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a new object with an additional key dimensions.
 Requires the dimension name or object, the desired position
 in the key dimensions and a key value scalar or sequence of
@@ -1456,7 +1456,7 @@ By default &#8216;all&#8217; dimensions are returned.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.UniformNdMapping.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2ba646adadb8&gt;</em><a class="headerlink" href="#holoviews.interface.UniformNdMapping.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b70f1d66f70&gt;</em><a class="headerlink" href="#holoviews.interface.UniformNdMapping.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -1496,7 +1496,7 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.UniformNdMapping.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2ba646adac00&gt;</em><a class="headerlink" href="#holoviews.interface.UniformNdMapping.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b70f1d66d08&gt;</em><a class="headerlink" href="#holoviews.interface.UniformNdMapping.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -1517,7 +1517,7 @@ about its dimensions.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.UniformNdMapping.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2ba646adaf70&gt;</em><a class="headerlink" href="#holoviews.interface.UniformNdMapping.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b70f1d66ec0&gt;</em><a class="headerlink" href="#holoviews.interface.UniformNdMapping.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -1663,12 +1663,12 @@ functions.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.UniformNdMapping.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2ba646adaa48&gt;</em><a class="headerlink" href="#holoviews.interface.UniformNdMapping.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b70f1d66b50&gt;</em><a class="headerlink" href="#holoviews.interface.UniformNdMapping.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.interface.UniformNdMapping.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2ba646adae68&gt;</em><a class="headerlink" href="#holoviews.interface.UniformNdMapping.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b70f1d66fc8&gt;</em><a class="headerlink" href="#holoviews.interface.UniformNdMapping.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -1889,7 +1889,7 @@ By default &#8216;all&#8217; dimensions are returned.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.ViewableElement.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2ba646adaaa0&gt;</em><a class="headerlink" href="#holoviews.interface.ViewableElement.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b70f1d66ba8&gt;</em><a class="headerlink" href="#holoviews.interface.ViewableElement.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -1923,12 +1923,12 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.ViewableElement.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2ba646adad60&gt;</em><a class="headerlink" href="#holoviews.interface.ViewableElement.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b70f1d66e68&gt;</em><a class="headerlink" href="#holoviews.interface.ViewableElement.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.interface.ViewableElement.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2ba646adae10&gt;</em><a class="headerlink" href="#holoviews.interface.ViewableElement.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b70f1d66c00&gt;</em><a class="headerlink" href="#holoviews.interface.ViewableElement.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -2033,12 +2033,12 @@ functions.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.ViewableElement.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2ba646adac58&gt;</em><a class="headerlink" href="#holoviews.interface.ViewableElement.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b70f1d66f18&gt;</em><a class="headerlink" href="#holoviews.interface.ViewableElement.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.interface.ViewableElement.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2ba646adaf18&gt;</em><a class="headerlink" href="#holoviews.interface.ViewableElement.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b70f1d66e10&gt;</em><a class="headerlink" href="#holoviews.interface.ViewableElement.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -2322,7 +2322,7 @@ By default &#8216;all&#8217; dimensions are returned.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.TimeSeries.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2ba646adacb0&gt;</em><a class="headerlink" href="#holoviews.interface.TimeSeries.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b70f1d66db8&gt;</em><a class="headerlink" href="#holoviews.interface.TimeSeries.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -2356,7 +2356,7 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.TimeSeries.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2ba646adab50&gt;</em><a class="headerlink" href="#holoviews.interface.TimeSeries.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b70f1d66c58&gt;</em><a class="headerlink" href="#holoviews.interface.TimeSeries.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -2372,7 +2372,7 @@ operation may also be supplied.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.TimeSeries.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2ba646adaba8&gt;</em><a class="headerlink" href="#holoviews.interface.TimeSeries.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b70f1d66cb0&gt;</em><a class="headerlink" href="#holoviews.interface.TimeSeries.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -2477,12 +2477,12 @@ functions.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.TimeSeries.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2ba646adac00&gt;</em><a class="headerlink" href="#holoviews.interface.TimeSeries.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b70f1d66d60&gt;</em><a class="headerlink" href="#holoviews.interface.TimeSeries.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.interface.TimeSeries.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2ba646adad08&gt;</em><a class="headerlink" href="#holoviews.interface.TimeSeries.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b70f1d66d08&gt;</em><a class="headerlink" href="#holoviews.interface.TimeSeries.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -2678,7 +2678,7 @@ By default &#8216;all&#8217; dimensions are returned.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.Dimensioned.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2ba646adaaf8&gt;</em><a class="headerlink" href="#holoviews.interface.Dimensioned.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b70f1d66b50&gt;</em><a class="headerlink" href="#holoviews.interface.Dimensioned.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -2712,12 +2712,12 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.Dimensioned.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2ba646adacb0&gt;</em><a class="headerlink" href="#holoviews.interface.Dimensioned.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b70f1d66db8&gt;</em><a class="headerlink" href="#holoviews.interface.Dimensioned.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.interface.Dimensioned.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2ba646adaf18&gt;</em><a class="headerlink" href="#holoviews.interface.Dimensioned.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b70f1d66e10&gt;</em><a class="headerlink" href="#holoviews.interface.Dimensioned.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -2822,12 +2822,12 @@ functions.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.Dimensioned.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2ba646adaaa0&gt;</em><a class="headerlink" href="#holoviews.interface.Dimensioned.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b70f1d66ba8&gt;</em><a class="headerlink" href="#holoviews.interface.Dimensioned.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.interface.Dimensioned.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2ba646adaa48&gt;</em><a class="headerlink" href="#holoviews.interface.Dimensioned.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b70f1d66ec0&gt;</em><a class="headerlink" href="#holoviews.interface.Dimensioned.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -2920,7 +2920,7 @@ list. Internally it uses Seaborn to make all the conversions.</p>
 </dl>
 <dl class="method">
 <dt id="holoviews.interface.Distribution.add_dimension">
-<tt class="descname">add_dimension</tt><big>(</big><em>dimension</em>, <em>dim_pos</em>, <em>dim_val</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#holoviews.interface.Distribution.add_dimension" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">add_dimension</tt><big>(</big><em>dimension</em>, <em>dim_pos</em>, <em>dim_val</em>, <em>vdim=False</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#holoviews.interface.Distribution.add_dimension" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a new object with an additional key dimensions.  Requires
 the dimension name or object, the desired position in the key
 dimensions and a key value scalar or sequence of the same length
@@ -2929,7 +2929,7 @@ as the existing keys.</p>
 
 <dl class="method">
 <dt id="holoviews.interface.Distribution.aggregate">
-<tt class="descname">aggregate</tt><big>(</big><em>dimensions=</em>, <span class="optional">[</span><span class="optional">]</span><em>function=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#holoviews.interface.Distribution.aggregate" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">aggregate</tt><big>(</big><em>dimensions=</em>, <span class="optional">[</span><span class="optional">]</span><em>function=None</em>, <em>spreadfn=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#holoviews.interface.Distribution.aggregate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Aggregates over the supplied key dimensions with the defined
 function.</p>
 </dd></dl>
@@ -3003,7 +3003,7 @@ By default &#8216;all&#8217; dimensions are returned.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.Distribution.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2ba646adae68&gt;</em><a class="headerlink" href="#holoviews.interface.Distribution.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b70f1d66c00&gt;</em><a class="headerlink" href="#holoviews.interface.Distribution.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -3037,7 +3037,7 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.Distribution.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2ba646adad08&gt;</em><a class="headerlink" href="#holoviews.interface.Distribution.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b70f1d66d08&gt;</em><a class="headerlink" href="#holoviews.interface.Distribution.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -3064,7 +3064,7 @@ operation may also be supplied.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.Distribution.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2ba646adae10&gt;</em><a class="headerlink" href="#holoviews.interface.Distribution.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b70f1d66fc8&gt;</em><a class="headerlink" href="#holoviews.interface.Distribution.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -3125,7 +3125,7 @@ evaluated with eval. See pprint() function for more details.</p>
 
 <dl class="method">
 <dt id="holoviews.interface.Distribution.reduce">
-<tt class="descname">reduce</tt><big>(</big><em>dimensions=</em>, <span class="optional">[</span><span class="optional">]</span><em>function=None</em>, <em>**reduce_map</em><big>)</big><a class="headerlink" href="#holoviews.interface.Distribution.reduce" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">reduce</tt><big>(</big><em>dimensions=</em>, <span class="optional">[</span><span class="optional">]</span><em>function=None</em>, <em>spreadfn=None</em>, <em>**reduce_map</em><big>)</big><a class="headerlink" href="#holoviews.interface.Distribution.reduce" title="Permalink to this definition">¶</a></dt>
 <dd><p>Allows reducing the values along one or more key dimension with
 the supplied function. The dimensions may be supplied as a list
 and a function to apply or a mapping between the dimensions and
@@ -3181,12 +3181,12 @@ specs match the selected object.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.Distribution.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2ba646adac00&gt;</em><a class="headerlink" href="#holoviews.interface.Distribution.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b70f1d66d60&gt;</em><a class="headerlink" href="#holoviews.interface.Distribution.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.interface.Distribution.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2ba646adaf70&gt;</em><a class="headerlink" href="#holoviews.interface.Distribution.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b70f1b210a8&gt;</em><a class="headerlink" href="#holoviews.interface.Distribution.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -3300,7 +3300,7 @@ two-dimensional space may have to arbitrary dimensions, e.g. for
 </dl>
 <dl class="method">
 <dt id="holoviews.interface.GridSpace.add_dimension">
-<tt class="descname">add_dimension</tt><big>(</big><em>dimension</em>, <em>dim_pos</em>, <em>dim_val</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#holoviews.interface.GridSpace.add_dimension" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">add_dimension</tt><big>(</big><em>dimension</em>, <em>dim_pos</em>, <em>dim_val</em>, <em>vdim=False</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#holoviews.interface.GridSpace.add_dimension" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a new object with an additional key dimensions.
 Requires the dimension name or object, the desired position
 in the key dimensions and a key value scalar or sequence of
@@ -3369,7 +3369,7 @@ By default &#8216;all&#8217; dimensions are returned.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.GridSpace.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2ba646adaa48&gt;</em><a class="headerlink" href="#holoviews.interface.GridSpace.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b70f1d66c58&gt;</em><a class="headerlink" href="#holoviews.interface.GridSpace.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -3409,7 +3409,7 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.GridSpace.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2ba646adae68&gt;</em><a class="headerlink" href="#holoviews.interface.GridSpace.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b70f1d66e10&gt;</em><a class="headerlink" href="#holoviews.interface.GridSpace.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -3430,7 +3430,7 @@ about its dimensions.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.GridSpace.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2ba646adacb0&gt;</em><a class="headerlink" href="#holoviews.interface.GridSpace.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b70f1d66c00&gt;</em><a class="headerlink" href="#holoviews.interface.GridSpace.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -3581,12 +3581,12 @@ functions.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.GridSpace.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2ba646adaaa0&gt;</em><a class="headerlink" href="#holoviews.interface.GridSpace.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b70f1d66ec0&gt;</em><a class="headerlink" href="#holoviews.interface.GridSpace.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.interface.GridSpace.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2ba646adab50&gt;</em><a class="headerlink" href="#holoviews.interface.GridSpace.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b70f1ef70a8&gt;</em><a class="headerlink" href="#holoviews.interface.GridSpace.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -3706,7 +3706,7 @@ and y-data.</p>
 </dl>
 <dl class="method">
 <dt id="holoviews.interface.Bivariate.add_dimension">
-<tt class="descname">add_dimension</tt><big>(</big><em>dimension</em>, <em>dim_pos</em>, <em>dim_val</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#holoviews.interface.Bivariate.add_dimension" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">add_dimension</tt><big>(</big><em>dimension</em>, <em>dim_pos</em>, <em>dim_val</em>, <em>vdim=False</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#holoviews.interface.Bivariate.add_dimension" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a new object with an additional key dimensions.  Requires
 the dimension name or object, the desired position in the key
 dimensions and a key value scalar or sequence of the same length
@@ -3715,7 +3715,7 @@ as the existing keys.</p>
 
 <dl class="method">
 <dt id="holoviews.interface.Bivariate.aggregate">
-<tt class="descname">aggregate</tt><big>(</big><em>dimensions=</em>, <span class="optional">[</span><span class="optional">]</span><em>function=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#holoviews.interface.Bivariate.aggregate" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">aggregate</tt><big>(</big><em>dimensions=</em>, <span class="optional">[</span><span class="optional">]</span><em>function=None</em>, <em>spreadfn=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#holoviews.interface.Bivariate.aggregate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Aggregates over the supplied key dimensions with the defined
 function.</p>
 </dd></dl>
@@ -3796,7 +3796,7 @@ By default &#8216;all&#8217; dimensions are returned.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.Bivariate.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2ba646adaec0&gt;</em><a class="headerlink" href="#holoviews.interface.Bivariate.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b70f1d66d08&gt;</em><a class="headerlink" href="#holoviews.interface.Bivariate.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -3830,7 +3830,7 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.Bivariate.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2ba646adaaf8&gt;</em><a class="headerlink" href="#holoviews.interface.Bivariate.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b70f1d66c58&gt;</em><a class="headerlink" href="#holoviews.interface.Bivariate.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -3857,7 +3857,7 @@ operation may also be supplied.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.Bivariate.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2ba646adaa48&gt;</em><a class="headerlink" href="#holoviews.interface.Bivariate.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b70f1d66fc8&gt;</em><a class="headerlink" href="#holoviews.interface.Bivariate.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -3926,7 +3926,7 @@ object.</p>
 
 <dl class="method">
 <dt id="holoviews.interface.Bivariate.reduce">
-<tt class="descname">reduce</tt><big>(</big><em>dimensions=</em>, <span class="optional">[</span><span class="optional">]</span><em>function=None</em>, <em>**reduce_map</em><big>)</big><a class="headerlink" href="#holoviews.interface.Bivariate.reduce" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">reduce</tt><big>(</big><em>dimensions=</em>, <span class="optional">[</span><span class="optional">]</span><em>function=None</em>, <em>spreadfn=None</em>, <em>**reduce_map</em><big>)</big><a class="headerlink" href="#holoviews.interface.Bivariate.reduce" title="Permalink to this definition">¶</a></dt>
 <dd><p>Allows reducing the values along one or more key dimension with
 the supplied function. The dimensions may be supplied as a list
 and a function to apply or a mapping between the dimensions and
@@ -3982,12 +3982,12 @@ specs match the selected object.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.Bivariate.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2ba646adae10&gt;</em><a class="headerlink" href="#holoviews.interface.Bivariate.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b70f1d66cb0&gt;</em><a class="headerlink" href="#holoviews.interface.Bivariate.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.interface.Bivariate.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2ba646adaf18&gt;</em><a class="headerlink" href="#holoviews.interface.Bivariate.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b70f17080a8&gt;</em><a class="headerlink" href="#holoviews.interface.Bivariate.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -4101,7 +4101,7 @@ more.</p>
 </dl>
 <dl class="method">
 <dt id="holoviews.interface.Regression.add_dimension">
-<tt class="descname">add_dimension</tt><big>(</big><em>dimension</em>, <em>dim_pos</em>, <em>dim_val</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#holoviews.interface.Regression.add_dimension" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">add_dimension</tt><big>(</big><em>dimension</em>, <em>dim_pos</em>, <em>dim_val</em>, <em>vdim=False</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#holoviews.interface.Regression.add_dimension" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a new object with an additional key dimensions.  Requires
 the dimension name or object, the desired position in the key
 dimensions and a key value scalar or sequence of the same length
@@ -4110,7 +4110,7 @@ as the existing keys.</p>
 
 <dl class="method">
 <dt id="holoviews.interface.Regression.aggregate">
-<tt class="descname">aggregate</tt><big>(</big><em>dimensions=</em>, <span class="optional">[</span><span class="optional">]</span><em>function=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#holoviews.interface.Regression.aggregate" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">aggregate</tt><big>(</big><em>dimensions=</em>, <span class="optional">[</span><span class="optional">]</span><em>function=None</em>, <em>spreadfn=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#holoviews.interface.Regression.aggregate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Aggregates over the supplied key dimensions with the defined
 function.</p>
 </dd></dl>
@@ -4191,7 +4191,7 @@ By default &#8216;all&#8217; dimensions are returned.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.Regression.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2ba646adacb0&gt;</em><a class="headerlink" href="#holoviews.interface.Regression.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b70f1d66db8&gt;</em><a class="headerlink" href="#holoviews.interface.Regression.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -4225,7 +4225,7 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.Regression.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2ba646adac58&gt;</em><a class="headerlink" href="#holoviews.interface.Regression.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b70f1d66ec0&gt;</em><a class="headerlink" href="#holoviews.interface.Regression.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -4252,7 +4252,7 @@ operation may also be supplied.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.Regression.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2ba646adab50&gt;</em><a class="headerlink" href="#holoviews.interface.Regression.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b70f1d66d60&gt;</em><a class="headerlink" href="#holoviews.interface.Regression.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -4321,7 +4321,7 @@ object.</p>
 
 <dl class="method">
 <dt id="holoviews.interface.Regression.reduce">
-<tt class="descname">reduce</tt><big>(</big><em>dimensions=</em>, <span class="optional">[</span><span class="optional">]</span><em>function=None</em>, <em>**reduce_map</em><big>)</big><a class="headerlink" href="#holoviews.interface.Regression.reduce" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">reduce</tt><big>(</big><em>dimensions=</em>, <span class="optional">[</span><span class="optional">]</span><em>function=None</em>, <em>spreadfn=None</em>, <em>**reduce_map</em><big>)</big><a class="headerlink" href="#holoviews.interface.Regression.reduce" title="Permalink to this definition">¶</a></dt>
 <dd><p>Allows reducing the values along one or more key dimension with
 the supplied function. The dimensions may be supplied as a list
 and a function to apply or a mapping between the dimensions and
@@ -4377,12 +4377,12 @@ specs match the selected object.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.Regression.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2ba646adaf18&gt;</em><a class="headerlink" href="#holoviews.interface.Regression.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b70f1d66ba8&gt;</em><a class="headerlink" href="#holoviews.interface.Regression.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.interface.Regression.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2ba646adaaa0&gt;</em><a class="headerlink" href="#holoviews.interface.Regression.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b70f2136050&gt;</em><a class="headerlink" href="#holoviews.interface.Regression.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -4779,7 +4779,7 @@ instantiated.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.collector.ViewRef.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2ba64743bfc8&gt;</em><a class="headerlink" href="#holoviews.interface.collector.ViewRef.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b70f2a78260&gt;</em><a class="headerlink" href="#holoviews.interface.collector.ViewRef.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -4793,12 +4793,12 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.collector.ViewRef.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2ba64743be68&gt;</em><a class="headerlink" href="#holoviews.interface.collector.ViewRef.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b70f2a78100&gt;</em><a class="headerlink" href="#holoviews.interface.collector.ViewRef.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.interface.collector.ViewRef.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2ba645503050&gt;</em><a class="headerlink" href="#holoviews.interface.collector.ViewRef.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b70f2a78158&gt;</em><a class="headerlink" href="#holoviews.interface.collector.ViewRef.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -4858,12 +4858,12 @@ object (if available).</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.collector.ViewRef.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2ba6455030a8&gt;</em><a class="headerlink" href="#holoviews.interface.collector.ViewRef.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b70f2a780a8&gt;</em><a class="headerlink" href="#holoviews.interface.collector.ViewRef.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.interface.collector.ViewRef.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2ba6455031b0&gt;</em><a class="headerlink" href="#holoviews.interface.collector.ViewRef.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b70f2a782b8&gt;</em><a class="headerlink" href="#holoviews.interface.collector.ViewRef.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -4985,7 +4985,7 @@ currently including Tables and HeatMaps.</p>
 </dl>
 <dl class="method">
 <dt id="holoviews.interface.pandas.DFrame.add_dimension">
-<tt class="descname">add_dimension</tt><big>(</big><em>dimension</em>, <em>dim_pos</em>, <em>dim_val</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#holoviews.interface.pandas.DFrame.add_dimension" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">add_dimension</tt><big>(</big><em>dimension</em>, <em>dim_pos</em>, <em>dim_val</em>, <em>vdim=False</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#holoviews.interface.pandas.DFrame.add_dimension" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a new object with an additional key dimensions.  Requires
 the dimension name or object, the desired position in the key
 dimensions and a key value scalar or sequence of the same length
@@ -4994,7 +4994,7 @@ as the existing keys.</p>
 
 <dl class="method">
 <dt id="holoviews.interface.pandas.DFrame.aggregate">
-<tt class="descname">aggregate</tt><big>(</big><em>dimensions=</em>, <span class="optional">[</span><span class="optional">]</span><em>function=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#holoviews.interface.pandas.DFrame.aggregate" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">aggregate</tt><big>(</big><em>dimensions=</em>, <span class="optional">[</span><span class="optional">]</span><em>function=None</em>, <em>spreadfn=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#holoviews.interface.pandas.DFrame.aggregate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Aggregates over the supplied key dimensions with the defined
 function.</p>
 </dd></dl>
@@ -5082,7 +5082,7 @@ By default &#8216;all&#8217; dimensions are returned.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.pandas.DFrame.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2ba64726f208&gt;</em><a class="headerlink" href="#holoviews.interface.pandas.DFrame.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b70f2ca6310&gt;</em><a class="headerlink" href="#holoviews.interface.pandas.DFrame.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -5116,7 +5116,7 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.pandas.DFrame.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2ba64726f260&gt;</em><a class="headerlink" href="#holoviews.interface.pandas.DFrame.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b70f2ca61b0&gt;</em><a class="headerlink" href="#holoviews.interface.pandas.DFrame.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -5144,7 +5144,7 @@ operation may also be supplied.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.pandas.DFrame.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2ba64726f2b8&gt;</em><a class="headerlink" href="#holoviews.interface.pandas.DFrame.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b70f2ca63c0&gt;</em><a class="headerlink" href="#holoviews.interface.pandas.DFrame.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -5213,7 +5213,7 @@ object.</p>
 
 <dl class="method">
 <dt id="holoviews.interface.pandas.DFrame.reduce">
-<tt class="descname">reduce</tt><big>(</big><em>dimensions=</em>, <span class="optional">[</span><span class="optional">]</span><em>function=None</em>, <em>**reduce_map</em><big>)</big><a class="headerlink" href="#holoviews.interface.pandas.DFrame.reduce" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">reduce</tt><big>(</big><em>dimensions=</em>, <span class="optional">[</span><span class="optional">]</span><em>function=None</em>, <em>spreadfn=None</em>, <em>**reduce_map</em><big>)</big><a class="headerlink" href="#holoviews.interface.pandas.DFrame.reduce" title="Permalink to this definition">¶</a></dt>
 <dd><p>Allows reducing the values along one or more key dimension with
 the supplied function. The dimensions may be supplied as a list
 and a function to apply or a mapping between the dimensions and
@@ -5269,12 +5269,12 @@ specs match the selected object.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.pandas.DFrame.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2ba64726f368&gt;</em><a class="headerlink" href="#holoviews.interface.pandas.DFrame.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b70f2ca6470&gt;</em><a class="headerlink" href="#holoviews.interface.pandas.DFrame.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.interface.pandas.DFrame.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2ba64726f418&gt;</em><a class="headerlink" href="#holoviews.interface.pandas.DFrame.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b70f2ca6520&gt;</em><a class="headerlink" href="#holoviews.interface.pandas.DFrame.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -5406,7 +5406,7 @@ selecting and slicing the data using NdMapping.</li>
 </dl>
 <dl class="method">
 <dt id="holoviews.interface.pandas.DataFrameView.add_dimension">
-<tt class="descname">add_dimension</tt><big>(</big><em>dimension</em>, <em>dim_pos</em>, <em>dim_val</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#holoviews.interface.pandas.DataFrameView.add_dimension" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">add_dimension</tt><big>(</big><em>dimension</em>, <em>dim_pos</em>, <em>dim_val</em>, <em>vdim=False</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#holoviews.interface.pandas.DataFrameView.add_dimension" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a new object with an additional key dimensions.  Requires
 the dimension name or object, the desired position in the key
 dimensions and a key value scalar or sequence of the same length
@@ -5415,7 +5415,7 @@ as the existing keys.</p>
 
 <dl class="method">
 <dt id="holoviews.interface.pandas.DataFrameView.aggregate">
-<tt class="descname">aggregate</tt><big>(</big><em>dimensions=</em>, <span class="optional">[</span><span class="optional">]</span><em>function=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#holoviews.interface.pandas.DataFrameView.aggregate" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">aggregate</tt><big>(</big><em>dimensions=</em>, <span class="optional">[</span><span class="optional">]</span><em>function=None</em>, <em>spreadfn=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#holoviews.interface.pandas.DataFrameView.aggregate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Aggregates over the supplied key dimensions with the defined
 function.</p>
 </dd></dl>
@@ -5503,7 +5503,7 @@ By default &#8216;all&#8217; dimensions are returned.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.pandas.DataFrameView.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2ba6472982b8&gt;</em><a class="headerlink" href="#holoviews.interface.pandas.DataFrameView.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b70f2ca6100&gt;</em><a class="headerlink" href="#holoviews.interface.pandas.DataFrameView.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -5537,7 +5537,7 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.pandas.DataFrameView.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2ba647298260&gt;</em><a class="headerlink" href="#holoviews.interface.pandas.DataFrameView.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b70f2ca63c0&gt;</em><a class="headerlink" href="#holoviews.interface.pandas.DataFrameView.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -5565,7 +5565,7 @@ operation may also be supplied.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.pandas.DataFrameView.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2ba647298368&gt;</em><a class="headerlink" href="#holoviews.interface.pandas.DataFrameView.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b70f2ca6260&gt;</em><a class="headerlink" href="#holoviews.interface.pandas.DataFrameView.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -5634,7 +5634,7 @@ object.</p>
 
 <dl class="method">
 <dt id="holoviews.interface.pandas.DataFrameView.reduce">
-<tt class="descname">reduce</tt><big>(</big><em>dimensions=</em>, <span class="optional">[</span><span class="optional">]</span><em>function=None</em>, <em>**reduce_map</em><big>)</big><a class="headerlink" href="#holoviews.interface.pandas.DataFrameView.reduce" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">reduce</tt><big>(</big><em>dimensions=</em>, <span class="optional">[</span><span class="optional">]</span><em>function=None</em>, <em>spreadfn=None</em>, <em>**reduce_map</em><big>)</big><a class="headerlink" href="#holoviews.interface.pandas.DataFrameView.reduce" title="Permalink to this definition">¶</a></dt>
 <dd><p>Allows reducing the values along one or more key dimension with
 the supplied function. The dimensions may be supplied as a list
 and a function to apply or a mapping between the dimensions and
@@ -5690,12 +5690,12 @@ specs match the selected object.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.pandas.DataFrameView.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2ba647298310&gt;</em><a class="headerlink" href="#holoviews.interface.pandas.DataFrameView.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b70f2ca6208&gt;</em><a class="headerlink" href="#holoviews.interface.pandas.DataFrameView.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.interface.pandas.DataFrameView.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2ba647298418&gt;</em><a class="headerlink" href="#holoviews.interface.pandas.DataFrameView.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b70f2ca6418&gt;</em><a class="headerlink" href="#holoviews.interface.pandas.DataFrameView.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -5848,7 +5848,7 @@ in a multi-dimensional Pandas dframe.</p>
 </dl>
 <dl class="method">
 <dt id="holoviews.interface.seaborn.DFrame.add_dimension">
-<tt class="descname">add_dimension</tt><big>(</big><em>dimension</em>, <em>dim_pos</em>, <em>dim_val</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#holoviews.interface.seaborn.DFrame.add_dimension" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">add_dimension</tt><big>(</big><em>dimension</em>, <em>dim_pos</em>, <em>dim_val</em>, <em>vdim=False</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#holoviews.interface.seaborn.DFrame.add_dimension" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a new object with an additional key dimensions.  Requires
 the dimension name or object, the desired position in the key
 dimensions and a key value scalar or sequence of the same length
@@ -5857,7 +5857,7 @@ as the existing keys.</p>
 
 <dl class="method">
 <dt id="holoviews.interface.seaborn.DFrame.aggregate">
-<tt class="descname">aggregate</tt><big>(</big><em>dimensions=</em>, <span class="optional">[</span><span class="optional">]</span><em>function=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#holoviews.interface.seaborn.DFrame.aggregate" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">aggregate</tt><big>(</big><em>dimensions=</em>, <span class="optional">[</span><span class="optional">]</span><em>function=None</em>, <em>spreadfn=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#holoviews.interface.seaborn.DFrame.aggregate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Aggregates over the supplied key dimensions with the defined
 function.</p>
 </dd></dl>
@@ -5945,7 +5945,7 @@ By default &#8216;all&#8217; dimensions are returned.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.seaborn.DFrame.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2ba647e22310&gt;</em><a class="headerlink" href="#holoviews.interface.seaborn.DFrame.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b70f2f48310&gt;</em><a class="headerlink" href="#holoviews.interface.seaborn.DFrame.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -5979,7 +5979,7 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.seaborn.DFrame.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2ba647e22260&gt;</em><a class="headerlink" href="#holoviews.interface.seaborn.DFrame.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b70f2f483c0&gt;</em><a class="headerlink" href="#holoviews.interface.seaborn.DFrame.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -6007,7 +6007,7 @@ operation may also be supplied.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.seaborn.DFrame.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2ba647e222b8&gt;</em><a class="headerlink" href="#holoviews.interface.seaborn.DFrame.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b70f2f48208&gt;</em><a class="headerlink" href="#holoviews.interface.seaborn.DFrame.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -6076,7 +6076,7 @@ object.</p>
 
 <dl class="method">
 <dt id="holoviews.interface.seaborn.DFrame.reduce">
-<tt class="descname">reduce</tt><big>(</big><em>dimensions=</em>, <span class="optional">[</span><span class="optional">]</span><em>function=None</em>, <em>**reduce_map</em><big>)</big><a class="headerlink" href="#holoviews.interface.seaborn.DFrame.reduce" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">reduce</tt><big>(</big><em>dimensions=</em>, <span class="optional">[</span><span class="optional">]</span><em>function=None</em>, <em>spreadfn=None</em>, <em>**reduce_map</em><big>)</big><a class="headerlink" href="#holoviews.interface.seaborn.DFrame.reduce" title="Permalink to this definition">¶</a></dt>
 <dd><p>Allows reducing the values along one or more key dimension with
 the supplied function. The dimensions may be supplied as a list
 and a function to apply or a mapping between the dimensions and
@@ -6132,12 +6132,12 @@ specs match the selected object.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.seaborn.DFrame.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2ba647e22208&gt;</em><a class="headerlink" href="#holoviews.interface.seaborn.DFrame.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b70f2f48368&gt;</em><a class="headerlink" href="#holoviews.interface.seaborn.DFrame.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.interface.seaborn.DFrame.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2ba647e22470&gt;</em><a class="headerlink" href="#holoviews.interface.seaborn.DFrame.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b70f2f48578&gt;</em><a class="headerlink" href="#holoviews.interface.seaborn.DFrame.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -6242,7 +6242,7 @@ and y-data.</p>
 </dl>
 <dl class="method">
 <dt id="holoviews.interface.seaborn.Bivariate.add_dimension">
-<tt class="descname">add_dimension</tt><big>(</big><em>dimension</em>, <em>dim_pos</em>, <em>dim_val</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#holoviews.interface.seaborn.Bivariate.add_dimension" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">add_dimension</tt><big>(</big><em>dimension</em>, <em>dim_pos</em>, <em>dim_val</em>, <em>vdim=False</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#holoviews.interface.seaborn.Bivariate.add_dimension" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a new object with an additional key dimensions.  Requires
 the dimension name or object, the desired position in the key
 dimensions and a key value scalar or sequence of the same length
@@ -6251,7 +6251,7 @@ as the existing keys.</p>
 
 <dl class="method">
 <dt id="holoviews.interface.seaborn.Bivariate.aggregate">
-<tt class="descname">aggregate</tt><big>(</big><em>dimensions=</em>, <span class="optional">[</span><span class="optional">]</span><em>function=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#holoviews.interface.seaborn.Bivariate.aggregate" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">aggregate</tt><big>(</big><em>dimensions=</em>, <span class="optional">[</span><span class="optional">]</span><em>function=None</em>, <em>spreadfn=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#holoviews.interface.seaborn.Bivariate.aggregate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Aggregates over the supplied key dimensions with the defined
 function.</p>
 </dd></dl>
@@ -6332,7 +6332,7 @@ By default &#8216;all&#8217; dimensions are returned.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.seaborn.Bivariate.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2ba647e35368&gt;</em><a class="headerlink" href="#holoviews.interface.seaborn.Bivariate.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b70f2f481b0&gt;</em><a class="headerlink" href="#holoviews.interface.seaborn.Bivariate.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -6366,7 +6366,7 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.seaborn.Bivariate.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2ba647e35418&gt;</em><a class="headerlink" href="#holoviews.interface.seaborn.Bivariate.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b70f2f48158&gt;</em><a class="headerlink" href="#holoviews.interface.seaborn.Bivariate.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -6393,7 +6393,7 @@ operation may also be supplied.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.seaborn.Bivariate.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2ba647e352b8&gt;</em><a class="headerlink" href="#holoviews.interface.seaborn.Bivariate.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b70f2f48418&gt;</em><a class="headerlink" href="#holoviews.interface.seaborn.Bivariate.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -6462,7 +6462,7 @@ object.</p>
 
 <dl class="method">
 <dt id="holoviews.interface.seaborn.Bivariate.reduce">
-<tt class="descname">reduce</tt><big>(</big><em>dimensions=</em>, <span class="optional">[</span><span class="optional">]</span><em>function=None</em>, <em>**reduce_map</em><big>)</big><a class="headerlink" href="#holoviews.interface.seaborn.Bivariate.reduce" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">reduce</tt><big>(</big><em>dimensions=</em>, <span class="optional">[</span><span class="optional">]</span><em>function=None</em>, <em>spreadfn=None</em>, <em>**reduce_map</em><big>)</big><a class="headerlink" href="#holoviews.interface.seaborn.Bivariate.reduce" title="Permalink to this definition">¶</a></dt>
 <dd><p>Allows reducing the values along one or more key dimension with
 the supplied function. The dimensions may be supplied as a list
 and a function to apply or a mapping between the dimensions and
@@ -6518,12 +6518,12 @@ specs match the selected object.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.seaborn.Bivariate.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2ba647e35310&gt;</em><a class="headerlink" href="#holoviews.interface.seaborn.Bivariate.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b70f2f48520&gt;</em><a class="headerlink" href="#holoviews.interface.seaborn.Bivariate.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.interface.seaborn.Bivariate.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2ba647e35470&gt;</em><a class="headerlink" href="#holoviews.interface.seaborn.Bivariate.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b70f2f484c8&gt;</em><a class="headerlink" href="#holoviews.interface.seaborn.Bivariate.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -6637,7 +6637,7 @@ list. Internally it uses Seaborn to make all the conversions.</p>
 </dl>
 <dl class="method">
 <dt id="holoviews.interface.seaborn.Distribution.add_dimension">
-<tt class="descname">add_dimension</tt><big>(</big><em>dimension</em>, <em>dim_pos</em>, <em>dim_val</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#holoviews.interface.seaborn.Distribution.add_dimension" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">add_dimension</tt><big>(</big><em>dimension</em>, <em>dim_pos</em>, <em>dim_val</em>, <em>vdim=False</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#holoviews.interface.seaborn.Distribution.add_dimension" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a new object with an additional key dimensions.  Requires
 the dimension name or object, the desired position in the key
 dimensions and a key value scalar or sequence of the same length
@@ -6646,7 +6646,7 @@ as the existing keys.</p>
 
 <dl class="method">
 <dt id="holoviews.interface.seaborn.Distribution.aggregate">
-<tt class="descname">aggregate</tt><big>(</big><em>dimensions=</em>, <span class="optional">[</span><span class="optional">]</span><em>function=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#holoviews.interface.seaborn.Distribution.aggregate" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">aggregate</tt><big>(</big><em>dimensions=</em>, <span class="optional">[</span><span class="optional">]</span><em>function=None</em>, <em>spreadfn=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#holoviews.interface.seaborn.Distribution.aggregate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Aggregates over the supplied key dimensions with the defined
 function.</p>
 </dd></dl>
@@ -6720,7 +6720,7 @@ By default &#8216;all&#8217; dimensions are returned.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.seaborn.Distribution.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2ba647e513c0&gt;</em><a class="headerlink" href="#holoviews.interface.seaborn.Distribution.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b70f2f48208&gt;</em><a class="headerlink" href="#holoviews.interface.seaborn.Distribution.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -6754,7 +6754,7 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.seaborn.Distribution.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2ba647e51208&gt;</em><a class="headerlink" href="#holoviews.interface.seaborn.Distribution.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b70f2f48368&gt;</em><a class="headerlink" href="#holoviews.interface.seaborn.Distribution.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -6781,7 +6781,7 @@ operation may also be supplied.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.seaborn.Distribution.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2ba647e51368&gt;</em><a class="headerlink" href="#holoviews.interface.seaborn.Distribution.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b70f2f48470&gt;</em><a class="headerlink" href="#holoviews.interface.seaborn.Distribution.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -6842,7 +6842,7 @@ evaluated with eval. See pprint() function for more details.</p>
 
 <dl class="method">
 <dt id="holoviews.interface.seaborn.Distribution.reduce">
-<tt class="descname">reduce</tt><big>(</big><em>dimensions=</em>, <span class="optional">[</span><span class="optional">]</span><em>function=None</em>, <em>**reduce_map</em><big>)</big><a class="headerlink" href="#holoviews.interface.seaborn.Distribution.reduce" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">reduce</tt><big>(</big><em>dimensions=</em>, <span class="optional">[</span><span class="optional">]</span><em>function=None</em>, <em>spreadfn=None</em>, <em>**reduce_map</em><big>)</big><a class="headerlink" href="#holoviews.interface.seaborn.Distribution.reduce" title="Permalink to this definition">¶</a></dt>
 <dd><p>Allows reducing the values along one or more key dimension with
 the supplied function. The dimensions may be supplied as a list
 and a function to apply or a mapping between the dimensions and
@@ -6898,12 +6898,12 @@ specs match the selected object.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.seaborn.Distribution.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2ba647e512b8&gt;</em><a class="headerlink" href="#holoviews.interface.seaborn.Distribution.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b70f2f483c0&gt;</em><a class="headerlink" href="#holoviews.interface.seaborn.Distribution.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.interface.seaborn.Distribution.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2ba647e51470&gt;</em><a class="headerlink" href="#holoviews.interface.seaborn.Distribution.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b70f2f482b8&gt;</em><a class="headerlink" href="#holoviews.interface.seaborn.Distribution.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -7086,7 +7086,7 @@ By default &#8216;all&#8217; dimensions are returned.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.seaborn.TimeSeries.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2ba647e5c2b8&gt;</em><a class="headerlink" href="#holoviews.interface.seaborn.TimeSeries.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b70f2f481b0&gt;</em><a class="headerlink" href="#holoviews.interface.seaborn.TimeSeries.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -7120,7 +7120,7 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.seaborn.TimeSeries.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2ba647e5c368&gt;</em><a class="headerlink" href="#holoviews.interface.seaborn.TimeSeries.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b70f2f48418&gt;</em><a class="headerlink" href="#holoviews.interface.seaborn.TimeSeries.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -7136,7 +7136,7 @@ operation may also be supplied.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.seaborn.TimeSeries.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2ba647e5c260&gt;</em><a class="headerlink" href="#holoviews.interface.seaborn.TimeSeries.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b70f2f48158&gt;</em><a class="headerlink" href="#holoviews.interface.seaborn.TimeSeries.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -7241,12 +7241,12 @@ functions.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.seaborn.TimeSeries.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2ba647e5c310&gt;</em><a class="headerlink" href="#holoviews.interface.seaborn.TimeSeries.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b70f2f48260&gt;</em><a class="headerlink" href="#holoviews.interface.seaborn.TimeSeries.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.interface.seaborn.TimeSeries.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2ba647e5c3c0&gt;</em><a class="headerlink" href="#holoviews.interface.seaborn.TimeSeries.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b70f2f48520&gt;</em><a class="headerlink" href="#holoviews.interface.seaborn.TimeSeries.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -7348,7 +7348,7 @@ more.</p>
 </dl>
 <dl class="method">
 <dt id="holoviews.interface.seaborn.Regression.add_dimension">
-<tt class="descname">add_dimension</tt><big>(</big><em>dimension</em>, <em>dim_pos</em>, <em>dim_val</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#holoviews.interface.seaborn.Regression.add_dimension" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">add_dimension</tt><big>(</big><em>dimension</em>, <em>dim_pos</em>, <em>dim_val</em>, <em>vdim=False</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#holoviews.interface.seaborn.Regression.add_dimension" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a new object with an additional key dimensions.  Requires
 the dimension name or object, the desired position in the key
 dimensions and a key value scalar or sequence of the same length
@@ -7357,7 +7357,7 @@ as the existing keys.</p>
 
 <dl class="method">
 <dt id="holoviews.interface.seaborn.Regression.aggregate">
-<tt class="descname">aggregate</tt><big>(</big><em>dimensions=</em>, <span class="optional">[</span><span class="optional">]</span><em>function=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#holoviews.interface.seaborn.Regression.aggregate" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">aggregate</tt><big>(</big><em>dimensions=</em>, <span class="optional">[</span><span class="optional">]</span><em>function=None</em>, <em>spreadfn=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#holoviews.interface.seaborn.Regression.aggregate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Aggregates over the supplied key dimensions with the defined
 function.</p>
 </dd></dl>
@@ -7438,7 +7438,7 @@ By default &#8216;all&#8217; dimensions are returned.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.seaborn.Regression.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2ba647e5c100&gt;</em><a class="headerlink" href="#holoviews.interface.seaborn.Regression.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2b70f2f48208&gt;</em><a class="headerlink" href="#holoviews.interface.seaborn.Regression.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -7472,7 +7472,7 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.seaborn.Regression.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2ba647e5c1b0&gt;</em><a class="headerlink" href="#holoviews.interface.seaborn.Regression.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2b70f2f48470&gt;</em><a class="headerlink" href="#holoviews.interface.seaborn.Regression.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -7499,7 +7499,7 @@ operation may also be supplied.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.seaborn.Regression.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2ba647e5c0a8&gt;</em><a class="headerlink" href="#holoviews.interface.seaborn.Regression.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2b70f2f481b0&gt;</em><a class="headerlink" href="#holoviews.interface.seaborn.Regression.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -7568,7 +7568,7 @@ object.</p>
 
 <dl class="method">
 <dt id="holoviews.interface.seaborn.Regression.reduce">
-<tt class="descname">reduce</tt><big>(</big><em>dimensions=</em>, <span class="optional">[</span><span class="optional">]</span><em>function=None</em>, <em>**reduce_map</em><big>)</big><a class="headerlink" href="#holoviews.interface.seaborn.Regression.reduce" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">reduce</tt><big>(</big><em>dimensions=</em>, <span class="optional">[</span><span class="optional">]</span><em>function=None</em>, <em>spreadfn=None</em>, <em>**reduce_map</em><big>)</big><a class="headerlink" href="#holoviews.interface.seaborn.Regression.reduce" title="Permalink to this definition">¶</a></dt>
 <dd><p>Allows reducing the values along one or more key dimension with
 the supplied function. The dimensions may be supplied as a list
 and a function to apply or a mapping between the dimensions and
@@ -7624,12 +7624,12 @@ specs match the selected object.</p>
 
 <dl class="attribute">
 <dt id="holoviews.interface.seaborn.Regression.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2ba647e5c050&gt;</em><a class="headerlink" href="#holoviews.interface.seaborn.Regression.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2b70f2f48578&gt;</em><a class="headerlink" href="#holoviews.interface.seaborn.Regression.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.interface.seaborn.Regression.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2ba647e5c208&gt;</em><a class="headerlink" href="#holoviews.interface.seaborn.Regression.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2b70f2f48310&gt;</em><a class="headerlink" href="#holoviews.interface.seaborn.Regression.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">

@@ -416,7 +416,7 @@
     <span class="k">return</span> <span class="n">render_plot</span><span class="p">(</span><span class="n">gridplot</span><span class="p">,</span> <span class="n">widget_mode</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="display"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.ipython.html#holoviews.ipython.display_hooks.display">[docs]</a><span class="k">def</span> <span class="nf">display</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">raw</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+<div class="viewcode-block" id="display"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.ipython.html#holoviews.ipython.display_hooks.display">[docs]</a><span class="k">def</span> <span class="nf">display</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">raw</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Renders any HoloViews object to HTML and displays it</span>
 <span class="sd">    using the IPython display function. If raw is enabled</span>
@@ -431,7 +431,7 @@
     <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">HoloMap</span><span class="p">):</span>
         <span class="n">html</span> <span class="o">=</span> <span class="n">map_display</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="nb">repr</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span> <span class="k">if</span> <span class="n">raw</span> <span class="k">else</span> <span class="n">IPython</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">display</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">repr</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span> <span class="k">if</span> <span class="n">raw</span> <span class="k">else</span> <span class="n">IPython</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">display</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">html</span> <span class="k">if</span> <span class="n">raw</span> <span class="k">else</span> <span class="n">IPython</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">display</span><span class="p">(</span><span class="n">IPython</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">HTML</span><span class="p">(</span><span class="n">html</span><span class="p">))</span>
 
 </div>
