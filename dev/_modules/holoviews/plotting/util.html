@@ -127,7 +127,7 @@
           <div role="main">
             
   <h1>Source code for holoviews.plotting.util</h1><div class="highlight"><pre>
-<span class="kn">from</span> <span class="nn">..core</span> <span class="kn">import</span> <span class="n">HoloMap</span><span class="p">,</span> <span class="n">CompositeOverlay</span>
+<span class="kn">from</span> <span class="nn">..core</span> <span class="kn">import</span> <span class="n">HoloMap</span><span class="p">,</span> <span class="n">DynamicMap</span><span class="p">,</span> <span class="n">CompositeOverlay</span>
 <span class="kn">from</span> <span class="nn">..core.util</span> <span class="kn">import</span> <span class="n">match_spec</span>
 
 <div class="viewcode-block" id="compute_sizes"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.plotting.html#holoviews.plotting.util.compute_sizes">[docs]</a><span class="k">def</span> <span class="nf">compute_sizes</span><span class="p">(</span><span class="n">sizes</span><span class="p">,</span> <span class="n">size_fn</span><span class="p">,</span> <span class="n">scaling</span><span class="p">,</span> <span class="n">base_size</span><span class="p">):</span>
@@ -173,7 +173,19 @@
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">range_item</span><span class="p">,</span> <span class="n">CompositeOverlay</span><span class="p">):</span>
         <span class="n">range_item</span> <span class="o">=</span> <span class="p">[</span><span class="n">ov</span> <span class="k">for</span> <span class="n">ov</span> <span class="ow">in</span> <span class="n">range_item</span>
                       <span class="k">if</span> <span class="n">dim</span> <span class="ow">in</span> <span class="n">ov</span><span class="o">.</span><span class="n">dimensions</span><span class="p">(</span><span class="s">&#39;all&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="bp">True</span><span class="p">)][</span><span class="mi">0</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">range_item</span><span class="p">,</span> <span class="n">main_range</span><span class="p">,</span> <span class="n">dim</span></div>
+    <span class="k">return</span> <span class="n">range_item</span><span class="p">,</span> <span class="n">main_range</span><span class="p">,</span> <span class="n">dim</span>
+
+</div>
+<div class="viewcode-block" id="get_dynamic_mode"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.plotting.html#holoviews.plotting.util.get_dynamic_mode">[docs]</a><span class="k">def</span> <span class="nf">get_dynamic_mode</span><span class="p">(</span><span class="n">composite</span><span class="p">):</span>
+    <span class="s">&quot;Returns the common mode of the dynamic maps in given composite object&quot;</span>
+    <span class="n">dynamic_modes</span> <span class="o">=</span> <span class="n">composite</span><span class="o">.</span><span class="n">traverse</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">mode</span><span class="p">,</span> <span class="p">[</span><span class="n">DynamicMap</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">dynamic_modes</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">composite</span><span class="o">.</span><span class="n">traverse</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">,</span> <span class="p">[</span><span class="s">&#39;HoloMap&#39;</span><span class="p">]):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">dynamic_modes</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s">&quot;Cannot display composites of DynamicMap objects &quot;</span>
+                            <span class="s">&quot;with different interval modes (i.e open or closed mode).&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">dynamic_modes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">None</span></div>
 </pre></div>
 
           </div>

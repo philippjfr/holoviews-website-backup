@@ -1,0 +1,12 @@
+<map id="inheritance888ece81a0" name="inheritance888ece81a0">
+<area shape="rect" id="node1" href="#holoviews.core.dimension.Dimensioned" title="Dimensioned is a base class that allows the data contents of a" alt="" coords="283,13,405,25"/>
+<area shape="rect" id="node4" href="#holoviews.core.ndmapping.MultiDimensionalMapping" title="An MultiDimensionalMapping is a Dimensioned mapping (like a" alt="" coords="427,13,586,25"/>
+<area shape="rect" id="node2" href="#holoviews.core.dimension.LabelledData" title="LabelledData is a mix&#45;in class designed to introduce the group and" alt="" coords="139,13,261,25"/>
+<area shape="rect" id="node3" title="params(name=String)" alt="" coords="2,13,118,25"/>
+<area shape="rect" id="node5" href="#holoviews.core.ndmapping.NdMapping" title="NdMapping supports the same indexing semantics as" alt="" coords="608,13,727,25"/>
+<area shape="rect" id="node6" href="#holoviews.core.ndmapping.UniformNdMapping" title="A UniformNdMapping is a map of Dimensioned objects and is itself" alt="" coords="749,13,890,25"/>
+<area shape="rect" id="node8" href="#holoviews.core.spaces.HoloMap" title="A HoloMap can hold any number of DataLayers indexed by a list of" alt="" coords="914,2,1014,13"/>
+<area shape="rect" id="node10" href="#holoviews.core.spaces.GridSpace" title="Grids are distinct from Layouts as they ensure all contained" alt="" coords="912,24,1017,35"/>
+<area shape="rect" id="node7" href="#holoviews.core.spaces.DynamicMap" title="A DynamicMap is a type of HoloMap where the elements are dynamically" alt="" coords="1038,2,1150,13"/>
+<area shape="rect" id="node9" href="#holoviews.core.spaces.GridMatrix" title="GridMatrix is container type for heterogeneous Element types" alt="" coords="1042,24,1146,35"/>
+</map>

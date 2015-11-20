@@ -136,16 +136,15 @@
 <span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="kn">import</span> <span class="n">Axes3D</span>  <span class="c"># pyflakes:ignore (For 3D plots)</span>
 <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
 <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">gridspec</span><span class="p">,</span> <span class="n">animation</span>
-
 <span class="kn">import</span> <span class="nn">param</span>
-<span class="kn">from</span> <span class="nn">...core</span> <span class="kn">import</span> <span class="n">OrderedDict</span><span class="p">,</span> <span class="n">HoloMap</span><span class="p">,</span> <span class="n">AdjointLayout</span><span class="p">,</span> <span class="n">NdLayout</span><span class="p">,</span>\
-    <span class="n">GridSpace</span><span class="p">,</span> <span class="n">Element</span><span class="p">,</span> <span class="n">CompositeOverlay</span><span class="p">,</span> <span class="n">Element3D</span><span class="p">,</span> <span class="n">Empty</span><span class="p">,</span> <span class="n">Collator</span>
+<span class="kn">from</span> <span class="nn">...core</span> <span class="kn">import</span> <span class="p">(</span><span class="n">OrderedDict</span><span class="p">,</span> <span class="n">HoloMap</span><span class="p">,</span> <span class="n">AdjointLayout</span><span class="p">,</span> <span class="n">NdLayout</span><span class="p">,</span>
+                     <span class="n">GridSpace</span><span class="p">,</span> <span class="n">Element</span><span class="p">,</span> <span class="n">CompositeOverlay</span><span class="p">,</span> <span class="n">Element3D</span><span class="p">,</span>
+                     <span class="n">Empty</span><span class="p">,</span> <span class="n">Collator</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">...core.options</span> <span class="kn">import</span> <span class="n">Store</span><span class="p">,</span> <span class="n">Compositor</span>
+<span class="kn">from</span> <span class="nn">...core.util</span> <span class="kn">import</span> <span class="n">int_to_roman</span><span class="p">,</span> <span class="n">int_to_alpha</span><span class="p">,</span> <span class="nb">basestring</span>
 <span class="kn">from</span> <span class="nn">...core</span> <span class="kn">import</span> <span class="n">traversal</span>
-<span class="kn">from</span> <span class="nn">...core.util</span> <span class="kn">import</span> <span class="n">int_to_roman</span><span class="p">,</span>\
-    <span class="n">int_to_alpha</span><span class="p">,</span> <span class="nb">basestring</span>
-
 <span class="kn">from</span> <span class="nn">..plot</span> <span class="kn">import</span> <span class="n">DimensionedPlot</span><span class="p">,</span> <span class="n">GenericLayoutPlot</span><span class="p">,</span> <span class="n">GenericCompositePlot</span>
+<span class="kn">from</span> <span class="nn">..util</span> <span class="kn">import</span> <span class="n">get_dynamic_mode</span>
 <span class="kn">from</span> <span class="nn">.renderer</span> <span class="kn">import</span> <span class="n">MPLRenderer</span>
 
 
@@ -389,6 +388,7 @@
                  <span class="n">keys</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">dimensions</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">layout_num</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">layout</span><span class="p">,</span> <span class="n">GridSpace</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s">&quot;GridPlot only accepts GridSpace.&quot;</span><span class="p">)</span>
+        <span class="n">dynamic</span> <span class="o">=</span> <span class="n">get_dynamic_mode</span><span class="p">(</span><span class="n">layout</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">layout</span> <span class="o">=</span> <span class="n">layout</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cols</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rows</span> <span class="o">=</span> <span class="n">layout</span><span class="o">.</span><span class="n">shape</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">layout_num</span> <span class="o">=</span> <span class="n">layout_num</span>
@@ -399,6 +399,7 @@
             <span class="n">params</span><span class="p">[</span><span class="s">&#39;uniform&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">traversal</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">layout</span><span class="p">)</span>
 
         <span class="nb">super</span><span class="p">(</span><span class="n">GridPlot</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">keys</span><span class="o">=</span><span class="n">keys</span><span class="p">,</span> <span class="n">dimensions</span><span class="o">=</span><span class="n">dimensions</span><span class="p">,</span>
+                                       <span class="n">dynamic</span><span class="o">=</span><span class="n">dynamic</span><span class="p">,</span>
                                        <span class="o">**</span><span class="nb">dict</span><span class="p">(</span><span class="n">extra_opts</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">))</span>
         <span class="c"># Compute ranges layoutwise</span>
         <span class="n">grid_kwargs</span> <span class="o">=</span> <span class="p">{}</span>
