@@ -135,6 +135,7 @@
 <span class="kn">from</span> <span class="nn">...core</span> <span class="kn">import</span> <span class="n">OrderedDict</span><span class="p">,</span> <span class="n">NdMapping</span>
 <span class="kn">from</span> <span class="nn">...core.util</span> <span class="kn">import</span> <span class="p">(</span><span class="n">sanitize_identifier</span><span class="p">,</span> <span class="n">safe_unicode</span><span class="p">,</span> <span class="nb">basestring</span><span class="p">,</span>
                           <span class="n">unique_iterator</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">...core.traversal</span> <span class="kn">import</span> <span class="n">bijective</span>
 
 <span class="k">def</span> <span class="nf">isnumeric</span><span class="p">(</span><span class="n">val</span><span class="p">):</span>
     <span class="k">try</span><span class="p">:</span>
@@ -209,8 +210,12 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">renderer</span> <span class="o">=</span> <span class="n">renderer</span>
         <span class="c"># Create mock NdMapping to hold the common dimensions and keys</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">mock_obj</span> <span class="o">=</span> <span class="n">NdMapping</span><span class="p">([(</span><span class="n">k</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">],</span>
-                                  <span class="n">kdims</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dimensions</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">bijective</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mock_obj</span> <span class="o">=</span> <span class="n">NdMapping</span><span class="p">([(</span><span class="n">i</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">))],</span>
+                                      <span class="n">kdims</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;Index&#39;</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mock_obj</span> <span class="o">=</span> <span class="n">NdMapping</span><span class="p">([(</span><span class="n">k</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">],</span>
+                                      <span class="n">kdims</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dimensions</span><span class="p">)</span>
 
         <span class="n">NdWidget</span><span class="o">.</span><span class="n">widgets</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span>
 
@@ -443,7 +448,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'1.4.1a1',
+            VERSION:'1.4.0a1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
