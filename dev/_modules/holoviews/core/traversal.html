@@ -133,9 +133,16 @@
 <span class="sd">or mutate the matching elements.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
 <span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">itemgetter</span>
 
 <span class="kn">from</span> <span class="nn">.dimension</span> <span class="kn">import</span> <span class="n">Dimension</span><span class="p">,</span> <span class="n">OrderedDict</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">itertools.izip</span> <span class="kn">as</span> <span class="nn">zip</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="k">pass</span>
+
 
 <span class="k">def</span> <span class="nf">create_ndkey</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="n">indexes</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
     <span class="n">key</span> <span class="o">=</span> <span class="p">[</span><span class="bp">None</span><span class="p">]</span> <span class="o">*</span> <span class="n">length</span>
@@ -219,6 +226,39 @@
                 <span class="k">return</span> <span class="bp">False</span>
             <span class="n">store</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">subkey</span><span class="p">)</span>
     <span class="k">return</span> <span class="bp">True</span>
+
+
+<div class="viewcode-block" id="hierarchical"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.core.html#holoviews.core.traversal.hierarchical">[docs]</a><span class="k">def</span> <span class="nf">hierarchical</span><span class="p">(</span><span class="n">keys</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Iterates over dimension values in keys, taking two sets</span>
+<span class="sd">    of dimension values at a time to determine whether two</span>
+<span class="sd">    consecutive dimensions have a one-to-many relationship.</span>
+<span class="sd">    If they do a mapping between the first and second dimension</span>
+<span class="sd">    values is returned. Returns a list of n-1 mappings, between</span>
+<span class="sd">    consecutive dimensions.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ndims</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">keys</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">ndims</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">True</span>
+    <span class="n">dim_vals</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">keys</span><span class="p">)</span>
+    <span class="n">combinations</span> <span class="o">=</span> <span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">dim_vals</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">2</span><span class="p">])</span>
+                    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ndims</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+    <span class="n">hierarchies</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">combination</span> <span class="ow">in</span> <span class="n">combinations</span><span class="p">:</span>
+        <span class="n">hierarchy</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="n">store1</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+        <span class="n">store2</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">v1</span><span class="p">,</span> <span class="n">v2</span> <span class="ow">in</span> <span class="n">combination</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">v2</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">store2</span><span class="p">[</span><span class="n">v1</span><span class="p">]:</span>
+                <span class="n">store2</span><span class="p">[</span><span class="n">v1</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v2</span><span class="p">)</span>
+            <span class="n">previous</span> <span class="o">=</span> <span class="n">store1</span><span class="p">[</span><span class="n">v2</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">previous</span> <span class="ow">and</span> <span class="n">previous</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">v1</span><span class="p">:</span>
+                <span class="n">hierarchy</span> <span class="o">=</span> <span class="bp">False</span>
+                <span class="k">break</span>
+            <span class="k">if</span> <span class="n">v1</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">store1</span><span class="p">[</span><span class="n">v2</span><span class="p">]:</span>
+                <span class="n">store1</span><span class="p">[</span><span class="n">v2</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v1</span><span class="p">)</span>
+        <span class="n">hierarchies</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">store2</span> <span class="k">if</span> <span class="n">hierarchy</span> <span class="k">else</span> <span class="p">{})</span>
+    <span class="k">return</span> <span class="n">hierarchies</span></div>
 </pre></div>
 
           </div>

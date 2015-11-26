@@ -477,6 +477,8 @@
 <span class="sd">    dimensions are fully bounded.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">_sorted</span> <span class="o">=</span> <span class="bp">False</span>
+    <span class="c"># Declare that callback is a positional parameter (used in clone)</span>
+    <span class="n">_pos_params</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;callback&#39;</span><span class="p">]</span>
 
     <span class="n">callback</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">Parameter</span><span class="p">(</span><span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
 <span class="s">        The callable or generator used to generate the elements. In the</span>
@@ -508,8 +510,8 @@
 <span class="s">       element will be cached and therefore accessible when casting to a</span>
 <span class="s">       HoloMap.  Applicable in open mode only.&quot;&quot;&quot;</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">initial_items</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">DynamicMap</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">initial_items</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">callback</span><span class="p">,</span> <span class="n">initial_items</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">DynamicMap</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">initial_items</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="n">callback</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">callback</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s">&quot;A suitable callback must be &quot;</span>
@@ -603,13 +605,17 @@
             <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">counter</span><span class="p">,</span> <span class="n">retval</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="DynamicMap.clone"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.core.html#holoviews.core.spaces.DynamicMap.clone">[docs]</a>    <span class="k">def</span> <span class="nf">clone</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">shared_data</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">overrides</span><span class="p">):</span>
+<div class="viewcode-block" id="DynamicMap.clone"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.core.html#holoviews.core.spaces.DynamicMap.clone">[docs]</a>    <span class="k">def</span> <span class="nf">clone</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">shared_data</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">new_type</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">overrides</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Overrides Dimensioned clone to avoid checking items if data</span>
-<span class="sd">        is unchanged.</span>
+<span class="sd">        Clone method to adapt the slightly different signature of</span>
+<span class="sd">        DynamicMap that also overrides Dimensioned clone to avoid</span>
+<span class="sd">        checking items if data is unchanged.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">UniformNdMapping</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">clone</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">shared_data</span><span class="p">,</span>
-                                                   <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">overrides</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">shared_data</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">UniformNdMapping</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">clone</span><span class="p">(</span><span class="n">overrides</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&#39;callback&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">callback</span><span class="p">),</span>
+                                                   <span class="n">shared_data</span><span class="p">,</span> <span class="n">new_type</span><span class="p">,</span>
+                                                   <span class="o">*</span><span class="p">(</span><span class="n">data</span><span class="p">,)</span> <span class="o">+</span> <span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">overrides</span><span class="p">)</span>
 
 </div>
 <div class="viewcode-block" id="DynamicMap.reset"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.core.html#holoviews.core.spaces.DynamicMap.reset">[docs]</a>    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -626,8 +632,8 @@
 </div>
     <span class="k">def</span> <span class="nf">_cross_product</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tuple_key</span><span class="p">,</span> <span class="n">cache</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns a HoloMap if the key (tuple form) expresses a cross</span>
-<span class="sd">        product, otherwise returns None. The cache argument is a</span>
+<span class="sd">        Returns a new DynamicMap if the key (tuple form) expresses a</span>
+<span class="sd">        cross product, otherwise returns None. The cache argument is a</span>
 <span class="sd">        dictionary (key:element pairs) of all the data found in the</span>
 <span class="sd">        cache for this key.</span>
 
@@ -653,7 +659,7 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">val</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_execute_callback</span><span class="p">(</span><span class="o">*</span><span class="n">key</span><span class="p">)</span>
             <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="p">))</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">clone</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">new_type</span><span class="o">=</span><span class="n">HoloMap</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">clone</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 
 
     <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
@@ -666,20 +672,20 @@
 
         <span class="c"># Validation for closed mode</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">==</span> <span class="s">&#39;closed&#39;</span><span class="p">:</span>
-            <span class="c"># DynamicMap(...)[:] returns a HoloMap of the available (cached) data</span>
+            <span class="c"># DynamicMap(...)[:] returns a new DynamicMap with the same cache</span>
             <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="nb">slice</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">):</span>
-                <span class="k">return</span> <span class="n">HoloMap</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">clone</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
             <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">el</span><span class="p">,</span> <span class="nb">slice</span><span class="p">)</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">tuple_key</span><span class="p">):</span>
-                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s">&quot;Slices not supported by DynamicMap in closed mode&quot;</span>
-                                <span class="s">&quot;except for the global slice [:] to convert to HoloMap.&quot;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s">&quot;Slices not supported by DynamicMap in closed mode &quot;</span>
+                                <span class="s">&quot;except for the global slice [:] to create a clone.&quot;</span><span class="p">)</span>
 
         <span class="c"># Cache lookup</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">cache</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">DynamicMap</span><span class="p">,</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__getitem__</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-            <span class="c"># Cast available cache in open mode to a HoloMap</span>
+            <span class="c"># Return selected cache items in a new DynamicMap</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">cache</span><span class="p">,</span> <span class="n">DynamicMap</span><span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span><span class="o">==</span><span class="s">&#39;open&#39;</span><span class="p">:</span>
-                <span class="n">cache</span> <span class="o">=</span> <span class="n">HoloMap</span><span class="p">(</span><span class="n">cache</span><span class="p">)</span>
+                <span class="n">cache</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">clone</span><span class="p">(</span><span class="n">cache</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
             <span class="n">cache</span> <span class="o">=</span> <span class="bp">None</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">==</span> <span class="s">&#39;open&#39;</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
