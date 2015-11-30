@@ -933,8 +933,7 @@
 <span class="sd">        Equivalent to pickle.load except that the HoloViews trees is</span>
 <span class="sd">        restored appropriately.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">cls</span><span class="o">.</span><span class="n">load_counter_offset</span> <span class="o">=</span> <span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span>  <span class="n">cls</span><span class="o">.</span><span class="n">_custom_options</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
-                                   <span class="k">if</span> <span class="n">cls</span><span class="o">.</span><span class="n">custom_options</span><span class="p">()</span> <span class="k">else</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">cls</span><span class="o">.</span><span class="n">load_counter_offset</span> <span class="o">=</span> <span class="n">StoreOptions</span><span class="o">.</span><span class="n">id_offset</span><span class="p">()</span>
         <span class="n">val</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
         <span class="n">cls</span><span class="o">.</span><span class="n">load_counter_offset</span> <span class="o">=</span> <span class="bp">None</span>
         <span class="k">return</span> <span class="n">val</span>
@@ -945,8 +944,7 @@
 <span class="sd">        Equivalent to pickle.loads except that the HoloViews trees is</span>
 <span class="sd">        restored appropriately.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">cls</span><span class="o">.</span><span class="n">load_counter_offset</span> <span class="o">=</span> <span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span>  <span class="n">cls</span><span class="o">.</span><span class="n">_custom_options</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
-                                   <span class="k">if</span> <span class="n">cls</span><span class="o">.</span><span class="n">custom_options</span><span class="p">()</span> <span class="k">else</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">cls</span><span class="o">.</span><span class="n">load_counter_offset</span> <span class="o">=</span> <span class="n">StoreOptions</span><span class="o">.</span><span class="n">id_offset</span><span class="p">()</span>
         <span class="n">val</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">pickle_string</span><span class="p">)</span>
         <span class="n">cls</span><span class="o">.</span><span class="n">load_counter_offset</span> <span class="o">=</span> <span class="bp">None</span>
         <span class="k">return</span> <span class="n">val</span>
@@ -984,12 +982,11 @@
 </div>
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">lookup_options</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">backend</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">group</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">obj</span><span class="o">.</span><span class="n">id</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">cls</span><span class="o">.</span><span class="n">_options</span><span class="p">[</span><span class="n">backend</span><span class="p">]</span><span class="o">.</span><span class="n">closest</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">group</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">obj</span><span class="o">.</span><span class="n">id</span> <span class="ow">in</span> <span class="n">cls</span><span class="o">.</span><span class="n">_custom_options</span><span class="p">[</span><span class="n">backend</span><span class="p">]:</span>
+        <span class="c"># Current custom_options dict may not have entry for obj.id</span>
+        <span class="k">if</span> <span class="n">obj</span><span class="o">.</span><span class="n">id</span> <span class="ow">in</span> <span class="n">cls</span><span class="o">.</span><span class="n">_custom_options</span><span class="p">[</span><span class="n">backend</span><span class="p">]:</span>
             <span class="k">return</span> <span class="n">cls</span><span class="o">.</span><span class="n">_custom_options</span><span class="p">[</span><span class="n">backend</span><span class="p">][</span><span class="n">obj</span><span class="o">.</span><span class="n">id</span><span class="p">]</span><span class="o">.</span><span class="n">closest</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">group</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s">&quot;No custom settings defined for object with id </span><span class="si">%d</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">obj</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">cls</span><span class="o">.</span><span class="n">_options</span><span class="p">[</span><span class="n">backend</span><span class="p">]</span><span class="o">.</span><span class="n">closest</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">group</span><span class="p">)</span>
 
     <span class="nd">@classmethod</span>
 <div class="viewcode-block" id="Store.lookup"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.core.html#holoviews.core.options.Store.lookup">[docs]</a>    <span class="k">def</span> <span class="nf">lookup</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">backend</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
@@ -1107,7 +1104,7 @@
                                  <span class="s">&quot;Store.custom_options to contain&quot;</span>
                                  <span class="s">&quot; a tree with id </span><span class="si">%d</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">new_id</span><span class="p">)</span>
         <span class="n">obj</span><span class="o">.</span><span class="n">traverse</span><span class="p">(</span><span class="k">lambda</span> <span class="n">o</span><span class="p">:</span> <span class="nb">setattr</span><span class="p">(</span><span class="n">o</span><span class="p">,</span> <span class="s">&#39;id&#39;</span><span class="p">,</span> <span class="n">new_id</span><span class="p">)</span>
-                     <span class="k">if</span> <span class="n">o</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">match_id</span> <span class="k">else</span> <span class="bp">None</span><span class="p">,</span> <span class="n">specs</span><span class="o">=</span><span class="nb">set</span><span class="p">(</span><span class="n">applied_keys</span><span class="p">))</span>
+                      <span class="k">if</span> <span class="n">o</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">match_id</span> <span class="k">else</span> <span class="bp">None</span><span class="p">,</span> <span class="n">specs</span><span class="o">=</span><span class="nb">set</span><span class="p">(</span><span class="n">applied_keys</span><span class="p">))</span>
 </div>
     <span class="nd">@classmethod</span>
 <div class="viewcode-block" id="StoreOptions.capture_ids"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.core.html#holoviews.core.options.StoreOptions.capture_ids">[docs]</a>    <span class="k">def</span> <span class="nf">capture_ids</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
@@ -1191,11 +1188,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">clones</span><span class="p">,</span> <span class="n">id_mapping</span> <span class="o">=</span> <span class="p">{},</span> <span class="p">[]</span>
         <span class="n">obj_ids</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">get_object_ids</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
-        <span class="n">store_ids</span> <span class="o">=</span> <span class="n">Store</span><span class="o">.</span><span class="n">custom_options</span><span class="p">()</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
-        <span class="n">offset</span> <span class="o">=</span> <span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">store_ids</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">store_ids</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span>
+        <span class="n">offset</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">id_offset</span><span class="p">()</span>
         <span class="n">obj_ids</span> <span class="o">=</span> <span class="p">[</span><span class="bp">None</span><span class="p">]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">obj_ids</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span> <span class="k">else</span> <span class="n">obj_ids</span>
         <span class="k">for</span> <span class="n">tree_id</span> <span class="ow">in</span> <span class="n">obj_ids</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">tree_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">tree_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">tree_id</span> <span class="ow">in</span> <span class="n">Store</span><span class="o">.</span><span class="n">custom_options</span><span class="p">():</span>
                 <span class="n">original</span> <span class="o">=</span> <span class="n">Store</span><span class="o">.</span><span class="n">custom_options</span><span class="p">()[</span><span class="n">tree_id</span><span class="p">]</span>
                 <span class="n">clone</span> <span class="o">=</span> <span class="n">OptionTree</span><span class="p">(</span><span class="n">items</span> <span class="o">=</span> <span class="n">original</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span>
                                    <span class="n">groups</span> <span class="o">=</span> <span class="n">original</span><span class="o">.</span><span class="n">groups</span><span class="p">)</span>
@@ -1204,7 +1200,7 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">clone</span> <span class="o">=</span> <span class="n">OptionTree</span><span class="p">(</span><span class="n">groups</span><span class="o">=</span><span class="n">Store</span><span class="o">.</span><span class="n">options</span><span class="p">()</span><span class="o">.</span><span class="n">groups</span><span class="p">)</span>
                 <span class="n">clones</span><span class="p">[</span><span class="n">offset</span><span class="p">]</span> <span class="o">=</span> <span class="n">clone</span>
-                <span class="n">id_mapping</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="bp">None</span><span class="p">,</span> <span class="n">offset</span><span class="p">))</span>
+                <span class="n">id_mapping</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">tree_id</span><span class="p">,</span> <span class="n">offset</span><span class="p">))</span>
 
            <span class="c"># Nodes needed to ensure allowed_keywords is respected</span>
             <span class="k">for</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">)</span> <span class="ow">in</span> <span class="n">Store</span><span class="o">.</span><span class="n">options</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
@@ -1300,6 +1296,38 @@
 
 </div>
     <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="StoreOptions.id_offset"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.core.html#holoviews.core.options.StoreOptions.id_offset">[docs]</a>    <span class="k">def</span> <span class="nf">id_offset</span><span class="p">(</span><span class="n">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute an appropriate offset for future id values given the set</span>
+<span class="sd">        of ids currently defined across backends.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">max_ids</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">backend</span> <span class="ow">in</span> <span class="n">Store</span><span class="o">.</span><span class="n">renderers</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">store_ids</span> <span class="o">=</span> <span class="n">Store</span><span class="o">.</span><span class="n">custom_options</span><span class="p">(</span><span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">)</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+            <span class="n">max_id</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">store_ids</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">store_ids</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span>
+            <span class="n">max_ids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">max_id</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">max_ids</span><span class="p">)</span>
+
+</div>
+    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="StoreOptions.update_backends"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.core.html#holoviews.core.options.StoreOptions.update_backends">[docs]</a>    <span class="k">def</span> <span class="nf">update_backends</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">id_mapping</span><span class="p">,</span> <span class="n">custom_trees</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Given the id_mapping from previous ids to new ids and the new</span>
+<span class="sd">        custom tree dictionary, update the current backend with the</span>
+<span class="sd">        supplied trees and update the keys in the remaining backends to</span>
+<span class="sd">        stay linked with the current object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c"># Update the custom option entries for the current backend</span>
+        <span class="n">Store</span><span class="o">.</span><span class="n">custom_options</span><span class="p">()</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">custom_trees</span><span class="p">)</span>
+        <span class="c"># Update the entries in other backends so the ids match correctly</span>
+        <span class="k">for</span> <span class="n">backend</span> <span class="ow">in</span> <span class="p">[</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">Store</span><span class="o">.</span><span class="n">renderers</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="o">!=</span> <span class="n">Store</span><span class="o">.</span><span class="n">current_backend</span><span class="p">]:</span>
+            <span class="k">for</span> <span class="p">(</span><span class="n">old_id</span><span class="p">,</span> <span class="n">new_id</span><span class="p">)</span> <span class="ow">in</span> <span class="n">id_mapping</span><span class="p">:</span>
+                <span class="n">tree</span> <span class="o">=</span> <span class="n">Store</span><span class="o">.</span><span class="n">_custom_options</span><span class="p">[</span><span class="n">backend</span><span class="p">]</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">old_id</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">tree</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                    <span class="n">Store</span><span class="o">.</span><span class="n">_custom_options</span><span class="p">[</span><span class="n">backend</span><span class="p">][</span><span class="n">new_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">tree</span>
+
+</div>
+    <span class="nd">@classmethod</span>
 <div class="viewcode-block" id="StoreOptions.set_options"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.core.html#holoviews.core.options.StoreOptions.set_options">[docs]</a>    <span class="k">def</span> <span class="nf">set_options</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Pure Python function for customize HoloViews objects in terms of</span>
@@ -1346,7 +1374,7 @@
         <span class="n">options</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">merge_options</span><span class="p">(</span><span class="n">Store</span><span class="o">.</span><span class="n">options</span><span class="p">()</span><span class="o">.</span><span class="n">groups</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="n">options</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="n">spec</span><span class="p">,</span> <span class="n">compositor_applied</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">expand_compositor_keys</span><span class="p">(</span><span class="n">options</span><span class="p">)</span>
         <span class="n">custom_trees</span><span class="p">,</span> <span class="n">id_mapping</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">create_custom_trees</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">spec</span><span class="p">)</span>
-        <span class="n">Store</span><span class="o">.</span><span class="n">custom_options</span><span class="p">()</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">custom_trees</span><span class="p">)</span>
+        <span class="n">cls</span><span class="o">.</span><span class="n">update_backends</span><span class="p">(</span><span class="n">id_mapping</span><span class="p">,</span> <span class="n">custom_trees</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">tree_id</span><span class="p">,</span> <span class="p">(</span><span class="n">match_id</span><span class="p">,</span> <span class="n">new_id</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">custom_trees</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="n">id_mapping</span><span class="p">):</span>
             <span class="n">cls</span><span class="o">.</span><span class="n">propagate_ids</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">match_id</span><span class="p">,</span> <span class="n">new_id</span><span class="p">,</span> <span class="n">compositor_applied</span><span class="o">+</span><span class="nb">list</span><span class="p">(</span><span class="n">spec</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
         <span class="k">return</span> <span class="n">obj</span></div></div>
