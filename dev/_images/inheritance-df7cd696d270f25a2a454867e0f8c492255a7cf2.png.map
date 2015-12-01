@@ -1,0 +1,8 @@
+<map id="inheritancee698a881b0" name="inheritancee698a881b0">
+<area shape="rect" id="node1" href="#holoviews.plotting.bokeh.callbacks.Callback" title="Callback functions provide an easy way to interactively modify" alt="" coords="550,25,794,45"/>
+<area shape="rect" id="node5" href="#holoviews.plotting.bokeh.callbacks.DownsampleColumns" title="Downsamples any column based Element by randomizing" alt="" coords="834,4,1147,25"/>
+<area shape="rect" id="node6" href="#holoviews.plotting.bokeh.callbacks.DownsampleImage" title="Downsamples any Image plot to the specified" alt="" coords="841,44,1141,65"/>
+<area shape="rect" id="node2" title="params(name=String)" alt="" coords="255,25,511,45"/>
+<area shape="rect" id="node3" href="#holoviews.plotting.bokeh.callbacks.Callbacks" title="Callbacks allows defining a number of callbacks to be applied" alt="" coords="259,65,507,86"/>
+<area shape="rect" id="node4" title="params(name=String)" alt="" coords="4,45,216,66"/>
+</map>

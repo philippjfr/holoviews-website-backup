@@ -222,7 +222,7 @@
         <span class="n">_loaded</span> <span class="o">=</span> <span class="bp">True</span>
         <span class="n">param_ext</span><span class="o">.</span><span class="n">load_ipython_extension</span><span class="p">(</span><span class="n">ip</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
         <span class="n">load_magics</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span>
-        <span class="n">OutputMagic</span><span class="o">.</span><span class="n">register_supported_formats</span><span class="p">(</span><span class="n">OutputMagic</span><span class="o">.</span><span class="n">optional_formats</span><span class="p">)</span>
+        <span class="n">OutputMagic</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
         <span class="n">set_display_hooks</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span>
         <span class="n">load_notebook</span><span class="p">()</span>
 

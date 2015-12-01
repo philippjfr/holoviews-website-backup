@@ -127,9 +127,82 @@
           <div role="main">
             
   <h1>Source code for holoviews.plotting.util</h1><div class="highlight"><pre>
-<span class="kn">from</span> <span class="nn">..core</span> <span class="kn">import</span> <span class="n">HoloMap</span><span class="p">,</span> <span class="n">DynamicMap</span><span class="p">,</span> <span class="n">CompositeOverlay</span>
+<span class="kn">import</span> <span class="nn">param</span>
+
+<span class="kn">from</span> <span class="nn">..core</span> <span class="kn">import</span> <span class="p">(</span><span class="n">HoloMap</span><span class="p">,</span> <span class="n">DynamicMap</span><span class="p">,</span> <span class="n">CompositeOverlay</span><span class="p">,</span> <span class="n">Layout</span><span class="p">,</span>
+                    <span class="n">GridSpace</span><span class="p">,</span> <span class="n">NdLayout</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">..core.util</span> <span class="kn">import</span> <span class="n">match_spec</span>
 
+
+<div class="viewcode-block" id="displayable"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.plotting.html#holoviews.plotting.util.displayable">[docs]</a><span class="k">def</span> <span class="nf">displayable</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Predicate that returns whether the object is displayable or not</span>
+<span class="sd">    (i.e whether the object obeys the nesting hierarchy</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">HoloMap</span><span class="p">):</span>
+        <span class="k">return</span> <span class="ow">not</span> <span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">type</span> <span class="ow">in</span> <span class="p">[</span><span class="n">Layout</span><span class="p">,</span> <span class="n">GridSpace</span><span class="p">,</span> <span class="n">NdLayout</span><span class="p">])</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="p">(</span><span class="n">GridSpace</span><span class="p">,</span> <span class="n">Layout</span><span class="p">,</span> <span class="n">NdLayout</span><span class="p">)):</span>
+        <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">obj</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">displayable</span><span class="p">(</span><span class="n">el</span><span class="p">):</span>
+                <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">return</span> <span class="bp">True</span>
+    <span class="k">return</span> <span class="bp">True</span>
+
+</div>
+<span class="k">class</span> <span class="nc">Warning</span><span class="p">(</span><span class="n">param</span><span class="o">.</span><span class="n">Parameterized</span><span class="p">):</span> <span class="k">pass</span>
+<span class="n">display_warning</span> <span class="o">=</span> <span class="ne">Warning</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;Warning&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">collate</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">HoloMap</span><span class="p">):</span>
+        <span class="n">display_warning</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s">&quot;Nesting </span><span class="si">%s</span><span class="s">s within a HoloMap makes it difficult &quot;</span>
+                                <span class="s">&quot;to access your data or control how it appears; &quot;</span>
+                                <span class="s">&quot;we recommend calling .collate() on the HoloMap &quot;</span>
+                                <span class="s">&quot;in order to follow the recommended nesting &quot;</span>
+                                <span class="s">&quot;structure shown in the Composing Data tutorial&quot;</span>
+                                <span class="s">&quot;(http://git.io/vtIQh)&quot;</span> <span class="o">%</span> <span class="n">vmap</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">vmap</span><span class="o">.</span><span class="n">collate</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="p">(</span><span class="n">Layout</span><span class="p">,</span> <span class="n">NdLayout</span><span class="p">)):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">display_warning</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                <span class="s">&quot;Layout contains HoloMaps which are not nested in the &quot;</span>
+                <span class="s">&quot;recommended format for accessing your data; calling &quot;</span>
+                <span class="s">&quot;.collate() on these objects will resolve any violations &quot;</span>
+                <span class="s">&quot;of the recommended nesting presented in the Composing Data &quot;</span>
+                <span class="s">&quot;tutorial (http://git.io/vqs03)&quot;</span><span class="p">)</span>
+            <span class="n">expanded</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">layout</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">el</span><span class="p">,</span> <span class="n">HoloMap</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">displayable</span><span class="p">(</span><span class="n">el</span><span class="p">):</span>
+                    <span class="n">collated_layout</span> <span class="o">=</span> <span class="n">Layout</span><span class="o">.</span><span class="n">from_values</span><span class="p">(</span><span class="n">el</span><span class="o">.</span><span class="n">collate</span><span class="p">())</span>
+                    <span class="n">expanded</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">collated_layout</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+            <span class="n">layout</span> <span class="o">=</span> <span class="n">Layout</span><span class="p">(</span><span class="n">expanded</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">undisplayable_info</span><span class="p">(</span><span class="n">layout</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">undisplayable_info</span><span class="p">(</span><span class="n">layout</span><span class="p">))</span>
+
+
+<div class="viewcode-block" id="undisplayable_info"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.plotting.html#holoviews.plotting.util.undisplayable_info">[docs]</a><span class="k">def</span> <span class="nf">undisplayable_info</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">html</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="s">&quot;Generate helpful message regarding an undisplayable object&quot;</span>
+
+    <span class="n">collate</span> <span class="o">=</span> <span class="s">&#39;&lt;tt&gt;collate&lt;/tt&gt;&#39;</span> <span class="k">if</span> <span class="n">html</span> <span class="k">else</span> <span class="s">&#39;collate&#39;</span>
+    <span class="n">info</span> <span class="o">=</span> <span class="s">&quot;For more information, please consult the Composing Data tutorial (http://git.io/vtIQh)&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">HoloMap</span><span class="p">):</span>
+        <span class="n">error</span> <span class="o">=</span> <span class="s">&quot;HoloMap of </span><span class="si">%s</span><span class="s"> objects cannot be displayed.&quot;</span> <span class="o">%</span> <span class="n">obj</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">__name__</span>
+        <span class="n">remedy</span> <span class="o">=</span> <span class="s">&quot;Please call the </span><span class="si">%s</span><span class="s"> method to generate a displayable object&quot;</span> <span class="o">%</span> <span class="n">collate</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">Layout</span><span class="p">):</span>
+        <span class="n">error</span> <span class="o">=</span> <span class="s">&quot;Layout containing HoloMaps of Layout or GridSpace objects cannot be displayed.&quot;</span>
+        <span class="n">remedy</span> <span class="o">=</span> <span class="s">&quot;Please call the </span><span class="si">%s</span><span class="s"> method on the appropriate elements.&quot;</span> <span class="o">%</span> <span class="n">collate</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">GridSpace</span><span class="p">):</span>
+        <span class="n">error</span> <span class="o">=</span> <span class="s">&quot;GridSpace containing HoloMaps of Layouts cannot be displayed.&quot;</span>
+        <span class="n">remedy</span> <span class="o">=</span> <span class="s">&quot;Please call the </span><span class="si">%s</span><span class="s"> method on the appropriate elements.&quot;</span> <span class="o">%</span> <span class="n">collate</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">html</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">error</span><span class="p">,</span> <span class="n">remedy</span><span class="p">,</span> <span class="n">info</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s">&quot;&lt;center&gt;{msg}&lt;/center&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">msg</span><span class="o">=</span><span class="p">(</span><span class="s">&#39;&lt;br&gt;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="p">[</span><span class="s">&#39;&lt;b&gt;</span><span class="si">%s</span><span class="s">&lt;/b&gt;&#39;</span> <span class="o">%</span> <span class="n">error</span><span class="p">,</span> <span class="n">remedy</span><span class="p">,</span> <span class="s">&#39;&lt;i&gt;</span><span class="si">%s</span><span class="s">&lt;/i&gt;&#39;</span> <span class="o">%</span> <span class="n">info</span><span class="p">])))</span>
+
+</div>
 <div class="viewcode-block" id="compute_sizes"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.plotting.html#holoviews.plotting.util.compute_sizes">[docs]</a><span class="k">def</span> <span class="nf">compute_sizes</span><span class="p">(</span><span class="n">sizes</span><span class="p">,</span> <span class="n">size_fn</span><span class="p">,</span> <span class="n">scaling</span><span class="p">,</span> <span class="n">base_size</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Scales point sizes according to a scaling factor,</span>

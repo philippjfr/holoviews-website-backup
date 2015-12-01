@@ -1,0 +1,534 @@
+
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>holoviews.plotting.bokeh.callbacks &mdash; HoloViews</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../../../_static/bootstrap.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../../../../_static/codehilite.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../../../../_static/custom.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../../../../_static/rtd_bootstrap.css" type="text/css" />
+  
+        <link rel="author" title="About these documents"
+              href="../../../../about.html"/>
+    <link rel="top" title="HoloViews" href="../../../../index.html"/>
+        <link rel="up" title="holoviews.plotting" href="../../plotting.html"/>
+    <script type="text/javascript" src='../../../../_static/jquery.js'></script>
+    <script type="text/javascript" src='../../../../_static/underscore.js'></script>
+    <script type="text/javascript" src='../../../../_static/doctools.js'></script>
+    <script type="text/javascript" src='../../../../_static/require.js'></script>
+    <script type="text/javascript" src='../../../../_static/bootstrap.js'></script>
+    <script type="text/javascript" src='../../../../_static/custom.js'></script>
+    <script type="text/javascript" src='../../../../_static/js/theme.js'></script>
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+
+        
+          <img src="../../../../_static/holoviews_logo.png" class="logo" />
+        
+
+        <a href="../../../../index.html" class="fa"> HoloViews</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../index.html">Home</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../features.html">Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Tutorials/index.html">Tutorials</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Examples/index.html">Examples</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Reference_Manual/index.html">Reference Manual</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Reference_Manual/holoviews.core.html">core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Reference_Manual/holoviews.element.html">element</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Reference_Manual/holoviews.interface.html">interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Reference_Manual/holoviews.ipython.html">ipython</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Reference_Manual/holoviews.operation.html">operation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Reference_Manual/holoviews.plotting.html">plotting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../FAQ.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference external" href="http://github.com/ioam/holoviews">Github source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../about.html">About</a><ul class="simple">
+</ul>
+</li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../../index.html">HoloViews</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="main">
+            
+  <h1>Source code for holoviews.plotting.bokeh.callbacks</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">bokeh.models</span> <span class="kn">import</span> <span class="n">CustomJS</span><span class="p">,</span> <span class="n">PlotObject</span><span class="p">,</span> <span class="n">TapTool</span><span class="p">,</span> <span class="n">ColumnDataSource</span>
+<span class="kn">from</span> <span class="nn">bokeh.protocol</span> <span class="kn">import</span> <span class="n">serialize_json</span>
+
+<span class="kn">import</span> <span class="nn">param</span>
+
+<span class="kn">from</span> <span class="nn">.plot</span> <span class="kn">import</span> <span class="n">BokehPlot</span>
+
+
+<div class="viewcode-block" id="Callback"><a class="viewcode-back" href="../../../../Reference_Manual/holoviews.plotting.bokeh.html#holoviews.plotting.bokeh.callbacks.Callback">[docs]</a><span class="k">class</span> <span class="nc">Callback</span><span class="p">(</span><span class="n">param</span><span class="o">.</span><span class="n">ParameterizedFunction</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Callback functions provide an easy way to interactively modify</span>
+<span class="sd">    the plot based on changes to the bokeh axis ranges, data sources,</span>
+<span class="sd">    tools or widgets.</span>
+
+<span class="sd">    The data sent to the Python callback from javascript is defined</span>
+<span class="sd">    by the plot attributes and callback_obj attributes and optionally</span>
+<span class="sd">    custom javascript code.</span>
+
+<span class="sd">    The user should define any plot_attributes and cb_attributes</span>
+<span class="sd">    he wants access to, which will be supplied in the form of a</span>
+<span class="sd">    dictionary to the call method. The call method can then apply</span>
+<span class="sd">    any processing depending on the callback data and return the</span>
+<span class="sd">    modified bokeh plot objects.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">callback_obj</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">ClassSelector</span><span class="p">(</span><span class="n">class_</span><span class="o">=</span><span class="p">(</span><span class="n">PlotObject</span><span class="p">,),</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">        Bokeh PlotObject the callback is applied to.&quot;&quot;&quot;</span><span class="p">)</span>
+
+    <span class="n">cb_attributes</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">List</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="p">[],</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">        Callback attributes returned to the Python callback.&quot;&quot;&quot;</span><span class="p">)</span>
+
+    <span class="n">code</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">        Custom javascript code executed on the callback. The code</span>
+<span class="s">        has access to the plot, source and cb_obj and may modify</span>
+<span class="s">        the data javascript object sent back to Python.&quot;&quot;&quot;</span><span class="p">)</span>
+
+    <span class="n">current_data</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">Dict</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="p">{})</span>
+
+    <span class="n">plot_attributes</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">Dict</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="p">{},</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">        Plot attributes returned to the Python callback.&quot;&quot;&quot;</span><span class="p">)</span>
+
+    <span class="n">plots</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">List</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="p">[],</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">        The HoloViews plot object the callback applies to.&quot;&quot;&quot;</span><span class="p">)</span>
+
+    <span class="n">streams</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">List</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="p">[],</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">        List of streams attached to this callback.&quot;&quot;&quot;</span><span class="p">)</span>
+
+    <span class="n">reinitialize</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">Boolean</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">        Whether the Callback should be reinitialized per plot instance&quot;&quot;&quot;</span><span class="p">)</span>
+
+    <span class="n">skip_unchanged</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">Boolean</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">        Avoid running the callback if the callback data is unchanged.</span>
+<span class="s">        Useful for avoiding infinite loops.&quot;&quot;&quot;</span><span class="p">)</span>
+
+    <span class="n">JS_callback</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">        function callback(msg){</span>
+<span class="s">          if (msg.msg_type == &quot;execute_result&quot;) {</span>
+<span class="s">            var data = JSON.parse(msg.content.data[&#39;text/plain&#39;].slice(1, -1));</span>
+<span class="s">            $.each(data, function(id, value) {</span>
+<span class="s">              var ds = Bokeh.Collections(value.type).get(id);</span>
+<span class="s">                if (ds != undefined) {</span>
+<span class="s">                  ds.set(value.data);</span>
+<span class="s">                }</span>
+<span class="s">            });</span>
+<span class="s">          } else {</span>
+<span class="s">            console.log(&quot;Python callback returned unexpected message:&quot;, msg)</span>
+<span class="s">          }</span>
+<span class="s">        }</span>
+<span class="s">        callbacks = {iopub: {output: callback}};</span>
+<span class="s">        var data = {};</span>
+<span class="s">    &quot;&quot;&quot;</span>
+
+    <span class="n">IPython_callback</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">        if (!(_.isEmpty(data))) {{</span>
+<span class="s">           var argstring = JSON.stringify(data);</span>
+<span class="s">           argstring = argstring.replace(&#39;true&#39;, &#39;True&#39;).replace(&#39;false&#39;,&#39;False&#39;);</span>
+<span class="s">           var kernel = IPython.notebook.kernel;</span>
+<span class="s">           var cmd = &quot;Callbacks.callbacks[{callback_id}].update(&quot; + argstring + &quot;)&quot;;</span>
+<span class="s">           var pyimport = &quot;from holoviews.plotting.bokeh import Callbacks;&quot;;</span>
+<span class="s">           kernel.execute(pyimport + cmd, callbacks, {{silent : false}});</span>
+<span class="s">        }}</span>
+<span class="s">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The call method can modify any bokeh plot object</span>
+<span class="sd">        depending on the supplied data dictionary. It</span>
+<span class="sd">        should return the modified plot objects as a list.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[]</span>
+
+
+<div class="viewcode-block" id="Callback.update"><a class="viewcode-back" href="../../../../Reference_Manual/holoviews.plotting.bokeh.html#holoviews.plotting.bokeh.callbacks.Callback.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">chained</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The update method is called by the javascript callback</span>
+<span class="sd">        with the supplied data and will return the json serialized</span>
+<span class="sd">        string representation of the changes to the Bokeh plot.</span>
+<span class="sd">        When chained=True it will return a list of the plot objects</span>
+<span class="sd">        to be updated, allowing chaining of callback operations.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">skip_unchanged</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_data</span> <span class="o">==</span> <span class="n">data</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[]</span> <span class="k">if</span> <span class="n">chained</span> <span class="k">else</span> <span class="s">&quot;{}&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_data</span> <span class="o">=</span> <span class="n">data</span>
+
+        <span class="n">objects</span> <span class="o">=</span> <span class="bp">self</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">stream</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">streams</span><span class="p">:</span>
+            <span class="n">objects</span> <span class="o">+=</span> <span class="n">stream</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">chained</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">objects</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">serialize</span><span class="p">(</span><span class="n">objects</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="Callback.serialize"><a class="viewcode-back" href="../../../../Reference_Manual/holoviews.plotting.bokeh.html#holoviews.plotting.bokeh.callbacks.Callback.serialize">[docs]</a>    <span class="k">def</span> <span class="nf">serialize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">objects</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Serializes any Bokeh plot objects passed to it as a list.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">objects</span><span class="p">:</span>
+            <span class="n">json</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">vm_serialize</span><span class="p">(</span><span class="n">changed_only</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+            <span class="n">data</span><span class="p">[</span><span class="n">obj</span><span class="o">.</span><span class="n">ref</span><span class="p">[</span><span class="s">&#39;id&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;type&#39;</span><span class="p">:</span> <span class="n">obj</span><span class="o">.</span><span class="n">ref</span><span class="p">[</span><span class="s">&#39;type&#39;</span><span class="p">],</span> <span class="s">&#39;data&#39;</span><span class="p">:</span> <span class="n">json</span><span class="p">}</span>
+        <span class="k">return</span> <span class="n">serialize_json</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+
+</div></div>
+<div class="viewcode-block" id="DownsampleImage"><a class="viewcode-back" href="../../../../Reference_Manual/holoviews.plotting.bokeh.html#holoviews.plotting.bokeh.callbacks.DownsampleImage">[docs]</a><span class="k">class</span> <span class="nc">DownsampleImage</span><span class="p">(</span><span class="n">Callback</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Downsamples any Image plot to the specified</span>
+<span class="sd">    max_width and max_height by slicing the</span>
+<span class="sd">    Image to the specified x_range and y_range</span>
+<span class="sd">    and then finding step values matching the</span>
+<span class="sd">    constraints.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">max_width</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">Integer</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">        Maximum plot width in pixels after slicing and downsampling.&quot;&quot;&quot;</span><span class="p">)</span>
+
+    <span class="n">max_height</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">Integer</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">        Maximum plot height in pixels after slicing and downsampling.&quot;&quot;&quot;</span><span class="p">)</span>
+
+    <span class="n">plot_attributes</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">Dict</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;x_range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;start&#39;</span><span class="p">,</span> <span class="s">&#39;end&#39;</span><span class="p">],</span>
+                                          <span class="s">&#39;y_range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;start&#39;</span><span class="p">,</span> <span class="s">&#39;end&#39;</span><span class="p">]})</span>
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="n">xstart</span><span class="p">,</span> <span class="n">xend</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;x_range&#39;</span><span class="p">]</span>
+        <span class="n">ystart</span><span class="p">,</span> <span class="n">yend</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;y_range&#39;</span><span class="p">]</span>
+
+        <span class="n">ranges</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">plots</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">current_ranges</span>
+        <span class="n">element</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">plots</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">current_frame</span>
+
+        <span class="c"># Slice Element to match selected ranges</span>
+        <span class="n">xdim</span><span class="p">,</span> <span class="n">ydim</span> <span class="o">=</span> <span class="n">element</span><span class="o">.</span><span class="n">dimensions</span><span class="p">(</span><span class="s">&#39;key&#39;</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
+        <span class="n">sliced</span> <span class="o">=</span> <span class="n">element</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="n">xdim</span><span class="p">:</span> <span class="p">(</span><span class="n">xstart</span><span class="p">,</span> <span class="n">xend</span><span class="p">),</span>
+                                   <span class="n">ydim</span><span class="p">:</span> <span class="p">(</span><span class="n">ystart</span><span class="p">,</span> <span class="n">yend</span><span class="p">)})</span>
+
+        <span class="c"># Get dimensions of sliced element</span>
+        <span class="n">shape</span> <span class="o">=</span> <span class="n">sliced</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span>
+        <span class="n">max_shape</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_height</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_width</span><span class="p">)</span>
+
+        <span class="c">#Find minimum downsampling to fit requirement</span>
+        <span class="n">steps</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">s</span><span class="p">,</span> <span class="n">max_s</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">max_shape</span><span class="p">):</span>
+            <span class="n">step</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="k">while</span> <span class="n">s</span><span class="o">/</span><span class="n">step</span> <span class="o">&gt;</span> <span class="n">max_s</span><span class="p">:</span> <span class="n">step</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">steps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
+        <span class="n">resampled</span> <span class="o">=</span> <span class="n">sliced</span><span class="o">.</span><span class="n">clone</span><span class="p">(</span><span class="n">sliced</span><span class="o">.</span><span class="n">data</span><span class="p">[::</span><span class="n">steps</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">::</span><span class="n">steps</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
+
+        <span class="c"># Update data source</span>
+        <span class="n">new_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">plots</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="n">resampled</span><span class="p">,</span> <span class="n">ranges</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">source</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">plots</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">handles</span><span class="p">[</span><span class="s">&#39;source&#39;</span><span class="p">]</span>
+        <span class="n">source</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">new_data</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">source</span><span class="p">]</span>
+
+
+</div>
+<div class="viewcode-block" id="DownsampleColumns"><a class="viewcode-back" href="../../../../Reference_Manual/holoviews.plotting.bokeh.html#holoviews.plotting.bokeh.callbacks.DownsampleColumns">[docs]</a><span class="k">class</span> <span class="nc">DownsampleColumns</span><span class="p">(</span><span class="n">Callback</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Downsamples any column based Element by randomizing</span>
+<span class="sd">    the rows and updating the ColumnDataSource with</span>
+<span class="sd">    up to max_samples.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">max_samples</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">Integer</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">800</span><span class="p">)</span>
+
+    <span class="n">plot_attributes</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">Dict</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;x_range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;start&#39;</span><span class="p">,</span> <span class="s">&#39;end&#39;</span><span class="p">],</span>
+                                          <span class="s">&#39;y_range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;start&#39;</span><span class="p">,</span> <span class="s">&#39;end&#39;</span><span class="p">]})</span>
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="n">xstart</span><span class="p">,</span> <span class="n">xend</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;x_range&#39;</span><span class="p">]</span>
+        <span class="n">ystart</span><span class="p">,</span> <span class="n">yend</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;y_range&#39;</span><span class="p">]</span>
+
+        <span class="n">plot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">plots</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">element</span> <span class="o">=</span> <span class="n">plot</span><span class="o">.</span><span class="n">current_frame</span>
+        <span class="n">ranges</span>  <span class="o">=</span> <span class="n">plot</span><span class="o">.</span><span class="n">current_ranges</span>
+
+        <span class="c"># Slice element to current ranges</span>
+        <span class="n">xdim</span><span class="p">,</span> <span class="n">ydim</span> <span class="o">=</span> <span class="n">element</span><span class="o">.</span><span class="n">dimensions</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="bp">True</span><span class="p">)[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">sliced</span> <span class="o">=</span> <span class="n">element</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="n">xdim</span><span class="p">:</span> <span class="p">(</span><span class="n">xstart</span><span class="p">,</span> <span class="n">xend</span><span class="p">),</span>
+                                   <span class="n">ydim</span><span class="p">:</span> <span class="p">(</span><span class="n">ystart</span><span class="p">,</span> <span class="n">yend</span><span class="p">)})</span>
+
+        <span class="c"># Avoid randomizing if possible (expensive)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sliced</span><span class="p">)</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_samples</span><span class="p">:</span>
+            <span class="c"># Randomize element samples and slice to region</span>
+            <span class="c"># Randomization consistent to avoid &quot;flicker&quot;.</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+            <span class="n">inds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">element</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">element</span><span class="p">),</span> <span class="bp">False</span><span class="p">)</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">element</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">inds</span><span class="p">,</span> <span class="p">:]</span>
+            <span class="n">randomized</span> <span class="o">=</span> <span class="n">element</span><span class="o">.</span><span class="n">clone</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+            <span class="n">sliced</span> <span class="o">=</span> <span class="n">randomized</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="n">xdim</span><span class="p">:</span> <span class="p">(</span><span class="n">xstart</span><span class="p">,</span> <span class="n">xend</span><span class="p">),</span>
+                                          <span class="n">ydim</span><span class="p">:</span> <span class="p">(</span><span class="n">ystart</span><span class="p">,</span> <span class="n">yend</span><span class="p">)})</span>
+
+        <span class="n">sliced</span> <span class="o">=</span> <span class="n">sliced</span><span class="o">.</span><span class="n">clone</span><span class="p">(</span><span class="n">sliced</span><span class="o">.</span><span class="n">data</span><span class="p">[:</span><span class="bp">self</span><span class="o">.</span><span class="n">max_samples</span><span class="p">,</span> <span class="p">:])</span>
+
+        <span class="c"># Update data source</span>
+        <span class="n">new_data</span> <span class="o">=</span> <span class="n">plot</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="n">sliced</span><span class="p">,</span> <span class="n">ranges</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">source</span> <span class="o">=</span> <span class="n">plot</span><span class="o">.</span><span class="n">handles</span><span class="p">[</span><span class="s">&#39;source&#39;</span><span class="p">]</span>
+        <span class="n">source</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">new_data</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">source</span><span class="p">]</span>
+
+</div>
+<div class="viewcode-block" id="Callbacks"><a class="viewcode-back" href="../../../../Reference_Manual/holoviews.plotting.bokeh.html#holoviews.plotting.bokeh.callbacks.Callbacks">[docs]</a><span class="k">class</span> <span class="nc">Callbacks</span><span class="p">(</span><span class="n">param</span><span class="o">.</span><span class="n">Parameterized</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Callbacks allows defining a number of callbacks to be applied</span>
+<span class="sd">    to a plot. Callbacks should</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">selection</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">ClassSelector</span><span class="p">(</span><span class="n">class_</span><span class="o">=</span><span class="p">(</span><span class="n">CustomJS</span><span class="p">,</span> <span class="n">Callback</span><span class="p">,</span> <span class="nb">list</span><span class="p">),</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">        Callback that gets triggered when user applies a selection to a</span>
+<span class="s">        data source.&quot;&quot;&quot;</span><span class="p">)</span>
+
+    <span class="n">ranges</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">ClassSelector</span><span class="p">(</span><span class="n">class_</span><span class="o">=</span><span class="p">(</span><span class="n">CustomJS</span><span class="p">,</span> <span class="n">Callback</span><span class="p">,</span> <span class="nb">list</span><span class="p">),</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">        Callback applied to plot x_range and y_range, data will</span>
+<span class="s">        supply &#39;x_range&#39; and &#39;y_range&#39; lists of the form [low, high].&quot;&quot;&quot;</span><span class="p">)</span>
+
+    <span class="n">x_range</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">ClassSelector</span><span class="p">(</span><span class="n">class_</span><span class="o">=</span><span class="p">(</span><span class="n">CustomJS</span><span class="p">,</span> <span class="n">Callback</span><span class="p">,</span> <span class="nb">list</span><span class="p">),</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">        Callback applied to plot x_range, data will supply</span>
+<span class="s">        &#39;x_range&#39; as a list of the form [low, high].&quot;&quot;&quot;</span><span class="p">)</span>
+
+    <span class="n">y_range</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">ClassSelector</span><span class="p">(</span><span class="n">class_</span><span class="o">=</span><span class="p">(</span><span class="n">CustomJS</span><span class="p">,</span> <span class="n">Callback</span><span class="p">,</span> <span class="nb">list</span><span class="p">),</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">        Callback applied to plot x_range, data will supply</span>
+<span class="s">        &#39;y_range&#39; as a list of the form [low, high].&quot;&quot;&quot;</span><span class="p">)</span>
+
+    <span class="n">tap</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">ClassSelector</span><span class="p">(</span><span class="n">class_</span><span class="o">=</span><span class="p">(</span><span class="n">CustomJS</span><span class="p">,</span> <span class="n">Callback</span><span class="p">,</span> <span class="nb">list</span><span class="p">),</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">        Callback that gets triggered when user clicks on a glyph.&quot;&quot;&quot;</span><span class="p">)</span>
+
+    <span class="n">callbacks</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="n">plot_callbacks</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Callbacks.initialize_callback"><a class="viewcode-back" href="../../../../Reference_Manual/holoviews.plotting.bokeh.html#holoviews.plotting.bokeh.callbacks.Callbacks.initialize_callback">[docs]</a>    <span class="k">def</span> <span class="nf">initialize_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cb_obj</span><span class="p">,</span> <span class="n">plot</span><span class="p">,</span> <span class="n">pycallback</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize the callback with the appropriate data</span>
+<span class="sd">        and javascript, execute once and return bokeh CustomJS</span>
+<span class="sd">        object to be installed on the appropriate plot object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">pycallback</span><span class="o">.</span><span class="n">reinitialize</span><span class="p">:</span>
+            <span class="n">pycallback</span> <span class="o">=</span> <span class="n">pycallback</span><span class="o">.</span><span class="n">instance</span><span class="p">()</span>
+        <span class="n">pycallback</span><span class="o">.</span><span class="n">callback_obj</span> <span class="o">=</span> <span class="n">cb_obj</span>
+        <span class="n">pycallback</span><span class="o">.</span><span class="n">plots</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">plot</span><span class="p">)</span>
+
+        <span class="c"># Register the callback to allow calling it from JS</span>
+        <span class="n">cb_id</span> <span class="o">=</span> <span class="nb">id</span><span class="p">(</span><span class="n">pycallback</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">callbacks</span><span class="p">[</span><span class="n">cb_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">pycallback</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">plot_callbacks</span><span class="p">[</span><span class="nb">id</span><span class="p">(</span><span class="n">cb_obj</span><span class="p">)]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pycallback</span><span class="p">)</span>
+
+        <span class="c"># Generate callback JS code to get all the requested data</span>
+        <span class="n">self_callback</span> <span class="o">=</span> <span class="n">Callback</span><span class="o">.</span><span class="n">IPython_callback</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">callback_id</span><span class="o">=</span><span class="n">cb_id</span><span class="p">)</span>
+        <span class="n">data</span><span class="p">,</span> <span class="n">code</span> <span class="o">=</span> <span class="p">{},</span> <span class="s">&#39;&#39;</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">pycallback</span><span class="o">.</span><span class="n">plot_attributes</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">format_kwargs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="nb">repr</span><span class="p">(</span><span class="n">k</span><span class="p">),</span> <span class="n">attrs</span><span class="o">=</span><span class="nb">repr</span><span class="p">(</span><span class="n">v</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">v</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">code</span> <span class="o">+=</span> <span class="s">&quot;data[{key}] = plot.get({key});</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="n">format_kwargs</span><span class="p">)</span>
+                <span class="n">data</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">plot</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">vm_props</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">code</span> <span class="o">+=</span> <span class="s">&quot;data[{key}] = {attrs}.map(function(attr) {{&quot;</span> \
+                        <span class="s">&quot;  return plot.get({key}).get(attr)&quot;</span> \
+                        <span class="s">&quot;}})</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="n">format_kwargs</span><span class="p">)</span>
+                <span class="n">data</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">plot</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">vm_props</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">k</span><span class="p">)</span><span class="o">.</span><span class="n">vm_props</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">attr</span><span class="p">)</span>
+                           <span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span> <span class="n">v</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">pycallback</span><span class="o">.</span><span class="n">cb_attributes</span><span class="p">:</span>
+            <span class="n">code</span> <span class="o">+=</span> <span class="s">&quot;data[&#39;cb_obj&#39;] = {attrs}.map(function(attr) {{&quot;</span>\
+                    <span class="s">&quot;  return cb_obj.get(attr)}});</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">attrs</span><span class="o">=</span><span class="nb">repr</span><span class="p">(</span><span class="n">pycallback</span><span class="o">.</span><span class="n">cb_attributes</span><span class="p">))</span>
+            <span class="n">data</span><span class="p">[</span><span class="s">&#39;cb_obj&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">pycallback</span><span class="o">.</span><span class="n">callback_obj</span><span class="o">.</span><span class="n">vm_props</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">attr</span><span class="p">)</span>
+                              <span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span> <span class="n">pycallback</span><span class="o">.</span><span class="n">cb_attributes</span><span class="p">]</span>
+        <span class="n">code</span> <span class="o">=</span> <span class="n">Callback</span><span class="o">.</span><span class="n">JS_callback</span> <span class="o">+</span> <span class="n">code</span> <span class="o">+</span> <span class="n">pycallback</span><span class="o">.</span><span class="n">code</span> <span class="o">+</span> <span class="n">self_callback</span>
+
+        <span class="c"># Generate CustomJS object</span>
+        <span class="n">customjs</span> <span class="o">=</span> <span class="n">CustomJS</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="n">plot</span><span class="o">.</span><span class="n">handles</span><span class="p">,</span> <span class="n">code</span><span class="o">=</span><span class="n">code</span><span class="p">)</span>
+
+        <span class="c"># Get initial callback data and call to initialize</span>
+        <span class="n">pycallback</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">customjs</span><span class="p">,</span> <span class="n">pycallback</span>
+
+</div>
+    <span class="k">def</span> <span class="nf">_chain_callbacks</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">plot</span><span class="p">,</span> <span class="n">cb_obj</span><span class="p">,</span> <span class="n">callbacks</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initializes new callbacks and chains them to</span>
+<span class="sd">        existing callbacks, allowing multiple callbacks</span>
+<span class="sd">        on the same plot object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">other_callbacks</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">plot_callbacks</span><span class="p">[</span><span class="nb">id</span><span class="p">(</span><span class="n">cb_obj</span><span class="p">)]</span>
+        <span class="n">chain_callback</span> <span class="o">=</span> <span class="n">other_callbacks</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="n">other_callbacks</span> <span class="k">else</span> <span class="bp">None</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">callbacks</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span> <span class="n">callbacks</span> <span class="o">=</span> <span class="p">[</span><span class="n">callbacks</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">callback</span> <span class="ow">in</span> <span class="n">callbacks</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">callback</span><span class="p">,</span> <span class="n">Callback</span><span class="p">):</span>
+                <span class="n">jscb</span><span class="p">,</span> <span class="n">pycb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">initialize_callback</span><span class="p">(</span><span class="n">cb_obj</span><span class="p">,</span> <span class="n">plot</span><span class="p">,</span> <span class="n">callback</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">chain_callback</span> <span class="ow">and</span> <span class="n">pycb</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">chain_callback</span><span class="p">:</span>
+                    <span class="n">chain_callback</span><span class="o">.</span><span class="n">streams</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pycb</span><span class="p">)</span>
+                    <span class="n">chain_callback</span> <span class="o">=</span> <span class="n">pycb</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">cb_obj</span><span class="o">.</span><span class="n">callback</span> <span class="o">=</span> <span class="n">jscb</span>
+                    <span class="n">chain_callback</span> <span class="o">=</span> <span class="n">pycb</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">cb_obj</span><span class="o">.</span><span class="n">callback</span> <span class="o">=</span> <span class="n">callback</span>
+
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">plot</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize callbacks, chaining them as necessary</span>
+<span class="sd">        and setting them on the appropriate plot object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c"># Initialize range callbacks</span>
+        <span class="n">xrange_cb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ranges</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ranges</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_range</span>
+        <span class="n">yrange_cb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ranges</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ranges</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_range</span>
+        <span class="k">if</span> <span class="n">xrange_cb</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_chain_callbacks</span><span class="p">(</span><span class="n">plot</span><span class="p">,</span> <span class="n">plot</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">x_range</span><span class="p">,</span> <span class="n">xrange_cb</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">yrange_cb</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_chain_callbacks</span><span class="p">(</span><span class="n">plot</span><span class="p">,</span> <span class="n">plot</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">y_range</span><span class="p">,</span> <span class="n">yrange_cb</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tap</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">tool</span> <span class="ow">in</span> <span class="n">plot</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="n">TapTool</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_chain_callbacks</span><span class="p">(</span><span class="n">plot</span><span class="p">,</span> <span class="n">tool</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tap</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">selection</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">tool</span> <span class="ow">in</span> <span class="n">plot</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="p">(</span><span class="n">ColumnDataSource</span><span class="p">)):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_chain_callbacks</span><span class="p">(</span><span class="n">plot</span><span class="p">,</span> <span class="n">tool</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">selection</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015 IOAM: Jean-Luc R. Stevens, Philipp Rudiger, and James A. Bednar.
+    </p>
+  </div>
+
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-61554933-1', 'auto');
+  ga('send', 'pageview');
+
+  </script>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../',
+            VERSION:'1.4.0a1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

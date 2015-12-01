@@ -133,6 +133,7 @@
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">...core</span> <span class="kn">import</span> <span class="n">OrderedDict</span><span class="p">,</span> <span class="n">NdMapping</span>
+<span class="kn">from</span> <span class="nn">...core.options</span> <span class="kn">import</span> <span class="n">Store</span>
 <span class="kn">from</span> <span class="nn">...core.util</span> <span class="kn">import</span> <span class="p">(</span><span class="n">sanitize_identifier</span><span class="p">,</span> <span class="n">safe_unicode</span><span class="p">,</span> <span class="nb">basestring</span><span class="p">,</span>
                           <span class="n">unique_iterator</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">...core.traversal</span> <span class="kn">import</span> <span class="n">hierarchical</span>
@@ -208,7 +209,8 @@
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">dynamic</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">embed</span> <span class="o">=</span> <span class="bp">False</span>
         <span class="k">if</span> <span class="n">renderer</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">renderer</span> <span class="o">=</span> <span class="n">plot</span><span class="o">.</span><span class="n">renderer</span><span class="o">.</span><span class="n">instance</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">display_options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;dpi&#39;</span><span class="p">,</span> <span class="mi">72</span><span class="p">))</span>
+            <span class="n">backend</span> <span class="o">=</span> <span class="n">Store</span><span class="o">.</span><span class="n">current_backend</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">renderer</span> <span class="o">=</span> <span class="n">Store</span><span class="o">.</span><span class="n">renderers</span><span class="p">[</span><span class="n">backend</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">renderer</span> <span class="o">=</span> <span class="n">renderer</span>
         <span class="c"># Create mock NdMapping to hold the common dimensions and keys</span>

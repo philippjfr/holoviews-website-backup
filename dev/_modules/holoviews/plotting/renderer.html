@@ -143,6 +143,7 @@
 <span class="kn">from</span> <span class="nn">.widgets</span> <span class="kn">import</span> <span class="n">ScrubberWidget</span><span class="p">,</span> <span class="n">SelectionWidget</span>
 
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">Plot</span>
+<span class="kn">from</span> <span class="nn">.util</span> <span class="kn">import</span> <span class="n">displayable</span><span class="p">,</span> <span class="n">collate</span>
 
 <span class="kn">from</span> <span class="nn">param.parameterized</span> <span class="kn">import</span> <span class="n">bothmethod</span>
 
@@ -196,26 +197,33 @@
 <span class="s">        The full, lowercase name of the rendering backend or third</span>
 <span class="s">        part plotting package used e.g &#39;matplotlib&#39; or &#39;cairo&#39;.&quot;&quot;&quot;</span><span class="p">)</span>
 
-    <span class="n">mode</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">ObjectSelector</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s">&#39;default&#39;</span><span class="p">,</span> <span class="n">objects</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;default&#39;</span><span class="p">],</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
-<span class="s">         The available rendering modes. As a minimum, the &#39;default&#39;</span>
-<span class="s">         mode must be supported.&quot;&quot;&quot;</span><span class="p">)</span>
+    <span class="n">dpi</span><span class="o">=</span><span class="n">param</span><span class="o">.</span><span class="n">Integer</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="n">allow_None</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">        The render resolution in dpi (dots per inch)&quot;&quot;&quot;</span><span class="p">)</span>
 
-    <span class="n">fig</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">ObjectSelector</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s">&#39;auto&#39;</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">ObjectSelector</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s">&#39;auto&#39;</span><span class="p">,</span> <span class="n">objects</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;auto&#39;</span><span class="p">],</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
 <span class="s">        Output render format for static figures. If None, no figure</span>
 <span class="s">        rendering will occur. &quot;&quot;&quot;</span><span class="p">)</span>
-
-    <span class="n">holomap</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">ObjectSelector</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s">&#39;auto&#39;</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
-<span class="s">        Output render multi-frame (typically animated) format. If</span>
-<span class="s">        None, no multi-frame rendering will occur.&quot;&quot;&quot;</span><span class="p">)</span>
-
-    <span class="n">size</span><span class="o">=</span><span class="n">param</span><span class="o">.</span><span class="n">Integer</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
-<span class="s">        The rendered size as a percentage size&quot;&quot;&quot;</span><span class="p">)</span>
 
     <span class="n">fps</span><span class="o">=</span><span class="n">param</span><span class="o">.</span><span class="n">Integer</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
 <span class="s">        Rendered fps (frames per second) for animated formats.&quot;&quot;&quot;</span><span class="p">)</span>
 
-    <span class="n">dpi</span><span class="o">=</span><span class="n">param</span><span class="o">.</span><span class="n">Integer</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="n">allow_None</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
-<span class="s">        The render resolution in dpi (dots per inch)&quot;&quot;&quot;</span><span class="p">)</span>
+    <span class="n">holomap</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">ObjectSelector</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s">&#39;auto&#39;</span><span class="p">,</span>
+                                   <span class="n">objects</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;scrubber&#39;</span><span class="p">,</span><span class="s">&#39;widgets&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="s">&#39;auto&#39;</span><span class="p">],</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">        Output render multi-frame (typically animated) format. If</span>
+<span class="s">        None, no multi-frame rendering will occur.&quot;&quot;&quot;</span><span class="p">)</span>
+
+    <span class="n">mode</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">ObjectSelector</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s">&#39;default&#39;</span><span class="p">,</span> <span class="n">objects</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;default&#39;</span><span class="p">],</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">         The available rendering modes. As a minimum, the &#39;default&#39;</span>
+<span class="s">         mode must be supported.&quot;&quot;&quot;</span><span class="p">)</span>
+
+    <span class="n">size</span><span class="o">=</span><span class="n">param</span><span class="o">.</span><span class="n">Integer</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">        The rendered size as a percentage size&quot;&quot;&quot;</span><span class="p">)</span>
+
+    <span class="n">widget_mode</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">ObjectSelector</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s">&#39;embed&#39;</span><span class="p">,</span> <span class="n">objects</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;embed&#39;</span><span class="p">,</span> <span class="s">&#39;live&#39;</span><span class="p">],</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">        The widget mode determining whether frames are embedded or generated</span>
+<span class="s">        &#39;live&#39; when interacting with the widget.&quot;&quot;&quot;</span><span class="p">)</span>
+
+    <span class="n">css</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">Dict</span><span class="p">(</span><span class="n">doc</span><span class="o">=</span><span class="s">&quot;Dictionary of CSS attributes and values to apply to HTML output&quot;</span><span class="p">)</span>
 
     <span class="n">info_fn</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">Callable</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="n">allow_None</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">constant</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>  <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
 <span class="s">        Renderers do not support the saving of object info metadata&quot;&quot;&quot;</span><span class="p">)</span>
@@ -224,10 +232,11 @@
 <span class="s">        Renderers do not support the saving of object key metadata&quot;&quot;&quot;</span><span class="p">)</span>
 
     <span class="c"># Defines the valid output formats for each mode.</span>
-    <span class="n">mode_formats</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;fig&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;default&#39;</span><span class="p">:</span> <span class="p">[</span><span class="bp">None</span><span class="p">]},</span> <span class="s">&#39;holomap&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;default&#39;</span><span class="p">:</span> <span class="p">[</span><span class="bp">None</span><span class="p">]}}</span>
+    <span class="n">mode_formats</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;fig&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;default&#39;</span><span class="p">:</span> <span class="p">[</span><span class="bp">None</span><span class="p">,</span> <span class="s">&#39;auto&#39;</span><span class="p">]},</span>
+                    <span class="s">&#39;holomap&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;default&#39;</span><span class="p">:</span> <span class="p">[</span><span class="bp">None</span><span class="p">,</span> <span class="s">&#39;auto&#39;</span><span class="p">]}}</span>
 
     <span class="c"># Define appropriate widget classes</span>
-    <span class="n">widgets</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;scrubber&#39;</span><span class="p">:</span> <span class="n">ScrubberWidget</span><span class="p">,</span> <span class="s">&#39;selection&#39;</span><span class="p">:</span> <span class="n">SelectionWidget</span><span class="p">}</span>
+    <span class="n">widgets</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;scrubber&#39;</span><span class="p">:</span> <span class="n">ScrubberWidget</span><span class="p">,</span> <span class="s">&#39;widgets&#39;</span><span class="p">:</span> <span class="n">SelectionWidget</span><span class="p">}</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">Renderer</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">params</span><span class="p">)</span>
@@ -238,6 +247,9 @@
 <span class="sd">        Helper method to be used in the __call__ method to get a</span>
 <span class="sd">        suitable plot object and the appropriate format.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">Plot</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">displayable</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
+            <span class="n">obj</span> <span class="o">=</span> <span class="n">collate</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+
         <span class="n">fig_formats</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode_formats</span><span class="p">[</span><span class="s">&#39;fig&#39;</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">mode</span><span class="p">]</span>
         <span class="n">holomap_formats</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode_formats</span><span class="p">[</span><span class="s">&#39;holomap&#39;</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">mode</span><span class="p">]</span>
 
@@ -245,15 +257,12 @@
             <span class="n">obj</span> <span class="o">=</span> <span class="n">Layout</span><span class="o">.</span><span class="n">from_values</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">AdjointLayout</span><span class="p">)</span> <span class="k">else</span> <span class="n">obj</span>
             <span class="n">plot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">plotting_class</span><span class="p">(</span><span class="n">obj</span><span class="p">)(</span><span class="n">obj</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">plot_options</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">))</span>
             <span class="n">plot</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">fmt</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s">&quot;Format must be specified when supplying a plot instance&quot;</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">plot</span> <span class="o">=</span> <span class="n">obj</span>
 
-        <span class="k">if</span> <span class="n">fmt</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span> <span class="k">return</span> <span class="p">(</span><span class="bp">None</span><span class="p">,</span><span class="bp">None</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">fmt</span> <span class="o">==</span><span class="s">&#39;auto&#39;</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">plot</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">fmt</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;auto&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">]</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">plot</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">plot</span><span class="o">.</span><span class="n">dynamic</span><span class="p">:</span>
             <span class="n">fmt</span> <span class="o">=</span> <span class="n">fig_formats</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">fig</span><span class="o">==</span><span class="s">&#39;auto&#39;</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">fig</span>
-        <span class="k">elif</span> <span class="n">fmt</span> <span class="o">==</span>  <span class="s">&#39;auto&#39;</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">fmt</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="n">fmt</span> <span class="o">=</span> <span class="n">holomap_formats</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">holomap</span><span class="o">==</span><span class="s">&#39;auto&#39;</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">holomap</span>
 
         <span class="n">all_formats</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">fig_formats</span> <span class="o">+</span> <span class="n">holomap_formats</span><span class="p">)</span>
@@ -277,13 +286,15 @@
         <span class="k">return</span> <span class="bp">None</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;file-ext&#39;</span><span class="p">:</span><span class="n">fmt</span><span class="p">,</span> <span class="s">&#39;mime_type&#39;</span><span class="p">:</span><span class="n">MIME_TYPES</span><span class="p">[</span><span class="n">fmt</span><span class="p">]}</span>
 
 
-<div class="viewcode-block" id="Renderer.html"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.plotting.html#holoviews.plotting.renderer.Renderer.html">[docs]</a>    <span class="k">def</span> <span class="nf">html</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">css</span><span class="o">=</span><span class="p">{}):</span>
+<div class="viewcode-block" id="Renderer.html"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.plotting.html#holoviews.plotting.renderer.Renderer.html">[docs]</a>    <span class="k">def</span> <span class="nf">html</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">css</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders plot or data structure and wraps the output in HTML.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">plot</span><span class="p">,</span> <span class="n">fmt</span> <span class="o">=</span>  <span class="bp">self</span><span class="o">.</span><span class="n">_validate</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">fmt</span><span class="p">)</span>
         <span class="n">figdata</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="p">(</span><span class="n">plot</span><span class="p">,</span> <span class="n">fmt</span><span class="p">)</span>
 
+        <span class="k">if</span> <span class="n">fmt</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">widgets</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">fmt</span> <span class="o">=</span> <span class="s">&#39;html&#39;</span>
         <span class="k">if</span> <span class="n">fmt</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;html&#39;</span><span class="p">,</span> <span class="s">&#39;json&#39;</span><span class="p">]:</span>
             <span class="k">return</span> <span class="n">figdata</span>
         <span class="k">else</span><span class="p">:</span>
@@ -293,6 +304,7 @@
                 <span class="n">w</span><span class="p">,</span><span class="n">h</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_size</span><span class="p">(</span><span class="n">plot</span><span class="p">)</span>
                 <span class="n">css</span><span class="p">[</span><span class="s">&#39;height&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;</span><span class="si">%d</span><span class="s">px&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">h</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">dpi</span><span class="o">*</span><span class="mf">1.15</span><span class="p">)</span>
 
+        <span class="k">if</span> <span class="n">css</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span> <span class="n">css</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">css</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">css</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
             <span class="n">css</span> <span class="o">=</span> <span class="s">&#39;; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">: </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">css</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
         <span class="k">else</span><span class="p">:</span>
@@ -304,6 +316,26 @@
         <span class="k">return</span> <span class="n">tag</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">src</span><span class="o">=</span><span class="n">src</span><span class="p">,</span> <span class="n">mime_type</span><span class="o">=</span><span class="n">mime_type</span><span class="p">,</span> <span class="n">css</span><span class="o">=</span><span class="n">css</span><span class="p">)</span>
 
 </div>
+    <span class="k">def</span> <span class="nf">get_widget</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">plot</span><span class="p">,</span> <span class="n">widget_type</span><span class="p">):</span>
+        <span class="n">dynamic</span> <span class="o">=</span> <span class="n">plot</span><span class="o">.</span><span class="n">dynamic</span>
+        <span class="k">if</span> <span class="n">widget_type</span> <span class="o">==</span> <span class="s">&#39;auto&#39;</span><span class="p">:</span>
+            <span class="n">isuniform</span> <span class="o">=</span> <span class="n">plot</span><span class="o">.</span><span class="n">uniform</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">isuniform</span><span class="p">:</span>
+                <span class="n">widget_type</span> <span class="o">=</span> <span class="s">&#39;scrubber&#39;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">widget_type</span> <span class="o">=</span> <span class="s">&#39;widgets&#39;</span>
+
+            <span class="k">if</span> <span class="n">dynamic</span> <span class="o">==</span> <span class="s">&#39;open&#39;</span><span class="p">:</span> <span class="n">widget_type</span> <span class="o">=</span> <span class="s">&#39;scrubber&#39;</span>
+            <span class="k">if</span> <span class="n">dynamic</span> <span class="o">==</span> <span class="s">&#39;closed&#39;</span><span class="p">:</span> <span class="n">widget_type</span> <span class="o">=</span> <span class="s">&#39;widgets&#39;</span>
+        <span class="k">elif</span> <span class="n">widget_type</span> <span class="o">==</span> <span class="s">&#39;widgets&#39;</span> <span class="ow">and</span> <span class="n">dynamic</span> <span class="o">==</span> <span class="s">&#39;open&#39;</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;Selection widgets not supported in dynamic open mode&#39;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">widget_type</span> <span class="o">==</span> <span class="s">&#39;scrubber&#39;</span> <span class="ow">and</span> <span class="n">dynamic</span> <span class="o">==</span> <span class="s">&#39;closed&#39;</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;Scrubber widget not supported in dynamic closed mode&#39;</span><span class="p">)</span>
+
+        <span class="n">widget_cls</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">widgets</span><span class="p">[</span><span class="n">widget_type</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">widget_cls</span><span class="p">(</span><span class="n">plot</span><span class="p">,</span> <span class="n">renderer</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span> <span class="n">embed</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">widget_mode</span> <span class="o">==</span> <span class="s">&#39;embed&#39;</span><span class="p">)</span>
+
+
     <span class="nd">@classmethod</span>
 <div class="viewcode-block" id="Renderer.plotting_class"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.plotting.html#holoviews.plotting.renderer.Renderer.plotting_class">[docs]</a>    <span class="k">def</span> <span class="nf">plotting_class</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -385,7 +417,15 @@
 <span class="sd">        allowing Plot classes to temporarily override that state.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">yield</span>
-</pre></div></div></div>
+
+</div>
+    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="Renderer.validate"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.plotting.html#holoviews.plotting.renderer.Renderer.validate">[docs]</a>    <span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">options</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Validate an options dictionary for the renderer.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">options</span></div></div>
+</pre></div>
 
           </div>
           <footer>

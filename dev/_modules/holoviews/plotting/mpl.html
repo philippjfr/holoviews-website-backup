@@ -212,7 +212,7 @@
                  <span class="s">&#39;markeredgecolor&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;mec&#39;</span><span class="p">],</span> <span class="s">&#39;markeredgewidth&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;mew&#39;</span><span class="p">],</span>
                  <span class="s">&#39;markerfacecolor&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;mfc&#39;</span><span class="p">],</span> <span class="s">&#39;markersize&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;ms&#39;</span><span class="p">]}</span>
 
-<span class="n">Store</span><span class="o">.</span><span class="n">renderers</span><span class="p">[</span><span class="s">&#39;matplotlib&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">MPLRenderer</span>
+<span class="n">Store</span><span class="o">.</span><span class="n">renderers</span><span class="p">[</span><span class="s">&#39;matplotlib&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">MPLRenderer</span><span class="o">.</span><span class="n">instance</span><span class="p">()</span>
 
 <span class="c"># Defines a wrapper around GridPlot and RasterGridPlot</span>
 <span class="c"># switching to RasterGridPlot if the plot only contains</span>
