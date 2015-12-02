@@ -275,8 +275,8 @@
                 <span class="n">xformat</span><span class="p">,</span> <span class="n">yformat</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span>
                 <span class="k">if</span> <span class="n">xdim</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
                     <span class="k">pass</span>
-                <span class="k">elif</span> <span class="n">xdim</span><span class="o">.</span><span class="n">formatter</span><span class="p">:</span>
-                    <span class="n">xformat</span> <span class="o">=</span> <span class="n">xdim</span><span class="o">.</span><span class="n">formatter</span>
+                <span class="k">elif</span> <span class="n">xdim</span><span class="o">.</span><span class="n">value_format</span><span class="p">:</span>
+                    <span class="n">xformat</span> <span class="o">=</span> <span class="n">xdim</span><span class="o">.</span><span class="n">value_format</span>
                 <span class="k">elif</span> <span class="n">xdim</span><span class="o">.</span><span class="n">type</span> <span class="ow">in</span> <span class="n">xdim</span><span class="o">.</span><span class="n">type_formatters</span><span class="p">:</span>
                     <span class="n">xformat</span> <span class="o">=</span> <span class="n">xdim</span><span class="o">.</span><span class="n">type_formatters</span><span class="p">[</span><span class="n">xdim</span><span class="o">.</span><span class="n">type</span><span class="p">]</span>
                 <span class="k">if</span> <span class="n">xformat</span><span class="p">:</span>
@@ -284,8 +284,8 @@
 
                 <span class="k">if</span> <span class="n">ydim</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
                     <span class="k">pass</span>
-                <span class="k">elif</span> <span class="n">ydim</span><span class="o">.</span><span class="n">formatter</span><span class="p">:</span>
-                    <span class="n">yformat</span> <span class="o">=</span> <span class="n">ydim</span><span class="o">.</span><span class="n">formatter</span>
+                <span class="k">elif</span> <span class="n">ydim</span><span class="o">.</span><span class="n">value_format</span><span class="p">:</span>
+                    <span class="n">yformat</span> <span class="o">=</span> <span class="n">ydim</span><span class="o">.</span><span class="n">value_format</span>
                 <span class="k">elif</span> <span class="n">ydim</span><span class="o">.</span><span class="n">type</span> <span class="ow">in</span> <span class="n">ydim</span><span class="o">.</span><span class="n">type_formatters</span><span class="p">:</span>
                     <span class="n">yformat</span> <span class="o">=</span> <span class="n">ydim</span><span class="o">.</span><span class="n">type_formatters</span><span class="p">[</span><span class="n">ydim</span><span class="o">.</span><span class="n">type</span><span class="p">]</span>
                 <span class="k">if</span> <span class="n">yformat</span><span class="p">:</span>

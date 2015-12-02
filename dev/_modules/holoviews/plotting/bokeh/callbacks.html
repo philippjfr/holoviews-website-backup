@@ -130,8 +130,16 @@
 <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">bokeh.models</span> <span class="kn">import</span> <span class="n">CustomJS</span><span class="p">,</span> <span class="n">PlotObject</span><span class="p">,</span> <span class="n">TapTool</span><span class="p">,</span> <span class="n">ColumnDataSource</span>
-<span class="kn">from</span> <span class="nn">bokeh.protocol</span> <span class="kn">import</span> <span class="n">serialize_json</span>
+<span class="kn">from</span> <span class="nn">bokeh.models</span> <span class="kn">import</span> <span class="n">CustomJS</span><span class="p">,</span> <span class="n">TapTool</span><span class="p">,</span> <span class="n">ColumnDataSource</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">bokeh.models</span> <span class="kn">import</span> <span class="n">PlotObject</span>
+    <span class="kn">from</span> <span class="nn">bokeh.protocol</span> <span class="kn">import</span> <span class="n">serialize_json</span>
+    <span class="n">old_bokeh</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">bokeh.models</span> <span class="kn">import</span> <span class="n">Component</span> <span class="k">as</span> <span class="n">PlotObject</span>
+    <span class="kn">from</span> <span class="nn">bokeh._json_encoder</span> <span class="kn">import</span> <span class="n">serialize_json</span>
+    <span class="n">old_bokeh</span> <span class="o">=</span> <span class="bp">False</span>
 
 <span class="kn">import</span> <span class="nn">param</span>
 
@@ -251,7 +259,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">data</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">objects</span><span class="p">:</span>
-            <span class="n">json</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">vm_serialize</span><span class="p">(</span><span class="n">changed_only</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">old_bokeh</span><span class="p">:</span>
+                <span class="n">json</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">vm_serialize</span><span class="p">(</span><span class="n">changed_only</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">json</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
             <span class="n">data</span><span class="p">[</span><span class="n">obj</span><span class="o">.</span><span class="n">ref</span><span class="p">[</span><span class="s">&#39;id&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;type&#39;</span><span class="p">:</span> <span class="n">obj</span><span class="o">.</span><span class="n">ref</span><span class="p">[</span><span class="s">&#39;type&#39;</span><span class="p">],</span> <span class="s">&#39;data&#39;</span><span class="p">:</span> <span class="n">json</span><span class="p">}</span>
         <span class="k">return</span> <span class="n">serialize_json</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 

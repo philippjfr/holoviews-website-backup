@@ -143,7 +143,8 @@
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">param</span>
 
-<span class="kn">from</span> <span class="nn">..core.util</span> <span class="kn">import</span> <span class="p">(</span><span class="nb">basestring</span><span class="p">,</span> <span class="n">sanitize_identifier</span><span class="p">,</span> <span class="n">max_range</span><span class="p">,</span>
+<span class="kn">from</span> <span class="nn">..core.util</span> <span class="kn">import</span> <span class="p">(</span><span class="nb">basestring</span><span class="p">,</span> <span class="n">sanitize_identifier</span><span class="p">,</span>
+                         <span class="n">group_sanitizer</span><span class="p">,</span> <span class="n">label_sanitizer</span><span class="p">,</span> <span class="n">max_range</span><span class="p">,</span>
                          <span class="n">find_range</span><span class="p">,</span> <span class="n">dimension_sanitizer</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">.options</span> <span class="kn">import</span> <span class="n">Store</span><span class="p">,</span> <span class="n">StoreOptions</span>
 <span class="kn">from</span> <span class="nn">.pprint</span> <span class="kn">import</span> <span class="n">PrettyPrinter</span>
@@ -153,6 +154,8 @@
 
 <span class="n">ALIASES</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;key_dimensions&#39;</span><span class="p">:</span> <span class="s">&#39;kdims&#39;</span><span class="p">,</span> <span class="s">&#39;value_dimensions&#39;</span><span class="p">:</span> <span class="s">&#39;vdims&#39;</span><span class="p">,</span>
            <span class="s">&#39;constant_dimensions&#39;</span><span class="p">:</span> <span class="s">&#39;cdims&#39;</span><span class="p">}</span>
+
+<span class="n">title_format</span> <span class="o">=</span> <span class="s">&quot;{name}: {val}{unit}&quot;</span>
 
 <div class="viewcode-block" id="param_aliases"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.core.html#holoviews.core.dimension.param_aliases">[docs]</a><span class="k">def</span> <span class="nf">param_aliases</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -192,7 +195,7 @@
 <span class="s">        maximum allowed value (defined by the range parameter) is</span>
 <span class="s">        continuous with the minimum allowed value.&quot;&quot;&quot;</span><span class="p">)</span>
 
-    <span class="n">formatter</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">Callable</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
+    <span class="n">value_format</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">Callable</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
 <span class="s">        Formatting function applied to each value before display.&quot;&quot;&quot;</span><span class="p">)</span>
 
     <span class="nb">range</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">Tuple</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">),</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
@@ -218,12 +221,6 @@
 <span class="s">        be used to retain a categorical ordering. Setting values to</span>
 <span class="s">        &#39;initial&#39; indicates that the values will be added during construction.&quot;&quot;&quot;</span><span class="p">)</span>
 
-    <span class="n">format_string</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s">&quot;{name}: {val}{unit}&quot;</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
-<span class="s">        Format string to specify how pprint_value_string is generated. Valid</span>
-<span class="s">        format keys include: &#39;name&#39; (Dimension name), &#39;val&#39; (a</span>
-<span class="s">        particular dimension value to be presented) and &#39;unit&#39; (the</span>
-<span class="s">        unit string).&quot;&quot;&quot;</span><span class="p">)</span>
-
     <span class="c"># Defines default formatting by type</span>
     <span class="n">type_formatters</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="n">unit_format</span> <span class="o">=</span> <span class="s">&#39; ({unit})&#39;</span>
@@ -236,7 +233,14 @@
             <span class="n">existing_params</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">name</span><span class="o">.</span><span class="n">get_param_values</span><span class="p">())</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">existing_params</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="n">name</span><span class="p">}</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">Dimension</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">**</span><span class="nb">dict</span><span class="p">(</span><span class="n">existing_params</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">))</span>
+
+        <span class="n">all_params</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">existing_params</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">all_params</span><span class="p">[</span><span class="s">&#39;name&#39;</span><span class="p">],</span> <span class="nb">tuple</span><span class="p">):</span>
+            <span class="n">alias</span><span class="p">,</span> <span class="n">long_name</span> <span class="o">=</span> <span class="n">all_params</span><span class="p">[</span><span class="s">&#39;name&#39;</span><span class="p">]</span>
+            <span class="n">dimension_sanitizer</span><span class="o">.</span><span class="n">add_aliases</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="n">alias</span><span class="p">:</span><span class="n">long_name</span><span class="p">})</span>
+            <span class="n">all_params</span><span class="p">[</span><span class="s">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">long_name</span>
+
+        <span class="nb">super</span><span class="p">(</span><span class="n">Dimension</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">all_params</span><span class="p">)</span>
 
 
     <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">overrides</span><span class="p">):</span>
@@ -261,7 +265,8 @@
 <span class="sd">        Applies the defined formatting to the value.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">own_type</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">type</span> <span class="ow">is</span> <span class="bp">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">type</span>
-        <span class="n">formatter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">formatter</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">formatter</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">type_formatters</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">own_type</span><span class="p">)</span>
+        <span class="n">formatter</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">value_format</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">value_format</span>
+                     <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">type_formatters</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">own_type</span><span class="p">))</span>
         <span class="k">if</span> <span class="n">formatter</span><span class="p">:</span>
             <span class="k">if</span> <span class="nb">callable</span><span class="p">(</span><span class="n">formatter</span><span class="p">):</span>
                 <span class="k">return</span> <span class="n">formatter</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
@@ -279,13 +284,13 @@
 
 <div class="viewcode-block" id="Dimension.pprint_value_string"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.core.html#holoviews.core.dimension.Dimension.pprint_value_string">[docs]</a>    <span class="k">def</span> <span class="nf">pprint_value_string</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Pretty prints the dimension name and value using the</span>
-<span class="sd">        format_string parameter, including the unit string (if</span>
+<span class="sd">        Pretty prints the dimension name and value using the global</span>
+<span class="sd">        title_format variable, including the unit string (if</span>
 <span class="sd">        set). Numeric types are printed to the stated rounding level.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">unit</span> <span class="o">=</span> <span class="s">&#39;&#39;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">unit</span> <span class="ow">is</span> <span class="bp">None</span> <span class="k">else</span> <span class="s">&#39; &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">unit</span>
         <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pprint_value</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">format_string</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">val</span><span class="o">=</span><span class="n">value</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="n">unit</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">title_format</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">val</span><span class="o">=</span><span class="n">value</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="n">unit</span><span class="p">)</span>
 
 </div>
     <span class="k">def</span> <span class="nf">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -369,11 +374,21 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="nb">id</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;label&#39;</span><span class="p">,</span><span class="bp">None</span><span class="p">),</span> <span class="nb">tuple</span><span class="p">):</span>
+            <span class="p">(</span><span class="n">alias</span><span class="p">,</span> <span class="n">long_name</span><span class="p">)</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s">&#39;label&#39;</span><span class="p">]</span>
+            <span class="n">label_sanitizer</span><span class="o">.</span><span class="n">add_aliases</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="n">alias</span><span class="p">:</span><span class="n">long_name</span><span class="p">})</span>
+            <span class="n">params</span><span class="p">[</span><span class="s">&#39;label&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">long_name</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;group&#39;</span><span class="p">,</span><span class="bp">None</span><span class="p">),</span> <span class="nb">tuple</span><span class="p">):</span>
+            <span class="p">(</span><span class="n">alias</span><span class="p">,</span> <span class="n">long_name</span><span class="p">)</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s">&#39;group&#39;</span><span class="p">]</span>
+            <span class="n">group_sanitizer</span><span class="o">.</span><span class="n">add_aliases</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="n">alias</span><span class="p">:</span><span class="n">long_name</span><span class="p">})</span>
+            <span class="n">params</span><span class="p">[</span><span class="s">&#39;group&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">long_name</span>
+
         <span class="nb">super</span><span class="p">(</span><span class="n">LabelledData</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">params</span><span class="p">)</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">sanitize_identifier</span><span class="o">.</span><span class="n">allowable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">group</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">group_sanitizer</span><span class="o">.</span><span class="n">allowable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">group</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;Supplied group </span><span class="si">%r</span><span class="s"> contains invalid characters.&quot;</span> <span class="o">%</span>
                              <span class="bp">self</span><span class="o">.</span><span class="n">group</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="ow">not</span> <span class="n">sanitize_identifier</span><span class="o">.</span><span class="n">allowable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">label</span><span class="p">):</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="n">label_sanitizer</span><span class="o">.</span><span class="n">allowable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">label</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;Supplied label </span><span class="si">%r</span><span class="s"> contains invalid characters.&quot;</span> <span class="o">%</span>
                              <span class="bp">self</span><span class="o">.</span><span class="n">label</span><span class="p">)</span>
 
@@ -398,7 +413,7 @@
         <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">shared_data</span><span class="p">:</span>
             <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span>
         <span class="k">return</span> <span class="n">clone_type</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="p">{</span><span class="n">k</span><span class="p">:</span><span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">settings</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
-                                          <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s">&#39;_pos_params&#39;</span><span class="p">,</span> <span class="p">[])})</span>
+                                          <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s">&#39;__pos_params&#39;</span><span class="p">,</span> <span class="p">[])})</span>
 
 </div>
 <div class="viewcode-block" id="LabelledData.relabel"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.core.html#holoviews.core.dimension.LabelledData.relabel">[docs]</a>    <span class="k">def</span> <span class="nf">relabel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">depth</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
@@ -438,8 +453,9 @@
         <span class="n">self_spec</span> <span class="o">=</span> <span class="n">match_fn</span><span class="p">(</span><span class="n">split_spec</span><span class="p">)</span>
         <span class="n">unescaped_match</span> <span class="o">=</span> <span class="n">match_fn</span><span class="p">(</span><span class="n">specification</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">split_spec</span><span class="p">)])</span> <span class="o">==</span> <span class="n">self_spec</span>
         <span class="k">if</span> <span class="n">unescaped_match</span><span class="p">:</span> <span class="k">return</span> <span class="bp">True</span>
-        <span class="n">identifier_specification</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">sanitize_identifier</span><span class="p">(</span><span class="n">ident</span><span class="p">,</span> <span class="n">escape</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
-                                         <span class="k">for</span> <span class="n">ident</span> <span class="ow">in</span> <span class="n">specification</span><span class="p">)</span>
+        <span class="n">sanitizers</span> <span class="o">=</span> <span class="p">[</span><span class="n">sanitize_identifier</span><span class="p">,</span> <span class="n">group_sanitizer</span><span class="p">,</span> <span class="n">label_sanitizer</span><span class="p">]</span>
+        <span class="n">identifier_specification</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">fn</span><span class="p">(</span><span class="n">ident</span><span class="p">,</span> <span class="n">escape</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+                                         <span class="k">for</span> <span class="n">ident</span><span class="p">,</span> <span class="n">fn</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">specification</span><span class="p">,</span> <span class="n">sanitizers</span><span class="p">))</span>
         <span class="n">identifier_match</span> <span class="o">=</span> <span class="n">match_fn</span><span class="p">(</span><span class="n">identifier_specification</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">split_spec</span><span class="p">)])</span> <span class="o">==</span> <span class="n">self_spec</span>
         <span class="k">return</span> <span class="n">identifier_match</span>
 
@@ -915,11 +931,11 @@
                 <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s">&quot;Cannot mix target specification keys such as &#39;Image&#39; with non-target keywords.&quot;</span><span class="p">)</span>
             <span class="k">elif</span> <span class="ow">not</span> <span class="nb">any</span><span class="p">(</span><span class="n">targets</span><span class="p">):</span>
                 <span class="c"># Not targets specified - add current object as target</span>
-                <span class="n">sanitized_group</span> <span class="o">=</span> <span class="n">sanitize_identifier</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">group</span><span class="p">)</span>
+                <span class="n">sanitized_group</span> <span class="o">=</span> <span class="n">group_sanitizer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">group</span><span class="p">)</span>
                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">label</span><span class="p">:</span>
                     <span class="n">identifier</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;</span><span class="si">%s</span><span class="s">.</span><span class="si">%s</span><span class="s">.</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span>
                                                 <span class="n">sanitized_group</span><span class="p">,</span>
-                                                <span class="n">sanitize_identifier</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">label</span><span class="p">)))</span>
+                                                <span class="n">label_sanitizer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">label</span><span class="p">)))</span>
                 <span class="k">elif</span>  <span class="n">sanitized_group</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">:</span>
                     <span class="n">identifier</span> <span class="o">=</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">.</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">sanitized_group</span><span class="p">)</span>
                 <span class="k">else</span><span class="p">:</span>

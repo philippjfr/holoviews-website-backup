@@ -168,7 +168,7 @@
 
 <span class="kn">import</span> <span class="nn">param</span>
 <span class="kn">from</span> <span class="nn">.tree</span> <span class="kn">import</span> <span class="n">AttrTree</span>
-<span class="kn">from</span> <span class="nn">.util</span> <span class="kn">import</span> <span class="n">sanitize_identifier</span>
+<span class="kn">from</span> <span class="nn">.util</span> <span class="kn">import</span> <span class="n">sanitize_identifier</span><span class="p">,</span> <span class="n">group_sanitizer</span><span class="p">,</span><span class="n">label_sanitizer</span>
 <span class="kn">from</span> <span class="nn">.pprint</span> <span class="kn">import</span> <span class="n">InfoPrinter</span>
 
 <div class="viewcode-block" id="OptionError"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.core.html#holoviews.core.options.OptionError">[docs]</a><span class="k">class</span> <span class="nc">OptionError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
@@ -608,8 +608,9 @@
 <span class="sd">        In addition, closest supports custom options by checking the</span>
 <span class="sd">        object</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">components</span> <span class="o">=</span> <span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">sanitize_identifier</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">group</span><span class="p">),</span>
-                      <span class="n">sanitize_identifier</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">label</span><span class="p">))</span>
+        <span class="n">components</span> <span class="o">=</span> <span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span>
+                      <span class="n">group_sanitizer</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">group</span><span class="p">),</span>
+                      <span class="n">label_sanitizer</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">label</span><span class="p">))</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">components</span><span class="p">)</span><span class="o">.</span><span class="n">options</span><span class="p">(</span><span class="n">group</span><span class="p">)</span>
 
 
@@ -829,12 +830,12 @@
             <span class="n">level</span> <span class="o">+=</span> <span class="mi">1</span>      <span class="c"># Types match</span>
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">spec</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="k">continue</span>
 
-            <span class="n">group</span> <span class="o">=</span> <span class="p">[</span><span class="n">el</span><span class="o">.</span><span class="n">group</span><span class="p">,</span> <span class="n">sanitize_identifier</span><span class="p">(</span><span class="n">el</span><span class="o">.</span><span class="n">group</span><span class="p">,</span> <span class="n">escape</span><span class="o">=</span><span class="bp">False</span><span class="p">)]</span>
+            <span class="n">group</span> <span class="o">=</span> <span class="p">[</span><span class="n">el</span><span class="o">.</span><span class="n">group</span><span class="p">,</span> <span class="n">group_sanitizer</span><span class="p">(</span><span class="n">el</span><span class="o">.</span><span class="n">group</span><span class="p">,</span> <span class="n">escape</span><span class="o">=</span><span class="bp">False</span><span class="p">)]</span>
             <span class="k">if</span> <span class="n">spec</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="n">group</span><span class="p">:</span> <span class="n">level</span> <span class="o">+=</span> <span class="mi">1</span>  <span class="c"># Values match</span>
             <span class="k">else</span><span class="p">:</span>                     <span class="k">return</span> <span class="bp">None</span>
 
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">spec</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
-                <span class="n">group</span> <span class="o">=</span> <span class="p">[</span><span class="n">el</span><span class="o">.</span><span class="n">label</span><span class="p">,</span> <span class="n">sanitize_identifier</span><span class="p">(</span><span class="n">el</span><span class="o">.</span><span class="n">label</span><span class="p">,</span> <span class="n">escape</span><span class="o">=</span><span class="bp">False</span><span class="p">)]</span>
+                <span class="n">group</span> <span class="o">=</span> <span class="p">[</span><span class="n">el</span><span class="o">.</span><span class="n">label</span><span class="p">,</span> <span class="n">label_sanitizer</span><span class="p">(</span><span class="n">el</span><span class="o">.</span><span class="n">label</span><span class="p">,</span> <span class="n">escape</span><span class="o">=</span><span class="bp">False</span><span class="p">)]</span>
                 <span class="k">if</span> <span class="p">(</span><span class="n">spec</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="ow">in</span> <span class="n">group</span><span class="p">):</span>
                     <span class="n">level</span> <span class="o">+=</span> <span class="mi">1</span>  <span class="c"># Labels match</span>
                 <span class="k">else</span><span class="p">:</span>

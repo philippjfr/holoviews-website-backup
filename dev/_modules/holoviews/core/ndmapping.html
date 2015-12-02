@@ -274,7 +274,7 @@
             <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s">&#39;Key has to match number of dimensions.&#39;</span><span class="p">)</span>
 
 
-    <span class="k">def</span> <span class="nf">_add_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dim_vals</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_add_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dim_vals</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">update</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Adds item to the data, applying dimension types and ensuring</span>
 <span class="sd">        key conforms to Dimension type and values.</span>
@@ -305,8 +305,8 @@
                                <span class="s">&#39; specified dimension values.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="nb">repr</span><span class="p">(</span><span class="n">val</span><span class="p">)))</span>
 
         <span class="c"># Updates nested data structures rather than simply overriding them.</span>
-        <span class="k">if</span> <span class="p">((</span><span class="n">dim_vals</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
-            <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">dim_vals</span><span class="p">],</span> <span class="p">(</span><span class="n">NdMapping</span><span class="p">,</span> <span class="n">OrderedDict</span><span class="p">))):</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">update</span> <span class="ow">and</span> <span class="p">(</span><span class="n">dim_vals</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+            <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">dim_vals</span><span class="p">],</span> <span class="p">(</span><span class="n">MultiDimensionalMapping</span><span class="p">,</span> <span class="n">OrderedDict</span><span class="p">))):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">dim_vals</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">dim_vals</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span>
@@ -561,8 +561,8 @@
                 <span class="n">info_str</span> <span class="o">+=</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s"> Dimensions: </span><span class="se">\n</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">group</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span>
             <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">dimensions</span><span class="p">:</span>
                 <span class="n">dmin</span><span class="p">,</span> <span class="n">dmax</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">range</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-                <span class="k">if</span> <span class="n">d</span><span class="o">.</span><span class="n">formatter</span><span class="p">:</span>
-                    <span class="n">dmin</span><span class="p">,</span> <span class="n">dmax</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">formatter</span><span class="p">(</span><span class="n">dmin</span><span class="p">),</span> <span class="n">d</span><span class="o">.</span><span class="n">formatter</span><span class="p">(</span><span class="n">dmax</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">d</span><span class="o">.</span><span class="n">value_format</span><span class="p">:</span>
+                    <span class="n">dmin</span><span class="p">,</span> <span class="n">dmax</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">value_format</span><span class="p">(</span><span class="n">dmin</span><span class="p">),</span> <span class="n">d</span><span class="o">.</span><span class="n">value_format</span><span class="p">(</span><span class="n">dmax</span><span class="p">)</span>
                 <span class="n">info_str</span> <span class="o">+=</span> <span class="s">&#39;</span><span class="se">\t</span><span class="s"> </span><span class="si">%s</span><span class="s">: </span><span class="si">%s</span><span class="s">...</span><span class="si">%s</span><span class="s"> </span><span class="se">\n</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">),</span> <span class="n">dmin</span><span class="p">,</span> <span class="n">dmax</span><span class="p">)</span>
         <span class="k">print</span><span class="p">(</span><span class="n">info_str</span><span class="p">)</span>
 
@@ -658,7 +658,7 @@
 
 
     <span class="k">def</span> <span class="nf">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_add_item</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_add_item</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">update</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 
 
     <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>

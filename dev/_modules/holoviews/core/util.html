@@ -175,6 +175,27 @@
     <span class="k">return</span> <span class="n">s</span><span class="p">[:</span><span class="n">index</span><span class="p">]</span> <span class="o">+</span> <span class="n">tail</span>
 
 </div>
+<div class="viewcode-block" id="Aliases"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.core.html#holoviews.core.util.Aliases">[docs]</a><span class="k">class</span> <span class="nc">Aliases</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Helper class useful for defining a set of alias tuples on a single object.</span>
+
+<span class="sd">    For instance, when defining a group or label with an alias, instead</span>
+<span class="sd">    of setting tuples in the constructor, you could use</span>
+<span class="sd">    ``aliases.water`` if you first define:</span>
+
+<span class="sd">    &gt;&gt;&gt; aliases = Aliases(water=&#39;H_2O&#39;, glucose=&#39;C_6H_{12}O_6&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; aliases.water</span>
+<span class="sd">    (&#39;water&#39;, &#39;H_2O&#39;)</span>
+
+<span class="sd">    This may be used to conveniently define aliases for groups, labels</span>
+<span class="sd">    or dimension names.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">))</span>
+
+
+</div>
 <div class="viewcode-block" id="sanitize_identifier_fn"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.core.html#holoviews.core.util.sanitize_identifier_fn">[docs]</a><span class="k">class</span> <span class="nc">sanitize_identifier_fn</span><span class="p">(</span><span class="n">param</span><span class="o">.</span><span class="n">ParameterizedFunction</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Sanitizes group/label values for use in AttrTree attribute</span>
@@ -243,10 +264,32 @@
 <span class="s">       Whether leading underscores should be allowed to be sanitized</span>
 <span class="s">       with the leading prefix.&quot;&quot;&quot;</span><span class="p">)</span>
 
+    <span class="n">aliases</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">Dict</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="p">{},</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">       A dictionary of aliases mapping long strings to their short,</span>
+<span class="s">       sanitized equivalents&quot;&quot;&quot;</span><span class="p">)</span>
+
     <span class="n">prefix</span> <span class="o">=</span> <span class="s">&#39;A_&#39;</span>
 
     <span class="n">_lookup_table</span> <span class="o">=</span> <span class="p">{}</span>
 
+
+    <span class="nd">@param.parameterized.bothmethod</span>
+<div class="viewcode-block" id="sanitize_identifier_fn.add_aliases"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.core.html#holoviews.core.util.sanitize_identifier_fn.add_aliases">[docs]</a>    <span class="k">def</span> <span class="nf">add_aliases</span><span class="p">(</span><span class="n">self_or_cls</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Conveniently add new aliases as keyword arguments. For instance</span>
+<span class="sd">        you can add one new alias with add_aliases(short=&#39;Longer string&#39;)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">self_or_cls</span><span class="o">.</span><span class="n">aliases</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">v</span><span class="p">:</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">()})</span>
+</div>
+    <span class="nd">@param.parameterized.bothmethod</span>
+<div class="viewcode-block" id="sanitize_identifier_fn.remove_aliases"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.core.html#holoviews.core.util.sanitize_identifier_fn.remove_aliases">[docs]</a>    <span class="k">def</span> <span class="nf">remove_aliases</span><span class="p">(</span><span class="n">self_or_cls</span><span class="p">,</span> <span class="n">aliases</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Remove a list of aliases.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">self_or_cls</span><span class="o">.</span><span class="n">aliases</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">aliases</span><span class="p">:</span>
+                <span class="n">self_or_cls</span><span class="o">.</span><span class="n">aliases</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+</div>
     <span class="nd">@param.parameterized.bothmethod</span>
     <span class="k">def</span> <span class="nf">allowable</span><span class="p">(</span><span class="n">self_or_cls</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">disable_leading_underscore</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
        <span class="n">disabled_reprs</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;javascript&#39;</span><span class="p">,</span> <span class="s">&#39;jpeg&#39;</span><span class="p">,</span> <span class="s">&#39;json&#39;</span><span class="p">,</span> <span class="s">&#39;latex&#39;</span><span class="p">,</span>
@@ -306,6 +349,8 @@
     <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">escape</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="p">[</span><span class="bp">None</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">]:</span>
            <span class="k">return</span> <span class="n">name</span>
+        <span class="k">elif</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">aliases</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">aliases</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
         <span class="k">elif</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lookup_table</span><span class="p">:</span>
            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lookup_table</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
         <span class="n">name</span> <span class="o">=</span> <span class="n">safe_unicode</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
@@ -373,6 +418,10 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_process_underscores</span><span class="p">(</span><span class="n">sanitized</span> <span class="o">+</span> <span class="p">([</span><span class="n">chars</span><span class="p">]</span> <span class="k">if</span> <span class="n">chars</span> <span class="k">else</span> <span class="p">[]))</span>
 </div></div>
 <span class="n">sanitize_identifier</span> <span class="o">=</span> <span class="n">sanitize_identifier_fn</span><span class="o">.</span><span class="n">instance</span><span class="p">()</span>
+
+
+<span class="n">group_sanitizer</span> <span class="o">=</span> <span class="n">sanitize_identifier_fn</span><span class="o">.</span><span class="n">instance</span><span class="p">()</span>
+<span class="n">label_sanitizer</span> <span class="o">=</span> <span class="n">sanitize_identifier_fn</span><span class="o">.</span><span class="n">instance</span><span class="p">()</span>
 <span class="n">dimension_sanitizer</span> <span class="o">=</span> <span class="n">sanitize_identifier_fn</span><span class="o">.</span><span class="n">instance</span><span class="p">(</span><span class="n">capitalize</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 
 <div class="viewcode-block" id="find_minmax"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.core.html#holoviews.core.util.find_minmax">[docs]</a><span class="k">def</span> <span class="nf">find_minmax</span><span class="p">(</span><span class="n">lims</span><span class="p">,</span> <span class="n">olims</span><span class="p">):</span>
@@ -519,8 +568,8 @@
     <span class="n">match_tuple</span> <span class="o">=</span> <span class="p">()</span>
     <span class="n">match</span> <span class="o">=</span> <span class="n">specification</span><span class="o">.</span><span class="n">get</span><span class="p">((),</span> <span class="p">{})</span>
     <span class="k">for</span> <span class="n">spec</span> <span class="ow">in</span> <span class="p">[</span><span class="nb">type</span><span class="p">(</span><span class="n">element</span><span class="p">)</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span>
-                 <span class="n">sanitize_identifier</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">group</span><span class="p">,</span> <span class="n">escape</span><span class="o">=</span><span class="bp">False</span><span class="p">),</span>
-                 <span class="n">sanitize_identifier</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">label</span><span class="p">,</span> <span class="n">escape</span><span class="o">=</span><span class="bp">False</span><span class="p">)]:</span>
+                 <span class="n">group_sanitizer</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">group</span><span class="p">,</span> <span class="n">escape</span><span class="o">=</span><span class="bp">False</span><span class="p">),</span>
+                 <span class="n">label_sanitizer</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">label</span><span class="p">,</span> <span class="n">escape</span><span class="o">=</span><span class="bp">False</span><span class="p">)]:</span>
         <span class="n">match_tuple</span> <span class="o">+=</span> <span class="p">(</span><span class="n">spec</span><span class="p">,)</span>
         <span class="k">if</span> <span class="n">match_tuple</span> <span class="ow">in</span> <span class="n">specification</span><span class="p">:</span>
             <span class="n">match</span> <span class="o">=</span> <span class="n">specification</span><span class="p">[</span><span class="n">match_tuple</span><span class="p">]</span>

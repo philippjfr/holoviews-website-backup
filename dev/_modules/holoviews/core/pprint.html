@@ -145,7 +145,7 @@
 <span class="kn">import</span> <span class="nn">re</span>
 <span class="c"># IPython not required to import ParamPager</span>
 <span class="kn">from</span> <span class="nn">param.ipython</span> <span class="kn">import</span> <span class="n">ParamPager</span>
-<span class="kn">from</span> <span class="nn">holoviews.core.util</span> <span class="kn">import</span> <span class="n">sanitize_identifier</span>
+<span class="kn">from</span> <span class="nn">holoviews.core.util</span> <span class="kn">import</span> <span class="n">sanitize_identifier</span><span class="p">,</span> <span class="n">group_sanitizer</span><span class="p">,</span> <span class="n">label_sanitizer</span>
 
 
 
@@ -217,8 +217,8 @@
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">get_target</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
         <span class="n">objtype</span><span class="o">=</span><span class="n">obj</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span>
-        <span class="n">group</span> <span class="o">=</span> <span class="n">sanitize_identifier</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">group</span><span class="p">)</span>
-        <span class="n">label</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;.&#39;</span><span class="o">+</span><span class="n">sanitize_identifier</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">label</span><span class="p">)</span> <span class="k">if</span> <span class="n">obj</span><span class="o">.</span><span class="n">label</span> <span class="k">else</span> <span class="s">&#39;&#39;</span><span class="p">)</span>
+        <span class="n">group</span> <span class="o">=</span> <span class="n">group_sanitizer</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">group</span><span class="p">)</span>
+        <span class="n">label</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;.&#39;</span> <span class="o">+</span> <span class="n">label_sanitizer</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">label</span><span class="p">)</span> <span class="k">if</span> <span class="n">obj</span><span class="o">.</span><span class="n">label</span> <span class="k">else</span> <span class="s">&#39;&#39;</span><span class="p">)</span>
         <span class="n">target</span> <span class="o">=</span> <span class="s">&#39;{objtype}.{group}{label}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">objtype</span><span class="o">=</span><span class="n">objtype</span><span class="p">,</span>
                                                    <span class="n">group</span><span class="o">=</span><span class="n">group</span><span class="p">,</span>
                                                    <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>

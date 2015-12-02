@@ -179,6 +179,17 @@
     <span class="s">&#39;json&#39;</span><span class="p">:</span>  <span class="bp">None</span>
 <span class="p">}</span>
 
+<span class="n">static_template</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">&lt;html&gt;</span>
+<span class="s">  &lt;head&gt;</span>
+<span class="s">    {css}</span>
+<span class="s">    {js}</span>
+<span class="s">  &lt;/head&gt;</span>
+<span class="s">  &lt;body&gt;</span>
+<span class="s">    {html}</span>
+<span class="s">  &lt;/body&gt;</span>
+<span class="s">&lt;/html&gt;</span>
+<span class="s">&quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="Renderer"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.plotting.html#holoviews.plotting.renderer.Renderer">[docs]</a><span class="k">class</span> <span class="nc">Renderer</span><span class="p">(</span><span class="n">Exporter</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -223,7 +234,8 @@
 <span class="s">        The widget mode determining whether frames are embedded or generated</span>
 <span class="s">        &#39;live&#39; when interacting with the widget.&quot;&quot;&quot;</span><span class="p">)</span>
 
-    <span class="n">css</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">Dict</span><span class="p">(</span><span class="n">doc</span><span class="o">=</span><span class="s">&quot;Dictionary of CSS attributes and values to apply to HTML output&quot;</span><span class="p">)</span>
+    <span class="n">css</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">Dict</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="p">{},</span>
+                     <span class="n">doc</span><span class="o">=</span><span class="s">&quot;Dictionary of CSS attributes and values to apply to HTML output&quot;</span><span class="p">)</span>
 
     <span class="n">info_fn</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">Callable</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="n">allow_None</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">constant</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>  <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
 <span class="s">        Renderers do not support the saving of object info metadata&quot;&quot;&quot;</span><span class="p">)</span>
@@ -237,6 +249,11 @@
 
     <span class="c"># Define appropriate widget classes</span>
     <span class="n">widgets</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;scrubber&#39;</span><span class="p">:</span> <span class="n">ScrubberWidget</span><span class="p">,</span> <span class="s">&#39;widgets&#39;</span><span class="p">:</span> <span class="n">SelectionWidget</span><span class="p">}</span>
+
+    <span class="n">js_dependencies</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;https://code.jquery.com/jquery-2.1.4.min.js&#39;</span><span class="p">,</span>
+                       <span class="s">&#39;https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.20/require.min.js&#39;</span><span class="p">]</span>
+
+    <span class="n">css_dependencies</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css&#39;</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">Renderer</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">params</span><span class="p">)</span>
@@ -314,6 +331,31 @@
         <span class="p">(</span><span class="n">mime_type</span><span class="p">,</span> <span class="n">tag</span><span class="p">)</span> <span class="o">=</span> <span class="n">MIME_TYPES</span><span class="p">[</span><span class="n">fmt</span><span class="p">],</span> <span class="n">HTML_TAGS</span><span class="p">[</span><span class="n">fmt</span><span class="p">]</span>
         <span class="n">src</span> <span class="o">=</span> <span class="n">HTML_TAGS</span><span class="p">[</span><span class="s">&#39;base64&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mime_type</span><span class="o">=</span><span class="n">mime_type</span><span class="p">,</span> <span class="n">b64</span><span class="o">=</span><span class="n">b64</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">tag</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">src</span><span class="o">=</span><span class="n">src</span><span class="p">,</span> <span class="n">mime_type</span><span class="o">=</span><span class="n">mime_type</span><span class="p">,</span> <span class="n">css</span><span class="o">=</span><span class="n">css</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="Renderer.static_html"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.plotting.html#holoviews.plotting.renderer.Renderer.static_html">[docs]</a>    <span class="k">def</span> <span class="nf">static_html</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">template</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Generates a static HTML with the rendered object in</span>
+<span class="sd">        the supplied format. Allows supplying a template</span>
+<span class="sd">        formatting string with fields to interpolate &#39;js&#39;,</span>
+<span class="sd">        &#39;css&#39; and the main &#39;html&#39;.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cls_type</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+        <span class="n">css_html</span><span class="p">,</span> <span class="n">js_html</span> <span class="o">=</span> <span class="s">&#39;&#39;</span><span class="p">,</span> <span class="s">&#39;&#39;</span>
+        <span class="n">js</span><span class="p">,</span> <span class="n">css</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">embed_assets</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">js_dependencies</span><span class="p">:</span>
+            <span class="n">js_html</span> <span class="o">+=</span> <span class="s">&#39;&lt;script src=&quot;</span><span class="si">%s</span><span class="s">&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;&#39;</span> <span class="o">%</span> <span class="n">url</span>
+        <span class="n">js_html</span> <span class="o">+=</span> <span class="s">&#39;&lt;script type=&quot;text/javascript&quot;&gt;</span><span class="si">%s</span><span class="s">&lt;/script&gt;&#39;</span> <span class="o">%</span> <span class="n">js</span>
+
+        <span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">css_dependencies</span><span class="p">:</span>
+            <span class="n">css_html</span> <span class="o">+=</span> <span class="s">&#39;&lt;link rel=&quot;stylesheet&quot; href=&quot;</span><span class="si">%s</span><span class="s">&quot;&gt;&#39;</span> <span class="o">%</span> <span class="n">url</span>
+        <span class="n">css_html</span> <span class="o">+=</span> <span class="s">&#39;&lt;style&gt;</span><span class="si">%s</span><span class="s">&lt;/style&gt;&#39;</span> <span class="o">%</span> <span class="n">css</span>
+
+        <span class="k">if</span> <span class="n">template</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span> <span class="n">template</span> <span class="o">=</span> <span class="n">static_template</span>
+
+        <span class="n">html</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">html</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">fmt</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">template</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">js</span><span class="o">=</span><span class="n">js_html</span><span class="p">,</span> <span class="n">css</span><span class="o">=</span><span class="n">css_html</span><span class="p">,</span> <span class="n">html</span><span class="o">=</span><span class="n">html</span><span class="p">)</span>
 
 </div>
     <span class="k">def</span> <span class="nf">get_widget</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">plot</span><span class="p">,</span> <span class="n">widget_type</span><span class="p">):</span>

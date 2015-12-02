@@ -478,7 +478,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">_sorted</span> <span class="o">=</span> <span class="bp">False</span>
     <span class="c"># Declare that callback is a positional parameter (used in clone)</span>
-    <span class="n">_pos_params</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;callback&#39;</span><span class="p">]</span>
+    <span class="n">__pos_params</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;callback&#39;</span><span class="p">]</span>
 
     <span class="n">callback</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">Parameter</span><span class="p">(</span><span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
 <span class="s">        The callable or generator used to generate the elements. In the</span>
@@ -718,8 +718,6 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">first_key</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
 
-    <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span>
 
 <div class="viewcode-block" id="DynamicMap.next"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.core.html#holoviews.core.spaces.DynamicMap.next">[docs]</a>    <span class="k">def</span> <span class="nf">next</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
