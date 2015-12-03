@@ -1306,7 +1306,8 @@
             <span class="n">store_ids</span> <span class="o">=</span> <span class="n">Store</span><span class="o">.</span><span class="n">custom_options</span><span class="p">(</span><span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">)</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
             <span class="n">max_id</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">store_ids</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">store_ids</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span>
             <span class="n">max_ids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">max_id</span><span class="p">)</span>
-        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">max_ids</span><span class="p">)</span>
+        <span class="c"># If no backends defined (e.g plotting not imported) return zero</span>
+        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">max_ids</span><span class="p">)</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">max_ids</span><span class="p">)</span> <span class="k">else</span> <span class="mi">0</span>
 
 </div>
     <span class="nd">@classmethod</span>

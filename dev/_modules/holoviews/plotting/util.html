@@ -176,9 +176,9 @@
                     <span class="n">expanded</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">collated_layout</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
             <span class="n">layout</span> <span class="o">=</span> <span class="n">Layout</span><span class="p">(</span><span class="n">expanded</span><span class="p">)</span>
         <span class="k">except</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">undisplayable_info</span><span class="p">(</span><span class="n">layout</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">undisplayable_info</span><span class="p">(</span><span class="n">obj</span><span class="p">))</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">undisplayable_info</span><span class="p">(</span><span class="n">layout</span><span class="p">))</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">undisplayable_info</span><span class="p">(</span><span class="n">obj</span><span class="p">))</span>
 
 
 <div class="viewcode-block" id="undisplayable_info"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.plotting.html#holoviews.plotting.util.undisplayable_info">[docs]</a><span class="k">def</span> <span class="nf">undisplayable_info</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">html</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>

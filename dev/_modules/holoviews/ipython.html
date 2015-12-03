@@ -131,10 +131,12 @@
 <span class="kn">import</span> <span class="nn">base64</span>
 <span class="kn">from</span> <span class="nn">unittest</span> <span class="kn">import</span> <span class="n">SkipTest</span>
 
+<span class="kn">import</span> <span class="nn">param</span>
 <span class="kn">import</span> <span class="nn">jinja2</span>
 <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">HTML</span>
 
 <span class="kn">import</span> <span class="nn">holoviews</span>
+<span class="kn">from</span> <span class="nn">..core.options</span> <span class="kn">import</span> <span class="n">Store</span>
 <span class="kn">from</span> <span class="nn">..element.comparison</span> <span class="kn">import</span> <span class="n">ComparisonTestCase</span>
 <span class="kn">from</span> <span class="nn">..interface.collector</span> <span class="kn">import</span> <span class="n">Collector</span>
 <span class="kn">from</span> <span class="nn">..plotting.renderer</span> <span class="kn">import</span> <span class="n">Renderer</span>
@@ -195,9 +197,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">ip</span><span class="o">.</span><span class="n">run_line_magic</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
 </div></div>
-<div class="viewcode-block" id="load_notebook"><a class="viewcode-back" href="../../Reference_Manual/holoviews.ipython.html#holoviews.ipython.load_notebook">[docs]</a><span class="k">def</span> <span class="nf">load_notebook</span><span class="p">():</span>
+<div class="viewcode-block" id="load_hvjs"><a class="viewcode-back" href="../../Reference_Manual/holoviews.ipython.html#holoviews.ipython.load_hvjs">[docs]</a><span class="k">def</span> <span class="nf">load_hvjs</span><span class="p">(</span><span class="n">logo</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Displays javascript and CSS to initialize HoloViews widgets</span>
+<span class="sd">    Displays javascript and CSS to initialize HoloViews widgets.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c"># Evaluate load_notebook.html template with widgetjs code</span>
     <span class="n">widgetjs</span><span class="p">,</span> <span class="n">widgetcss</span> <span class="o">=</span> <span class="n">Renderer</span><span class="o">.</span><span class="n">embed_assets</span><span class="p">()</span>
@@ -205,7 +207,8 @@
     <span class="n">jinjaEnv</span> <span class="o">=</span> <span class="n">jinja2</span><span class="o">.</span><span class="n">Environment</span><span class="p">(</span><span class="n">loader</span><span class="o">=</span><span class="n">templateLoader</span><span class="p">)</span>
     <span class="n">template</span> <span class="o">=</span> <span class="n">jinjaEnv</span><span class="o">.</span><span class="n">get_template</span><span class="p">(</span><span class="s">&#39;load_notebook.html&#39;</span><span class="p">)</span>
     <span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="n">template</span><span class="o">.</span><span class="n">render</span><span class="p">({</span><span class="s">&#39;widgetjs&#39;</span><span class="p">:</span> <span class="n">widgetjs</span><span class="p">,</span>
-                                  <span class="s">&#39;widgetcss&#39;</span><span class="p">:</span> <span class="n">widgetcss</span><span class="p">})))</span>
+                                  <span class="s">&#39;widgetcss&#39;</span><span class="p">:</span> <span class="n">widgetcss</span><span class="p">,</span>
+                                  <span class="s">&#39;logo&#39;</span><span class="p">:</span> <span class="n">logo</span><span class="p">})))</span>
 
 
 <span class="c"># Populating the namespace for keyword evaluation</span></div>
@@ -214,21 +217,60 @@
 
 <span class="n">Parser</span><span class="o">.</span><span class="n">namespace</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;np&#39;</span><span class="p">:</span><span class="n">np</span><span class="p">,</span> <span class="s">&#39;Cycle&#39;</span><span class="p">:</span><span class="n">Cycle</span><span class="p">,</span> <span class="s">&#39;Palette&#39;</span><span class="p">:</span> <span class="n">Palette</span><span class="p">}</span>
 
-<span class="n">_loaded</span> <span class="o">=</span> <span class="bp">False</span>
-<span class="k">def</span> <span class="nf">load_ipython_extension</span><span class="p">(</span><span class="n">ip</span><span class="p">):</span>
+<div class="viewcode-block" id="notebook_extension_fn"><a class="viewcode-back" href="../../Reference_Manual/holoviews.ipython.html#holoviews.ipython.notebook_extension_fn">[docs]</a><span class="k">class</span> <span class="nc">notebook_extension_fn</span><span class="p">(</span><span class="n">param</span><span class="o">.</span><span class="n">ParameterizedFunction</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Parameterized function to initialize notebook resources</span>
+<span class="sd">    and register magics.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">global</span> <span class="n">_loaded</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">_loaded</span><span class="p">:</span>
-        <span class="n">_loaded</span> <span class="o">=</span> <span class="bp">True</span>
-        <span class="n">param_ext</span><span class="o">.</span><span class="n">load_ipython_extension</span><span class="p">(</span><span class="n">ip</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
-        <span class="n">load_magics</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span>
-        <span class="n">OutputMagic</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
-        <span class="n">set_display_hooks</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span>
-        <span class="n">load_notebook</span><span class="p">()</span>
+    <span class="n">css</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;Optional CSS rule set to apply to the notebook.&quot;</span><span class="p">)</span>
+
+    <span class="n">logo</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">Boolean</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;Toggles display of HoloViews logo&quot;</span><span class="p">)</span>
+
+    <span class="n">width</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">Number</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">        Width of the notebook as a percentage of the browser screen window width.&quot;&quot;&quot;</span><span class="p">)</span>
+
+    <span class="n">ip</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">Parameter</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;IPython kernel instance&quot;</span><span class="p">)</span>
+
+    <span class="n">_loaded</span> <span class="o">=</span> <span class="bp">False</span>
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">resources</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">resources</span><span class="p">:</span>
+            <span class="n">resources</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;holoviews&#39;</span><span class="p">]</span>
+        <span class="n">ip</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&#39;ip&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">ParamOverrides</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">notebook_extension_fn</span><span class="o">.</span><span class="n">_loaded</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+            <span class="n">ip</span> <span class="o">=</span> <span class="n">get_ipython</span><span class="p">()</span> <span class="k">if</span> <span class="n">ip</span> <span class="ow">is</span> <span class="bp">None</span> <span class="k">else</span> <span class="n">ip</span>
+            <span class="n">param_ext</span><span class="o">.</span><span class="n">load_ipython_extension</span><span class="p">(</span><span class="n">ip</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+            <span class="n">load_magics</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span>
+            <span class="n">OutputMagic</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
+            <span class="n">set_display_hooks</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span>
+            <span class="n">notebook_extension_fn</span><span class="o">.</span><span class="n">_loaded</span> <span class="o">=</span> <span class="bp">True</span>
+
+        <span class="n">css</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+        <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">width</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">css</span> <span class="o">+=</span> <span class="s">&#39;&lt;style&gt;div.container { width: </span><span class="si">%s%%</span><span class="s"> }&lt;/style&gt;&#39;</span> <span class="o">%</span> <span class="n">p</span><span class="o">.</span><span class="n">width</span>
+        <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">css</span><span class="p">:</span>
+            <span class="n">css</span> <span class="o">+=</span> <span class="s">&#39;&lt;style&gt;</span><span class="si">%s</span><span class="s">&lt;/style&gt;&#39;</span> <span class="o">%</span> <span class="n">p</span><span class="o">.</span><span class="n">css</span>
+        <span class="k">if</span> <span class="n">css</span><span class="p">:</span>
+            <span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="n">css</span><span class="p">))</span>
+
+        <span class="n">resources</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">resources</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s">&#39;holoviews&#39;</span> <span class="ow">in</span> <span class="n">resources</span><span class="p">:</span>
+            <span class="n">resources</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">resources</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s">&#39;holoviews&#39;</span><span class="p">))</span>
+            <span class="n">load_hvjs</span><span class="p">(</span><span class="n">logo</span><span class="o">=</span><span class="n">p</span><span class="o">.</span><span class="n">logo</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">backend</span> <span class="ow">in</span> <span class="n">resources</span><span class="p">:</span>
+            <span class="n">Store</span><span class="o">.</span><span class="n">renderers</span><span class="p">[</span><span class="n">backend</span><span class="p">]</span><span class="o">.</span><span class="n">load_nb</span><span class="p">()</span>
+
+</div>
+<span class="n">notebook_extension</span> <span class="o">=</span> <span class="n">notebook_extension_fn</span><span class="o">.</span><span class="n">instance</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">load_ipython_extension</span><span class="p">(</span><span class="n">ip</span><span class="p">):</span>
+    <span class="n">notebook_extension</span><span class="p">(</span><span class="n">ip</span><span class="o">=</span><span class="n">ip</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">unload_ipython_extension</span><span class="p">(</span><span class="n">ip</span><span class="p">):</span>
-    <span class="k">global</span> <span class="n">_loaded</span>
-    <span class="n">_loaded</span> <span class="o">=</span> <span class="bp">False</span>
+    <span class="n">notebook_extension_fn</span><span class="o">.</span><span class="n">_loaded</span> <span class="o">=</span> <span class="bp">False</span>
 </pre></div>
 
           </div>

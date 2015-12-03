@@ -153,6 +153,15 @@
 <span class="kn">from</span> <span class="nn">.operation</span> <span class="kn">import</span> <span class="n">ElementOperation</span><span class="p">,</span> <span class="n">MapOperation</span><span class="p">,</span> <span class="n">TreeOperation</span> <span class="c"># pyflakes:ignore (API import)</span>
 <span class="kn">from</span> <span class="nn">.element</span> <span class="kn">import</span> <span class="o">*</span>                                               <span class="c"># pyflakes:ignore (API import)</span>
 
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">.ipython</span> <span class="kn">import</span> <span class="n">notebook_extension</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="k">class</span> <span class="nc">_notebook_extension_fn</span><span class="p">(</span><span class="n">param</span><span class="o">.</span><span class="n">ParameterizedFunction</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="o">**</span><span class="n">opts</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s">&quot;IPython notebook not available&quot;</span><span class="p">)</span>
+    <span class="n">notebook_extension</span> <span class="o">=</span> <span class="n">_notebook_extension_fn</span><span class="o">.</span><span class="n">instance</span><span class="p">()</span>
+
+
 <span class="c"># A single holoviews.rc file may be executed if found.</span>
 <span class="k">for</span> <span class="n">rcfile</span> <span class="ow">in</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;HOLOVIEWSRC&quot;</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">),</span>
                <span class="s">&quot;~/.holoviews.rc&quot;</span><span class="p">,</span>
