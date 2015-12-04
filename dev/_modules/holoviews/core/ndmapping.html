@@ -14,6 +14,8 @@
 
   
   
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+  
 
   
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
@@ -142,7 +144,7 @@
 
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">traversal</span>
 <span class="kn">from</span> <span class="nn">.dimension</span> <span class="kn">import</span> <span class="n">OrderedDict</span><span class="p">,</span> <span class="n">Dimension</span><span class="p">,</span> <span class="n">Dimensioned</span><span class="p">,</span> <span class="n">ViewableElement</span>
-<span class="kn">from</span> <span class="nn">.util</span> <span class="kn">import</span> <span class="n">unique_iterator</span><span class="p">,</span> <span class="n">sanitize_identifier</span><span class="p">,</span> <span class="n">dimension_sort</span><span class="p">,</span> <span class="n">group_select</span><span class="p">,</span> <span class="n">iterative_select</span>
+<span class="kn">from</span> <span class="nn">.util</span> <span class="kn">import</span> <span class="n">unique_iterator</span><span class="p">,</span> <span class="n">sanitize_identifier</span><span class="p">,</span> <span class="n">dimension_sort</span><span class="p">,</span> <span class="n">group_select</span><span class="p">,</span> <span class="n">iterative_select</span><span class="p">,</span> <span class="nb">basestring</span><span class="p">,</span> <span class="n">wrap_tuple</span><span class="p">,</span> <span class="n">process_ellipses</span>
 
 
 <div class="viewcode-block" id="item_check"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.core.html#holoviews.core.ndmapping.item_check">[docs]</a><span class="k">class</span> <span class="nc">item_check</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -448,7 +450,7 @@
             <span class="n">dims</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">dim_pos</span><span class="p">,</span> <span class="n">dimension</span><span class="p">)</span>
             <span class="n">dimensions</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">kdims</span><span class="o">=</span><span class="n">dims</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isscalar</span><span class="p">(</span><span class="n">dim_val</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dim_val</span><span class="p">,</span> <span class="nb">basestring</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">dim_val</span><span class="p">,</span> <span class="s">&#39;__iter__&#39;</span><span class="p">):</span>
             <span class="n">dim_val</span> <span class="o">=</span> <span class="n">cycle</span><span class="p">([</span><span class="n">dim_val</span><span class="p">])</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">dim_val</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -708,6 +710,8 @@
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">clone</span><span class="p">([</span><span class="n">item</span> <span class="k">for</span> <span class="n">c</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">selection</span> <span class="k">if</span> <span class="n">c</span><span class="p">])</span>
         <span class="k">elif</span> <span class="n">indexslice</span> <span class="ow">in</span> <span class="p">[</span><span class="bp">Ellipsis</span><span class="p">,</span> <span class="p">()]:</span>
             <span class="k">return</span> <span class="bp">self</span>
+        <span class="k">elif</span> <span class="bp">Ellipsis</span> <span class="ow">in</span> <span class="n">wrap_tuple</span><span class="p">(</span><span class="n">indexslice</span><span class="p">):</span>
+            <span class="n">indexslice</span> <span class="o">=</span> <span class="n">process_ellipses</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">indexslice</span><span class="p">)</span>
 
         <span class="n">map_slice</span><span class="p">,</span> <span class="n">data_slice</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_split_index</span><span class="p">(</span><span class="n">indexslice</span><span class="p">)</span>
         <span class="n">map_slice</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transform_indices</span><span class="p">(</span><span class="n">map_slice</span><span class="p">)</span>

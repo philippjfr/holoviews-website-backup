@@ -14,6 +14,8 @@
 
   
   
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+  
 
   
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
@@ -519,14 +521,6 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">call_mode</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_validate_mode</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="s">&#39;closed&#39;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">call_mode</span> <span class="o">==</span> <span class="s">&#39;key&#39;</span> <span class="k">else</span> <span class="s">&#39;open&#39;</span>
-        <span class="c"># Needed to initialize the plotting system</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">call_mode</span> <span class="o">==</span> <span class="s">&#39;key&#39;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_initial_key</span><span class="p">()]</span>
-        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">call_mode</span> <span class="o">==</span> <span class="s">&#39;counter&#39;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">counter</span><span class="p">]</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
 
     <span class="k">def</span> <span class="nf">_initial_key</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>

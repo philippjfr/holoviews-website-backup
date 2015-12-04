@@ -14,6 +14,8 @@
 
   
   
+    <link rel="shortcut icon" href="../../../../_static/favicon.ico"/>
+  
 
   
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
@@ -143,11 +145,11 @@
 <span class="kn">from</span> <span class="nn">param.parameterized</span> <span class="kn">import</span> <span class="n">bothmethod</span>
 
 <span class="kn">from</span> <span class="nn">...core</span> <span class="kn">import</span> <span class="n">HoloMap</span>
-<span class="kn">from</span> <span class="nn">...core.options</span> <span class="kn">import</span> <span class="n">Store</span><span class="p">,</span> <span class="n">StoreOptions</span>
+<span class="kn">from</span> <span class="nn">...core.options</span> <span class="kn">import</span> <span class="n">Store</span>
 
 <span class="kn">from</span> <span class="nn">..plot</span> <span class="kn">import</span> <span class="n">Plot</span>
 <span class="kn">from</span> <span class="nn">..renderer</span> <span class="kn">import</span> <span class="n">Renderer</span><span class="p">,</span> <span class="n">MIME_TYPES</span>
-<span class="kn">from</span> <span class="nn">.widgets</span> <span class="kn">import</span> <span class="n">MPLSelectionWidget</span><span class="p">,</span> <span class="n">MPLScrubberWidget</span>
+<span class="kn">from</span> <span class="nn">.widgets</span> <span class="kn">import</span> <span class="n">MPLWidget</span><span class="p">,</span> <span class="n">MPLSelectionWidget</span><span class="p">,</span> <span class="n">MPLScrubberWidget</span>
 
 <span class="k">class</span> <span class="nc">OutputWarning</span><span class="p">(</span><span class="n">param</span><span class="o">.</span><span class="n">Parameterized</span><span class="p">):</span><span class="k">pass</span>
 <span class="n">outputwarning</span> <span class="o">=</span> <span class="n">OutputWarning</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;Warning&#39;</span><span class="p">)</span>
@@ -196,10 +198,11 @@
         <span class="s">&#39;scrubber&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s">&#39;html&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;fps&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">},</span> <span class="bp">None</span><span class="p">)</span>
     <span class="p">}</span>
 
-    <span class="n">mode_formats</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;fig&#39;</span><span class="p">:{</span><span class="s">&#39;default&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;png&#39;</span><span class="p">,</span> <span class="s">&#39;svg&#39;</span><span class="p">,</span> <span class="s">&#39;pdf&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="s">&#39;auto&#39;</span><span class="p">],</span>
+    <span class="n">mode_formats</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;fig&#39;</span><span class="p">:{</span><span class="s">&#39;default&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;png&#39;</span><span class="p">,</span> <span class="s">&#39;svg&#39;</span><span class="p">,</span> <span class="s">&#39;pdf&#39;</span><span class="p">,</span> <span class="s">&#39;html&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="s">&#39;auto&#39;</span><span class="p">],</span>
                            <span class="s">&#39;mpld3&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;html&#39;</span><span class="p">,</span> <span class="s">&#39;json&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="s">&#39;auto&#39;</span><span class="p">],</span>
                            <span class="s">&#39;nbagg&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;html&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="s">&#39;auto&#39;</span><span class="p">]},</span>
-                    <span class="s">&#39;holomap&#39;</span><span class="p">:</span> <span class="p">{</span><span class="n">m</span><span class="p">:[</span><span class="s">&#39;widgets&#39;</span><span class="p">,</span> <span class="s">&#39;scrubber&#39;</span><span class="p">,</span> <span class="s">&#39;webm&#39;</span><span class="p">,</span><span class="s">&#39;mp4&#39;</span><span class="p">,</span> <span class="s">&#39;gif&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="s">&#39;auto&#39;</span><span class="p">]</span>
+                    <span class="s">&#39;holomap&#39;</span><span class="p">:</span> <span class="p">{</span><span class="n">m</span><span class="p">:[</span><span class="s">&#39;widgets&#39;</span><span class="p">,</span> <span class="s">&#39;scrubber&#39;</span><span class="p">,</span> <span class="s">&#39;webm&#39;</span><span class="p">,</span><span class="s">&#39;mp4&#39;</span><span class="p">,</span> <span class="s">&#39;gif&#39;</span><span class="p">,</span>
+                                   <span class="s">&#39;html&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="s">&#39;auto&#39;</span><span class="p">]</span>
                                 <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;default&#39;</span><span class="p">,</span> <span class="s">&#39;mpld3&#39;</span><span class="p">,</span> <span class="s">&#39;nbagg&#39;</span><span class="p">]}}</span>
 
     <span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
@@ -207,7 +210,6 @@
     <span class="c"># Define appropriate widget classes</span>
     <span class="n">widgets</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;scrubber&#39;</span><span class="p">:</span> <span class="n">MPLScrubberWidget</span><span class="p">,</span>
                <span class="s">&#39;widgets&#39;</span><span class="p">:</span> <span class="n">MPLSelectionWidget</span><span class="p">}</span>
-
 
     <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s">&#39;auto&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -217,10 +219,8 @@
         <span class="n">plot</span><span class="p">,</span> <span class="n">fmt</span> <span class="o">=</span>  <span class="bp">self</span><span class="o">.</span><span class="n">_validate</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">fmt</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">plot</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span> <span class="k">return</span>
 
-        <span class="n">widgets</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">widgets</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="o">+</span><span class="p">[</span><span class="s">&#39;auto&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">fmt</span> <span class="ow">in</span> <span class="n">widgets</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_widget</span><span class="p">(</span><span class="n">plot</span><span class="p">,</span> <span class="n">fmt</span><span class="p">)(),</span> <span class="p">{</span><span class="s">&#39;file-ext&#39;</span><span class="p">:</span><span class="s">&#39; html&#39;</span><span class="p">,</span>
-                                                  <span class="s">&#39;mime_type&#39;</span><span class="p">:</span> <span class="n">MIME_TYPES</span><span class="p">[</span><span class="s">&#39;html&#39;</span><span class="p">]}</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">plot</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">widgets</span><span class="o">.</span><span class="n">values</span><span class="p">())):</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">plot</span><span class="p">()</span>
         <span class="k">elif</span> <span class="n">fmt</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;png&#39;</span><span class="p">,</span> <span class="s">&#39;svg&#39;</span><span class="p">,</span> <span class="s">&#39;pdf&#39;</span><span class="p">,</span> <span class="s">&#39;html&#39;</span><span class="p">,</span> <span class="s">&#39;json&#39;</span><span class="p">]:</span>
             <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_figure_data</span><span class="p">(</span><span class="n">plot</span><span class="p">,</span> <span class="n">fmt</span><span class="p">,</span> <span class="o">**</span><span class="p">({</span><span class="s">&#39;dpi&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">dpi</span><span class="p">}</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dpi</span> <span class="k">else</span> <span class="p">{}))</span>
         <span class="k">else</span><span class="p">:</span>
@@ -261,28 +261,6 @@
 
         <span class="k">return</span> <span class="nb">dict</span><span class="p">({</span><span class="s">&#39;fig_inches&#39;</span><span class="p">:</span><span class="n">fig_inches</span><span class="p">},</span>
                     <span class="o">**</span><span class="n">Store</span><span class="o">.</span><span class="n">lookup_options</span><span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">backend</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="s">&#39;plot&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">options</span><span class="p">)</span>
-</div>
-    <span class="nd">@bothmethod</span>
-<div class="viewcode-block" id="MPLRenderer.save"><a class="viewcode-back" href="../../../../Reference_Manual/holoviews.plotting.mpl.html#holoviews.plotting.mpl.renderer.MPLRenderer.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="n">self_or_cls</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">basename</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s">&#39;auto&#39;</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="p">{},</span> <span class="n">info</span><span class="o">=</span><span class="p">{},</span> <span class="n">options</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Save a HoloViews object to file, either using an explicitly</span>
-<span class="sd">        supplied format or to the appropriate default.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">info</span> <span class="ow">or</span> <span class="n">key</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s">&#39;MPLRenderer does not support saving metadata to file.&#39;</span><span class="p">)</span>
-
-        <span class="k">with</span> <span class="n">StoreOptions</span><span class="o">.</span><span class="n">options</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-            <span class="n">rendered</span> <span class="o">=</span> <span class="n">self_or_cls</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">fmt</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">rendered</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span> <span class="k">return</span>
-        <span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">info</span><span class="p">)</span> <span class="o">=</span> <span class="n">rendered</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">basename</span><span class="p">,</span> <span class="n">BytesIO</span><span class="p">):</span>
-            <span class="n">basename</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-            <span class="n">basename</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">encoded</span> <span class="o">=</span> <span class="n">self_or_cls</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">rendered</span><span class="p">)</span>
-            <span class="n">filename</span> <span class="o">=</span><span class="s">&#39;</span><span class="si">%s</span><span class="s">.</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">basename</span><span class="p">,</span> <span class="n">info</span><span class="p">[</span><span class="s">&#39;file-ext&#39;</span><span class="p">])</span>
-            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">encoded</span><span class="p">)</span>
 
 </div>
     <span class="nd">@bothmethod</span>

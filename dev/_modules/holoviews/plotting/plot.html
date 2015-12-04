@@ -14,6 +14,8 @@
 
   
   
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+  
 
   
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
@@ -159,6 +161,9 @@
     <span class="c"># A list of style options that may be supplied to the plotting</span>
     <span class="c"># call</span>
     <span class="n">style_opts</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c"># Sometimes matplotlib doesn&#39;t support the common aliases.</span>
+    <span class="c"># Use this list to disable any invalid style options</span>
+    <span class="n">_disabled_opts</span> <span class="o">=</span> <span class="p">[]</span>
 
 <div class="viewcode-block" id="Plot.initialize_plot"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.plotting.html#holoviews.plotting.plot.Plot.initialize_plot">[docs]</a>    <span class="k">def</span> <span class="nf">initialize_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ranges</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -201,6 +206,8 @@
 <span class="sd">    function of the plotted object. Behaves like a Plot class and</span>
 <span class="sd">    presents the same parameterized interface.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_disabled_opts</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">selector</span><span class="p">,</span> <span class="n">plot_classes</span><span class="p">,</span> <span class="n">allow_mismatch</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        The selector function accepts a component instance and returns</span>

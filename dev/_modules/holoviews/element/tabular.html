@@ -14,6 +14,8 @@
 
   
   
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+  
 
   
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
@@ -190,7 +192,7 @@
         <span class="k">if</span> <span class="n">heading</span> <span class="ow">is</span> <span class="p">():</span>
             <span class="k">return</span> <span class="bp">self</span>
         <span class="k">if</span> <span class="n">heading</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">vdims</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%r</span><span class="s"> not in available headings.&quot;</span> <span class="o">%</span> <span class="n">heading</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%r</span><span class="s"> not in available headings.&quot;</span> <span class="o">%</span> <span class="n">heading</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">heading</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">NaN</span><span class="p">))</span>
 
 

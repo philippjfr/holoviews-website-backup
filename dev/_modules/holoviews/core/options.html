@@ -14,6 +14,8 @@
 
   
   
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+  
 
   
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
@@ -1050,7 +1052,8 @@
         <span class="k">for</span> <span class="n">view_class</span><span class="p">,</span> <span class="n">plot</span> <span class="ow">in</span> <span class="n">cls</span><span class="o">.</span><span class="n">registry</span><span class="p">[</span><span class="n">backend</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="n">expanded_opts</span> <span class="o">=</span> <span class="p">[</span><span class="n">opt</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">plot</span><span class="o">.</span><span class="n">style_opts</span>
                              <span class="k">for</span> <span class="n">opt</span> <span class="ow">in</span> <span class="n">style_aliases</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="p">[])]</span>
-            <span class="n">style_opts</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">expanded_opts</span> <span class="o">+</span> <span class="n">plot</span><span class="o">.</span><span class="n">style_opts</span><span class="p">))</span>
+            <span class="n">style_opts</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">opt</span> <span class="k">for</span> <span class="n">opt</span> <span class="ow">in</span> <span class="p">(</span><span class="n">expanded_opts</span> <span class="o">+</span> <span class="n">plot</span><span class="o">.</span><span class="n">style_opts</span><span class="p">)</span>
+                                    <span class="k">if</span> <span class="n">opt</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">plot</span><span class="o">.</span><span class="n">_disabled_opts</span><span class="p">))</span>
             <span class="n">plot_opts</span> <span class="o">=</span> <span class="p">[</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">plot</span><span class="o">.</span><span class="n">params</span><span class="p">()</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;name&#39;</span><span class="p">]]</span>
 
             <span class="k">with</span> <span class="n">param</span><span class="o">.</span><span class="n">logging_level</span><span class="p">(</span><span class="s">&#39;CRITICAL&#39;</span><span class="p">):</span>

@@ -14,6 +14,8 @@
 
   
   
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+  
 
   
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
@@ -172,14 +174,14 @@
 <span class="s">         plots as json files, which can be dynamically loaded through</span>
 <span class="s">         a callback from the slider.&quot;&quot;&quot;</span><span class="p">)</span>
 
-    <span class="n">json_path</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s">&#39;./json_figures&#39;</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
-<span class="s">         If export_json is True the json files will be written to this</span>
-<span class="s">         directory.&quot;&quot;&quot;</span><span class="p">)</span>
+    <span class="n">json_save_path</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s">&#39;./json_figures&#39;</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">         If export_json is enabled the widget will save the json</span>
+<span class="s">         data to this path. If None data will be accessible via the</span>
+<span class="s">         json_data attribute.&quot;&quot;&quot;</span><span class="p">)</span>
 
-    <span class="n">server_url</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;If export_json is</span>
-<span class="s">         True the slider widget will expect to be served the plot data</span>
-<span class="s">         from this URL. Data should be served from:</span>
-<span class="s">         server_url/fig_{id}/{frame}.&quot;&quot;&quot;</span><span class="p">)</span>
+    <span class="n">json_load_path</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">         If export_json is enabled the widget JS code will load the data</span>
+<span class="s">         from this relative path, if None defaults to json_save_path.&quot;&quot;&quot;</span><span class="p">)</span>
 
     <span class="c">##############################</span>
     <span class="c"># Javascript include options #</span>
@@ -207,6 +209,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">dimensions</span> <span class="o">=</span> <span class="n">plot</span><span class="o">.</span><span class="n">dimensions</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">keys</span> <span class="o">=</span> <span class="n">plot</span><span class="o">.</span><span class="n">keys</span>
 
+        <span class="bp">self</span><span class="o">.</span><span class="n">json_data</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">dynamic</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">embed</span> <span class="o">=</span> <span class="bp">False</span>
         <span class="k">if</span> <span class="n">renderer</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="n">backend</span> <span class="o">=</span> <span class="n">Store</span><span class="o">.</span><span class="n">current_backend</span>
@@ -237,11 +240,12 @@
         <span class="n">cached</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">embed</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
         <span class="n">load_json</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">export_json</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
         <span class="n">mode</span> <span class="o">=</span> <span class="nb">repr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">renderer</span><span class="o">.</span><span class="n">mode</span><span class="p">)</span>
+        <span class="n">json_path</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">json_save_path</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">json_load_path</span> <span class="ow">is</span> <span class="bp">None</span>
+                     <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">json_load_path</span><span class="p">)</span>
         <span class="n">dynamic</span> <span class="o">=</span> <span class="nb">repr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">dynamic</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">dynamic</span> <span class="k">else</span> <span class="s">&#39;false&#39;</span>
         <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">CDN</span><span class="o">=</span><span class="n">CDN</span><span class="p">,</span> <span class="n">frames</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get_frames</span><span class="p">(),</span> <span class="n">delay</span><span class="o">=</span><span class="n">delay</span><span class="p">,</span>
-                    <span class="n">server</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">server_url</span><span class="p">,</span> <span class="n">cached</span><span class="o">=</span><span class="n">cached</span><span class="p">,</span>
-                    <span class="n">load_json</span><span class="o">=</span><span class="n">load_json</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="n">mode</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
-                    <span class="n">Nframes</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">plot</span><span class="p">),</span> <span class="n">widget_name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
+                    <span class="n">cached</span><span class="o">=</span><span class="n">cached</span><span class="p">,</span> <span class="n">load_json</span><span class="o">=</span><span class="n">load_json</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="n">mode</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+                    <span class="n">Nframes</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">plot</span><span class="p">),</span> <span class="n">widget_name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">json_path</span><span class="o">=</span><span class="n">json_path</span><span class="p">,</span>
                     <span class="n">widget_template</span><span class="o">=</span><span class="n">template</span><span class="p">,</span> <span class="n">dynamic</span><span class="o">=</span><span class="n">dynamic</span><span class="p">)</span>
 
 
@@ -262,15 +266,21 @@
     <span class="k">def</span> <span class="nf">encode_frames</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">frames</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">frames</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
             <span class="n">frames</span> <span class="o">=</span> <span class="p">{</span><span class="n">idx</span><span class="p">:</span> <span class="n">frame</span> <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">frame</span> <span class="ow">in</span> <span class="n">frames</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">export_json</span><span class="p">:</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">json_path</span><span class="p">):</span>
-                <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">json_path</span><span class="p">)</span>
-            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">json_path</span><span class="o">+</span><span class="s">&#39;/fig_</span><span class="si">%s</span><span class="s">.json&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="s">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-                <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">frames</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
-            <span class="n">frames</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">return</span> <span class="n">frames</span>
 
-
+<div class="viewcode-block" id="NdWidget.save_json"><a class="viewcode-back" href="../../../Reference_Manual/holoviews.plotting.widgets.html#holoviews.plotting.widgets.NdWidget.save_json">[docs]</a>    <span class="k">def</span> <span class="nf">save_json</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">frames</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Saves frames data into a json file at the</span>
+<span class="sd">        specified json_path, named with the widget uuid.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">json_save_path</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span> <span class="k">return</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">json_save_path</span><span class="p">,</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">.json&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">json_save_path</span><span class="p">):</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">json_save_path</span><span class="p">)</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">frames</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">json_data</span> <span class="o">=</span> <span class="n">frames</span>
+</div>
     <span class="k">def</span> <span class="nf">_plot_figure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">):</span>
         <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">renderer</span><span class="o">.</span><span class="n">state</span><span class="p">():</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span>

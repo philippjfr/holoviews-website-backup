@@ -14,6 +14,8 @@
 
   
   
+    <link rel="shortcut icon" href="../../../../_static/favicon.ico"/>
+  
 
   
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
@@ -176,6 +178,10 @@
 
     <span class="n">current_data</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">Dict</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="p">{})</span>
 
+    <span class="n">initialize_cb</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">Boolean</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">        Whether the callback should be initialized when it&#39;s first</span>
+<span class="s">        added to a plot&quot;&quot;&quot;</span><span class="p">)</span>
+
     <span class="n">plot_attributes</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">Dict</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="p">{},</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
 <span class="s">        Plot attributes returned to the Python callback.&quot;&quot;&quot;</span><span class="p">)</span>
 
@@ -221,6 +227,15 @@
 <span class="s">        }}</span>
 <span class="s">    &quot;&quot;&quot;</span>
 
+<div class="viewcode-block" id="Callback.initialize"><a class="viewcode-back" href="../../../../Reference_Manual/holoviews.plotting.bokeh.html#holoviews.plotting.bokeh.callbacks.Callback.initialize">[docs]</a>    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize is called when the callback is added to a new plot</span>
+<span class="sd">        and the initialize option is enabled. May avoid repeat</span>
+<span class="sd">        initialization by setting initialize_cb parameter to False</span>
+<span class="sd">        inside this method.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+</div>
     <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        The call method can modify any bokeh plot object</span>
@@ -330,6 +345,9 @@
     <span class="n">plot_attributes</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">Dict</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;x_range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;start&#39;</span><span class="p">,</span> <span class="s">&#39;end&#39;</span><span class="p">],</span>
                                           <span class="s">&#39;y_range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;start&#39;</span><span class="p">,</span> <span class="s">&#39;end&#39;</span><span class="p">]})</span>
 
+    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
     <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="n">xstart</span><span class="p">,</span> <span class="n">xend</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;x_range&#39;</span><span class="p">]</span>
         <span class="n">ystart</span><span class="p">,</span> <span class="n">yend</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;y_range&#39;</span><span class="p">]</span>
@@ -433,7 +451,8 @@
         <span class="n">customjs</span> <span class="o">=</span> <span class="n">CustomJS</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="n">plot</span><span class="o">.</span><span class="n">handles</span><span class="p">,</span> <span class="n">code</span><span class="o">=</span><span class="n">code</span><span class="p">)</span>
 
         <span class="c"># Get initial callback data and call to initialize</span>
-        <span class="n">pycallback</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">pycallback</span><span class="o">.</span><span class="n">initialize_cb</span><span class="p">:</span>
+            <span class="n">pycallback</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">customjs</span><span class="p">,</span> <span class="n">pycallback</span>
 

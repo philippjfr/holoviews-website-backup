@@ -14,6 +14,8 @@
 
   
   
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+  
 
   
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
@@ -258,8 +260,7 @@
 <span class="nd">@display_hook</span>
 <span class="k">def</span> <span class="nf">map_display</span><span class="p">(</span><span class="n">vmap</span><span class="p">,</span> <span class="n">max_frames</span><span class="p">,</span> <span class="n">max_branches</span><span class="p">):</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">vmap</span><span class="p">,</span> <span class="p">(</span><span class="n">HoloMap</span><span class="p">,</span> <span class="n">DynamicMap</span><span class="p">)):</span> <span class="k">return</span> <span class="bp">None</span>
-
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">vmap</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">vmap</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">vmap</span><span class="p">,</span> <span class="n">DynamicMap</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">sanitize_HTML</span><span class="p">(</span><span class="n">vmap</span><span class="p">)</span>
     <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">vmap</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">max_frames</span><span class="p">:</span>
         <span class="n">max_frame_warning</span><span class="p">(</span><span class="n">max_frames</span><span class="p">)</span>

@@ -14,6 +14,8 @@
 
   
   
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
 
   
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
@@ -160,23 +162,22 @@ hold the dimensions and keys.</p>
 </dl>
 <p><em>param Dict</em> <tt class="docutils literal"><span class="pre">CDN</span></tt> (<em>allow_None=False, constant=False, default={&#8216;jQueryUI&#8217;: &#8216;https://code.jquery.com/ui/1.10.4/jquery-ui.min.js&#8217;, &#8216;underscore&#8217;: &#8216;https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js&#8217;}, instantiate=True, is_instance=True, pickle_default_value=True, precedence=None, readonly=False</em>)</p>
 <dl class="docutils">
-<dt><em>param String</em> <tt class="docutils literal"><span class="pre">server_url</span></tt> (<em>allow_None=False, basestring=&lt;type &#8216;basestring&#8217;&gt;, constant=False, default=, instantiate=False, pickle_default_value=True, precedence=None, readonly=False</em>)</dt>
-<dd>If export_json is
-         True the slider widget will expect to be served the plot data
-         from this URL. Data should be served from:
-         server_url/fig_{id}/{frame}.</dd>
 <dt><em>param String</em> <tt class="docutils literal"><span class="pre">extensionjs</span></tt> (<em>allow_None=False, basestring=&lt;type &#8216;basestring&#8217;&gt;, constant=False, default=None, instantiate=False, pickle_default_value=True, precedence=None, readonly=False</em>)</dt>
 <dd>Optional javascript extension file for a particular backend.</dd>
+<dt><em>param String</em> <tt class="docutils literal"><span class="pre">json_load_path</span></tt> (<em>allow_None=False, basestring=&lt;type &#8216;basestring&#8217;&gt;, constant=False, default=None, instantiate=False, pickle_default_value=True, precedence=None, readonly=False</em>)</dt>
+<dd>If export_json is enabled the widget JS code will load the data
+         from this relative path, if None defaults to json_save_path.</dd>
+<dt><em>param String</em> <tt class="docutils literal"><span class="pre">css</span></tt> (<em>allow_None=False, basestring=&lt;type &#8216;basestring&#8217;&gt;, constant=False, default=None, instantiate=False, pickle_default_value=True, precedence=None, readonly=False</em>)</dt>
+<dd>Defines the local CSS file to be loaded for this widget.</dd>
 <dt><em>param String</em> <tt class="docutils literal"><span class="pre">basejs</span></tt> (<em>allow_None=False, basestring=&lt;type &#8216;basestring&#8217;&gt;, constant=False, default=widgets.js, instantiate=False, pickle_default_value=True, precedence=None, readonly=False</em>)</dt>
 <dd>JS file containing javascript baseclasses for the widget.</dd>
-<dt><em>param String</em> <tt class="docutils literal"><span class="pre">json_path</span></tt> (<em>allow_None=False, basestring=&lt;type &#8216;basestring&#8217;&gt;, constant=False, default=./json_figures, instantiate=False, pickle_default_value=True, precedence=None, readonly=False</em>)</dt>
-<dd>If export_json is True the json files will be written to this
-         directory.</dd>
 <dt><em>param Boolean</em> <tt class="docutils literal"><span class="pre">embed</span></tt> (<em>allow_None=False, bounds=(0, 1), constant=False, default=True, instantiate=False, pickle_default_value=True, precedence=None, readonly=False</em>)</dt>
 <dd>Whether to embed all plots in the Javascript, generating
         a static widget not dependent on the IPython server.</dd>
-<dt><em>param String</em> <tt class="docutils literal"><span class="pre">css</span></tt> (<em>allow_None=False, basestring=&lt;type &#8216;basestring&#8217;&gt;, constant=False, default=None, instantiate=False, pickle_default_value=True, precedence=None, readonly=False</em>)</dt>
-<dd>Defines the local CSS file to be loaded for this widget.</dd>
+<dt><em>param String</em> <tt class="docutils literal"><span class="pre">json_save_path</span></tt> (<em>allow_None=False, basestring=&lt;type &#8216;basestring&#8217;&gt;, constant=False, default=./json_figures, instantiate=False, pickle_default_value=True, precedence=None, readonly=False</em>)</dt>
+<dd>If export_json is enabled the widget will save the json
+         data to this path. If None data will be accessible via the
+         json_data attribute.</dd>
 </dl>
 <dl class="method">
 <dt id="holoviews.plotting.widgets.NdWidget.debug">
@@ -196,7 +197,7 @@ instantiated.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.widgets.NdWidget.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2ab963b1ac58&gt;</em><a class="headerlink" href="#holoviews.plotting.widgets.NdWidget.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2ac57048cf18&gt;</em><a class="headerlink" href="#holoviews.plotting.widgets.NdWidget.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -210,12 +211,12 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.widgets.NdWidget.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2ab963b1acb0&gt;</em><a class="headerlink" href="#holoviews.plotting.widgets.NdWidget.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2ac57048cf70&gt;</em><a class="headerlink" href="#holoviews.plotting.widgets.NdWidget.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.widgets.NdWidget.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2ab963b1ad08&gt;</em><a class="headerlink" href="#holoviews.plotting.widgets.NdWidget.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2ac57048cd08&gt;</em><a class="headerlink" href="#holoviews.plotting.widgets.NdWidget.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -254,6 +255,13 @@ evaluated with eval. See pprint() function for more details.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="holoviews.plotting.widgets.NdWidget.save_json">
+<tt class="descname">save_json</tt><big>(</big><em>frames</em><big>)</big><a class="reference internal" href="../_modules/holoviews/plotting/widgets.html#NdWidget.save_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#holoviews.plotting.widgets.NdWidget.save_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saves frames data into a json file at the
+specified json_path, named with the widget uuid.</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="holoviews.plotting.widgets.NdWidget.script_repr">
 <tt class="descname">script_repr</tt><big>(</big><em>imports=</em>, <span class="optional">[</span><span class="optional">]</span><em>prefix='    '</em><big>)</big><a class="headerlink" href="#holoviews.plotting.widgets.NdWidget.script_repr" title="Permalink to this definition">¶</a></dt>
 <dd><p>Variant of __repr__ designed for generating a runnable script.</p>
@@ -268,12 +276,12 @@ evaluated with eval. See pprint() function for more details.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.widgets.NdWidget.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2ab963b1ad60&gt;</em><a class="headerlink" href="#holoviews.plotting.widgets.NdWidget.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2ac573e8e100&gt;</em><a class="headerlink" href="#holoviews.plotting.widgets.NdWidget.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.widgets.NdWidget.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2ab963b1ae68&gt;</em><a class="headerlink" href="#holoviews.plotting.widgets.NdWidget.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2ac573e8e158&gt;</em><a class="headerlink" href="#holoviews.plotting.widgets.NdWidget.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -335,27 +343,26 @@ on a simple server.</p>
 </dl>
 <p><em>param Dict</em> <tt class="docutils literal"><span class="pre">CDN</span></tt> (<em>allow_None=False, constant=False, default={&#8216;jQueryUI&#8217;: &#8216;https://code.jquery.com/ui/1.10.4/jquery-ui.min.js&#8217;, &#8216;underscore&#8217;: &#8216;https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js&#8217;}, instantiate=True, is_instance=True, pickle_default_value=True, precedence=None, readonly=False</em>)</p>
 <dl class="docutils">
-<dt><em>param String</em> <tt class="docutils literal"><span class="pre">server_url</span></tt> (<em>allow_None=False, basestring=&lt;type &#8216;basestring&#8217;&gt;, constant=False, default=, instantiate=False, pickle_default_value=True, precedence=None, readonly=False</em>)</dt>
-<dd>If export_json is
-         True the slider widget will expect to be served the plot data
-         from this URL. Data should be served from:
-         server_url/fig_{id}/{frame}.</dd>
 <dt><em>param String</em> <tt class="docutils literal"><span class="pre">extensionjs</span></tt> (<em>allow_None=False, basestring=&lt;type &#8216;basestring&#8217;&gt;, constant=False, default=None, instantiate=False, pickle_default_value=True, precedence=None, readonly=False</em>)</dt>
 <dd>Optional javascript extension file for a particular backend.</dd>
+<dt><em>param String</em> <tt class="docutils literal"><span class="pre">json_load_path</span></tt> (<em>allow_None=False, basestring=&lt;type &#8216;basestring&#8217;&gt;, constant=False, default=None, instantiate=False, pickle_default_value=True, precedence=None, readonly=False</em>)</dt>
+<dd>If export_json is enabled the widget JS code will load the data
+         from this relative path, if None defaults to json_save_path.</dd>
+<dt><em>param String</em> <tt class="docutils literal"><span class="pre">css</span></tt> (<em>allow_None=False, basestring=&lt;type &#8216;basestring&#8217;&gt;, constant=False, default=None, instantiate=False, pickle_default_value=True, precedence=None, readonly=False</em>)</dt>
+<dd>Defines the local CSS file to be loaded for this widget.</dd>
 <dt><em>param String</em> <tt class="docutils literal"><span class="pre">template</span></tt> (<em>allow_None=False, basestring=&lt;type &#8216;basestring&#8217;&gt;, constant=False, default=jsscrubber.jinja, instantiate=False, pickle_default_value=True, precedence=None, readonly=False</em>)</dt>
 <dd>The jinja2 template used to generate the html output.</dd>
 <dt><em>param String</em> <tt class="docutils literal"><span class="pre">basejs</span></tt> (<em>allow_None=False, basestring=&lt;type &#8216;basestring&#8217;&gt;, constant=False, default=widgets.js, instantiate=False, pickle_default_value=True, precedence=None, readonly=False</em>)</dt>
 <dd>JS file containing javascript baseclasses for the widget.</dd>
-<dt><em>param String</em> <tt class="docutils literal"><span class="pre">json_path</span></tt> (<em>allow_None=False, basestring=&lt;type &#8216;basestring&#8217;&gt;, constant=False, default=./json_figures, instantiate=False, pickle_default_value=True, precedence=None, readonly=False</em>)</dt>
-<dd>If export_json is True the json files will be written to this
-         directory.</dd>
 <dt><em>param Boolean</em> <tt class="docutils literal"><span class="pre">embed</span></tt> (<em>allow_None=False, bounds=(0, 1), constant=False, default=True, instantiate=False, pickle_default_value=True, precedence=None, readonly=False</em>)</dt>
 <dd>Whether to embed all plots in the Javascript, generating
         a static widget not dependent on the IPython server.</dd>
 <dt><em>param String</em> <tt class="docutils literal"><span class="pre">base_template</span></tt> (<em>allow_None=False, basestring=&lt;type &#8216;basestring&#8217;&gt;, constant=False, default=jsscrubber.jinja, instantiate=False, pickle_default_value=True, precedence=None, readonly=False</em>)</dt>
 <dd>The jinja2 template used to generate the html output.</dd>
-<dt><em>param String</em> <tt class="docutils literal"><span class="pre">css</span></tt> (<em>allow_None=False, basestring=&lt;type &#8216;basestring&#8217;&gt;, constant=False, default=None, instantiate=False, pickle_default_value=True, precedence=None, readonly=False</em>)</dt>
-<dd>Defines the local CSS file to be loaded for this widget.</dd>
+<dt><em>param String</em> <tt class="docutils literal"><span class="pre">json_save_path</span></tt> (<em>allow_None=False, basestring=&lt;type &#8216;basestring&#8217;&gt;, constant=False, default=./json_figures, instantiate=False, pickle_default_value=True, precedence=None, readonly=False</em>)</dt>
+<dd>If export_json is enabled the widget will save the json
+         data to this path. If None data will be accessible via the
+         json_data attribute.</dd>
 </dl>
 <dl class="method">
 <dt id="holoviews.plotting.widgets.ScrubberWidget.debug">
@@ -375,7 +382,7 @@ instantiated.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.widgets.ScrubberWidget.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2ab963b1ab50&gt;</em><a class="headerlink" href="#holoviews.plotting.widgets.ScrubberWidget.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2ac57048cec0&gt;</em><a class="headerlink" href="#holoviews.plotting.widgets.ScrubberWidget.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -389,12 +396,12 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.widgets.ScrubberWidget.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2ab963b1acb0&gt;</em><a class="headerlink" href="#holoviews.plotting.widgets.ScrubberWidget.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2ac57048ce68&gt;</em><a class="headerlink" href="#holoviews.plotting.widgets.ScrubberWidget.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.widgets.ScrubberWidget.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2ab963b1ac00&gt;</em><a class="headerlink" href="#holoviews.plotting.widgets.ScrubberWidget.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2ac573e8f0a8&gt;</em><a class="headerlink" href="#holoviews.plotting.widgets.ScrubberWidget.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -433,6 +440,13 @@ evaluated with eval. See pprint() function for more details.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="holoviews.plotting.widgets.ScrubberWidget.save_json">
+<tt class="descname">save_json</tt><big>(</big><em>frames</em><big>)</big><a class="headerlink" href="#holoviews.plotting.widgets.ScrubberWidget.save_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saves frames data into a json file at the
+specified json_path, named with the widget uuid.</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="holoviews.plotting.widgets.ScrubberWidget.script_repr">
 <tt class="descname">script_repr</tt><big>(</big><em>imports=</em>, <span class="optional">[</span><span class="optional">]</span><em>prefix='    '</em><big>)</big><a class="headerlink" href="#holoviews.plotting.widgets.ScrubberWidget.script_repr" title="Permalink to this definition">¶</a></dt>
 <dd><p>Variant of __repr__ designed for generating a runnable script.</p>
@@ -447,12 +461,12 @@ evaluated with eval. See pprint() function for more details.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.widgets.ScrubberWidget.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2ab963b1aaa0&gt;</em><a class="headerlink" href="#holoviews.plotting.widgets.ScrubberWidget.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2ac573e8f050&gt;</em><a class="headerlink" href="#holoviews.plotting.widgets.ScrubberWidget.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.widgets.ScrubberWidget.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2ab963b1af18&gt;</em><a class="headerlink" href="#holoviews.plotting.widgets.ScrubberWidget.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2ac573e8f1b0&gt;</em><a class="headerlink" href="#holoviews.plotting.widgets.ScrubberWidget.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -519,27 +533,26 @@ to json and dynamically loaded from a server.</p>
 </dl>
 <p><em>param Dict</em> <tt class="docutils literal"><span class="pre">CDN</span></tt> (<em>allow_None=False, constant=False, default={&#8216;jQueryUI&#8217;: &#8216;https://code.jquery.com/ui/1.10.4/jquery-ui.min.js&#8217;, &#8216;underscore&#8217;: &#8216;https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js&#8217;}, instantiate=True, is_instance=True, pickle_default_value=True, precedence=None, readonly=False</em>)</p>
 <dl class="docutils">
-<dt><em>param String</em> <tt class="docutils literal"><span class="pre">server_url</span></tt> (<em>allow_None=False, basestring=&lt;type &#8216;basestring&#8217;&gt;, constant=False, default=, instantiate=False, pickle_default_value=True, precedence=None, readonly=False</em>)</dt>
-<dd>If export_json is
-         True the slider widget will expect to be served the plot data
-         from this URL. Data should be served from:
-         server_url/fig_{id}/{frame}.</dd>
 <dt><em>param String</em> <tt class="docutils literal"><span class="pre">extensionjs</span></tt> (<em>allow_None=False, basestring=&lt;type &#8216;basestring&#8217;&gt;, constant=False, default=None, instantiate=False, pickle_default_value=True, precedence=None, readonly=False</em>)</dt>
 <dd>Optional javascript extension file for a particular backend.</dd>
+<dt><em>param String</em> <tt class="docutils literal"><span class="pre">json_load_path</span></tt> (<em>allow_None=False, basestring=&lt;type &#8216;basestring&#8217;&gt;, constant=False, default=None, instantiate=False, pickle_default_value=True, precedence=None, readonly=False</em>)</dt>
+<dd>If export_json is enabled the widget JS code will load the data
+         from this relative path, if None defaults to json_save_path.</dd>
+<dt><em>param String</em> <tt class="docutils literal"><span class="pre">css</span></tt> (<em>allow_None=False, basestring=&lt;type &#8216;basestring&#8217;&gt;, constant=False, default=jsslider.css, instantiate=False, pickle_default_value=True, precedence=None, readonly=False</em>)</dt>
+<dd>Defines the local CSS file to be loaded for this widget.</dd>
 <dt><em>param String</em> <tt class="docutils literal"><span class="pre">template</span></tt> (<em>allow_None=False, basestring=&lt;type &#8216;basestring&#8217;&gt;, constant=False, default=jsslider.jinja, instantiate=False, pickle_default_value=True, precedence=None, readonly=False</em>)</dt>
 <dd>The jinja2 template used to generate the html output.</dd>
 <dt><em>param String</em> <tt class="docutils literal"><span class="pre">basejs</span></tt> (<em>allow_None=False, basestring=&lt;type &#8216;basestring&#8217;&gt;, constant=False, default=widgets.js, instantiate=False, pickle_default_value=True, precedence=None, readonly=False</em>)</dt>
 <dd>JS file containing javascript baseclasses for the widget.</dd>
-<dt><em>param String</em> <tt class="docutils literal"><span class="pre">json_path</span></tt> (<em>allow_None=False, basestring=&lt;type &#8216;basestring&#8217;&gt;, constant=False, default=./json_figures, instantiate=False, pickle_default_value=True, precedence=None, readonly=False</em>)</dt>
-<dd>If export_json is True the json files will be written to this
-         directory.</dd>
 <dt><em>param Boolean</em> <tt class="docutils literal"><span class="pre">embed</span></tt> (<em>allow_None=False, bounds=(0, 1), constant=False, default=True, instantiate=False, pickle_default_value=True, precedence=None, readonly=False</em>)</dt>
 <dd>Whether to embed all plots in the Javascript, generating
         a static widget not dependent on the IPython server.</dd>
 <dt><em>param String</em> <tt class="docutils literal"><span class="pre">base_template</span></tt> (<em>allow_None=False, basestring=&lt;type &#8216;basestring&#8217;&gt;, constant=False, default=jsslider.jinja, instantiate=False, pickle_default_value=True, precedence=None, readonly=False</em>)</dt>
 <dd>The jinja2 template used to generate the html output.</dd>
-<dt><em>param String</em> <tt class="docutils literal"><span class="pre">css</span></tt> (<em>allow_None=False, basestring=&lt;type &#8216;basestring&#8217;&gt;, constant=False, default=jsslider.css, instantiate=False, pickle_default_value=True, precedence=None, readonly=False</em>)</dt>
-<dd>Defines the local CSS file to be loaded for this widget.</dd>
+<dt><em>param String</em> <tt class="docutils literal"><span class="pre">json_save_path</span></tt> (<em>allow_None=False, basestring=&lt;type &#8216;basestring&#8217;&gt;, constant=False, default=./json_figures, instantiate=False, pickle_default_value=True, precedence=None, readonly=False</em>)</dt>
+<dd>If export_json is enabled the widget will save the json
+         data to this path. If None data will be accessible via the
+         json_data attribute.</dd>
 </dl>
 <dl class="method">
 <dt id="holoviews.plotting.widgets.SelectionWidget.debug">
@@ -559,7 +572,7 @@ instantiated.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.widgets.SelectionWidget.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2ab963b1aa48&gt;</em><a class="headerlink" href="#holoviews.plotting.widgets.SelectionWidget.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2ac57048cec0&gt;</em><a class="headerlink" href="#holoviews.plotting.widgets.SelectionWidget.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -573,12 +586,12 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.widgets.SelectionWidget.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2ab963b1ad08&gt;</em><a class="headerlink" href="#holoviews.plotting.widgets.SelectionWidget.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2ac57048cd60&gt;</em><a class="headerlink" href="#holoviews.plotting.widgets.SelectionWidget.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.widgets.SelectionWidget.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2ab963b1ad60&gt;</em><a class="headerlink" href="#holoviews.plotting.widgets.SelectionWidget.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2ac573e8e050&gt;</em><a class="headerlink" href="#holoviews.plotting.widgets.SelectionWidget.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -617,6 +630,13 @@ evaluated with eval. See pprint() function for more details.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="holoviews.plotting.widgets.SelectionWidget.save_json">
+<tt class="descname">save_json</tt><big>(</big><em>frames</em><big>)</big><a class="headerlink" href="#holoviews.plotting.widgets.SelectionWidget.save_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saves frames data into a json file at the
+specified json_path, named with the widget uuid.</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="holoviews.plotting.widgets.SelectionWidget.script_repr">
 <tt class="descname">script_repr</tt><big>(</big><em>imports=</em>, <span class="optional">[</span><span class="optional">]</span><em>prefix='    '</em><big>)</big><a class="headerlink" href="#holoviews.plotting.widgets.SelectionWidget.script_repr" title="Permalink to this definition">¶</a></dt>
 <dd><p>Variant of __repr__ designed for generating a runnable script.</p>
@@ -631,12 +651,12 @@ evaluated with eval. See pprint() function for more details.</p>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.widgets.SelectionWidget.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2ab963b1ab50&gt;</em><a class="headerlink" href="#holoviews.plotting.widgets.SelectionWidget.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2ac573e8e0a8&gt;</em><a class="headerlink" href="#holoviews.plotting.widgets.SelectionWidget.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.plotting.widgets.SelectionWidget.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2ab963b1aec0&gt;</em><a class="headerlink" href="#holoviews.plotting.widgets.SelectionWidget.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2ac573e8e1b0&gt;</em><a class="headerlink" href="#holoviews.plotting.widgets.SelectionWidget.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">

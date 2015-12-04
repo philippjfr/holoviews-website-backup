@@ -14,6 +14,8 @@
 
   
   
+    <link rel="shortcut icon" href="../../../../_static/favicon.ico"/>
+  
 
   
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
@@ -133,7 +135,7 @@
 <span class="kn">import</span> <span class="nn">param</span>
 
 <span class="kn">from</span> <span class="nn">bokeh.io</span> <span class="kn">import</span> <span class="n">gridplot</span><span class="p">,</span> <span class="n">vplot</span><span class="p">,</span> <span class="n">hplot</span>
-<span class="kn">from</span> <span class="nn">bokeh.models</span> <span class="kn">import</span> <span class="n">ColumnDataSource</span>
+<span class="kn">from</span> <span class="nn">bokeh.models</span> <span class="kn">import</span> <span class="n">ColumnDataSource</span><span class="p">,</span> <span class="n">VBox</span><span class="p">,</span> <span class="n">HBox</span><span class="p">,</span> <span class="n">GridPlot</span> <span class="k">as</span> <span class="n">BokehGridPlot</span>
 <span class="kn">from</span> <span class="nn">bokeh.models.widgets</span> <span class="kn">import</span> <span class="n">Panel</span><span class="p">,</span> <span class="n">Tabs</span><span class="p">,</span> <span class="n">DataTable</span>
 
 <span class="kn">from</span> <span class="nn">...core</span> <span class="kn">import</span> <span class="p">(</span><span class="n">OrderedDict</span><span class="p">,</span> <span class="n">CompositeOverlay</span><span class="p">,</span> <span class="n">Store</span><span class="p">,</span> <span class="n">Layout</span><span class="p">,</span>
@@ -345,7 +347,7 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">plots</span><span class="p">[</span><span class="n">r</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
                 <span class="n">passed_plots</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">[</span><span class="s">&#39;plot&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">gridplot</span><span class="p">(</span><span class="n">plots</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">[</span><span class="s">&#39;plot&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">BokehGridPlot</span><span class="p">(</span><span class="n">children</span><span class="o">=</span><span class="n">plots</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">[</span><span class="s">&#39;plots&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">plots</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">shared_datasource</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">sync_sources</span><span class="p">()</span>
@@ -586,11 +588,11 @@
                       <span class="k">if</span> <span class="n">child</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">]</span>
             <span class="n">layout_plot</span> <span class="o">=</span> <span class="n">Tabs</span><span class="p">(</span><span class="n">tabs</span><span class="o">=</span><span class="n">panels</span><span class="p">)</span>
         <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">plots</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">adjoined</span><span class="p">:</span>
-            <span class="n">layout_plot</span> <span class="o">=</span> <span class="n">vplot</span><span class="p">(</span><span class="n">hplot</span><span class="p">(</span><span class="o">*</span><span class="n">plots</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+            <span class="n">layout_plot</span> <span class="o">=</span> <span class="n">VBox</span><span class="p">(</span><span class="n">children</span><span class="o">=</span><span class="p">[</span><span class="n">HBox</span><span class="p">(</span><span class="n">children</span><span class="o">=</span><span class="n">plots</span><span class="p">[</span><span class="mi">0</span><span class="p">])])</span>
         <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">plots</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="n">layout_plot</span> <span class="o">=</span> <span class="n">vplot</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">plots</span><span class="p">])</span>
+            <span class="n">layout_plot</span> <span class="o">=</span> <span class="n">VBox</span><span class="p">(</span><span class="n">children</span><span class="o">=</span><span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">plots</span><span class="p">])</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">layout_plot</span> <span class="o">=</span> <span class="n">gridplot</span><span class="p">(</span><span class="n">plots</span><span class="p">)</span>
+            <span class="n">layout_plot</span> <span class="o">=</span> <span class="n">BokehGridPlot</span><span class="p">(</span><span class="n">children</span><span class="o">=</span><span class="n">plots</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">[</span><span class="s">&#39;plot&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">layout_plot</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">[</span><span class="s">&#39;plots&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">plots</span>
