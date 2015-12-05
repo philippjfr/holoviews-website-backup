@@ -161,7 +161,7 @@
                                 <span class="s">&quot;we recommend calling .collate() on the HoloMap &quot;</span>
                                 <span class="s">&quot;in order to follow the recommended nesting &quot;</span>
                                 <span class="s">&quot;structure shown in the Composing Data tutorial&quot;</span>
-                                <span class="s">&quot;(http://git.io/vtIQh)&quot;</span> <span class="o">%</span> <span class="n">vmap</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
+                                <span class="s">&quot;(http://git.io/vtIQh)&quot;</span> <span class="o">%</span> <span class="n">obj</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">obj</span><span class="o">.</span><span class="n">collate</span><span class="p">()</span>
     <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="p">(</span><span class="n">Layout</span><span class="p">,</span> <span class="n">NdLayout</span><span class="p">)):</span>
         <span class="k">try</span><span class="p">:</span>
@@ -176,7 +176,7 @@
                 <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">el</span><span class="p">,</span> <span class="n">HoloMap</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">displayable</span><span class="p">(</span><span class="n">el</span><span class="p">):</span>
                     <span class="n">collated_layout</span> <span class="o">=</span> <span class="n">Layout</span><span class="o">.</span><span class="n">from_values</span><span class="p">(</span><span class="n">el</span><span class="o">.</span><span class="n">collate</span><span class="p">())</span>
                     <span class="n">expanded</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">collated_layout</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
-            <span class="n">layout</span> <span class="o">=</span> <span class="n">Layout</span><span class="p">(</span><span class="n">expanded</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">Layout</span><span class="p">(</span><span class="n">expanded</span><span class="p">)</span>
         <span class="k">except</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">undisplayable_info</span><span class="p">(</span><span class="n">obj</span><span class="p">))</span>
     <span class="k">else</span><span class="p">:</span>
@@ -222,6 +222,7 @@
 <span class="sd">    Element the plot is adjoined to and the</span>
 <span class="sd">    dictionary of ranges.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">key</span> <span class="o">=</span> <span class="n">plot</span><span class="o">.</span><span class="n">current_key</span>
     <span class="n">dims</span> <span class="o">=</span> <span class="n">element</span><span class="o">.</span><span class="n">dimensions</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
     <span class="n">dim</span> <span class="o">=</span> <span class="n">dims</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="n">dims</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="s">&#39;Frequency&#39;</span> <span class="k">else</span> <span class="n">dims</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">range_item</span> <span class="o">=</span> <span class="n">main</span>
@@ -272,7 +273,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">select</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">([</span><span class="n">d</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">dimensions</span><span class="p">],</span> <span class="n">key</span><span class="p">))</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="n">selection</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">select</span><span class="p">([</span><span class="n">DynamicMap</span><span class="p">],</span> <span class="o">**</span><span class="n">select</span><span class="p">)</span>
+        <span class="n">obj</span><span class="o">.</span><span class="n">select</span><span class="p">([</span><span class="n">DynamicMap</span><span class="p">],</span> <span class="o">**</span><span class="n">select</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
         <span class="k">pass</span>
 

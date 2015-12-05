@@ -379,10 +379,7 @@
 <span class="sd">        state.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">ranges</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_ranges</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">layout</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">ranges</span><span class="p">)</span>
-        <span class="n">plots</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">[</span><span class="s">&#39;plots&#39;</span><span class="p">]</span>
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">coord</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">keys</span><span class="p">(</span><span class="n">full_grid</span><span class="o">=</span><span class="bp">True</span><span class="p">)):</span>
-            <span class="n">r</span> <span class="o">=</span> <span class="n">i</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">cols</span>
-            <span class="n">c</span> <span class="o">=</span> <span class="n">i</span> <span class="o">//</span> <span class="bp">self</span><span class="o">.</span><span class="n">cols</span>
             <span class="n">subplot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">subplots</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">coord</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">subplot</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
                 <span class="n">subplot</span><span class="o">.</span><span class="n">update_frame</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">ranges</span><span class="p">)</span>
@@ -410,7 +407,6 @@
     <span class="k">def</span> <span class="nf">_init_layout</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">layout</span><span class="p">):</span>
         <span class="c"># Situate all the Layouts in the grid and compute the gridspec</span>
         <span class="c"># indices for all the axes required by each LayoutPlot.</span>
-        <span class="n">gidx</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="n">layout_count</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="n">collapsed_layout</span> <span class="o">=</span> <span class="n">layout</span><span class="o">.</span><span class="n">clone</span><span class="p">(</span><span class="n">shared_data</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">layout</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
         <span class="n">frame_ranges</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_ranges</span><span class="p">(</span><span class="n">layout</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
@@ -419,7 +415,6 @@
         <span class="n">layout_items</span> <span class="o">=</span> <span class="n">layout</span><span class="o">.</span><span class="n">grid_items</span><span class="p">()</span>
         <span class="n">layout_dimensions</span> <span class="o">=</span> <span class="n">layout</span><span class="o">.</span><span class="n">kdims</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">layout</span><span class="p">,</span> <span class="n">NdLayout</span><span class="p">)</span> <span class="k">else</span> <span class="bp">None</span>
         <span class="n">layout_subplots</span><span class="p">,</span> <span class="n">layouts</span><span class="p">,</span> <span class="n">paths</span> <span class="o">=</span> <span class="p">{},</span> <span class="p">{},</span> <span class="p">{}</span>
-        <span class="n">inserts_cols</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">r</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">coords</span><span class="p">:</span>
             <span class="c"># Get view at layout position and wrap in AdjointLayout</span>
             <span class="n">key</span><span class="p">,</span> <span class="n">view</span> <span class="o">=</span> <span class="n">layout_items</span><span class="o">.</span><span class="n">get</span><span class="p">((</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">),</span> <span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">))</span>
@@ -472,7 +467,6 @@
 <span class="sd">        empty axes as necessary.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">subplots</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="n">projections</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">adjoint_clone</span> <span class="o">=</span> <span class="n">layout</span><span class="o">.</span><span class="n">clone</span><span class="p">(</span><span class="n">shared_data</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">layout</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
         <span class="n">subplot_opts</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">adjoined</span><span class="o">=</span><span class="n">layout</span><span class="p">)</span>
         <span class="n">main</span><span class="p">,</span> <span class="n">main_plot</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span>
@@ -522,7 +516,6 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">adjoint_clone</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span> <span class="o">=</span> <span class="n">subplots</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span><span class="o">.</span><span class="n">hmap</span>
             <span class="k">if</span> <span class="n">pos</span> <span class="o">==</span> <span class="s">&#39;main&#39;</span><span class="p">:</span>
-                <span class="n">main</span> <span class="o">=</span> <span class="n">element</span>
                 <span class="n">main_plot</span> <span class="o">=</span> <span class="n">subplot</span>
 
         <span class="k">return</span> <span class="n">subplots</span><span class="p">,</span> <span class="n">adjoint_clone</span>
@@ -627,7 +620,6 @@
 <span class="sd">        state.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">ranges</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_ranges</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">layout</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">ranges</span><span class="p">)</span>
-        <span class="n">plots</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">[</span><span class="s">&#39;plots&#39;</span><span class="p">]</span>
         <span class="k">for</span> <span class="n">r</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">coords</span><span class="p">:</span>
             <span class="n">subplot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">subplots</span><span class="o">.</span><span class="n">get</span><span class="p">((</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">),</span> <span class="bp">None</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">subplot</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>

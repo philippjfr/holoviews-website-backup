@@ -159,7 +159,7 @@
 <span class="sd">    Converts a matplotlib colormap to palette of RGB hex strings.&quot;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">colors</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">ValueException</span><span class="p">(</span><span class="s">&quot;Using cmaps on objects requires matplotlib.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;Using cmaps on objects requires matplotlib.&quot;</span><span class="p">)</span>
     <span class="n">colormap</span> <span class="o">=</span> <span class="n">cm</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="n">cmap</span><span class="p">)</span> <span class="c">#choose any matplotlib colormap here</span>
     <span class="k">return</span> <span class="p">[</span><span class="n">colors</span><span class="o">.</span><span class="n">rgb2hex</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">colormap</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">colormap</span><span class="o">.</span><span class="n">N</span><span class="p">))]</span>
 
