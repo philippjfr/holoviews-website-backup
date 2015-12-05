@@ -512,6 +512,13 @@
 <span class="s">       element will be cached and therefore accessible when casting to a</span>
 <span class="s">       HoloMap.  Applicable in open mode only.&quot;&quot;&quot;</span><span class="p">)</span>
 
+    <span class="n">sampled</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">Boolean</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">       Allows defining a DynamicMap in closed mode without defining the</span>
+<span class="s">       dimension bounds or values. The DynamicMap may then be explicitly</span>
+<span class="s">       sampled via getitem or the sampling is determined during plotting</span>
+<span class="s">       by a HoloMap with fixed sampling.</span>
+<span class="s">       &quot;&quot;&quot;</span><span class="p">)</span>
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">callback</span><span class="p">,</span> <span class="n">initial_items</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">DynamicMap</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">initial_items</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="n">callback</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
@@ -543,7 +550,12 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">isgenerator</span> <span class="o">=</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">callback</span><span class="p">,</span> <span class="n">types</span><span class="o">.</span><span class="n">GeneratorType</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">isgenerator</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">sampled</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;Cannot set DynamicMap containing generator &quot;</span>
+                                 <span class="s">&quot;to sampled&quot;</span><span class="p">)</span>
             <span class="k">return</span> <span class="s">&#39;generator&#39;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">sampled</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s">&#39;key&#39;</span>
         <span class="c"># Any unbounded kdim (any direction) implies open mode</span>
         <span class="k">for</span> <span class="n">kdim</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">kdims</span><span class="p">:</span>
             <span class="k">if</span> <span class="p">(</span><span class="n">kdim</span><span class="o">.</span><span class="n">values</span><span class="p">)</span> <span class="ow">and</span> <span class="n">kdim</span><span class="o">.</span><span class="n">range</span> <span class="o">!=</span> <span class="p">(</span><span class="bp">None</span><span class="p">,</span><span class="bp">None</span><span class="p">):</span>
@@ -934,7 +946,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'1.4.0a1',
+            VERSION:'1.4.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

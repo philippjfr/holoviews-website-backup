@@ -141,12 +141,12 @@
 <span class="kn">import</span> <span class="nn">param</span>
 <span class="kn">from</span> <span class="nn">...core</span> <span class="kn">import</span> <span class="p">(</span><span class="n">OrderedDict</span><span class="p">,</span> <span class="n">HoloMap</span><span class="p">,</span> <span class="n">AdjointLayout</span><span class="p">,</span> <span class="n">NdLayout</span><span class="p">,</span>
                      <span class="n">GridSpace</span><span class="p">,</span> <span class="n">Element</span><span class="p">,</span> <span class="n">CompositeOverlay</span><span class="p">,</span> <span class="n">Element3D</span><span class="p">,</span>
-                     <span class="n">Empty</span><span class="p">,</span> <span class="n">Collator</span><span class="p">)</span>
+                     <span class="n">Empty</span><span class="p">,</span> <span class="n">Collator</span><span class="p">,</span> <span class="n">DynamicMap</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">...core.options</span> <span class="kn">import</span> <span class="n">Store</span><span class="p">,</span> <span class="n">Compositor</span>
 <span class="kn">from</span> <span class="nn">...core.util</span> <span class="kn">import</span> <span class="n">int_to_roman</span><span class="p">,</span> <span class="n">int_to_alpha</span><span class="p">,</span> <span class="nb">basestring</span>
 <span class="kn">from</span> <span class="nn">...core</span> <span class="kn">import</span> <span class="n">traversal</span>
 <span class="kn">from</span> <span class="nn">..plot</span> <span class="kn">import</span> <span class="n">DimensionedPlot</span><span class="p">,</span> <span class="n">GenericLayoutPlot</span><span class="p">,</span> <span class="n">GenericCompositePlot</span>
-<span class="kn">from</span> <span class="nn">..util</span> <span class="kn">import</span> <span class="n">get_dynamic_mode</span>
+<span class="kn">from</span> <span class="nn">..util</span> <span class="kn">import</span> <span class="n">get_dynamic_mode</span><span class="p">,</span> <span class="n">initialize_sampled</span>
 <span class="kn">from</span> <span class="nn">.renderer</span> <span class="kn">import</span> <span class="n">MPLRenderer</span>
 
 
@@ -390,7 +390,6 @@
                  <span class="n">keys</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">dimensions</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">layout_num</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">layout</span><span class="p">,</span> <span class="n">GridSpace</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s">&quot;GridPlot only accepts GridSpace.&quot;</span><span class="p">)</span>
-        <span class="n">dynamic</span> <span class="o">=</span> <span class="n">get_dynamic_mode</span><span class="p">(</span><span class="n">layout</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">layout</span> <span class="o">=</span> <span class="n">layout</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cols</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rows</span> <span class="o">=</span> <span class="n">layout</span><span class="o">.</span><span class="n">shape</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">layout_num</span> <span class="o">=</span> <span class="n">layout_num</span>
@@ -399,7 +398,9 @@
             <span class="n">dimensions</span><span class="p">,</span> <span class="n">keys</span> <span class="o">=</span> <span class="n">traversal</span><span class="o">.</span><span class="n">unique_dimkeys</span><span class="p">(</span><span class="n">layout</span><span class="p">)</span>
         <span class="k">if</span> <span class="s">&#39;uniform&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span>
             <span class="n">params</span><span class="p">[</span><span class="s">&#39;uniform&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">traversal</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">layout</span><span class="p">)</span>
-
+        <span class="n">dynamic</span><span class="p">,</span> <span class="n">sampled</span> <span class="o">=</span> <span class="n">get_dynamic_mode</span><span class="p">(</span><span class="n">layout</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">sampled</span><span class="p">:</span>
+            <span class="n">initialize_sampled</span><span class="p">(</span><span class="n">layout</span><span class="p">,</span> <span class="n">dimensions</span><span class="p">,</span> <span class="n">keys</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">GridPlot</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">keys</span><span class="o">=</span><span class="n">keys</span><span class="p">,</span> <span class="n">dimensions</span><span class="o">=</span><span class="n">dimensions</span><span class="p">,</span>
                                        <span class="n">dynamic</span><span class="o">=</span><span class="n">dynamic</span><span class="p">,</span>
                                        <span class="o">**</span><span class="nb">dict</span><span class="p">(</span><span class="n">extra_opts</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">))</span>
@@ -458,6 +459,8 @@
             <span class="k">if</span> <span class="n">view</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
                 <span class="n">vtype</span> <span class="o">=</span> <span class="n">view</span><span class="o">.</span><span class="n">type</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">HoloMap</span><span class="p">)</span> <span class="k">else</span> <span class="n">view</span><span class="o">.</span><span class="n">__class__</span>
                 <span class="n">opts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lookup_options</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="s">&#39;plot&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">options</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">continue</span>
 
             <span class="c"># Create axes</span>
             <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{}</span>
@@ -474,6 +477,7 @@
                 <span class="c"># Disable subplot axes depending on shared axis options</span>
                 <span class="c"># and the position in the grid</span>
                 <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shared_xaxis</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">shared_yaxis</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">axiswise</span><span class="p">:</span>
+
                     <span class="k">if</span> <span class="n">c</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">r</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
                         <span class="n">subax</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_ticks_position</span><span class="p">(</span><span class="s">&#39;none&#39;</span><span class="p">)</span>
                         <span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;xaxis&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;bottom-bare&#39;</span>
@@ -493,15 +497,20 @@
                 <span class="n">subaxes</span><span class="p">[(</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">)]</span> <span class="o">=</span> <span class="n">subax</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">subax</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="k">if</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">vtype</span><span class="p">,</span> <span class="n">CompositeOverlay</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">c</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">cols</span> <span class="o">-</span> <span class="mi">1</span> <span class="ow">and</span>
+                                                        <span class="n">r</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">rows</span><span class="o">//</span><span class="mi">2</span><span class="p">):</span>
+                <span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;show_legend&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">show_legend</span>
+                <span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;legend_position&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;right&#39;</span>
 
             <span class="c"># Create subplot</span>
             <span class="k">if</span> <span class="n">view</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">params</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">fig</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">[</span><span class="s">&#39;fig&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="n">subax</span><span class="p">,</span>
+                              <span class="n">dimensions</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dimensions</span><span class="p">,</span> <span class="n">show_title</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+                              <span class="n">subplot</span><span class="o">=</span><span class="ow">not</span> <span class="n">create_axes</span><span class="p">,</span> <span class="n">ranges</span><span class="o">=</span><span class="n">frame_ranges</span><span class="p">,</span>
+                              <span class="n">uniform</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">uniform</span><span class="p">,</span> <span class="n">keys</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">,</span>
+                              <span class="n">show_legend</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
                 <span class="n">plotting_class</span> <span class="o">=</span> <span class="n">Store</span><span class="o">.</span><span class="n">registry</span><span class="p">[</span><span class="s">&#39;matplotlib&#39;</span><span class="p">][</span><span class="n">vtype</span><span class="p">]</span>
-                <span class="n">subplot</span> <span class="o">=</span> <span class="n">plotting_class</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">fig</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">[</span><span class="s">&#39;fig&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="n">subax</span><span class="p">,</span>
-                                         <span class="n">dimensions</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dimensions</span><span class="p">,</span> <span class="n">show_title</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
-                                         <span class="n">subplot</span><span class="o">=</span><span class="ow">not</span> <span class="n">create_axes</span><span class="p">,</span> <span class="n">ranges</span><span class="o">=</span><span class="n">frame_ranges</span><span class="p">,</span>
-                                         <span class="n">uniform</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">uniform</span><span class="p">,</span> <span class="n">keys</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">,</span>
-                                         <span class="n">show_legend</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="o">**</span><span class="nb">dict</span><span class="p">(</span><span class="n">opts</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+                <span class="n">subplot</span> <span class="o">=</span> <span class="n">plotting_class</span><span class="p">(</span><span class="n">view</span><span class="p">,</span>  <span class="o">**</span><span class="nb">dict</span><span class="p">(</span><span class="n">opts</span><span class="p">,</span> <span class="o">**</span><span class="nb">dict</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)))</span>
                 <span class="n">collapsed_layout</span><span class="p">[</span><span class="n">coord</span><span class="p">]</span> <span class="o">=</span> <span class="n">subplot</span><span class="o">.</span><span class="n">layout</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">subplot</span><span class="p">,</span> <span class="n">CompositePlot</span><span class="p">)</span> <span class="k">else</span> <span class="n">subplot</span><span class="o">.</span><span class="n">hmap</span>
                 <span class="n">subplots</span><span class="p">[(</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">)]</span> <span class="o">=</span> <span class="n">subplot</span>
             <span class="k">else</span><span class="p">:</span>
@@ -1198,7 +1207,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../../',
-            VERSION:'1.4.0a1',
+            VERSION:'1.4.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

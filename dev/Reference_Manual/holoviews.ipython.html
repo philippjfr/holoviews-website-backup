@@ -136,14 +136,14 @@
 <div class="section" id="ipython-package">
 <h2><tt class="xref py py-mod docutils literal"><span class="pre">ipython</span></tt> Package<a class="headerlink" href="#ipython-package" title="Permalink to this headline">¶</a></h2>
 <p class="graphviz">
-<img src="../_images/inheritance-47504c416bdd6dd2c63dd497cdef8b2e8ca6db03.png" alt="Inheritance diagram of holoviews.ipython" usemap="#inheritancef0cb66cb4f" class="inheritance"/>
+<img src="../_images/inheritance-fe8ac020372e35eea97800965f7726534721fd06.png" alt="Inheritance diagram of holoviews.ipython" usemap="#inheritancef0cb66cb4f" class="inheritance"/>
 <map id="inheritancef0cb66cb4f" name="inheritancef0cb66cb4f">
 <area shape="rect" id="node1" href="holoviews.element.html#holoviews.element.comparison.Comparison" title="Class used for comparing two HoloViews objects, including complex" alt="" coords="345,86,594,107"/>
 <area shape="rect" id="node3" href="holoviews.element.html#holoviews.element.comparison.ComparisonTestCase" title="Class to integrate the Comparison class with unittest.TestCase." alt="" coords="639,65,935,86"/>
 <area shape="rect" id="node2" href="holoviews.element.html#holoviews.element.comparison.ComparisonInterface" title="This class is designed to allow equality testing to work" alt="" coords="5,86,300,107"/>
 <area shape="rect" id="node5" href="#holoviews.ipython.IPTestCase" title="This class extends ComparisonTestCase to handle IPython specific" alt="" coords="976,65,1147,86"/>
 <area shape="rect" id="node4" title="A class whose instances are single test cases." alt="" coords="401,45,539,66"/>
-<area shape="rect" id="node6" href="#holoviews.ipython.notebook_extension_fn" title="Parameterized function to initialize notebook resources" alt="" coords="668,4,906,25"/>
+<area shape="rect" id="node6" href="#holoviews.ipython.notebook_extension" title="params(holoviews=Boolean, bokeh=Boolean, matplotlib=Boolean, logo=Boolean, ip=Parameter, name=String, css=String, width=Number)" alt="" coords="677,4,898,25"/>
 <area shape="rect" id="node7" title="params(name=String)" alt="" coords="341,4,599,25"/>
 <area shape="rect" id="node8" title="params(name=String)" alt="" coords="45,4,260,25"/>
 </map>
@@ -592,16 +592,15 @@ the specified test method&#8217;s docstring.</p>
 
 <dl class="function">
 <dt id="holoviews.ipython.load_hvjs">
-<tt class="descclassname">holoviews.ipython.</tt><tt class="descname">load_hvjs</tt><big>(</big><em>logo=False</em><big>)</big><a class="reference internal" href="../_modules/holoviews/ipython.html#load_hvjs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#holoviews.ipython.load_hvjs" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">holoviews.ipython.</tt><tt class="descname">load_hvjs</tt><big>(</big><em>logo=False</em>, <em>JS=True</em>, <em>message='HoloViewsJS successfully loaded.'</em><big>)</big><a class="reference internal" href="../_modules/holoviews/ipython.html#load_hvjs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#holoviews.ipython.load_hvjs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Displays javascript and CSS to initialize HoloViews widgets.</p>
 </dd></dl>
 
 <dl class="class">
-<dt id="holoviews.ipython.notebook_extension_fn">
-<em class="property">class </em><tt class="descclassname">holoviews.ipython.</tt><tt class="descname">notebook_extension_fn</tt><big>(</big><em>**params</em><big>)</big><a class="reference internal" href="../_modules/holoviews/ipython.html#notebook_extension_fn"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#holoviews.ipython.notebook_extension_fn" title="Permalink to this definition">¶</a></dt>
+<dt id="holoviews.ipython.notebook_extension">
+<em class="property">class </em><tt class="descclassname">holoviews.ipython.</tt><tt class="descname">notebook_extension</tt><big>(</big><em>**params</em><big>)</big><a class="reference internal" href="../_modules/holoviews/ipython.html#notebook_extension"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#holoviews.ipython.notebook_extension" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="http://ioam.github.io/param/Reference_Manual/param.html#param.parameterized.ParameterizedFunction" title="(in Param v1.3.1)"><tt class="xref py py-class docutils literal"><span class="pre">param.parameterized.ParameterizedFunction</span></tt></a></p>
-<p>Parameterized function to initialize notebook resources
-and register magics.</p>
+<p>params(holoviews=Boolean, bokeh=Boolean, matplotlib=Boolean, logo=Boolean, ip=Parameter, name=String, css=String, width=Number)</p>
 <dl class="docutils">
 <dt><em>param Boolean</em> <tt class="docutils literal"><span class="pre">logo</span></tt> (<em>allow_None=False, bounds=(0, 1), constant=False, default=True, instantiate=False, pickle_default_value=True, precedence=None, readonly=False</em>)</dt>
 <dd>Toggles display of HoloViews logo</dd>
@@ -613,15 +612,15 @@ and register magics.</p>
 <dd>Width of the notebook as a percentage of the browser screen window width.</dd>
 </dl>
 <dl class="method">
-<dt id="holoviews.ipython.notebook_extension_fn.debug">
-<tt class="descname">debug</tt><big>(</big><em>msg</em>, <em>*args</em>, <em>**kw</em><big>)</big><a class="headerlink" href="#holoviews.ipython.notebook_extension_fn.debug" title="Permalink to this definition">¶</a></dt>
+<dt id="holoviews.ipython.notebook_extension.debug">
+<tt class="descname">debug</tt><big>(</big><em>msg</em>, <em>*args</em>, <em>**kw</em><big>)</big><a class="headerlink" href="#holoviews.ipython.notebook_extension.debug" title="Permalink to this definition">¶</a></dt>
 <dd><p>Print msg merged with args as a debugging statement.</p>
 <p>See Python&#8217;s logging module for details of message formatting.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="holoviews.ipython.notebook_extension_fn.defaults">
-<tt class="descname">defaults</tt><big>(</big><big>)</big><a class="headerlink" href="#holoviews.ipython.notebook_extension_fn.defaults" title="Permalink to this definition">¶</a></dt>
+<dt id="holoviews.ipython.notebook_extension.defaults">
+<tt class="descname">defaults</tt><big>(</big><big>)</big><a class="headerlink" href="#holoviews.ipython.notebook_extension.defaults" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return {parameter_name:parameter.default} for all non-constant
 Parameters.</p>
 <p>Note that a Parameter for which instantiate==True has its default
@@ -629,13 +628,13 @@ instantiated.</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="holoviews.ipython.notebook_extension_fn.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2ac5738174c8&gt;</em><a class="headerlink" href="#holoviews.ipython.notebook_extension_fn.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<dt id="holoviews.ipython.notebook_extension.force_new_dynamic_value">
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2ac30eedc368&gt;</em><a class="headerlink" href="#holoviews.ipython.notebook_extension.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="holoviews.ipython.notebook_extension_fn.get_param_values">
-<tt class="descname">get_param_values</tt><big>(</big><em>onlychanged=False</em><big>)</big><a class="headerlink" href="#holoviews.ipython.notebook_extension_fn.get_param_values" title="Permalink to this definition">¶</a></dt>
+<dt id="holoviews.ipython.notebook_extension.get_param_values">
+<tt class="descname">get_param_values</tt><big>(</big><em>onlychanged=False</em><big>)</big><a class="headerlink" href="#holoviews.ipython.notebook_extension.get_param_values" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a list of name,value pairs for all Parameters of this
 object.</p>
 <p>If onlychanged is True, will only return values that are not
@@ -643,30 +642,30 @@ equal to the default value.</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="holoviews.ipython.notebook_extension_fn.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2ac5738175d0&gt;</em><a class="headerlink" href="#holoviews.ipython.notebook_extension_fn.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<dt id="holoviews.ipython.notebook_extension.get_value_generator">
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2ac30eedc3c0&gt;</em><a class="headerlink" href="#holoviews.ipython.notebook_extension.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
-<dt id="holoviews.ipython.notebook_extension_fn.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2ac573817628&gt;</em><a class="headerlink" href="#holoviews.ipython.notebook_extension_fn.inspect_value" title="Permalink to this definition">¶</a></dt>
+<dt id="holoviews.ipython.notebook_extension.inspect_value">
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2ac30eedc470&gt;</em><a class="headerlink" href="#holoviews.ipython.notebook_extension.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
-<dt id="holoviews.ipython.notebook_extension_fn.instance">
-<tt class="descname">instance</tt><em class="property"> = &lt;functools.partial object at 0x2ac5738176d8&gt;</em><a class="headerlink" href="#holoviews.ipython.notebook_extension_fn.instance" title="Permalink to this definition">¶</a></dt>
+<dt id="holoviews.ipython.notebook_extension.instance">
+<tt class="descname">instance</tt><em class="property"> = &lt;functools.partial object at 0x2ac30eedc4c8&gt;</em><a class="headerlink" href="#holoviews.ipython.notebook_extension.instance" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="holoviews.ipython.notebook_extension_fn.message">
-<tt class="descname">message</tt><big>(</big><em>msg</em>, <em>*args</em>, <em>**kw</em><big>)</big><a class="headerlink" href="#holoviews.ipython.notebook_extension_fn.message" title="Permalink to this definition">¶</a></dt>
+<dt id="holoviews.ipython.notebook_extension.message">
+<tt class="descname">message</tt><big>(</big><em>msg</em>, <em>*args</em>, <em>**kw</em><big>)</big><a class="headerlink" href="#holoviews.ipython.notebook_extension.message" title="Permalink to this definition">¶</a></dt>
 <dd><p>Print msg merged with args as a message.</p>
 <p>See Python&#8217;s logging module for details of message formatting.</p>
 </dd></dl>
 
 <dl class="classmethod">
-<dt id="holoviews.ipython.notebook_extension_fn.params">
-<em class="property">classmethod </em><tt class="descname">params</tt><big>(</big><em>parameter_name=None</em><big>)</big><a class="headerlink" href="#holoviews.ipython.notebook_extension_fn.params" title="Permalink to this definition">¶</a></dt>
+<dt id="holoviews.ipython.notebook_extension.params">
+<em class="property">classmethod </em><tt class="descname">params</tt><big>(</big><em>parameter_name=None</em><big>)</big><a class="headerlink" href="#holoviews.ipython.notebook_extension.params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the Parameters of this class as the
 dictionary {name: parameter_object}</p>
 <p>Includes Parameters from this class and its
@@ -674,58 +673,58 @@ superclasses.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="holoviews.ipython.notebook_extension_fn.pprint">
-<tt class="descname">pprint</tt><big>(</big><em>imports=None</em>, <em>prefix='n    '</em>, <em>unknown_value='&lt;?&gt;'</em>, <em>qualify=False</em>, <em>separator=''</em><big>)</big><a class="headerlink" href="#holoviews.ipython.notebook_extension_fn.pprint" title="Permalink to this definition">¶</a></dt>
+<dt id="holoviews.ipython.notebook_extension.pprint">
+<tt class="descname">pprint</tt><big>(</big><em>imports=None</em>, <em>prefix='n    '</em>, <em>unknown_value='&lt;?&gt;'</em>, <em>qualify=False</em>, <em>separator=''</em><big>)</big><a class="headerlink" href="#holoviews.ipython.notebook_extension.pprint" title="Permalink to this definition">¶</a></dt>
 <dd><p>Same as Parameterized.pprint, except that X.classname(Y
 is replaced with X.classname.instance(Y</p>
 </dd></dl>
 
 <dl class="classmethod">
-<dt id="holoviews.ipython.notebook_extension_fn.print_param_defaults">
-<em class="property">classmethod </em><tt class="descname">print_param_defaults</tt><big>(</big><big>)</big><a class="headerlink" href="#holoviews.ipython.notebook_extension_fn.print_param_defaults" title="Permalink to this definition">¶</a></dt>
+<dt id="holoviews.ipython.notebook_extension.print_param_defaults">
+<em class="property">classmethod </em><tt class="descname">print_param_defaults</tt><big>(</big><big>)</big><a class="headerlink" href="#holoviews.ipython.notebook_extension.print_param_defaults" title="Permalink to this definition">¶</a></dt>
 <dd><p>Print the default values of all cls&#8217;s Parameters.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="holoviews.ipython.notebook_extension_fn.print_param_values">
-<tt class="descname">print_param_values</tt><big>(</big><big>)</big><a class="headerlink" href="#holoviews.ipython.notebook_extension_fn.print_param_values" title="Permalink to this definition">¶</a></dt>
+<dt id="holoviews.ipython.notebook_extension.print_param_values">
+<tt class="descname">print_param_values</tt><big>(</big><big>)</big><a class="headerlink" href="#holoviews.ipython.notebook_extension.print_param_values" title="Permalink to this definition">¶</a></dt>
 <dd><p>Print the values of all this object&#8217;s Parameters.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="holoviews.ipython.notebook_extension_fn.script_repr">
-<tt class="descname">script_repr</tt><big>(</big><em>imports=</em>, <span class="optional">[</span><span class="optional">]</span><em>prefix='    '</em><big>)</big><a class="headerlink" href="#holoviews.ipython.notebook_extension_fn.script_repr" title="Permalink to this definition">¶</a></dt>
+<dt id="holoviews.ipython.notebook_extension.script_repr">
+<tt class="descname">script_repr</tt><big>(</big><em>imports=</em>, <span class="optional">[</span><span class="optional">]</span><em>prefix='    '</em><big>)</big><a class="headerlink" href="#holoviews.ipython.notebook_extension.script_repr" title="Permalink to this definition">¶</a></dt>
 <dd><p>Same as Parameterized.script_repr, except that X.classname(Y
 is replaced with X.classname.instance(Y</p>
 </dd></dl>
 
 <dl class="classmethod">
-<dt id="holoviews.ipython.notebook_extension_fn.set_default">
-<em class="property">classmethod </em><tt class="descname">set_default</tt><big>(</big><em>param_name</em>, <em>value</em><big>)</big><a class="headerlink" href="#holoviews.ipython.notebook_extension_fn.set_default" title="Permalink to this definition">¶</a></dt>
+<dt id="holoviews.ipython.notebook_extension.set_default">
+<em class="property">classmethod </em><tt class="descname">set_default</tt><big>(</big><em>param_name</em>, <em>value</em><big>)</big><a class="headerlink" href="#holoviews.ipython.notebook_extension.set_default" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the default value of param_name.</p>
 <p>Equivalent to setting param_name on the class.</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="holoviews.ipython.notebook_extension_fn.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2ac573817aa0&gt;</em><a class="headerlink" href="#holoviews.ipython.notebook_extension_fn.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<dt id="holoviews.ipython.notebook_extension.set_dynamic_time_fn">
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2ac30eedc578&gt;</em><a class="headerlink" href="#holoviews.ipython.notebook_extension.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
-<dt id="holoviews.ipython.notebook_extension_fn.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2ac573817af8&gt;</em><a class="headerlink" href="#holoviews.ipython.notebook_extension_fn.set_param" title="Permalink to this definition">¶</a></dt>
+<dt id="holoviews.ipython.notebook_extension.set_param">
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2ac30eedc5d0&gt;</em><a class="headerlink" href="#holoviews.ipython.notebook_extension.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="holoviews.ipython.notebook_extension_fn.state_pop">
-<tt class="descname">state_pop</tt><big>(</big><big>)</big><a class="headerlink" href="#holoviews.ipython.notebook_extension_fn.state_pop" title="Permalink to this definition">¶</a></dt>
+<dt id="holoviews.ipython.notebook_extension.state_pop">
+<tt class="descname">state_pop</tt><big>(</big><big>)</big><a class="headerlink" href="#holoviews.ipython.notebook_extension.state_pop" title="Permalink to this definition">¶</a></dt>
 <dd><p>Restore the most recently saved state.</p>
 <p>See state_push() for more details.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="holoviews.ipython.notebook_extension_fn.state_push">
-<tt class="descname">state_push</tt><big>(</big><big>)</big><a class="headerlink" href="#holoviews.ipython.notebook_extension_fn.state_push" title="Permalink to this definition">¶</a></dt>
+<dt id="holoviews.ipython.notebook_extension.state_push">
+<tt class="descname">state_push</tt><big>(</big><big>)</big><a class="headerlink" href="#holoviews.ipython.notebook_extension.state_push" title="Permalink to this definition">¶</a></dt>
 <dd><p>Save this instance&#8217;s state.</p>
 <p>For Parameterized instances, this includes the state of
 dynamically generated values.</p>
@@ -736,16 +735,21 @@ state_pop().</p>
 something without permanently altering the objects&#8217; state.</p>
 </dd></dl>
 
+<dl class="attribute">
+<dt id="holoviews.ipython.notebook_extension.tab_completion_docstring">
+<tt class="descname">tab_completion_docstring</tt><em class="property"> = &lt;functools.partial object at 0x2ac30eedc418&gt;</em><a class="reference internal" href="../_modules/holoviews/ipython.html#notebook_extension.tab_completion_docstring"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#holoviews.ipython.notebook_extension.tab_completion_docstring" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="method">
-<dt id="holoviews.ipython.notebook_extension_fn.verbose">
-<tt class="descname">verbose</tt><big>(</big><em>msg</em>, <em>*args</em>, <em>**kw</em><big>)</big><a class="headerlink" href="#holoviews.ipython.notebook_extension_fn.verbose" title="Permalink to this definition">¶</a></dt>
+<dt id="holoviews.ipython.notebook_extension.verbose">
+<tt class="descname">verbose</tt><big>(</big><em>msg</em>, <em>*args</em>, <em>**kw</em><big>)</big><a class="headerlink" href="#holoviews.ipython.notebook_extension.verbose" title="Permalink to this definition">¶</a></dt>
 <dd><p>Print msg merged with args as a verbose message.</p>
 <p>See Python&#8217;s logging module for details of message formatting.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="holoviews.ipython.notebook_extension_fn.warning">
-<tt class="descname">warning</tt><big>(</big><em>msg</em>, <em>*args</em>, <em>**kw</em><big>)</big><a class="headerlink" href="#holoviews.ipython.notebook_extension_fn.warning" title="Permalink to this definition">¶</a></dt>
+<dt id="holoviews.ipython.notebook_extension.warning">
+<tt class="descname">warning</tt><big>(</big><em>msg</em>, <em>*args</em>, <em>**kw</em><big>)</big><a class="headerlink" href="#holoviews.ipython.notebook_extension.warning" title="Permalink to this definition">¶</a></dt>
 <dd><p>Print msg merged with args as a warning, unless module variable
 warnings_as_exceptions is True, then raise an Exception
 containing the arguments.</p>
@@ -811,7 +815,7 @@ the archive upon export.</p>
 <dt><em>param ObjectSelector</em> <tt class="docutils literal"><span class="pre">archive_format</span></tt> (<em>allow_None=None, check_on_set=True, compute_default_fn=None, constant=False, default=zip, instantiate=False, objects=[&#8216;zip&#8217;, &#8216;tar&#8217;], pickle_default_value=True, precedence=None, readonly=False</em>)</dt>
 <dd>The archive format to use if there are multiple files and pack
         is set to True. Supported formats include &#8216;zip&#8217; and &#8216;tar&#8217;.</dd>
-<dt><em>param List</em> <tt class="docutils literal"><span class="pre">exporters</span></tt> (<em>allow_None=False, bounds=(0, None), constant=False, default=[MPLRenderer(backend=&#8217;matplotlib&#8217;, css={}, dpi=None, fig=&#8217;svg&#8217;, fps=20, holomap=None, info_fn=&lt;function &lt;lambda&gt; at 0x2ac55b0c8848&gt;, key_fn=None, mode=&#8217;default&#8217;, name=&#8217;MPLRenderer00966&#8217;, size=100, widget_mode=&#8217;embed&#8217;), &lt;class &#8216;holoviews.core.io.Pickler&#8217;&gt;], instantiate=True, pickle_default_value=True, precedence=None, readonly=False</em>)</dt>
+<dt><em>param List</em> <tt class="docutils literal"><span class="pre">exporters</span></tt> (<em>allow_None=False, bounds=(0, None), constant=False, default=[MPLRenderer(backend=&#8217;matplotlib&#8217;, css={}, dpi=None, fig=&#8217;svg&#8217;, fps=20, holomap=None, info_fn=&lt;function &lt;lambda&gt; at 0x2ac2f65cf938&gt;, key_fn=None, mode=&#8217;default&#8217;, name=&#8217;MPLRenderer00966&#8217;, size=100, widget_mode=&#8217;embed&#8217;), &lt;class &#8216;holoviews.core.io.Pickler&#8217;&gt;], instantiate=True, pickle_default_value=True, precedence=None, readonly=False</em>)</dt>
 <dd>The exporter functions used to convert HoloViews objects into
         the appropriate format(s).</dd>
 <dt><em>param String</em> <tt class="docutils literal"><span class="pre">root</span></tt> (<em>allow_None=False, basestring=&lt;type &#8216;basestring&#8217;&gt;, constant=False, default=., instantiate=False, pickle_default_value=True, precedence=None, readonly=False</em>)</dt>
@@ -875,7 +879,7 @@ instantiated.</p>
 
 <dl class="attribute">
 <dt id="holoviews.ipython.archive.NotebookArchive.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2ac573541940&gt;</em><a class="headerlink" href="#holoviews.ipython.archive.NotebookArchive.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2ac30ed4b7e0&gt;</em><a class="headerlink" href="#holoviews.ipython.archive.NotebookArchive.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -895,12 +899,12 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.ipython.archive.NotebookArchive.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2ac573541890&gt;</em><a class="headerlink" href="#holoviews.ipython.archive.NotebookArchive.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2ac30ed4b730&gt;</em><a class="headerlink" href="#holoviews.ipython.archive.NotebookArchive.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.ipython.archive.NotebookArchive.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2ac573541998&gt;</em><a class="headerlink" href="#holoviews.ipython.archive.NotebookArchive.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2ac30ed4b838&gt;</em><a class="headerlink" href="#holoviews.ipython.archive.NotebookArchive.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -982,12 +986,12 @@ evaluated with eval. See pprint() function for more details.</p>
 
 <dl class="attribute">
 <dt id="holoviews.ipython.archive.NotebookArchive.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2ac5735416d8&gt;</em><a class="headerlink" href="#holoviews.ipython.archive.NotebookArchive.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2ac30ed4b578&gt;</em><a class="headerlink" href="#holoviews.ipython.archive.NotebookArchive.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.ipython.archive.NotebookArchive.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2ac573541aa0&gt;</em><a class="headerlink" href="#holoviews.ipython.archive.NotebookArchive.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2ac30ed4b940&gt;</em><a class="headerlink" href="#holoviews.ipython.archive.NotebookArchive.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -2658,7 +2662,7 @@ instantiated.</p>
 
 <dl class="attribute">
 <dt id="holoviews.ipython.widgets.ProgressBar.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2ac5743e3ec0&gt;</em><a class="headerlink" href="#holoviews.ipython.widgets.ProgressBar.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2ac30bfa3db8&gt;</em><a class="headerlink" href="#holoviews.ipython.widgets.ProgressBar.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -2672,12 +2676,12 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.ipython.widgets.ProgressBar.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2ac5743e3f18&gt;</em><a class="headerlink" href="#holoviews.ipython.widgets.ProgressBar.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2ac30c675d60&gt;</em><a class="headerlink" href="#holoviews.ipython.widgets.ProgressBar.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.ipython.widgets.ProgressBar.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2ac5743e3f70&gt;</em><a class="headerlink" href="#holoviews.ipython.widgets.ProgressBar.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2ac30c675d08&gt;</em><a class="headerlink" href="#holoviews.ipython.widgets.ProgressBar.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -2730,12 +2734,12 @@ evaluated with eval. See pprint() function for more details.</p>
 
 <dl class="attribute">
 <dt id="holoviews.ipython.widgets.ProgressBar.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2ac5743e3fc8&gt;</em><a class="headerlink" href="#holoviews.ipython.widgets.ProgressBar.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2ac30c675208&gt;</em><a class="headerlink" href="#holoviews.ipython.widgets.ProgressBar.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.ipython.widgets.ProgressBar.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2ac57454a050&gt;</em><a class="headerlink" href="#holoviews.ipython.widgets.ProgressBar.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2ac30c6759f0&gt;</em><a class="headerlink" href="#holoviews.ipython.widgets.ProgressBar.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -2831,7 +2835,7 @@ instantiated.</p>
 
 <dl class="attribute">
 <dt id="holoviews.ipython.widgets.RemoteProgress.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2ac5743e3d60&gt;</em><a class="headerlink" href="#holoviews.ipython.widgets.RemoteProgress.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2ac30bfa3100&gt;</em><a class="headerlink" href="#holoviews.ipython.widgets.RemoteProgress.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -2845,12 +2849,12 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.ipython.widgets.RemoteProgress.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2ac5743e3f70&gt;</em><a class="headerlink" href="#holoviews.ipython.widgets.RemoteProgress.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2ac30c675d60&gt;</em><a class="headerlink" href="#holoviews.ipython.widgets.RemoteProgress.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.ipython.widgets.RemoteProgress.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2ac5743e3e10&gt;</em><a class="headerlink" href="#holoviews.ipython.widgets.RemoteProgress.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2ac30c675208&gt;</em><a class="headerlink" href="#holoviews.ipython.widgets.RemoteProgress.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -2903,12 +2907,12 @@ evaluated with eval. See pprint() function for more details.</p>
 
 <dl class="attribute">
 <dt id="holoviews.ipython.widgets.RemoteProgress.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2ac5743e3c58&gt;</em><a class="headerlink" href="#holoviews.ipython.widgets.RemoteProgress.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2ac30c675d08&gt;</em><a class="headerlink" href="#holoviews.ipython.widgets.RemoteProgress.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.ipython.widgets.RemoteProgress.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2ac574557050&gt;</em><a class="headerlink" href="#holoviews.ipython.widgets.RemoteProgress.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2ac30c675b50&gt;</em><a class="headerlink" href="#holoviews.ipython.widgets.RemoteProgress.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -3014,7 +3018,7 @@ instantiated.</p>
 
 <dl class="attribute">
 <dt id="holoviews.ipython.widgets.RunProgress.force_new_dynamic_value">
-<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2ac5743e3e10&gt;</em><a class="headerlink" href="#holoviews.ipython.widgets.RunProgress.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">force_new_dynamic_value</tt><em class="property"> = &lt;functools.partial object at 0x2ac30bfa33c0&gt;</em><a class="headerlink" href="#holoviews.ipython.widgets.RunProgress.force_new_dynamic_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -3028,12 +3032,12 @@ equal to the default value.</p>
 
 <dl class="attribute">
 <dt id="holoviews.ipython.widgets.RunProgress.get_value_generator">
-<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2ac5743e3f18&gt;</em><a class="headerlink" href="#holoviews.ipython.widgets.RunProgress.get_value_generator" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_value_generator</tt><em class="property"> = &lt;functools.partial object at 0x2ac30c675d60&gt;</em><a class="headerlink" href="#holoviews.ipython.widgets.RunProgress.get_value_generator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.ipython.widgets.RunProgress.inspect_value">
-<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2ac5743e3db8&gt;</em><a class="headerlink" href="#holoviews.ipython.widgets.RunProgress.inspect_value" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">inspect_value</tt><em class="property"> = &lt;functools.partial object at 0x2ac30c675b50&gt;</em><a class="headerlink" href="#holoviews.ipython.widgets.RunProgress.inspect_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -3086,12 +3090,12 @@ evaluated with eval. See pprint() function for more details.</p>
 
 <dl class="attribute">
 <dt id="holoviews.ipython.widgets.RunProgress.set_dynamic_time_fn">
-<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2ac5743e3fc8&gt;</em><a class="headerlink" href="#holoviews.ipython.widgets.RunProgress.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_dynamic_time_fn</tt><em class="property"> = &lt;functools.partial object at 0x2ac30c675d08&gt;</em><a class="headerlink" href="#holoviews.ipython.widgets.RunProgress.set_dynamic_time_fn" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="holoviews.ipython.widgets.RunProgress.set_param">
-<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2ac574561050&gt;</em><a class="headerlink" href="#holoviews.ipython.widgets.RunProgress.set_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_param</tt><em class="property"> = &lt;functools.partial object at 0x2ac30c675418&gt;</em><a class="headerlink" href="#holoviews.ipython.widgets.RunProgress.set_param" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -3192,7 +3196,7 @@ length).</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.4.0a1',
+            VERSION:'1.4.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

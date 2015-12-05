@@ -199,18 +199,22 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">ip</span><span class="o">.</span><span class="n">run_line_magic</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
 </div></div>
-<div class="viewcode-block" id="load_hvjs"><a class="viewcode-back" href="../../Reference_Manual/holoviews.ipython.html#holoviews.ipython.load_hvjs">[docs]</a><span class="k">def</span> <span class="nf">load_hvjs</span><span class="p">(</span><span class="n">logo</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+<div class="viewcode-block" id="load_hvjs"><a class="viewcode-back" href="../../Reference_Manual/holoviews.ipython.html#holoviews.ipython.load_hvjs">[docs]</a><span class="k">def</span> <span class="nf">load_hvjs</span><span class="p">(</span><span class="n">logo</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">JS</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s">&#39;HoloViewsJS successfully loaded.&#39;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Displays javascript and CSS to initialize HoloViews widgets.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c"># Evaluate load_notebook.html template with widgetjs code</span>
-    <span class="n">widgetjs</span><span class="p">,</span> <span class="n">widgetcss</span> <span class="o">=</span> <span class="n">Renderer</span><span class="o">.</span><span class="n">embed_assets</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">JS</span><span class="p">:</span>
+        <span class="n">widgetjs</span><span class="p">,</span> <span class="n">widgetcss</span> <span class="o">=</span> <span class="n">Renderer</span><span class="o">.</span><span class="n">embed_assets</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">widgetjs</span><span class="p">,</span> <span class="n">widgetcss</span> <span class="o">=</span> <span class="s">&#39;&#39;</span><span class="p">,</span> <span class="s">&#39;&#39;</span>
     <span class="n">templateLoader</span> <span class="o">=</span> <span class="n">jinja2</span><span class="o">.</span><span class="n">FileSystemLoader</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">__file__</span><span class="p">)))</span>
     <span class="n">jinjaEnv</span> <span class="o">=</span> <span class="n">jinja2</span><span class="o">.</span><span class="n">Environment</span><span class="p">(</span><span class="n">loader</span><span class="o">=</span><span class="n">templateLoader</span><span class="p">)</span>
     <span class="n">template</span> <span class="o">=</span> <span class="n">jinjaEnv</span><span class="o">.</span><span class="n">get_template</span><span class="p">(</span><span class="s">&#39;load_notebook.html&#39;</span><span class="p">)</span>
     <span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="n">template</span><span class="o">.</span><span class="n">render</span><span class="p">({</span><span class="s">&#39;widgetjs&#39;</span><span class="p">:</span> <span class="n">widgetjs</span><span class="p">,</span>
                                   <span class="s">&#39;widgetcss&#39;</span><span class="p">:</span> <span class="n">widgetcss</span><span class="p">,</span>
-                                  <span class="s">&#39;logo&#39;</span><span class="p">:</span> <span class="n">logo</span><span class="p">})))</span>
+                                  <span class="s">&#39;logo&#39;</span><span class="p">:</span> <span class="n">logo</span><span class="p">,</span>
+                                  <span class="s">&#39;message&#39;</span><span class="p">:</span><span class="n">message</span><span class="p">})))</span>
 
 
 <span class="c"># Populating the namespace for keyword evaluation</span></div>
@@ -219,7 +223,7 @@
 
 <span class="n">Parser</span><span class="o">.</span><span class="n">namespace</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;np&#39;</span><span class="p">:</span><span class="n">np</span><span class="p">,</span> <span class="s">&#39;Cycle&#39;</span><span class="p">:</span><span class="n">Cycle</span><span class="p">,</span> <span class="s">&#39;Palette&#39;</span><span class="p">:</span> <span class="n">Palette</span><span class="p">}</span>
 
-<div class="viewcode-block" id="notebook_extension_fn"><a class="viewcode-back" href="../../Reference_Manual/holoviews.ipython.html#holoviews.ipython.notebook_extension_fn">[docs]</a><span class="k">class</span> <span class="nc">notebook_extension_fn</span><span class="p">(</span><span class="n">param</span><span class="o">.</span><span class="n">ParameterizedFunction</span><span class="p">):</span>
+<div class="viewcode-block" id="notebook_extension"><a class="viewcode-back" href="../../Reference_Manual/holoviews.ipython.html#holoviews.ipython.notebook_extension">[docs]</a><span class="k">class</span> <span class="nc">notebook_extension</span><span class="p">(</span><span class="n">param</span><span class="o">.</span><span class="n">ParameterizedFunction</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Parameterized function to initialize notebook resources</span>
 <span class="sd">    and register magics.</span>
@@ -236,19 +240,18 @@
 
     <span class="n">_loaded</span> <span class="o">=</span> <span class="bp">False</span>
 
-    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">resources</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">resources</span><span class="p">:</span>
-            <span class="n">resources</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;holoviews&#39;</span><span class="p">]</span>
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
+        <span class="n">resources</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_resources</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
         <span class="n">ip</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&#39;ip&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
         <span class="n">p</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">ParamOverrides</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">notebook_extension_fn</span><span class="o">.</span><span class="n">_loaded</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_loaded</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
             <span class="n">ip</span> <span class="o">=</span> <span class="n">get_ipython</span><span class="p">()</span> <span class="k">if</span> <span class="n">ip</span> <span class="ow">is</span> <span class="bp">None</span> <span class="k">else</span> <span class="n">ip</span>
             <span class="n">param_ext</span><span class="o">.</span><span class="n">load_ipython_extension</span><span class="p">(</span><span class="n">ip</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
             <span class="n">load_magics</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span>
             <span class="n">OutputMagic</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
             <span class="n">set_display_hooks</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span>
-            <span class="n">notebook_extension_fn</span><span class="o">.</span><span class="n">_loaded</span> <span class="o">=</span> <span class="bp">True</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_loaded</span> <span class="o">=</span> <span class="bp">True</span>
 
         <span class="n">css</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
         <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">width</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
@@ -259,20 +262,61 @@
             <span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="n">css</span><span class="p">))</span>
 
         <span class="n">resources</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">resources</span><span class="p">)</span>
-        <span class="k">if</span> <span class="s">&#39;holoviews&#39;</span> <span class="ow">in</span> <span class="n">resources</span><span class="p">:</span>
-            <span class="n">resources</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">resources</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s">&#39;holoviews&#39;</span><span class="p">))</span>
-            <span class="n">load_hvjs</span><span class="p">(</span><span class="n">logo</span><span class="o">=</span><span class="n">p</span><span class="o">.</span><span class="n">logo</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">backend</span> <span class="ow">in</span> <span class="n">resources</span><span class="p">:</span>
-            <span class="n">Store</span><span class="o">.</span><span class="n">renderers</span><span class="p">[</span><span class="n">backend</span><span class="p">]</span><span class="o">.</span><span class="n">load_nb</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">resources</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span>
 
-</div>
-<span class="n">notebook_extension</span> <span class="o">=</span> <span class="n">notebook_extension_fn</span><span class="o">.</span><span class="n">instance</span><span class="p">()</span>
+        <span class="c"># Create a message for the logo (if shown)</span>
+        <span class="n">js_names</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;holoviews&#39;</span><span class="p">:</span><span class="s">&#39;HoloViewsJS&#39;</span><span class="p">}</span> <span class="c"># resource : displayed name</span>
+        <span class="n">loaded</span> <span class="o">=</span> <span class="s">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">js_names</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="k">if</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">js_names</span> <span class="k">else</span> <span class="n">r</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span><span class="o">+</span><span class="s">&#39;JS&#39;</span>
+                           <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">resources</span><span class="p">)</span>
+
+        <span class="n">load_hvjs</span><span class="p">(</span><span class="n">logo</span><span class="o">=</span><span class="n">p</span><span class="o">.</span><span class="n">logo</span><span class="p">,</span>
+                  <span class="n">JS</span><span class="o">=</span><span class="p">(</span><span class="s">&#39;holoviews&#39;</span> <span class="ow">in</span> <span class="n">resources</span><span class="p">),</span>
+                  <span class="n">message</span> <span class="o">=</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s"> successfully loaded in this cell.&#39;</span> <span class="o">%</span> <span class="n">loaded</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="p">[</span><span class="n">r</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">resources</span> <span class="k">if</span> <span class="n">r</span> <span class="o">!=</span> <span class="s">&#39;holoviews&#39;</span><span class="p">]:</span>
+            <span class="n">Store</span><span class="o">.</span><span class="n">renderers</span><span class="p">[</span><span class="n">r</span><span class="p">]</span><span class="o">.</span><span class="n">load_nb</span><span class="p">()</span>
+
+
+    <span class="k">def</span> <span class="nf">_get_resources</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Finds the list of resources from the keyword parameters and pops</span>
+<span class="sd">        them out of the params dictionary.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">resources</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">disabled</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">resource</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;holoviews&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">Store</span><span class="o">.</span><span class="n">renderers</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+            <span class="k">if</span> <span class="n">resource</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span>
+                <span class="n">setting</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">resource</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">setting</span> <span class="ow">is</span> <span class="bp">True</span> <span class="ow">and</span> <span class="n">resource</span> <span class="o">!=</span> <span class="s">&#39;matplotlib&#39;</span><span class="p">:</span>
+                    <span class="n">resources</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">resource</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">setting</span> <span class="ow">is</span> <span class="bp">False</span><span class="p">:</span>
+                    <span class="n">disabled</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">resource</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="s">&#39;holoviews&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">disabled</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="s">&#39;holoviews&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">resources</span><span class="p">):</span>
+            <span class="n">resources</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;holoviews&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">resources</span>
+        <span class="k">return</span> <span class="n">resources</span>
+
+
+    <span class="nd">@param.parameterized.bothmethod</span>
+<div class="viewcode-block" id="notebook_extension.tab_completion_docstring"><a class="viewcode-back" href="../../Reference_Manual/holoviews.ipython.html#holoviews.ipython.notebook_extension.tab_completion_docstring">[docs]</a>    <span class="k">def</span> <span class="nf">tab_completion_docstring</span><span class="p">(</span><span class="n">self_or_cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Generates a docstring that can be used to enable tab-completion</span>
+<span class="sd">        of resources.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">elements</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;</span><span class="si">%s</span><span class="s">=Boolean&#39;</span> <span class="o">%</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">Store</span><span class="o">.</span><span class="n">renderers</span><span class="o">.</span><span class="n">keys</span><span class="p">())]</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">self_or_cls</span><span class="o">.</span><span class="n">params</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">param_type</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span>
+            <span class="n">elements</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">=</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">param_type</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="s">&quot;params(</span><span class="si">%s</span><span class="s">)&quot;</span> <span class="o">%</span> <span class="s">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s">&#39;holoviews=Boolean&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">elements</span><span class="p">)</span>
+
+</div></div>
+<span class="n">notebook_extension</span><span class="o">.</span><span class="n">__doc__</span> <span class="o">=</span> <span class="n">notebook_extension</span><span class="o">.</span><span class="n">tab_completion_docstring</span><span class="p">()</span>
 
 <span class="k">def</span> <span class="nf">load_ipython_extension</span><span class="p">(</span><span class="n">ip</span><span class="p">):</span>
     <span class="n">notebook_extension</span><span class="p">(</span><span class="n">ip</span><span class="o">=</span><span class="n">ip</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">unload_ipython_extension</span><span class="p">(</span><span class="n">ip</span><span class="p">):</span>
-    <span class="n">notebook_extension_fn</span><span class="o">.</span><span class="n">_loaded</span> <span class="o">=</span> <span class="bp">False</span>
+    <span class="n">notebook_extension</span><span class="o">.</span><span class="n">_loaded</span> <span class="o">=</span> <span class="bp">False</span>
 </pre></div>
 
           </div>
@@ -312,7 +356,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'1.4.0a1',
+            VERSION:'1.4.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

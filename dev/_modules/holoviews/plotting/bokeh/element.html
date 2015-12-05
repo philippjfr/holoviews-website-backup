@@ -150,6 +150,7 @@
 <span class="kn">from</span> <span class="nn">..plot</span> <span class="kn">import</span> <span class="n">GenericElementPlot</span><span class="p">,</span> <span class="n">GenericOverlayPlot</span>
 <span class="kn">from</span> <span class="nn">.callbacks</span> <span class="kn">import</span> <span class="n">Callbacks</span>
 <span class="kn">from</span> <span class="nn">.plot</span> <span class="kn">import</span> <span class="n">BokehPlot</span>
+<span class="kn">from</span> <span class="nn">.renderer</span> <span class="kn">import</span> <span class="n">old_bokeh</span>
 <span class="kn">from</span> <span class="nn">.util</span> <span class="kn">import</span> <span class="n">mpl_to_bokeh</span><span class="p">,</span> <span class="n">convert_datetime</span>
 
 
@@ -393,7 +394,9 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">show_title</span><span class="p">:</span>
             <span class="n">plot_props</span><span class="p">[</span><span class="s">&#39;title&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_format_title</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">separator</span><span class="o">=</span><span class="s">&#39; &#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">bgcolor</span><span class="p">:</span>
-            <span class="n">plot_props</span><span class="p">[</span><span class="s">&#39;background_fill&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bgcolor</span>
+            <span class="n">bg_attr</span> <span class="o">=</span> <span class="s">&#39;background_fill&#39;</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">old_bokeh</span><span class="p">:</span> <span class="n">bg_attr</span> <span class="o">+=</span> <span class="s">&#39; _color&#39;</span>
+            <span class="n">plot_props</span><span class="p">[</span><span class="n">bg_attr</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bgcolor</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">border</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
             <span class="n">plot_props</span><span class="p">[</span><span class="s">&#39;min_border&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">border</span>
         <span class="n">lod</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">defaults</span><span class="p">()[</span><span class="s">&#39;lod&#39;</span><span class="p">],</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">lod</span><span class="p">)</span>
@@ -439,7 +442,7 @@
                 <span class="n">axis_props</span><span class="p">[</span><span class="s">&#39;ticker&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ticker</span>
             <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ticker</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
                 <span class="n">axis_props</span><span class="p">[</span><span class="s">&#39;ticker&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">BasicTicker</span><span class="p">(</span><span class="n">desired_num_ticks</span><span class="o">=</span><span class="n">ticker</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ticker</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ticker</span><span class="p">,</span> <span class="p">(</span><span class="nb">tuple</span><span class="p">,</span> <span class="nb">list</span><span class="p">)):</span>
                 <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">ticker</span><span class="p">):</span>
                     <span class="k">pass</span>
                 <span class="k">else</span><span class="p">:</span>
@@ -568,7 +571,8 @@
 <span class="sd">        Updates an existing plot with data corresponding</span>
 <span class="sd">        to the key.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">element</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_frame</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">element</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">element</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_frame</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">element</span><span class="p">:</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dynamic</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">overlaid</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">current_key</span> <span class="o">=</span> <span class="n">key</span>
@@ -850,7 +854,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../../',
-            VERSION:'1.4.0a1',
+            VERSION:'1.4.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
